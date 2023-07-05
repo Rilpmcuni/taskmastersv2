@@ -3,6 +3,9 @@ import * as React from "react";
 import { red } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Capriola } from "next/font/google";
+import Header from "@/layouts/Header";
+import Top from "@/layouts/Top";
+import { Divider } from "@mui/material";
 
 const capriola = Capriola({
     subsets: ["latin"],
@@ -37,6 +40,11 @@ type Props = {
 };
 
 const Provider: React.FC<Props> = ({ children }) => {
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+    return <ThemeProvider theme={theme}>
+        
+        <Top />
+                    <Divider />
+                    <Header/>
+        {children}</ThemeProvider>;
 };
 export default Provider;

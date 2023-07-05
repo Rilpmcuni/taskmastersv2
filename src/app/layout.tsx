@@ -1,4 +1,3 @@
-"use client";
 import Top from "@/layouts/Top";
 import Provider from "./Provider";
 import "./globals.css";
@@ -25,9 +24,9 @@ export default function RootLayout({
         <html lang="es">
             <body className={capriola.className} style={{marginTop:0, marginBottom:0}}>
                 <Provider>
-                    <Top />
+                    {/* <Top />
                     <Divider />
-                    <Header/>
+                    <Header/> */}
                     {children}
                 </Provider>
             </body>
