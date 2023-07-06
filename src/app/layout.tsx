@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es">
-            <body className={capriola.className} style={{marginTop:0, marginBottom:0}}>
+            <body className={capriola.className} style={{ margin: 0 }}>
                 <Provider>
                     {/* <Top />
                     <Divider />

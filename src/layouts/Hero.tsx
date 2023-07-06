@@ -5,7 +5,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 // "repeat(auto-fit, minmax(500px, auto))",
 
 export default function Hero() {
@@ -18,7 +18,9 @@ export default function Hero() {
                     gridTemplateColumns:
                         "repeat(auto-fit, minmax(200px, auto))",
                     // marginTop: "1rem",}
-                    marginBottom: "1rem",
+                    marginBottom: "1.5rem",
+                    marginLeft:"1rem",
+                    marginRight:"1rem",
                 }}
             >
                 <div style={{ position: "relative", height: "500px" }}>
@@ -67,15 +69,14 @@ export default function Hero() {
                                 categorías iniciales perfectas.
                             </Typography>
                         </Stack>
-                        <Stack
+                        <Box
                             display={"flex"}
-                            direction="row"
                             justifyContent="center"
                             alignItems="stretch"
-                            spacing={1}
                             sx={{
                                 display: "flex",
                                 flexDirection: { xs: "column", md: "row" },
+                                gap: 1
                             }}
                         >
                             <Button
@@ -108,7 +109,7 @@ export default function Hero() {
                                 Llámanos: +56 9 8845 6231
                             </Button>
                             {/*  */}
-                        </Stack>
+                        </Box>
                     </Stack>
                     <Image
                         alt="Mountains"

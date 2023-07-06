@@ -1,7 +1,5 @@
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+
 import {
     Badge,
     Button,
@@ -9,11 +7,18 @@ import {
     IconButton,
     Link,
     Stack,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import Logo from "@/components/ui/Logo";
+import { useState } from "react";
+import Zoom from "@mui/material/Zoom";
 
 export default function Header() {
+    const [CountEmpleo, setCountEmpleo] = useState(0);
+    function moreJob() {
+        setCountEmpleo(+1);
+    }
     return (
         <Stack
             bgcolor={"white"}
@@ -89,20 +94,26 @@ export default function Header() {
                 <Button>Inicio</Button>
                 <Button>Nosotros</Button>
                 <Button>Servicios</Button>
-                <Badge color="primary" badgeContent="+20">
-                <Button
-                    sx={{
-                        boxShadow: 0,
-                        "&:hover": {
-                            boxShadow: 0,
-                            bgcolor: "secondary.dark",
-                        },
-                    }}
-                    variant="contained"
-                    color="secondary"
-                >
-                    Empleo
-                </Button>
+                <Badge color="primary" badgeContent={CountEmpleo}>
+                    <Tooltip
+                        TransitionComponent={Zoom}
+                        title="Explora los empleos que tenemos para ti"
+                    >
+                        <Button
+                            sx={{
+                                boxShadow: 0,
+                                "&:hover": {
+                                    boxShadow: 0,
+                                    bgcolor: "secondary.dark",
+                                },
+                            }}
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => setCountEmpleo(CountEmpleo + 1)}
+                        >
+                            Empleo
+                        </Button>
+                    </Tooltip>
                 </Badge>
                 <Button>Contacto</Button>
             </Stack>
@@ -113,7 +124,7 @@ export default function Header() {
                 href={"tel:+123456789"}
                 // sx={{ borderRadius: "0.8rem" }}
                 LinkComponent={Link}
-                startIcon={<LocalPhoneIcon />}
+                startIcon={<PhoneInTalkIcon />}
             >
                 Llámanos
             </Button>

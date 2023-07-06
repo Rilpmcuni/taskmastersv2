@@ -1,29 +1,26 @@
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import {
     Button,
-    Chip,
     IconButton,
     Link,
     Stack,
-    Typography,
 } from "@mui/material";
-// import Stack from '@mui/material/Stack'
-import React from "react";
-// color="primary"
+
+
+
 export default function Top() {
     return (
         <>
             <Stack
-            display={"flex"}
+                display={"flex"}
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
                 spacing={1}
-                paddingX={"1rem"}
+                paddingX={"2rem"}
                 paddingY={"0.25rem"}
             >
                 <Button
@@ -32,7 +29,7 @@ export default function Top() {
                     variant="outlined"
                     sx={{ borderRadius: "2rem" }}
                     LinkComponent={Link}
-                    startIcon={<LocalPhoneIcon />}
+                    startIcon={<PhoneInTalkIcon />}
                 >
                     Llámanos: +56 9 8845 6231
                 </Button>
@@ -74,9 +71,9 @@ export default function Top() {
                     <IconButton size="small" aria-label="Example">
                         <FacebookIcon fontSize="small" color="primary" />
                     </IconButton>
-                    <IconButton size="small" aria-label="Example">
+                    {/* <IconButton size="small" aria-label="Example">
                         <LinkedInIcon fontSize="small" color="primary" />
-                    </IconButton>
+                    </IconButton> */}
                 </Stack>
             </Stack>
         </>

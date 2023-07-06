@@ -6,6 +6,7 @@ import { Capriola } from "next/font/google";
 import Header from "@/layouts/Header";
 import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
+import Footer from "@/layouts/Footer";
 
 const capriola = Capriola({
     subsets: ["latin"],
@@ -20,7 +21,10 @@ const theme = createTheme({
         },
         secondary: {
             main: "#ffd234",
-            dark: '#EFBE0A',
+            dark: "#EFBE0A",
+        },
+        text: {
+            primary: "#1e293b",
         },
     },
     shape: {
@@ -32,7 +36,6 @@ const theme = createTheme({
         fontSize: 15,
         fontWeightLight: 400,
     },
-    
 });
 
 type Props = {
@@ -40,11 +43,14 @@ type Props = {
 };
 
 const Provider: React.FC<Props> = ({ children }) => {
-    return <ThemeProvider theme={theme}>
-        
-        <Top />
-                    <Divider />
-                    <Header/>
-        {children}</ThemeProvider>;
+    return (
+        <ThemeProvider theme={theme}>
+            <Top />
+            <Divider />
+            <Header />
+            {children}
+            <Footer />
+        </ThemeProvider>
+    );
 };
 export default Provider;
