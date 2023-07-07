@@ -11,7 +11,7 @@ import Contact from "@/layouts/Contact";
 import CallUs from "@/layouts/CallUs";
 export default function Home() {
     return (
-        <main style={{ gap: 1 }}>
+        <main>
             <Hero />
             <Features />
             <Services />

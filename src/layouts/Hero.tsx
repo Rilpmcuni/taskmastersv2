@@ -18,12 +18,12 @@ export default function Hero() {
                     gridTemplateColumns:
                         "repeat(auto-fit, minmax(200px, auto))",
                     // marginTop: "1rem",}
-                    marginBottom: "1.5rem",
                     marginLeft:"1rem",
                     marginRight:"1rem",
+                    marginBottom: "2rem",
                 }}
             >
-                <div style={{ position: "relative", height: "500px" }}>
+                <div style={{ position: "relative", height: "600px" }}>
                     <Stack
                         spacing={2}
                         style={{

@@ -41,14 +41,14 @@ export default function Services() {
                 alignItems={"center"}
                 spacing={1}
                 sx={{
-                    marginBottom: "1.5rem",
+                    marginBottom: "2rem",
                 }}
             >
                 <Typography variant="h4" component="h3" fontWeight={600} color={"text.primary"}>
                     Nuestros Servicios
                 </Typography>
                 <Container sx={{ maxWidth: 900, margin: "0 auto" }}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                         {ServicesData.map((service: any, index: any) => (
                             <ServicesCard
                                 key={index}

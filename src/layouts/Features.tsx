@@ -45,7 +45,7 @@ export default function Features() {
                     // alignItems: { xs: "start", md: "center" },
                     flexDirection: { xs: "column-reverse", md: "row" },
                     gap: "0.5rem",
-                    marginBottom: "1.5rem",
+                    marginBottom: "2rem",
 
                 }}
             >
