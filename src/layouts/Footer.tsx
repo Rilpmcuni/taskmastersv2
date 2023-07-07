@@ -58,7 +58,6 @@ export default function Footer() {
             justifyContent={"space-between"}
             sx={{
                 flexDirection: { xs: "column", md: "row" },
-
                   gap:{ xs: "4rem", md: "1rem" }
             }}
         >
@@ -83,7 +82,7 @@ export default function Footer() {
                 >
                     <Logo />
                     <Typography
-                        variant="h5"
+                        variant="h4"
                         noWrap
                         component="div"
                         color="grey.700"
