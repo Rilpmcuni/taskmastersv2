@@ -41,10 +41,14 @@ export default function Services() {
                 alignItems={"center"}
                 spacing={1}
                 sx={{
+                    paddingY: "1rem",
                     marginBottom: "2rem",
+                    bgcolor:"primary.main",
+                    // rgba(30,41,59,0.1)
+                    borderRadius:"1.5rem"
                 }}
             >
-                <Typography variant="h4" component="h3" fontWeight={600} color={"text.primary"}>
+                <Typography variant="h4" component="h3" fontWeight={600} color={"white"}>
                     Nuestros Servicios
                 </Typography>
                 <Container sx={{ maxWidth: 900, margin: "0 auto" }}>

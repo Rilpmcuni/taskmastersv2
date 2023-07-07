@@ -50,6 +50,12 @@ const ServicesCardV2: React.FC<Props> = ({
                                         top: "-10px",
                                         left: "-10px",
                                         zIndex: 1,
+                                        bgcolor: "secondary.main",
+                                        // boxShadow: "0 0 1px 1px #000",
+                                        color: "primary",
+                                        "&.Mui-checked": {
+                                            color: "primary",
+                                        },
                                     }}
                                 />
                             )}
@@ -66,7 +72,6 @@ const ServicesCardV2: React.FC<Props> = ({
                             <Typography variant="button" color="primary">
                                 Solicitar
                             </Typography>
-                            
                         </CardContent>
                     </CardActionArea>
                 </Card>
