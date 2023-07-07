@@ -34,7 +34,7 @@ const ServicesCardV2: React.FC<Props> = ({
                         overflow: "visible",
                         boxShadow:
                             selectedProduct === service.title
-                                ? "0 0 1px 1px #1681ff"
+                                ? "0 0 1px 5px #ffd234"
                                 : "none",
                         cursor: "pointer",
                     }}
@@ -50,7 +50,7 @@ const ServicesCardV2: React.FC<Props> = ({
                                         top: "-10px",
                                         left: "-10px",
                                         zIndex: 1,
-                                        bgcolor: "secondary.main",
+                                        // bgcolor: "secondary.main",
                                         // boxShadow: "0 0 1px 1px #000",
                                         color: "primary",
                                         "&.Mui-checked": {
