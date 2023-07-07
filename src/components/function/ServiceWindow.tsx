@@ -54,6 +54,7 @@ export default function ServiceWindow() {
                 flexDirection: "row",
                 borderRadius: "1.5rem",
                 justifyContent: "start",
+                bgcolor: "white",
             }}
         >
             <Stepper
@@ -61,7 +62,7 @@ export default function ServiceWindow() {
                 orientation="vertical"
                 sx={{
                     p: 2,
-                    backgroundColor: "rgba(0, 0, 0, 0.12)",
+                    backgroundColor: "text.primary",
                     borderBottomLeftRadius: "1.5rem",
                     borderTopLeftRadius: "1.5rem",
                     minWidth: "15%",
@@ -73,13 +74,15 @@ export default function ServiceWindow() {
                         <StepLabel
                             optional={
                                 index === 2 ? (
-                                    <Typography variant="caption">
+                                    <Typography variant="caption" color="white">
                                         Last step
                                     </Typography>
                                 ) : null
                             }
                         >
-                            {step.label}
+                            <Typography variant="body2" color="white">
+                                {step.label}
+                            </Typography>
                         </StepLabel>
                         {/* <StepContent>
                             <Typography>{step.description}</Typography>

@@ -26,7 +26,7 @@ export default function Contact() {
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "1rem",
-                    flexDirection: { xs: "row", md: "column" },
+                    flexDirection: "row",
                 }}>
                     {[CallUsImgTwo, featureImg].map((image) => (
                         <Box

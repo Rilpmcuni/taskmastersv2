@@ -1,16 +1,17 @@
 "use client";
-import heroImg from "@/../public/images/heroImg.jpg";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+
 import React from "react";
-import Image from "next/image";
-import { Link, Box, Button, Container, Stack, Typography } from "@mui/material";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import featureImg from "@/../public/images/featureImg.webp";
-import CallUsImgTwo from "@/../public/images/CallUsImgTwo.webp";
+
+import { Link, Box, Stack, Typography } from "@mui/material";
+
 import Logo from "@/components/ui/Logo";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import MarkunreadMailboxRoundedIcon from "@mui/icons-material/MarkunreadMailboxRounded";
+import RoomRoundedIcon from "@mui/icons-material/RoomRounded";
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+
 
 export default function Footer() {
     /* año */
@@ -37,15 +38,38 @@ export default function Footer() {
     const CompaniList = [
         {
             title: "Llámanos: +56 9 8845 6231",
+
+            ico: (
+                <PhoneInTalkIcon
+                    fontSize="small"
+                    sx={{ mr: "0.30rem" }}
+                    color={"primary"}
+                />
+            ),
         },
         {
             title: "contacto@taskMasters.cl",
+            ico: (
+                <EmailRoundedIcon
+                    fontSize="small"
+                    sx={{ mr: "0.30rem" }}
+                    color={"primary"}
+                />
+            ),
         },
         {
             title: "C. Talca 344, Cartagena, Valparaiso, Chile",
+            ico: (
+                <RoomRoundedIcon
+                    fontSize="small"
+                    sx={{ mr: "0.30rem" }}
+                    color={"primary"}
+                />
+            ),
         },
         {
             title: "Lunes - Viernes, 9am - 6pm; Fin de semana cerrado",
+            ico: <AccessTimeRoundedIcon fontSize="small" sx={{ mr: "0.30rem" }} color={"primary"} />,
         },
     ];
     return (
@@ -58,7 +82,7 @@ export default function Footer() {
             justifyContent={"space-between"}
             sx={{
                 flexDirection: { xs: "column", md: "row" },
-                  gap:{ xs: "4rem", md: "1rem" }
+                gap: { xs: "4rem", md: "1rem" },
             }}
         >
             <Stack
@@ -152,9 +176,11 @@ export default function Footer() {
                                     }}
                                 >
                                     <WebAssetIcon
+                                        fontSize="small"
                                         sx={{ mr: "0.30rem" }}
                                         color={"primary"}
                                     />
+
                                     <Typography variant="caption">
                                         {title}
                                     </Typography>
@@ -183,7 +209,7 @@ export default function Footer() {
                             paddingLeft: 0,
                         }}
                     >
-                        {CompaniList.map(({ title }, index) => (
+                        {CompaniList.map(({ title, ico }, index) => (
                             <>
                                 <li
                                     style={{
@@ -193,10 +219,7 @@ export default function Footer() {
                                         flexDirection: "row",
                                     }}
                                 >
-                                    <WebAssetIcon
-                                        sx={{ mr: "0.30rem" }}
-                                        color={"primary"}
-                                    />
+                                    {ico}
                                     <Typography variant="caption">
                                         {title}
                                     </Typography>
