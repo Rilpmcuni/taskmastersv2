@@ -152,7 +152,7 @@ export default function Features() {
                         marginright: "1rem",
                     }}
                 >
-                    <Stack sx={{ width: { xs: "14rem", md: "24rem" } }}>
+                    <Stack sx={{ width: { xs: "12rem", md: "24rem" } }}>
                         <Image
                             style={{
                                 borderRadius: "1.5rem",
@@ -184,8 +184,8 @@ export default function Features() {
                                 flexDirection: "column",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                width: { xs: "190px", md: "200px" },
-                                height: { xs: "190px", md: "200px" },
+                                width: { xs: "180px", md: "200px" },
+                                height: { xs: "180px", md: "200px" },
                             }}
                         >
                             <Image

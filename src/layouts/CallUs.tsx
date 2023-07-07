@@ -19,13 +19,22 @@ export default function CallUs() {
                     backgroundColor: "#ffd234",
                     paddingTop: "1.5rem",
                     paddingBottom: "1.5rem",
-                    userSelect:"none"
+                    userSelect: "none",
                 }}
             >
-                <Typography color="text.primary" variant="h1" sx={{ marginX: "2.5rem" }}>
+                <Typography
+                    color="text.primary"
+                    variant="h1"
+                    sx={{
+                        marginX: { xs: "1.5rem", md: "2.5rem" },
+                        fontSize: { xs: "3rem", md: "6rem" },
+                    }}
+                >
                     LLÁMANOS
                 </Typography>
-                <HandymanIcon sx={{fontSize:"6rem", color:"text.primary"}} />
+                <HandymanIcon
+                    sx={{ fontSize: { xs: "3rem", md: "6rem" }, color: "text.primary" }}
+                />
             </Marquee>
         </Box>
     );

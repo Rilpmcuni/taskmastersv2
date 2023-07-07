@@ -2,26 +2,32 @@
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import React from "react";
 import Image from "next/image";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography, Container } from "@mui/material";
 import featureImg from "@/../public/images/featureImg.webp";
 import CallUsImgTwo from "@/../public/images/CallUsImgTwo.webp";
 
 export default function Contact() {
     return (
         <>
-            <Box
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
+            <Container
                 sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // alignItems: { xs: "start", md: "center" },
                     flexDirection: { xs: "column", md: "row" },
+                    gap: "0.5rem",
                     marginBottom: "1.5rem",
-                    marginLeft:"1rem",
-                    marginRight:"1rem",
 
                 }}
             >
-                <Stack spacing={1} direction={"row"}>
+                <Stack sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "1rem",
+                    flexDirection: { xs: "row", md: "column" },
+                }}>
                     {[CallUsImgTwo, featureImg].map((image) => (
                         <Box
                             sx={{
@@ -47,7 +53,12 @@ export default function Contact() {
                     spacing={2}
                     sx={{ p: 2, width: { xs: "100%", md: "30%" } }}
                 >
-                    <Typography color="text.primary" variant="h4" component="h3" fontWeight={600}>
+                    <Typography
+                        color="text.primary"
+                        variant="h4"
+                        component="h3"
+                        fontWeight={600}
+                    >
                         Respondemos a su llamada rápidamente
                     </Typography>
                     <Typography color="text.primary" variant="body1">
@@ -97,7 +108,7 @@ export default function Contact() {
                         {/*  */}
                     </Stack>
                 </Stack>
-            </Box>
+            </Container>
         </>
     );
 }
