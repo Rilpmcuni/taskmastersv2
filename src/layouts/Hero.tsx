@@ -1,11 +1,14 @@
 "use client";
 import heroImg from "@/../public/images/heroImg.jpg";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+// import servicesTwo from "@/../public/images/servicesTwo.jpg";
+import heroRabbit from "@/../public/images/heroRabbit.webp";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { Box, Button, Stack, Typography } from "@mui/material";
+import { ContactData } from "@/data/ContactData";
 // "repeat(auto-fit, minmax(500px, auto))",
 
 export default function Hero() {
@@ -18,8 +21,8 @@ export default function Hero() {
                     gridTemplateColumns:
                         "repeat(auto-fit, minmax(200px, auto))",
                     // marginTop: "1rem",}
-                    marginLeft:"1rem",
-                    marginRight:"1rem",
+                    marginLeft: "1rem",
+                    marginRight: "1rem",
                     marginBottom: "2rem",
                 }}
             >
@@ -38,7 +41,7 @@ export default function Hero() {
                             borderRadius: "1.5rem",
                             textAlign: "center",
                             /*  */
-                            backgroundImage: `linear-gradient(0deg, #173E6D 0%, rgba(0, 212, 255, 0) 100%)`,
+                            backgroundImage: `linear-gradient(0deg, #1e293b 0%, rgba(255,210,52,0) 100%)`,
                         }}
                     >
                         <Stack
@@ -52,7 +55,7 @@ export default function Hero() {
                             spacing={1}
                             color={"white"}
                         >
-                            <Typography
+                            {/* <Typography
                                 fontWeight={700}
                                 variant="h2"
                                 component="h2"
@@ -61,12 +64,21 @@ export default function Hero() {
                                 }}
                             >
                                 Solucionamos todos sus problemas de hogar
+                            </Typography> */}
+                            <Typography
+                                fontWeight={700}
+                                variant="h2"
+                                component="h2"
+                                sx={{
+                                    fontSize: { xs: "3rem", md: "4rem" },
+                                }}
+                            >
+                                Bienvenido a TaskMasters: Tu solución confiable
+                                para servicios en el hogar
                             </Typography>
                             <Typography variant="body1" component="p">
-                                Use y reutilice toneladas de secciones
-                                receptivas para crear el diseño perfecto. Las
-                                secciones están firmemente organizadas en las
-                                categorías iniciales perfectas.
+                                Conéctate con expertos en construcción,
+                                remodelación y reparaciones generales
                             </Typography>
                         </Stack>
                         <Box
@@ -76,7 +88,7 @@ export default function Hero() {
                             sx={{
                                 display: "flex",
                                 flexDirection: { xs: "column", md: "row" },
-                                gap: 1
+                                gap: 1,
                             }}
                         >
                             <Button
@@ -95,6 +107,8 @@ export default function Hero() {
                                 Escríbenos
                             </Button>
                             <Button
+                            href={`tel:${ContactData.number}`}
+                                startIcon={<PhoneInTalkIcon />}
                                 size="large"
                                 sx={{
                                     fontWeight: 600,
@@ -106,24 +120,25 @@ export default function Hero() {
                                 variant="contained"
                                 color="secondary"
                             >
-                                Llámanos: +56 9 8845 6231
+                                {`Llámanos: ${ContactData.number}`}
                             </Button>
                             {/*  */}
                         </Box>
                     </Stack>
                     <Image
-                        alt="Mountains"
-                        src={heroImg}
-                        fill
-                        sizes="(min-width: 808px) 50vw, 100vw"
+                        src={heroRabbit}
+                        alt="taskMasters"
+                        fill={true}
                         style={{
                             objectFit: "cover",
-                            borderRadius: "1.5rem", // cover, contain, none
+                            borderRadius: "1.5rem",
                         }}
                     />
                 </div>
                 {/* And more images in the grid... */}
             </div>
+            {/* 
+             */}
         </>
     );
 }

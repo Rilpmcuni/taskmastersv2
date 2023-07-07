@@ -7,7 +7,7 @@ export const ServicesData = [
         title: "Reparaciones del Hogar",
         badge: ["?"],
         description:
-            "Product specific content",
+            "Soluciones rápidas y confiables para cualquier problema en tu hogar.",
         bgCard: servicesOne,
         bgCardV2: "https://raw.githubusercontent.com/Rilpmcuni/assets/main/servicesOne.webp",
         parraph:
@@ -18,7 +18,7 @@ export const ServicesData = [
         title: "Servicio de Remodelación",
         badge: ["?"],
         description:
-            "Product specific content",
+            "Transforma tu hogar en un espacio que refleje tu estilo y necesidades.",
         bgCard: servicesTwo,
         bgCardV2: "https://github.com/Rilpmcuni/assets/blob/main/servicesTwoComprimido.jpg?raw=true",
         parraph:
@@ -29,7 +29,7 @@ export const ServicesData = [
         title: "Limpieza de hogar",
         badge: ["?"],
         description:
-            "Product specific content",
+            "Deja que nuestros profesionales mantengan tu hogar limpio y reluciente.",
         bgCard: servicesTree,
         bgCardV2: "https://github.com/Rilpmcuni/assets/raw/main/servicesTree.webp",
         parraph:
@@ -40,7 +40,7 @@ export const ServicesData = [
         title: "Plomería",
         badge: ["?"],
         description:
-            "Product specific content",
+            "Resuelve cualquier problema de fontanería con la ayuda de nuestros expertos.",
         bgCard: servicesOne,
         bgCardV2: "https://raw.githubusercontent.com/Rilpmcuni/assets/main/servicesOne.webp",
         parraph:
@@ -51,7 +51,7 @@ export const ServicesData = [
         title: "Ayuda Eléctrica",
         badge: ["?"],
         description:
-            "Product specific content",
+            "Servicios eléctricos seguros y eficientes para tu tranquilidad.",
         bgCard: servicesTwo,
         bgCardV2: "https://github.com/Rilpmcuni/assets/blob/main/servicesTwoComprimido.jpg?raw=true",
         parraph:
@@ -62,7 +62,7 @@ export const ServicesData = [
         title: "Gasfitería",
         badge: ["?"],
         description:
-            "Product specific content",
+            "Soluciones expertas para mantener tu sistema de gas en perfecto funcionamiento.",
         bgCard: servicesTree,
         bgCardV2: "https://github.com/Rilpmcuni/assets/raw/main/servicesTree.webp",
         parraph:

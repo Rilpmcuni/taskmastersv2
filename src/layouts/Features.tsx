@@ -46,7 +46,6 @@ export default function Features() {
                     flexDirection: { xs: "column-reverse", md: "row" },
                     gap: "0.5rem",
                     marginBottom: "2rem",
-
                 }}
             >
                 <Stack
@@ -55,19 +54,31 @@ export default function Features() {
                     spacing={1}
                     sx={{ width: { xs: "90%", md: "60%" } }}
                 >
-                    <Typography color="text.primary" variant="h4" component="h3" fontWeight={600}>
+                    <Typography
+                        color="text.primary"
+                        variant="h4"
+                        component="h3"
+                        fontWeight={600}
+                    >
                         Nos enfocamos en la satisfacción del cliente y la
                         calidad
                     </Typography>
-                    <Typography color="text.primary"
+                    <Typography
+                        color="text.primary"
                         variant="body1"
                         sx={{ width: { xs: "100%", md: "60%" } }}
                     >
-                        Use y reutilice toneladas de secciones receptivas para
-                        crear el diseño perfecto. Las secciones están firmemente
-                        organizadas en las categorías iniciales perfectas.
+                        En TaskMasters, nuestra prioridad es superar tus
+                        expectativas y brindarte servicios de excelencia en cada
+                        proyecto. Nos enorgullece ofrecerte una experiencia
+                        única y una calidad que puedes confiar. ¿Qué nos
+                        distingue?
                     </Typography>
-                    <Typography color="text.primary" variant="h6" fontWeight={600}>
+                    <Typography
+                        color="text.primary"
+                        variant="h6"
+                        fontWeight={600}
+                    >
                         Una instantánea de las características de taskMasters:
                     </Typography>
 
@@ -83,7 +94,7 @@ export default function Features() {
                                 justifyContent: "center",
                                 flexDirection: "column",
                                 marginLeft: 0,
-                                paddingLeft:0
+                                paddingLeft: 0,
                             }}
                         >
                             {FeaturesListOne.map(({ description }, index) => (
@@ -100,7 +111,10 @@ export default function Features() {
                                             sx={{ mr: "0.30rem" }}
                                             color={"primary"}
                                         />
-                                        <Typography color="text.primary" variant="body1">
+                                        <Typography
+                                            color="text.primary"
+                                            variant="body1"
+                                        >
                                             {description}
                                         </Typography>
                                     </li>
@@ -116,7 +130,7 @@ export default function Features() {
                                 justifyContent: "center",
                                 flexDirection: "column",
                                 marginLeft: 0,
-                                paddingLeft:0
+                                paddingLeft: 0,
                             }}
                         >
                             {FeaturesListTwo.map(({ description }, index) => (
@@ -146,7 +160,7 @@ export default function Features() {
                 {/* Image */}
                 <Stack
                     sx={{
-                        alignSelf:"start",
+                        alignSelf: "start",
                         position: "relative",
                         marginLeft: "1rem",
                         marginright: "1rem",

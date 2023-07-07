@@ -43,8 +43,10 @@ export default function Services() {
                 sx={{
                     paddingY: "1rem",
                     marginBottom: "2rem",
-                    bgcolor:"primary.main",
+                    // bgcolor:"primary.main",
                     // rgba(30,41,59,0.1)
+                    // backgroundImage: `linear-gradient(0deg, #ffd234 20%, #1681ff 50%)`,
+                    backgroundImage: `linear-gradient(0deg, #1e293b 5%, #1681ff 100%)`,
                     borderRadius:"1.5rem"
                 }}
             >

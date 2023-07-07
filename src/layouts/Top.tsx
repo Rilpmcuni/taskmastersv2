@@ -8,6 +8,7 @@ import {
     Link,
     Stack,
 } from "@mui/material";
+import { ContactData } from "@/data/ContactData";
 
 
 
@@ -25,13 +26,13 @@ export default function Top() {
             >
                 <Button
                     size="small"
-                    href={"tel:+123456789"}
+                    href={`tel:${ContactData.number}`}
                     variant="outlined"
                     sx={{ borderRadius: "2rem" }}
                     LinkComponent={Link}
                     startIcon={<PhoneInTalkIcon />}
                 >
-                    Llámanos: +56 9 8845 6231
+                    {`Llámanos: ${ContactData.number}`}
                 </Button>
                 {/* <Link
                     href={"tel:+123456789"}

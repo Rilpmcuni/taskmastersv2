@@ -1,18 +1,12 @@
-import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import { Link as LinkMui } from "@mui/material";
+import Link from "next/link";
 
-import {
-    Badge,
-    Button,
-    Chip,
-    IconButton,
-    Link,
-    Stack,
-    Tooltip,
-    Typography,
-} from "@mui/material";
+import { Badge, Button, Stack, Tooltip, Typography } from "@mui/material";
 import Logo from "@/components/ui/Logo";
 import { useState } from "react";
 import Zoom from "@mui/material/Zoom";
+import { ContactData } from "@/data/ContactData";
 
 export default function Header() {
     const [CountEmpleo, setCountEmpleo] = useState(0);
@@ -32,7 +26,8 @@ export default function Header() {
             paddingX={"1rem"}
             zIndex={50}
         >
-            <Link
+            <LinkMui
+                component={Link}
                 href={"/"}
                 sx={{
                     display: "flex",
@@ -83,7 +78,7 @@ export default function Header() {
                 >
                     taskMasters
                 </Typography>
-            </Link>
+            </LinkMui>
             <Stack
                 sx={{ display: { xs: "none", md: "flex" } }}
                 direction="row"
@@ -118,13 +113,13 @@ export default function Header() {
                 <Button>Contacto</Button>
             </Stack>
             <Button
+            href={`tel:${ContactData.number}`}
                 variant="contained"
                 size="medium"
                 sx={{ boxShadow: 0 }}
-                href={"tel:+123456789"}
                 // sx={{ borderRadius: "0.8rem" }}
-                LinkComponent={Link}
                 startIcon={<PhoneInTalkIcon />}
+                LinkComponent={Link}
             >
                 Llámanos
             </Button>

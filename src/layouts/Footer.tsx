@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { Link, Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import { Link as LinkMui } from "@mui/material";
 
 import Logo from "@/components/ui/Logo";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
@@ -10,8 +11,9 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import MarkunreadMailboxRoundedIcon from "@mui/icons-material/MarkunreadMailboxRounded";
 import RoomRoundedIcon from "@mui/icons-material/RoomRounded";
-import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
-
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+import Link from "next/link";
+import { ContactData } from "@/data/ContactData";
 
 export default function Footer() {
     /* año */
@@ -37,7 +39,7 @@ export default function Footer() {
     ];
     const CompaniList = [
         {
-            title: "Llámanos: +56 9 8845 6231",
+            title: `Llámanos: ${ContactData.number}`,
 
             ico: (
                 <PhoneInTalkIcon
@@ -46,9 +48,10 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
+            link:`tel:${ContactData.number}`
         },
         {
-            title: "contacto@taskMasters.cl",
+            title: ContactData.mail,
             ico: (
                 <EmailRoundedIcon
                     fontSize="small"
@@ -56,9 +59,10 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
+            link:`mailto:${ContactData.mail}`
         },
         {
-            title: "C. Talca 344, Cartagena, Valparaiso, Chile",
+            title: ContactData.direction,
             ico: (
                 <RoomRoundedIcon
                     fontSize="small"
@@ -66,10 +70,18 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
+            link:"https://goo.gl/maps/jvL2fjRRPueTowym6"
         },
         {
             title: "Lunes - Viernes, 9am - 6pm; Fin de semana cerrado",
-            ico: <AccessTimeRoundedIcon fontSize="small" sx={{ mr: "0.30rem" }} color={"primary"} />,
+            ico: (
+                <AccessTimeRoundedIcon
+                    fontSize="small"
+                    sx={{ mr: "0.30rem" }}
+                    color={"primary"}
+                />
+            ),
+            link:""
         },
     ];
     return (
@@ -93,7 +105,8 @@ export default function Footer() {
                     gap: "1rem",
                 }}
             >
-                <Link
+                <LinkMui
+                    component={Link}
                     href={"/"}
                     sx={{
                         display: "flex",
@@ -131,10 +144,9 @@ export default function Footer() {
                     >
                         taskMasters
                     </Typography>
-                </Link>
+                </LinkMui>
                 <Typography variant="body2">
-                    Puede confiar en nuestros Taskers y en la profesionalidad de
-                    calidad de nuestro trabajo
+                    Simplificando tu hogar, construyendo sonrisas
                 </Typography>
                 <Typography variant="caption">
                     © {currentYear} taskMasters. Todos los derechos reservados.
@@ -167,23 +179,29 @@ export default function Footer() {
                     >
                         {PagesList.map(({ title }, index) => (
                             <>
-                                <li
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "start",
-                                        justifyContent: "start",
-                                        flexDirection: "row",
-                                    }}
-                                >
-                                    <WebAssetIcon
-                                        fontSize="small"
-                                        sx={{ mr: "0.30rem" }}
-                                        color={"primary"}
-                                    />
+                                <li key={index}>
+                                    <LinkMui
+                                        component={Link}
+                                        href={`/${title}`}
+                                        color="inherit"
+                                        underline="hover"
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "start",
+                                            justifyContent: "start",
+                                            flexDirection: "row",
+                                        }}
+                                    >
+                                        <WebAssetIcon
+                                            fontSize="small"
+                                            sx={{ mr: "0.30rem" }}
+                                            color={"primary"}
+                                        />
 
-                                    <Typography variant="caption">
-                                        {title}
-                                    </Typography>
+                                        <Typography variant="caption">
+                                            {title}
+                                        </Typography>
+                                    </LinkMui>
                                 </li>
                             </>
                         ))}
@@ -209,20 +227,27 @@ export default function Footer() {
                             paddingLeft: 0,
                         }}
                     >
-                        {CompaniList.map(({ title, ico }, index) => (
+                        {CompaniList.map(({ title, ico,link }, index) => (
                             <>
-                                <li
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "start",
-                                        justifyContent: "start",
-                                        flexDirection: "row",
-                                    }}
-                                >
-                                    {ico}
-                                    <Typography variant="caption">
-                                        {title}
-                                    </Typography>
+                                <li key={index}>
+                                    <LinkMui
+                                    target="_blank"
+                                        component={Link}
+                                        href={link}
+                                        color="inherit"
+                                        underline="hover"
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "start",
+                                            justifyContent: "start",
+                                            flexDirection: "row",
+                                        }}
+                                    >
+                                        {ico}
+                                        <Typography variant="caption">
+                                            {title}
+                                        </Typography>
+                                    </LinkMui>
                                 </li>
                             </>
                         ))}

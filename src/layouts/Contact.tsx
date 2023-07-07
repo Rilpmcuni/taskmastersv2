@@ -1,10 +1,12 @@
 "use client";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import React from "react";
 import Image from "next/image";
 import { Box, Button, Stack, Typography, Container } from "@mui/material";
 import featureImg from "@/../public/images/featureImg.webp";
 import CallUsImgTwo from "@/../public/images/CallUsImgTwo.webp";
+import { ContactData } from "@/data/ContactData";
 
 export default function Contact() {
     return (
@@ -18,16 +20,17 @@ export default function Contact() {
                     flexDirection: { xs: "column", md: "row" },
                     gap: "0.5rem",
                     marginBottom: "2rem",
-
                 }}
             >
-                <Stack sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "1rem",
-                    flexDirection: "row",
-                }}>
+                <Stack
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "1rem",
+                        flexDirection: "row",
+                    }}
+                >
                     {[CallUsImgTwo, featureImg].map((image) => (
                         <Box
                             sx={{
@@ -38,8 +41,8 @@ export default function Contact() {
                             }}
                         >
                             <Image
-                                fill={true}
                                 alt="Mountains"
+                                fill={true}
                                 style={{
                                     objectFit: "cover",
                                     borderRadius: "1.5rem",
@@ -92,6 +95,8 @@ export default function Contact() {
                             Escríbenos
                         </Button>
                         <Button
+                        href={`tel:${ContactData.number}`}
+                            startIcon={<PhoneInTalkIcon />}
                             size="large"
                             sx={{
                                 fontWeight: 600,
@@ -103,8 +108,9 @@ export default function Contact() {
                             variant="contained"
                             color="secondary"
                         >
-                            Llámanos: +56 9 8845 6231
+                            {`Llámanos: ${ContactData.number}`}
                         </Button>
+
                         {/*  */}
                     </Stack>
                 </Stack>
