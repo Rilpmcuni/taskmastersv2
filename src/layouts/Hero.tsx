@@ -73,9 +73,10 @@ export default function Hero() {
                                     fontSize: { xs: "3rem", md: "4rem" },
                                 }}
                             >
-                                Bienvenido a TaskMasters: Tu solución confiable
+                                Tu solución confiable
                                 para servicios en el hogar
                             </Typography>
+                            {/* Bienvenido a TaskMasters:  */}
                             <Typography variant="body1" component="p">
                                 Conéctate con expertos en construcción,
                                 remodelación y reparaciones generales

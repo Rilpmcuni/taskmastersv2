@@ -4,6 +4,7 @@ import React from "react";
 
 import { Box, Stack, Typography } from "@mui/material";
 import { Link as LinkMui } from "@mui/material";
+import Link from "next/link";
 
 import Logo from "@/components/ui/Logo";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
@@ -12,7 +13,6 @@ import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import MarkunreadMailboxRoundedIcon from "@mui/icons-material/MarkunreadMailboxRounded";
 import RoomRoundedIcon from "@mui/icons-material/RoomRounded";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
-import Link from "next/link";
 import { ContactData } from "@/data/ContactData";
 
 export default function Footer() {

@@ -86,15 +86,15 @@ export default function Header() {
                 alignItems="center"
                 spacing={1}
             >
-                <Button>Inicio</Button>
-                <Button>Nosotros</Button>
-                <Button>Servicios</Button>
+                <Button LinkComponent={Link} href="/">Inicio</Button>
+                <Button LinkComponent={Link} href="/Nosotros">Nosotros</Button>
+                <Button LinkComponent={Link} href="/Servicios">Servicios</Button>
                 <Badge color="primary" badgeContent={CountEmpleo}>
                     <Tooltip
                         TransitionComponent={Zoom}
                         title="Explora los empleos que tenemos para ti"
                     >
-                        <Button
+                        <Button LinkComponent={Link} href="/Empleo"
                             sx={{
                                 boxShadow: 0,
                                 "&:hover": {
@@ -110,7 +110,7 @@ export default function Header() {
                         </Button>
                     </Tooltip>
                 </Badge>
-                <Button>Contacto</Button>
+                <Button LinkComponent={Link} href="/Contacto">Contacto</Button>
             </Stack>
             <Button
             href={`tel:${ContactData.number}`}

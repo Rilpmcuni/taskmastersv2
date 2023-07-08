@@ -15,13 +15,16 @@
     "@mui/material": "^5.13.7",
     "@mui/styled-engine-sc": "^5.12.0",
     "@types/node": "20.3.3",
-    "@types/react": "18.2.14",
+    "@types/react": "^18.2.14",
     "@types/react-dom": "18.2.6",
+    "@types/react-swipeable-views": "^0.13.2",
+    "@types/react-swipeable-views-utils": "^0.13.4",
     "next": "13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-fast-marquee": "^1.6.0",
     "styled-components": "^5.3.11",
+    "swiper": "^10.0.4",
     "typescript": "5.1.6"
   }
 }
