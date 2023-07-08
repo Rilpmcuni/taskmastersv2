@@ -1,15 +1,8 @@
 "use client";
-import heroImg from "@/../public/images/heroImg.jpg";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import React from "react";
 import Image from "next/image";
 import { Box, Button, Container, Stack } from "@mui/material";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import SELLO from "@/../public/images/SELLO.svg";
-import Logosvg from "@/../public/images/LOGO.svg";
 import SocialProofCard from "@/components/SocialProofCard";
-import { ServicesData } from "@/data/ServicesData";
 import { Link as LinkMui } from "@mui/material";
 import Link from "next/link";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
@@ -83,6 +76,7 @@ export default function SocialProof() {
                     component="h3"
                     fontWeight={600}
                     color="text.primary"
+                    textAlign={"center"}
                 >
                     Nuestra reputación habla por sí misma
                 </Typography>

@@ -1,10 +1,8 @@
 "use client";
-import heroImg from "@/../public/images/heroImg.jpg";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 // import servicesTwo from "@/../public/images/servicesTwo.jpg";
 import heroRabbit from "@/../public/images/heroRabbit.webp";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { Box, Button, Stack, Typography } from "@mui/material";

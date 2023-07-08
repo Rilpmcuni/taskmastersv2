@@ -1,15 +1,6 @@
 "use client";
-import heroImg from "@/../public/images/heroImg.jpg";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import Link from "next/link";
 import React from "react";
-import Image from "next/image";
-import { Button, Container, Stack } from "@mui/material";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import featureImg from "@/../public/images/featureImg.webp";
-import SELLO from "@/../public/images/SELLO.svg";
-import Logosvg from "@/../public/images/LOGO.svg";
+import { Container, Stack } from "@mui/material";
 import ServicesCard from "@/components/ServicesCard";
 import { ServicesData } from "@/data/ServicesData";
 
@@ -47,10 +38,15 @@ export default function Services() {
                     // rgba(30,41,59,0.1)
                     // backgroundImage: `linear-gradient(0deg, #ffd234 20%, #1681ff 50%)`,
                     backgroundImage: `linear-gradient(0deg, #1e293b 5%, #1681ff 100%)`,
-                    borderRadius:"1.5rem"
+                    borderRadius: "1.5rem",
                 }}
             >
-                <Typography variant="h4" component="h3" fontWeight={600} color={"white"}>
+                <Typography
+                    variant="h4"
+                    component="h3"
+                    fontWeight={600}
+                    color={"white"}
+                >
                     Nuestros Servicios
                 </Typography>
                 <Container sx={{ maxWidth: 900, margin: "0 auto" }}>

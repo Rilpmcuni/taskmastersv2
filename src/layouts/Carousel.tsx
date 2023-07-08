@@ -38,28 +38,6 @@ export default function Carousel() {
 
     return (
         <>
-            {/* <Swiper
-                centeredSlides={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
-                navigation={true}
-                slidesPerView={2}
-                spaceBetween={50}
-                modules={[Autoplay, Navigation]}
-                className="mySwiper"
-            >
-                <SwiperSlide>JobsImage</SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide>
-            </Swiper> */}
             <Swiper
             grabCursor={true}
                 autoplay={{
@@ -71,7 +49,7 @@ export default function Carousel() {
                 centeredSlides={false}
                 slidesPerView={2}
                 slidesPerGroup={2}
-                spaceBetween={30}
+                spaceBetween={20}
                 modules={[Autoplay, Navigation]}
                 className="mySwiper"
                 style={{
