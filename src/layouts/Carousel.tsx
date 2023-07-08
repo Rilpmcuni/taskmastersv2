@@ -62,13 +62,15 @@ export default function Carousel() {
             </Swiper> */}
             <Swiper
             grabCursor={true}
-                centeredSlides={true}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
+                    pauseOnMouseEnter:true
                 }}
                 navigation={true}
+                centeredSlides={false}
                 slidesPerView={2}
+                slidesPerGroup={2}
                 spaceBetween={30}
                 modules={[Autoplay, Navigation]}
                 className="mySwiper"
