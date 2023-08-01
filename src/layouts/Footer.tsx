@@ -38,7 +38,6 @@ export default function Footer() {
     const CompaniList = [
         {
             title: `Llámanos: ${ContactData.number}`,
-
             ico: (
                 <PhoneInTalkIcon
                     fontSize="small"
@@ -46,7 +45,7 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
-            link:`tel:${ContactData.number}`
+            link: `tel:${ContactData.number}`,
         },
         {
             title: ContactData.mail,
@@ -57,7 +56,7 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
-            link:`mailto:${ContactData.mail}`
+            link: `mailto:${ContactData.mail}`,
         },
         {
             title: ContactData.direction,
@@ -68,7 +67,7 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
-            link:"https://goo.gl/maps/jvL2fjRRPueTowym6"
+            link: "https://goo.gl/maps/jvL2fjRRPueTowym6",
         },
         {
             title: "Lunes - Viernes, 9am - 6pm; Fin de semana cerrado",
@@ -79,7 +78,7 @@ export default function Footer() {
                     color={"primary"}
                 />
             ),
-            link:""
+            link: "",
         },
     ];
     return (
@@ -225,11 +224,11 @@ export default function Footer() {
                             paddingLeft: 0,
                         }}
                     >
-                        {CompaniList.map(({ title, ico,link }, index) => (
+                        {CompaniList.map(({ title, ico, link }, index) => (
                             <>
                                 <li key={index}>
                                     <LinkMui
-                                    target="_blank"
+                                        target="_blank"
                                         component={Link}
                                         href={link}
                                         color="inherit"

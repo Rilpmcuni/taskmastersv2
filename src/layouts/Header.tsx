@@ -86,15 +86,29 @@ export default function Header() {
                 alignItems="center"
                 spacing={1}
             >
-                <Button LinkComponent={Link} href="/">Inicio</Button>
-                <Button LinkComponent={Link} href="/Nosotros">Nosotros</Button>
-                <Button LinkComponent={Link} href="/Servicios">Servicios</Button>
-                <Badge color="primary" badgeContent={CountEmpleo}>
+                <Button LinkComponent={Link} href="/">
+                    Inicio
+                </Button>
+                <Button LinkComponent={Link} href="/Nosotros">
+                    Nosotros
+                </Button>
+                <Button LinkComponent={Link} href="/Servicios">
+                    Servicios
+                </Button>
+                {/* <Badge color="primary" badgeContent={CountEmpleo}> */}
+                <Badge
+                    sx={{ userSelect: "none" }}
+                    color="primary"
+                    badgeContent={"+50"}
+                >
                     <Tooltip
+                        disableInteractive
                         TransitionComponent={Zoom}
                         title="Explora los empleos que tenemos para ti"
                     >
-                        <Button LinkComponent={Link} href="/Empleo"
+                        <Button
+                            LinkComponent={Link}
+                            href="/Empleo"
                             sx={{
                                 boxShadow: 0,
                                 "&:hover": {
@@ -110,10 +124,12 @@ export default function Header() {
                         </Button>
                     </Tooltip>
                 </Badge>
-                <Button LinkComponent={Link} href="/Contacto">Contacto</Button>
+                <Button LinkComponent={Link} href="/Contacto">
+                    Contacto
+                </Button>
             </Stack>
             <Button
-            href={`tel:${ContactData.number}`}
+                href={`tel:${ContactData.number}`}
                 variant="contained"
                 size="medium"
                 sx={{ boxShadow: 0 }}

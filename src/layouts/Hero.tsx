@@ -12,15 +12,15 @@ import { ContactData } from "@/data/ContactData";
 export default function Hero() {
     return (
         <>
-            <div
-                style={{
+            <Box
+                sx={{
                     display: "grid",
                     gridGap: "8px",
                     gridTemplateColumns:
                         "repeat(auto-fit, minmax(200px, auto))",
                     // marginTop: "1rem",}
-                    marginLeft: "1rem",
-                    marginRight: "1rem",
+                    marginLeft: { xs: "0rem", md: "1rem" },
+                    marginRight: { xs: "0rem", md: "1rem" },
                     marginBottom: "2rem",
                 }}
             >
@@ -28,7 +28,7 @@ export default function Hero() {
                     <Stack
                         spacing={2}
                         style={{
-                            zIndex: "40",
+                            zIndex: "30",
                             position: "absolute",
                             display: "flex",
                             flexDirection: "column",
@@ -106,7 +106,7 @@ export default function Hero() {
                                 Escríbenos
                             </Button>
                             <Button
-                            href={`tel:${ContactData.number}`}
+                                href={`tel:${ContactData.number}`}
                                 startIcon={<PhoneInTalkIcon />}
                                 size="large"
                                 sx={{
@@ -135,7 +135,7 @@ export default function Hero() {
                     />
                 </div>
                 {/* And more images in the grid... */}
-            </div>
+            </Box>
             {/* 
              */}
         </>

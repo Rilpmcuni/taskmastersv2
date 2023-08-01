@@ -80,24 +80,21 @@ export default function SocialProof() {
                 >
                     Nuestra reputación habla por sí misma
                 </Typography>
-                <LinkMui
-                    component={Link}
+                <Button
+                    size="small"
                     href={`/Saber-Mas`}
-                    underline="hover"
-                    sx={{
-                        display: "flex",
-                        alignItems: "start",
-                        justifyContent: "start",
-                        flexDirection: "row",
-                    }}
+                    sx={{ borderRadius: "2rem", fontSize:"small" }}
+                    LinkComponent={Link}
+                    endIcon={
+                        <NavigateNextRoundedIcon
+                            fontSize="small"
+                            sx={{ mr: "0.30rem" }}
+                            color={"primary"}
+                        />
+                    }
                 >
-                    <Typography variant="body2">Saber más</Typography>
-                    <NavigateNextRoundedIcon
-                        fontSize="small"
-                        sx={{ mr: "0.30rem" }}
-                        color={"primary"}
-                    />
-                </LinkMui>
+                    Saber más
+                </Button>
                 <Container sx={{ height: "14rem", margin: "0 auto" }}>
                     <Carousel />
                 </Container>
