@@ -12,7 +12,7 @@ const capriola = Capriola({
 export const metadata = {
     title: "taskMasters",
     description:
-        "TaskMasters - Plataforma líder en servicios para el hogar y construcción",
+        "TaskMasters - Plataforma líder en servicios para el hogar",
 };
 // capriola.style.fontFamily
 export default function RootLayout({

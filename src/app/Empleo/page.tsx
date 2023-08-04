@@ -28,7 +28,7 @@ interface Job {
     // Agrega otras propiedades que tenga tu objeto Job si las tienes definidas
 }
 
-export default function Home() {
+export default function Empleo() {
     const supabase = createClientComponentClient();
     const [Jobs, setJobs] = useState<Job[] | null>(null); // Tipo explícito para Jobs
 

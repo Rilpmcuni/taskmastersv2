@@ -92,6 +92,8 @@ export default function Footer() {
             sx={{
                 flexDirection: { xs: "column", md: "row" },
                 gap: { xs: "4rem", md: "1rem" },
+                // borderTopLeftRadius: "1.5rem",
+                // borderTopRightRadius: "1.5rem",
             }}
         >
             <Stack

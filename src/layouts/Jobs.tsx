@@ -49,7 +49,6 @@ export default function Jobs() {
                     size="large"
                     href={`/Empleo`}
                     sx={{
-                        borderRadius: "2rem",
                         fontSize: "large",
                         boxShadow: 0,
                         "&:hover": {
@@ -57,7 +56,6 @@ export default function Jobs() {
                         },
                     }}
                     LinkComponent={Link}
-                   
                 >
                     Lista de empleos
                 </Button>
