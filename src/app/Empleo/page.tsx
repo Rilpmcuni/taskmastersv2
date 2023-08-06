@@ -58,7 +58,7 @@ export default function Empleo() {
                         alignItems={"flex-start"}
                         spacing={1}
                         sx={{
-                            marginBottom: "2rem",
+                            // marginBottom: "2rem",
                             bgcolor: "secondary.main",
                             borderRadius: "1.5rem",
                             width: "100%",
@@ -90,7 +90,9 @@ export default function Empleo() {
                     </Stack>
                 </>
 
-                <Container sx={{ maxWidth: 900, margin: "0 auto" }}>
+                <Container
+                    sx={{ maxWidth: 900, margin: "0 auto", marginY: "1rem" }}
+                >
                     <Grid container spacing={1}>
                         {Jobs ? (
                             <>
@@ -100,7 +102,7 @@ export default function Empleo() {
                             </>
                         ) : (
                             <>
-                                {[0, 1, 2, 3, 4, 5, 6].map((dato, index) => (
+                                {[0, 1, 2].map((dato, index) => (
                                     <Grid
                                         key={index}
                                         item
@@ -135,11 +137,6 @@ export default function Empleo() {
                                 ))}
                             </>
                         )}
-                        <>
-                            {/* For variant="text", adjust the height via font-size */}
-
-                            {/* For other variants, adjust the size with `width` and `height` */}
-                        </>
                     </Grid>
                 </Container>
             </Box>
