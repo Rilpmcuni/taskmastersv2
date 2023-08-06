@@ -155,306 +155,16 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
     }
     return (
         <>
-            <main
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "flex-start",
-                    flexGrow: 1,
-                    margin: "1rem",
-                    gap: "1rem",
-                }}
-            >
-                {/* sx={{ flexGrow: 1, p:"1rem", margin:"1rem" }}
- sx={{border: "1px solid #e0e0e0", borderRadius:"1.5rem"}} */}
-                <Box
-                    sx={{
-                        border: "1px solid #e0e0e0",
-                        borderRadius: "1.5rem",
-                        padding: "1rem",
-                        width: "75%",
-                    }}
-                >
-                    <Typography
-                        color="text.primary"
-                        variant="h4"
-                        component="h3"
-                        fontWeight={600}
-                    >
-                        {/* <Skeleton variant="rounded" width={50} height={50} /> */}
-                        {empleo ? empleo?.title : <Skeleton width={200} />}
-                    </Typography>
-                    <Typography
-                        color="text.primary"
-                        variant="h6"
-                        component="h5"
-                        fontWeight={600}
-                    >
-                        {empleo ? (
-                            "Descripción del trabajo"
-                        ) : (
-                            <Skeleton width={300} />
-                        )}
-                    </Typography>
-                    <Typography
-                        color="text.primary"
-                        variant="body1"
-                        sx={{ width: { xs: "100%", md: "90%" } }}
-                    >
-                        {empleo ? empleo?.content : <Skeleton height={200} />}
-                    </Typography>
-                    <>
-                        <Stack
-                            direction="row"
-                            justifyContent="center"
-                            alignItems="flex-start"
-                            flexWrap={"wrap"}
-                            spacing={2}
-                            sx={{
-                                flexGrow: 1,
-                                backgroundColor: "secondary.main",
-                                margin: "-1rem",
-                                paddingY: "1rem",
-                                marginTop: "1rem",
-                            }}
-                        >
-                            {/* Responsabilidades */}
-                            <Box
-                                sx={{
-                                    width: "30%",
-                                    minWidth: 250,
-                                }} /* sx={{ minWidth: 275 }} */
-                            >
-                                <Card variant="outlined">
-                                    <CardContent>
-                                        <Typography
-                                            variant="h5"
-                                            component="div"
-                                        >
-                                            Responsabilidades
-                                        </Typography>
-                                        {empleo ? (
-                                            <List dense>
-                                                {empleo?.responsibilities.responsabilidades.map(
-                                                    (
-                                                        responsabilidad: any,
-                                                        index: number
-                                                    ) => (
-                                                        <ListItem
-                                                            disableGutters
-                                                            key={index}
-                                                        >
-                                                            <VerifiedIcon
-                                                                fontSize="small"
-                                                                sx={{
-                                                                    mr: "0.30rem",
-                                                                    // mr: 0.5,
-                                                                }}
-                                                                color={
-                                                                    "secondary"
-                                                                }
-                                                            />
-
-                                                            <ListItemText
-                                                                primary={
-                                                                    responsabilidad
-                                                                }
-                                                            />
-                                                        </ListItem>
-                                                    )
-                                                )}
-                                            </List>
-                                        ) : (
-                                            <List dense disablePadding>
-                                                {[0, 1].map(
-                                                    (
-                                                        // responsabilidad: any,
-                                                        index: number
-                                                    ) => (
-                                                        <ListItem
-                                                            disableGutters
-                                                            disablePadding
-                                                        >
-                                                            <VerifiedIcon
-                                                                fontSize="small"
-                                                                sx={{
-                                                                    mr: "0.30rem",
-                                                                    // mr: 0.5,
-                                                                }}
-                                                                color={
-                                                                    "secondary"
-                                                                }
-                                                            />
-                                                            <ListItemText
-                                                                primary={
-                                                                    <Skeleton
-                                                                        width={
-                                                                            "100%"
-                                                                        }
-                                                                        height={
-                                                                            150
-                                                                        }
-                                                                    />
-                                                                }
-                                                            />
-                                                        </ListItem>
-                                                    )
-                                                )}
-                                            </List>
-                                        )}
-                                    </CardContent>
-                                </Card>
-                            </Box>
-                            {/* requisitos */}
-                            <Box
-                                sx={{
-                                    width: "30%",
-                                    minWidth: 100,
-                                }} /* sx={{ minWidth: 275 }} */
-                            >
-                                <Card variant="outlined">
-                                    <CardContent>
-                                        <Typography
-                                            bgcolor={"secondary"}
-                                            sx={{
-                                                backgroundColor: "secondary",
-                                            }}
-                                            variant="h5"
-                                            component="div"
-                                        >
-                                            Requisitos
-                                        </Typography>
-
-                                        {empleo ? (
-                                            <List dense>
-                                                {empleo?.valued.valorado.map(
-                                                    (
-                                                        valor: any,
-                                                        index: number
-                                                    ) => (
-                                                        <ListItem
-                                                            disableGutters
-                                                            key={index}
-                                                        >
-                                                            <VerifiedIcon
-                                                                fontSize="small"
-                                                                sx={{
-                                                                    mr: "0.30rem",
-                                                                    // mr: 0.5,
-                                                                }}
-                                                                color={
-                                                                    "secondary"
-                                                                }
-                                                            />
-
-                                                            <ListItemText
-                                                                primary={valor}
-                                                            />
-                                                        </ListItem>
-                                                    )
-                                                )}
-                                            </List>
-                                        ) : (
-                                            <List dense disablePadding>
-                                                {[0].map(
-                                                    (
-                                                        // responsabilidad: any,
-                                                        index: number
-                                                    ) => (
-                                                        <ListItem
-                                                            disableGutters
-                                                            disablePadding
-                                                        >
-                                                            <VerifiedIcon
-                                                                fontSize="small"
-                                                                sx={{
-                                                                    mr: "0.30rem",
-                                                                    // mr: 0.5,
-                                                                }}
-                                                                color={
-                                                                    "secondary"
-                                                                }
-                                                            />
-                                                            <ListItemText
-                                                                primary={
-                                                                    <Skeleton
-                                                                        width={
-                                                                            "100%"
-                                                                        }
-                                                                        height={
-                                                                            150
-                                                                        }
-                                                                    />
-                                                                }
-                                                            />
-                                                        </ListItem>
-                                                    )
-                                                )}
-                                            </List>
-                                        )}
-                                    </CardContent>
-                                </Card>
-                            </Box>
-                            {/* Se valorará */}
-                            <Box
-                                sx={{
-                                    width: "30%",
-                                    minWidth: 100,
-                                }} /* sx={{ minWidth: 275 }} */
-                            >
-                                <Card variant="outlined">
-                                    <CardContent>
-                                        <Typography
-                                            bgcolor={"secondary"}
-                                            sx={{
-                                                backgroundColor: "secondary",
-                                            }}
-                                            variant="h5"
-                                            component="div"
-                                        >
-                                            Se valorará
-                                        </Typography>
-
-                                        <List dense>
-                                            {empleo?.valued.valorado.map(
-                                                (valor: any, index: number) => (
-                                                    <ListItem
-                                                        disableGutters
-                                                        key={index}
-                                                    >
-                                                        <VerifiedIcon
-                                                            fontSize="small"
-                                                            sx={{
-                                                                mr: "0.30rem",
-                                                                // mr: 0.5,
-                                                            }}
-                                                            color={"secondary"}
-                                                        />
-
-                                                        <ListItemText
-                                                            primary={valor}
-                                                        />
-                                                    </ListItem>
-                                                )
-                                            )}
-                                        </List>
-                                        {/* <Typography variant="body2">
-                                            well meaning and kindly.
-                                            <br />
-                                            {'"a benevolent smile"'}
-                                        </Typography> */}
-                                    </CardContent>
-                                </Card>
-                            </Box>
-                        </Stack>
-                    </>
-                </Box>
+            <main>
                 <Box
                     sx={{
                         display: "flex",
-                        flexDirection: "column",
+                        flexDirection: { xs: "column", md: "row" },
+                        alignItems: "flex-start",
+                        flexGrow: 1,
+                        margin: { xs: "0rem", md: "1rem" },
+                        marginY: { xs: "1rem", md: "1rem" },
                         gap: "1rem",
-                        width: "25%",
                     }}
                 >
                     <Box
@@ -462,189 +172,554 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
                             border: "1px solid #e0e0e0",
                             borderRadius: "1.5rem",
                             padding: "1rem",
+                            width: { xs: "auto", md: "75%" },
                         }}
                     >
                         <Typography
+                            color="text.primary"
+                            variant="h4"
+                            component="h3"
+                            fontWeight={600}
+                        >
+                            {/* <Skeleton variant="rounded" width={50} height={50} /> */}
+                            {empleo ? empleo?.title : <Skeleton width={200} />}
+                            <Button
+                                href={`#`}
+                                variant="contained"
+                                size="large"
+                                sx={{ boxShadow: 0 }}
+                                // sx={{ borderRadius: "0.8rem" }}
+                                LinkComponent={Link}
+                            >
+                                ¡Solicitar ahora!
+                            </Button>
+                        </Typography>
+                        <Typography
+                            color="text.primary"
                             variant="h6"
-                            component="div"
+                            component="h5"
                             fontWeight={600}
                         >
                             {empleo ? (
-                                obtenerIco(empleo?.title)
+                                "Descripción del trabajo"
                             ) : (
-                                <Skeleton
-                                    variant="rounded"
-                                    width={"5.6rem"}
-                                    height={"5.6rem"}
-                                />
+                                <Skeleton width={300} />
                             )}
                         </Typography>
+                        <Typography
+                            color="text.primary"
+                            variant="body1"
+                            sx={{ width: { xs: "auto", md: "90%" } }}
+                        >
+                            {empleo ? (
+                                empleo?.content
+                            ) : (
+                                <Skeleton height={200} />
+                            )}
+                        </Typography>
+                        <>
+                            <Stack
+                                sx={{
+                                    gap: "0.5rem",
+                                    backgroundColor: "secondary.main",
+                                    margin: "-1rem",
+                                    paddingY: "1rem",
+                                    marginTop: "1rem",
+                                    marginBottom: "1rem",
+                                    flexDirection: { xs: "column", md: "row" },
+                                    justifyContent: "center",
+                                    alignItems: {
+                                        xs: "center",
+                                        md: "flex-start",
+                                    },
+                                }}
+                            >
+                                {/* Responsabilidades */}
+                                <Box
+                                    sx={{
+                                        width: { xs: "90%", md: "30%" },
+                                    }} /* sx={{ minWidth: 275 }} */
+                                >
+                                    <Card variant="outlined">
+                                        <CardContent>
+                                            <Typography
+                                                variant="h5"
+                                                component="div"
+                                            >
+                                                Responsabilidades
+                                            </Typography>
+                                            {empleo ? (
+                                                <List dense>
+                                                    {empleo?.responsibilities.responsabilidades.map(
+                                                        (
+                                                            responsabilidad: any,
+                                                            index: number
+                                                        ) => (
+                                                            <ListItem
+                                                                disableGutters
+                                                                key={index}
+                                                            >
+                                                                <VerifiedIcon
+                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        mr: "0.30rem",
+                                                                        // mr: 0.5,
+                                                                    }}
+                                                                    color={
+                                                                        "secondary"
+                                                                    }
+                                                                />
 
-                        <List dense>
-                            <ListItem disablePadding disableGutters>
-                                <VerifiedIcon
-                                    fontSize="small"
+                                                                <ListItemText
+                                                                    primary={
+                                                                        responsabilidad
+                                                                    }
+                                                                />
+                                                            </ListItem>
+                                                        )
+                                                    )}
+                                                </List>
+                                            ) : (
+                                                <List dense disablePadding>
+                                                    {[0, 1, 2].map(
+                                                        (
+                                                            // responsabilidad: any,
+                                                            index: number
+                                                        ) => (
+                                                            <ListItem
+                                                                disableGutters
+                                                                disablePadding
+                                                            >
+                                                                <VerifiedIcon
+                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        mr: "0.30rem",
+                                                                        // mr: 0.5,
+                                                                    }}
+                                                                    color={
+                                                                        "secondary"
+                                                                    }
+                                                                />
+                                                                <ListItemText
+                                                                    primary={
+                                                                        <Skeleton
+                                                                            width={
+                                                                                "100%"
+                                                                            }
+                                                                            height={
+                                                                                150
+                                                                            }
+                                                                        />
+                                                                    }
+                                                                />
+                                                            </ListItem>
+                                                        )
+                                                    )}
+                                                </List>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                                {/* requisitos */}
+                                <Box
                                     sx={{
-                                        mr: "0.30rem",
-                                        // mr: 0.5,
-                                    }}
-                                    color={"secondary"}
-                                />
-                                <ListItemText
-                                    primary={"Locación"}
-                                    secondary={
-                                        empleo ? (
-                                            `${obtenerNombreRegion(
-                                                empleo?.location
-                                            )}, Chile`
-                                        ) : (
-                                            <Skeleton width={150} />
-                                        )
-                                    }
-                                />
-                            </ListItem>
-                            <ListItem disablePadding disableGutters>
-                                <VerifiedIcon
-                                    fontSize="small"
+                                        width: { xs: "90%", md: "30%" },
+                                    }} /* sx={{ minWidth: 275 }} */
+                                >
+                                    <Card variant="outlined">
+                                        <CardContent>
+                                            <Typography
+                                                bgcolor={"secondary"}
+                                                sx={{
+                                                    backgroundColor:
+                                                        "secondary",
+                                                }}
+                                                variant="h5"
+                                                component="div"
+                                            >
+                                                Requisitos
+                                            </Typography>
+
+                                            {empleo ? (
+                                                <List dense>
+                                                    {empleo?.requirements.requisitos.map(
+                                                        (
+                                                            requisito: any,
+                                                            index: number
+                                                        ) => (
+                                                            <ListItem
+                                                                disableGutters
+                                                                key={index}
+                                                            >
+                                                                <VerifiedIcon
+                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        mr: "0.30rem",
+                                                                        // mr: 0.5,
+                                                                    }}
+                                                                    color={
+                                                                        "secondary"
+                                                                    }
+                                                                />
+
+                                                                <ListItemText
+                                                                    primary={
+                                                                        requisito
+                                                                    }
+                                                                />
+                                                            </ListItem>
+                                                        )
+                                                    )}
+                                                </List>
+                                            ) : (
+                                                <List dense disablePadding>
+                                                    {[0, 1].map(
+                                                        (
+                                                            // responsabilidad: any,
+                                                            index: number
+                                                        ) => (
+                                                            <ListItem
+                                                                disableGutters
+                                                                disablePadding
+                                                            >
+                                                                <VerifiedIcon
+                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        mr: "0.30rem",
+                                                                        // mr: 0.5,
+                                                                    }}
+                                                                    color={
+                                                                        "secondary"
+                                                                    }
+                                                                />
+                                                                <ListItemText
+                                                                    primary={
+                                                                        <Skeleton
+                                                                            width={
+                                                                                "100%"
+                                                                            }
+                                                                            height={
+                                                                                150
+                                                                            }
+                                                                        />
+                                                                    }
+                                                                />
+                                                            </ListItem>
+                                                        )
+                                                    )}
+                                                </List>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                                {/* Se valorará */}
+                                <Box
                                     sx={{
-                                        mr: "0.30rem",
-                                        // mr: 0.5,
-                                    }}
-                                    color={"primary"}
-                                />
-                                <ListItemText
-                                    primary={"Experiencia"}
-                                    secondary={
-                                        empleo ? (
-                                            obtenerNivelExperiencia(
-                                                empleo?.experience
-                                            )
-                                        ) : (
-                                            <Skeleton width={130} />
-                                        )
-                                    }
-                                />
-                            </ListItem>
-                            <ListItem disablePadding disableGutters>
-                                <VerifiedIcon
-                                    fontSize="small"
-                                    sx={{
-                                        mr: "0.30rem",
-                                        // mr: 0.5,
-                                    }}
-                                    color={"secondary"}
-                                />
-                                <ListItemText
-                                    primary={"Salario"}
-                                    secondary={
-                                        empleo ? (
-                                            `$${empleo?.salary}.000`
-                                        ) : (
-                                            <Skeleton width={100} />
-                                        )
-                                    }
-                                />
-                            </ListItem>
-                            <ListItem disablePadding disableGutters>
-                                <VerifiedIcon
-                                    fontSize="small"
-                                    sx={{
-                                        mr: "0.30rem",
-                                        // mr: 0.5,
-                                    }}
-                                    color={"primary"}
-                                />
-                                <ListItemText
-                                    primary={"Puesto"}
-                                    secondary={
-                                        empleo ? (
-                                            empleo?.role
-                                        ) : (
-                                            <Skeleton width={80} />
-                                        )
-                                    }
-                                />
-                            </ListItem>
-                            <ListItem disablePadding disableGutters>
-                                <VerifiedIcon
-                                    fontSize="small"
-                                    sx={{
-                                        mr: "0.30rem",
-                                        // mr: 0.5,
-                                    }}
-                                    color={"secondary"}
-                                />
-                                <ListItemText
-                                    primary={"Tiempo"}
-                                    secondary={
-                                        empleo ? (
-                                            obtenerEmploy(empleo?.employ)
-                                        ) : (
-                                            <Skeleton width={150} />
-                                        )
-                                    }
-                                />
-                            </ListItem>
-                        </List>
+                                        width: { xs: "90%", md: "30%" },
+                                    }} /* sx={{ minWidth: 275 }} */
+                                >
+                                    <Card variant="outlined">
+                                        <CardContent>
+                                            <Typography
+                                                bgcolor={"secondary"}
+                                                sx={{
+                                                    backgroundColor:
+                                                        "secondary",
+                                                }}
+                                                variant="h5"
+                                                component="div"
+                                            >
+                                                Se valorará
+                                            </Typography>
+
+                                            {empleo ? (
+                                                <List dense>
+                                                    {empleo?.valued.valorado.map(
+                                                        (
+                                                            valor: any,
+                                                            index: number
+                                                        ) => (
+                                                            <ListItem
+                                                                disableGutters
+                                                                key={index}
+                                                            >
+                                                                <VerifiedIcon
+                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        mr: "0.30rem",
+                                                                        // mr: 0.5,
+                                                                    }}
+                                                                    color={
+                                                                        "secondary"
+                                                                    }
+                                                                />
+
+                                                                <ListItemText
+                                                                    primary={
+                                                                        valor
+                                                                    }
+                                                                />
+                                                            </ListItem>
+                                                        )
+                                                    )}
+                                                </List>
+                                            ) : (
+                                                <List dense disablePadding>
+                                                    {[0].map(
+                                                        (
+                                                            // responsabilidad: any,
+                                                            index: number
+                                                        ) => (
+                                                            <ListItem
+                                                                disableGutters
+                                                                disablePadding
+                                                            >
+                                                                <VerifiedIcon
+                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        mr: "0.30rem",
+                                                                        // mr: 0.5,
+                                                                    }}
+                                                                    color={
+                                                                        "secondary"
+                                                                    }
+                                                                />
+                                                                <ListItemText
+                                                                    primary={
+                                                                        <Skeleton
+                                                                            width={
+                                                                                "100%"
+                                                                            }
+                                                                            height={
+                                                                                150
+                                                                            }
+                                                                        />
+                                                                    }
+                                                                />
+                                                            </ListItem>
+                                                        )
+                                                    )}
+                                                </List>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                            </Stack>
+                        </>
+                        <Button
+                            href={`#`}
+                            variant="contained"
+                            size="large"
+                            sx={{ boxShadow: 0 }}
+                            // sx={{ borderRadius: "0.8rem" }}
+                            LinkComponent={Link}
+                        >
+                            ¡Solicitar ahora!
+                        </Button>
                     </Box>
                     <Box
                         sx={{
-                            border: "1px solid #e0e0e0",
-                            borderRadius: "1.5rem",
-                            padding: "1rem",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "1rem",
+                            width: { xs: "100%", md: "25%" },
                         }}
                     >
-                        <LinkMui
-                            component={Link}
-                            href={"/"}
+                        <Box
                             sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "flex-start",
-                                color: "inherit",
-                                textDecoration: "none",
+                                border: "1px solid #e0e0e0",
+                                borderRadius: "1.5rem",
+                                padding: "1rem",
                             }}
                         >
-                            <Logo />
                             <Typography
                                 variant="h6"
-                                noWrap
                                 component="div"
-                                color="grey.700"
+                                fontWeight={600}
+                            >
+                                {empleo ? (
+                                    obtenerIco(empleo?.title)
+                                ) : (
+                                    <Skeleton
+                                        variant="rounded"
+                                        width={"5.6rem"}
+                                        height={"5.6rem"}
+                                    />
+                                )}
+                            </Typography>
+
+                            <List dense>
+                                <ListItem disablePadding disableGutters>
+                                    <VerifiedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            mr: "0.30rem",
+                                            // mr: 0.5,
+                                        }}
+                                        color={"secondary"}
+                                    />
+                                    <ListItemText
+                                        primary={"Locación"}
+                                        secondary={
+                                            empleo ? (
+                                                `${obtenerNombreRegion(
+                                                    empleo?.location
+                                                )}, Chile`
+                                            ) : (
+                                                <Skeleton width={150} />
+                                            )
+                                        }
+                                    />
+                                </ListItem>
+                                <ListItem disablePadding disableGutters>
+                                    <VerifiedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            mr: "0.30rem",
+                                            // mr: 0.5,
+                                        }}
+                                        color={"primary"}
+                                    />
+                                    <ListItemText
+                                        primary={"Experiencia"}
+                                        secondary={
+                                            empleo ? (
+                                                obtenerNivelExperiencia(
+                                                    empleo?.experience
+                                                )
+                                            ) : (
+                                                <Skeleton width={130} />
+                                            )
+                                        }
+                                    />
+                                </ListItem>
+                                <ListItem disablePadding disableGutters>
+                                    <VerifiedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            mr: "0.30rem",
+                                            // mr: 0.5,
+                                        }}
+                                        color={"secondary"}
+                                    />
+                                    <ListItemText
+                                        primary={"Salario"}
+                                        secondary={
+                                            empleo ? (
+                                                `$${empleo?.salary}.000`
+                                            ) : (
+                                                <Skeleton width={100} />
+                                            )
+                                        }
+                                    />
+                                </ListItem>
+                                <ListItem disablePadding disableGutters>
+                                    <VerifiedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            mr: "0.30rem",
+                                            // mr: 0.5,
+                                        }}
+                                        color={"primary"}
+                                    />
+                                    <ListItemText
+                                        primary={"Puesto"}
+                                        secondary={
+                                            empleo ? (
+                                                empleo?.role
+                                            ) : (
+                                                <Skeleton width={80} />
+                                            )
+                                        }
+                                    />
+                                </ListItem>
+                                <ListItem disablePadding disableGutters>
+                                    <VerifiedIcon
+                                        fontSize="small"
+                                        sx={{
+                                            mr: "0.30rem",
+                                            // mr: 0.5,
+                                        }}
+                                        color={"secondary"}
+                                    />
+                                    <ListItemText
+                                        primary={"Tiempo"}
+                                        secondary={
+                                            empleo ? (
+                                                obtenerEmploy(empleo?.employ)
+                                            ) : (
+                                                <Skeleton width={150} />
+                                            )
+                                        }
+                                    />
+                                </ListItem>
+                            </List>
+                        </Box>
+                        <Box
+                            sx={{
+                                border: "1px solid #e0e0e0",
+                                borderRadius: "1.5rem",
+                                padding: "1rem",
+                            }}
+                        >
+                            <LinkMui
+                                component={Link}
+                                href={"/"}
                                 sx={{
-                                    mr: 2,
-                                    fontWeight: 700,
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "flex-start",
                                     color: "inherit",
                                     textDecoration: "none",
-                                    /*  */
-
-                                    backgroundcolor: "primary.main",
-                                    backgroundImage: `linear-gradient(to right, #1681FF 23%, #FFD234 42%)`,
-                                    "&:hover": {
-                                        backgroundImage: `linear-gradient(to right, #FFD234 23%, #1681FF 42%)`,
-                                    },
-                                    backgroundSize: "100%",
-                                    backgroundRepeat: "repeat",
-                                    backgroundClip: "text",
-                                    WebkitBackgroundClip: "text",
-                                    WebkitTextFillColor: "transparent",
                                 }}
                             >
-                                taskMasters
-                            </Typography>
-                        </LinkMui>
-                        <List dense disablePadding>
-                            <ListItem disablePadding disableGutters>
-                                <ListItemText primary={ContactData.direction} />
-                            </ListItem>
-                            <ListItem disablePadding disableGutters>
-                                <ListItemText primary={ContactData.number} />
-                            </ListItem>
-                            <ListItem disablePadding disableGutters>
-                                <ListItemText primary={ContactData.mailJob} />
-                            </ListItem>
-                        </List>
+                                <Logo />
+                                <Typography
+                                    variant="h6"
+                                    noWrap
+                                    component="div"
+                                    color="grey.700"
+                                    sx={{
+                                        mr: 2,
+                                        fontWeight: 700,
+                                        color: "inherit",
+                                        textDecoration: "none",
+                                        /*  */
+
+                                        backgroundcolor: "primary.main",
+                                        backgroundImage: `linear-gradient(to right, #1681FF 23%, #FFD234 42%)`,
+                                        "&:hover": {
+                                            backgroundImage: `linear-gradient(to right, #FFD234 23%, #1681FF 42%)`,
+                                        },
+                                        backgroundSize: "100%",
+                                        backgroundRepeat: "repeat",
+                                        backgroundClip: "text",
+                                        WebkitBackgroundClip: "text",
+                                        WebkitTextFillColor: "transparent",
+                                    }}
+                                >
+                                    taskMasters
+                                </Typography>
+                            </LinkMui>
+                            <List dense disablePadding>
+                                <ListItem disablePadding disableGutters>
+                                    <ListItemText
+                                        primary={ContactData.direction}
+                                    />
+                                </ListItem>
+                                <ListItem disablePadding disableGutters>
+                                    <ListItemText
+                                        primary={ContactData.number}
+                                    />
+                                </ListItem>
+                                <ListItem disablePadding disableGutters>
+                                    <ListItemText
+                                        primary={ContactData.mailJob}
+                                    />
+                                </ListItem>
+                            </List>
+                        </Box>
                     </Box>
                 </Box>
             </main>
