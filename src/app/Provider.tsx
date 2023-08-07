@@ -7,6 +7,7 @@ import Header from "@/layouts/Header";
 import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
 import Footer from "@/layouts/Footer";
+import NextNProgressClient from "@/components/function/NextNProgressClient";
 
 const capriola = Capriola({
     subsets: ["latin"],
@@ -45,6 +46,9 @@ type Props = {
 const Provider: React.FC<Props> = ({ children }) => {
     return (
         <ThemeProvider theme={theme}>
+            {/* <div style={{height:"100vh"}}></div> */}
+            <NextNProgressClient />
+
             <Top />
             <Divider />
             <Header />
