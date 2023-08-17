@@ -1,4 +1,4 @@
-// import Provider from "./Provider";
+import Provider from "./Provider";
 import "./globals.css";
 import { Capriola } from "next/font/google";
 const capriola = Capriola({
@@ -85,7 +85,7 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
-                {/* <Provider>
+                <Provider>
                     <div
                         style={{
                             borderRadius: "1.5rem",
@@ -102,9 +102,9 @@ export default function RootLayout({
                             zIndex: 40,
                             pointerEvents: "none",
                         }}
-                    ></div> */}
+                    ></div>
                     {children}
-                {/* </Provider> */}
+                </Provider>
             </body>
         </html>
     );
