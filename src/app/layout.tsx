@@ -1,9 +1,6 @@
-import Top from "@/layouts/Top";
 import Provider from "./Provider";
 import "./globals.css";
 import { Capriola } from "next/font/google";
-import Header from "@/layouts/Header";
-import { Divider } from "@mui/material";
 const capriola = Capriola({
     subsets: ["latin"],
     weight: "400",
@@ -89,10 +86,6 @@ export default function RootLayout({
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
                 <Provider>
-                    {/* <Aver /> */}
-                    {/* <Top />
-                    <Divider />
-                    <Header/> */}
                     <div
                         style={{
                             borderRadius: "1.5rem",
