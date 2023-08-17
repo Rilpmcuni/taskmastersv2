@@ -96,7 +96,6 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
                 <CssBaseline />
                 {/* <Provider> */}
                 {/* <NextNProgressClient /> */}
-                <Providers>
                     <Top />
                     <Divider />
                     <Header />
@@ -119,7 +118,6 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
                     ></div>
                     {children}
                     <Footer />
-                </Providers>
 
                 {/* </Provider> */}
             </ThemeProvider>
