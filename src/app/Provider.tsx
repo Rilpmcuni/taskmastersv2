@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Header from "@/layouts/Header";
 import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
