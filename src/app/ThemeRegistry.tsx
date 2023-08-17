@@ -88,10 +88,10 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
         <CacheProvider value={cache}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Provider>
+                {/* <Provider> */}
 
                 {children}
-                </Provider>
+                {/* </Provider> */}
             </ThemeProvider>
         </CacheProvider>
     );
