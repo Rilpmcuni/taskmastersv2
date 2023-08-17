@@ -11,6 +11,28 @@ import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
 import Provider from "./Provider";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import Header from "@/layouts/Header";
+import Top from "@/layouts/Top";
+import { Divider } from "@mui/material";
+import Footer from "@/layouts/Footer";
+import NextNProgressClient from "@/components/function/NextNProgressClient";
+
 const capriola = Capriola({
     subsets: ["latin"],
     weight: "400",
@@ -89,8 +111,13 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 {/* <Provider> */}
-
+                <NextNProgressClient />
+            <Top />
+            <Divider />
+            <Header />
                 {children}
+            <Footer />
+
                 {/* </Provider> */}
             </ThemeProvider>
         </CacheProvider>
