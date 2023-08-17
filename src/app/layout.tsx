@@ -90,7 +90,7 @@ export default function RootLayout({
     return (
         <html lang="es">
         <body>
-        {children}
+        <Providers>{children}</Providers>
       </body>
         </html>
     );
