@@ -19,13 +19,13 @@
 // export default Providers;
 // "use client";
 
-import NextTopLoader from 'nextjs-toploader';
- const Providers = ({ children }: { children: React.ReactNode }) => {
-     return (
-         <>
-             <NextTopLoader />
-             {children}
-         </>
-     );
- };
- export default Providers;
+import NextTopLoader from "nextjs-toploader";
+const NextNProgressClient = ({ children }: { children: React.ReactNode }) => {
+    return (
+        <>
+            <NextTopLoader height={4} color="#ffd234" showSpinner={false} />
+            {children}
+        </>
+    );
+};
+export default NextNProgressClient;

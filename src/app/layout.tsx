@@ -1,4 +1,4 @@
-import Providers from "@/components/function/NextNProgressClient";
+import NextNProgressClient from "@/components/function/NextNProgressClient";
 import ThemeRegistry from "./ThemeRegistry";
 import "./globals.css";
 import { Suspense } from "react";
@@ -91,10 +91,9 @@ export default function RootLayout({
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
                 <ThemeRegistry options={{ key: "mui" }}>
-                    <Providers>
-                        {/* <Loading/> */}
+                    <NextNProgressClient>
                         {children}
-                    </Providers>
+                    </NextNProgressClient>
                 </ThemeRegistry>
             </body>
         </html>
