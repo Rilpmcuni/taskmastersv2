@@ -1,4 +1,5 @@
 import Provider from "./Provider";
+import ThemeRegistry from "./ThemeRegistry";
 import "./globals.css";
 import { Capriola } from "next/font/google";
 const capriola = Capriola({
@@ -60,11 +61,11 @@ export const metadata = {
             alt: "@Tamíz.LA",
         },
     },
-    // viewport: {
-    //     width: "device-width",
-    //     initialScale: 1,
-    //     maximumScale: 1,
-    // },
+    viewport: {
+        width: "device-width",
+        initialScale: 1,
+        maximumScale: 1,
+    },
     // verification: {
     //     google: "google",
     //     yandex: "yandex",
@@ -85,7 +86,8 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
-                <Provider>
+                <ThemeRegistry options={{ key: "mui" }}>
+                    {/* <Provider> */}
                     <div
                         style={{
                             borderRadius: "1.5rem",
@@ -104,7 +106,8 @@ export default function RootLayout({
                         }}
                     ></div>
                     {children}
-                </Provider>
+                    {/* </Provider> */}
+                </ThemeRegistry>
             </body>
         </html>
     );

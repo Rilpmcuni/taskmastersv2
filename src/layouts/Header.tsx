@@ -1,3 +1,4 @@
+"use client"
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import { Link as LinkMui } from "@mui/material";
 import Link from "next/link";

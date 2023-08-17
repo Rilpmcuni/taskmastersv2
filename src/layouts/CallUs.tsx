@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Marquee from "react-fast-marquee";
 import HandymanIcon from "@mui/icons-material/Handyman";
