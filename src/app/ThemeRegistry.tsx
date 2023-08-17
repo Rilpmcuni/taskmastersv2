@@ -9,13 +9,12 @@ import { Capriola } from "next/font/google";
 
 import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
-import Provider from "./Provider";
 
 import Header from "@/layouts/Header";
 import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
 import Footer from "@/layouts/Footer";
-import NextNProgressClient from "@/components/function/NextNProgressClient";
+// import NextNProgressClient from "@/components/function/NextNProgressClient";
 
 const capriola = Capriola({
     subsets: ["latin"],
@@ -95,10 +94,27 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 {/* <Provider> */}
-                <NextNProgressClient />
+                {/* <NextNProgressClient /> */}
                 <Top />
                 <Divider />
                 <Header />
+                <div
+                    style={{
+                        borderRadius: "1.5rem",
+                        // border: "solid 1px black",
+                        position: "fixed",
+                        top: 63,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "100vh",
+                        width: "100%",
+                        boxShadow: "0px 0px 0px 15px white",
+                        zIndex: 40,
+                        pointerEvents: "none",
+                    }}
+                ></div>
                 {children}
                 <Footer />
 
