@@ -5,6 +5,7 @@ import { Divider } from "@mui/material";
 import Footer from "@/layouts/Footer";
 import NextNProgressClient from "@/components/function/NextNProgressClient";
 import Theme from "./Theme";
+import ThemeRegistry from "./ThemeRegistry";
 
 
 
@@ -15,7 +16,7 @@ type Props = {
 
 const Provider: React.FC<Props> = ({ children }) => {
     return (
-        <Theme >
+        <ThemeRegistry options={{ key: "mui" }} >
             {/* <div style={{height:"100vh"}}></div> */}
             <NextNProgressClient />
             <Top />
@@ -23,7 +24,7 @@ const Provider: React.FC<Props> = ({ children }) => {
             <Header />
             {children}
             <Footer />
-        </Theme>
+        </ThemeRegistry>
     );
 };
 export default Provider;

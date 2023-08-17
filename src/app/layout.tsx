@@ -8,29 +8,29 @@ const capriola = Capriola({
 });
 
 export const metadata = {
-    title: "Tamíz.LA | La solución tecnológica para profesionales laboratoristas",
+    title: "Rilpni | La solución tecnológica para todos",
     description:
-        "Tamíz.LA: La solución tecnológica para laboratoristas viales que optimiza el trabajo, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales en el laboratorio vial.",
-    generator: "Tamíz.LA",
-    applicationName: "Tamíz.LA",
+        "Rilpni: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+    generator: "Rilpni",
+    applicationName: "Rilpni",
     referrer: "origin-when-cross-origin",
-    keywords: ["Tamíz.LA", "Laboratorio", "Vial"],
-    authors: [{ name: "Tamíz.LA" }],
+    keywords: ["Rilpni", "Reparaciones", "Mantenimiento"],
+    authors: [{ name: "Rilpni" }],
     colorScheme: "light",
-    creator: "Tamíz.LA",
-    publisher: "Tamíz.LA",
+    creator: "Rilpni",
+    publisher: "Rilpni",
     formatDetection: {
         email: false,
         address: false,
         telephone: false,
     },
     openGraph: {
-        title: "Tamíz.LA | La solución tecnológica para profesionales laboratoristas",
+        title: "Rilpni",
         description:
-            "Tamíz.LA: La solución tecnológica para laboratoristas viales que optimiza el trabajo, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales en el laboratorio vial.",
-        url: "http://tamizla-beta.vercel.app",
+            "Rilpni: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+        url: "https://rilpni.vercel.app/",
         images: "/image.png",
-        siteName: "Tamíz.LA",
+        siteName: "Rilpni",
         locale: "es_CL",
         type: "website",
     },
@@ -50,15 +50,15 @@ export const metadata = {
     themeColor: "light",
     twitter: {
         card: "summary_large_image",
-        title: "Tamíz.LA | La solución tecnológica para profesionales laboratoristas",
+        title: "Rilpni | La solución tecnológica para todos",
         description:
-            "Tamíz.LA: La solución tecnológica para laboratoristas viales que optimiza el trabajo, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales en el laboratorio vial.",
+            "Rilpni: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
         siteId: "1467726470533754880",
-        creator: "@Tamíz.LA",
+        creator: "@Rilpni",
         creatorId: "1467726470533754880",
         images: {
             url: "/image.png",
-            alt: "@Tamíz.LA",
+            alt: "@Rilpni",
         },
     },
     viewport: {
@@ -66,14 +66,14 @@ export const metadata = {
         initialScale: 1,
         maximumScale: 1,
     },
-    // verification: {
-    //     google: "google",
-    //     yandex: "yandex",
-    //     yahoo: "yahoo",
-    //     other: {
-    //         me: ["contacto@tamiz.la", "http://tamizla-beta.vercel.app"],
-    //     },
-    // },
+    verification: {
+        google: "google",
+        yandex: "yandex",
+        yahoo: "yahoo",
+        other: {
+            me: ["contacto@Rilpni", "https://rilpni.vercel.app/"],
+        },
+    },
     category: "technology",
 };
 
@@ -86,8 +86,8 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
-                <ThemeRegistry options={{ key: "mui" }}>
-                    {/* <Provider> */}
+                {/* <ThemeRegistry options={{ key: "mui" }}> */}
+                <Provider>
                     <div
                         style={{
                             borderRadius: "1.5rem",
@@ -106,8 +106,8 @@ export default function RootLayout({
                         }}
                     ></div>
                     {children}
-                    {/* </Provider> */}
-                </ThemeRegistry>
+                </Provider>
+                {/* </ThemeRegistry> */}
             </body>
         </html>
     );

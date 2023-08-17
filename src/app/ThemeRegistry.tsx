@@ -5,11 +5,15 @@ import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 // import theme from "/path/to/your/theme";
+import { Capriola } from "next/font/google";
 
 import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
 
-
+const capriola = Capriola({
+    subsets: ["latin"],
+    weight: "400",
+});
 const theme = createTheme({
     palette: {
         mode: "light",
@@ -29,14 +33,14 @@ const theme = createTheme({
     },
     spacing: 10,
     typography: {
-        // fontFamily: capriola.style.fontFamily,
+        fontFamily: capriola.style.fontFamily,
         fontSize: 15,
         fontWeightLight: 400,
     },
 });
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
-export default function ThemeRegistry(props: { options: any; children: any; }) {
+export default function ThemeRegistry(props: { options: any; children: any }) {
     const { options, children } = props;
 
     const [{ cache, flush }] = useState(() => {
