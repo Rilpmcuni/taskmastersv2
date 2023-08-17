@@ -23,7 +23,6 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import PlumbingIcon from "@mui/icons-material/Plumbing";
 import GasMeterIcon from "@mui/icons-material/GasMeter";
 import ElectricBoltRoundedIcon from "@mui/icons-material/ElectricBoltRounded";
-import GasMeterTwoToneIcon from "@mui/icons-material/GasMeterTwoTone";
 
 interface Props {
     Job: any;

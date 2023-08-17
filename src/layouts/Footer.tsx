@@ -141,14 +141,14 @@ export default function Footer() {
                             WebkitTextFillColor: "transparent",
                         }}
                     >
-                        taskMasters
+                        Rilpni
                     </Typography>
                 </LinkMui>
                 <Typography variant="body2">
                     Simplificando tu hogar, construyendo sonrisas
                 </Typography>
                 <Typography variant="caption">
-                    © {currentYear} taskMasters. Todos los derechos reservados.
+                    © {currentYear} Rilpni SpA. Todos los derechos reservados.
                 </Typography>
             </Stack>
             <Stack

@@ -75,7 +75,7 @@ export default function Empleo() {
                                 paddingX: "1rem",
                             }}
                         >
-                            Trabaja con nosotros
+                            ¡Trabaja con nosotros!
                         </Typography>
                         <Typography
                             color="text.primary"

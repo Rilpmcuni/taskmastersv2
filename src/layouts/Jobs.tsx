@@ -33,7 +33,7 @@ export default function Jobs() {
                     color="text.primary"
                     textAlign={"center"}
                 >
-                    Trabaja con nosotros
+                    ¡Trabaja con nosotros!
                 </Typography>
                 <Typography
                     color="text.primary"

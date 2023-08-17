@@ -41,7 +41,7 @@ export default function Ubicacion() {
                     color="inherit"
                     href="/"
                 >
-                    taskMasters
+                    Rilpni
                 </LinkMui>
                 {pathSegments.map((segment, index) => {
                     const isLastSegment = index === pathSegments.length - 1;

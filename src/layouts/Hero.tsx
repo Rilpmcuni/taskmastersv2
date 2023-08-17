@@ -74,7 +74,7 @@ export default function Hero() {
                                 Tu solución confiable
                                 para servicios en el hogar
                             </Typography>
-                            {/* Bienvenido a TaskMasters:  */}
+                            {/* Bienvenido a Rilpni:  */}
                             <Typography variant="body1" component="p">
                                 Conéctate con expertos en construcción,
                                 remodelación y reparaciones generales
@@ -126,7 +126,7 @@ export default function Hero() {
                     </Stack>
                     <Image
                         src={heroRabbit}
-                        alt="taskMasters"
+                        alt="Rilpni"
                         fill={true}
                         style={{
                             objectFit: "cover",

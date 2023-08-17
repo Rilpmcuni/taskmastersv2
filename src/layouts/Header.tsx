@@ -50,7 +50,7 @@ export default function Header() {
                         textDecoration: "none",
                     }}
                 >
-                    taskMasters
+                    Rilpni
                 </Typography> */}
                 <Typography
                     variant="h6"
@@ -76,7 +76,7 @@ export default function Header() {
                         WebkitTextFillColor: "transparent",
                     }}
                 >
-                    taskMasters
+                    Rilpni
                 </Typography>
             </LinkMui>
             <Stack

@@ -14,7 +14,7 @@ import Logosvg from "@/../public/images/LOGO.svg";
 export default function Features() {
     const FeaturesListOne = [
         {
-            description: "Taskers con experiencia",
+            description: "Rilpnis con experiencia",
         },
         {
             description: "Precio competitivo",
@@ -68,7 +68,7 @@ export default function Features() {
                         variant="body1"
                         sx={{ width: { xs: "100%", md: "60%" } }}
                     >
-                        En TaskMasters, nuestra prioridad es superar tus
+                        En Rilpni, nuestra prioridad es superar tus
                         expectativas y brindarte servicios de excelencia en cada
                         proyecto. Nos enorgullece ofrecerte una experiencia
                         única y una calidad que puedes confiar. ¿Qué nos
@@ -79,7 +79,7 @@ export default function Features() {
                         variant="h6"
                         fontWeight={600}
                     >
-                        Una instantánea de las características de taskMasters:
+                        Una instantánea de las características de Rilpni:
                     </Typography>
 
                     {/* list */}
@@ -240,7 +240,7 @@ export default function Features() {
                                             height: "auto",
                                         }}
                                         src={Logosvg}
-                                        alt="TaskMasters"
+                                        alt="Rilpni"
                                         // width={55}
                                         // height={55}
                                         priority
