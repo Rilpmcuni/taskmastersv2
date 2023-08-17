@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import { Link as LinkMui } from "@mui/material";
 import Link from "next/link";
@@ -80,6 +80,7 @@ export default function Header() {
                     Rilpni
                 </Typography>
             </LinkMui>
+            
             <Stack
                 sx={{ display: { xs: "none", md: "flex" } }}
                 direction="row"

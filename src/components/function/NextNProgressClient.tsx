@@ -11,7 +11,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
                 color="#ffd234"
                 options={{ showSpinner: false }}
                 // delay={200}
-                shallowRouting
+                // shallowRouting
             />
         </>
     );

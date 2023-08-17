@@ -1,7 +1,11 @@
 import Providers from "@/components/function/NextNProgressClient";
 import ThemeRegistry from "./ThemeRegistry";
 import "./globals.css";
+import { Suspense } from "react";
+
 import { Capriola } from "next/font/google";
+import ProgressBar from "@/components/function/ProgressBar";
+import Loading from "./Loading";
 const capriola = Capriola({
     subsets: ["latin"],
     weight: "400",
@@ -85,17 +89,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es">
-            <body className={capriola.className} style={{ margin: 0 }}>
-                {/* <ThemeRegistry options={{ key: "mui" }}> */}
-
-                <Providers>
-                    
-                    {children}
-                
-                </Providers>
-
-                {/* </ThemeRegistry> */}
-            </body>
+        <body>
+        <Providers>{children}</Providers>
+      </body>
         </html>
     );
 }

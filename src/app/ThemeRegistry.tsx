@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from 'react'
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
@@ -99,6 +100,7 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
                     <Top />
                     <Divider />
                     <Header />
+                    <Suspense fallback={<p>Loading feed...</p>}></Suspense>
                     <div
                         style={{
                             borderRadius: "1.5rem",
