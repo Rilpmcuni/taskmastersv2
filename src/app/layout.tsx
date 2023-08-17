@@ -1,4 +1,4 @@
-import Providers from "@/components/function/NextNProgressClient";
+"use client";
 import ThemeRegistry from "./ThemeRegistry";
 import "./globals.css";
 import { Capriola } from "next/font/google";
@@ -88,7 +88,7 @@ export default function RootLayout({
             <body className={capriola.className} style={{ margin: 0 }}>
                 <ThemeRegistry options={{ key: "mui" }}>
                 {/* <Provider> */}
-                <Providers>{children}</Providers>
+                    {children}
                 {/* </Provider> */}
                 </ThemeRegistry>
             </body>
