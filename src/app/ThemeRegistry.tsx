@@ -95,7 +95,7 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 {/* <Provider> */}
-                {/* <NextNProgressClient /> */}
+                <NextNProgressClient />
                 <Top />
                 <Divider />
                 <Header />
