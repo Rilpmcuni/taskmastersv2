@@ -11,22 +11,6 @@ import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
 import Provider from "./Provider";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import Header from "@/layouts/Header";
 import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
@@ -111,12 +95,12 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 {/* <Provider> */}
-                <NextNProgressClient />
-            <Top />
-            <Divider />
-            <Header />
+                {/* <NextNProgressClient /> */}
+                <Top />
+                <Divider />
+                <Header />
                 {children}
-            <Footer />
+                <Footer />
 
                 {/* </Provider> */}
             </ThemeProvider>
