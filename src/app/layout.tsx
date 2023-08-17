@@ -86,15 +86,15 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
-                <ThemeRegistry options={{ key: "mui" }}>
+                {/* <ThemeRegistry options={{ key: "mui" }}> */}
 
-                {/* <Providers> */}
+                <Providers>
                     
                     {children}
                 
-                {/* </Providers> */}
+                </Providers>
 
-                </ThemeRegistry>
+                {/* </ThemeRegistry> */}
             </body>
         </html>
     );
