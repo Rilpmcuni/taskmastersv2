@@ -14,6 +14,7 @@ import Header from "@/layouts/Header";
 import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
 import Footer from "@/layouts/Footer";
+import Providers from "@/components/function/NextNProgressClient";
 // import NextNProgressClient from "@/components/function/NextNProgressClient";
 
 const capriola = Capriola({
@@ -95,28 +96,30 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
                 <CssBaseline />
                 {/* <Provider> */}
                 {/* <NextNProgressClient /> */}
-                <Top />
-                <Divider />
-                <Header />
-                <div
-                    style={{
-                        borderRadius: "1.5rem",
-                        // border: "solid 1px black",
-                        position: "fixed",
-                        top: 63,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        height: "100vh",
-                        width: "100%",
-                        boxShadow: "0px 0px 0px 15px white",
-                        zIndex: 40,
-                        pointerEvents: "none",
-                    }}
-                ></div>
-                {children}
-                <Footer />
+                <Providers>
+                    <Top />
+                    <Divider />
+                    <Header />
+                    <div
+                        style={{
+                            borderRadius: "1.5rem",
+                            // border: "solid 1px black",
+                            position: "fixed",
+                            top: 63,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "100vh",
+                            width: "100%",
+                            boxShadow: "0px 0px 0px 15px white",
+                            zIndex: 40,
+                            pointerEvents: "none",
+                        }}
+                    ></div>
+                    {children}
+                    <Footer />
+                </Providers>
 
                 {/* </Provider> */}
             </ThemeProvider>
