@@ -16,7 +16,7 @@ type Props = {
 
 const Provider: React.FC<Props> = ({ children }) => {
     return (
-        <ThemeRegistry options={{ key: "mui" }} >
+        < >
             {/* <div style={{height:"100vh"}}></div> */}
             <NextNProgressClient />
             <Top />
@@ -24,7 +24,7 @@ const Provider: React.FC<Props> = ({ children }) => {
             <Header />
             {children}
             <Footer />
-        </ThemeRegistry>
+        </>
     );
 };
 export default Provider;

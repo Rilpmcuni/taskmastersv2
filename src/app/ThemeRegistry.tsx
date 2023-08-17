@@ -9,6 +9,7 @@ import { Capriola } from "next/font/google";
 
 import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
+import Provider from "./Provider";
 
 const capriola = Capriola({
     subsets: ["latin"],
@@ -87,7 +88,10 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
         <CacheProvider value={cache}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
+                <Provider>
+
                 {children}
+                </Provider>
             </ThemeProvider>
         </CacheProvider>
     );
