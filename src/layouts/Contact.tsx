@@ -65,7 +65,7 @@ export default function Contact() {
                         Respondemos a su llamada rápidamente
                     </Typography>
                     <Typography color="text.primary" variant="body1">
-                        Puede confiar en nuestros Rilpnis y en la
+                        Puede confiar en nuestros Reviasas y en la
                         profesionalidad de calidad de nuestro trabajo
                     </Typography>
                     <Stack

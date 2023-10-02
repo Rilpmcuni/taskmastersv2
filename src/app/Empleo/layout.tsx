@@ -14,7 +14,7 @@ export async function generateMetadata({
     params: { slug: string };
 }): Promise<Metadata> {
     return {
-        title: `Empleos | Rilpni`,
+        title: `Empleos | Reviasa`,
         description:
             "Trabaja con un equipo altamente motivado de personas talentosas y excelentes compañeros de equipo.",
     };

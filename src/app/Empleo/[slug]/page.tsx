@@ -699,7 +699,7 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
                                         WebkitTextFillColor: "transparent",
                                     }}
                                 >
-                                    Rilpni
+                                    Reviasa
                                 </Typography>
                             </LinkMui>
                             <List dense disablePadding>

@@ -8,7 +8,7 @@ export default function Logo() {
             <Image
                 className=""
                 src={Logosvg}
-                alt="Rilpni"
+                alt="Reviasa"
                 width={55}
                 height={55}
                 priority

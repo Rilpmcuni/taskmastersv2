@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from 'react'
+import { Suspense } from "react";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
@@ -23,6 +23,48 @@ const capriola = Capriola({
     weight: "400",
 });
 const theme = createTheme({
+    components: {
+        MuiListItem: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 10,
+                },
+            },
+        },
+        MuiListItemButton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 10,
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 10,
+                },
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform:"capitalize",
+                    // fontWeight: "bold",
+                    boxShadow: "none",
+                    "&:hover": {
+                        boxShadow: "none",
+                    },
+                },
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "1rem",
+                },
+            },
+        },
+    },
     palette: {
         mode: "light",
         primary: {
@@ -35,6 +77,7 @@ const theme = createTheme({
         text: {
             primary: "#1e293b",
         },
+        divider: "#d9d9d9",
     },
     shape: {
         borderRadius: 10,
@@ -97,29 +140,29 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
                 <CssBaseline />
                 {/* <Provider> */}
                 {/* <NextNProgressClient /> */}
-                    <Top />
-                    <Divider />
-                    <Header />
-                    <Suspense fallback={<p>Loading feed...</p>}></Suspense>
-                    <div
-                        style={{
-                            borderRadius: "1.5rem",
-                            // border: "solid 1px black",
-                            position: "fixed",
-                            top: 63,
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            height: "100vh",
-                            width: "100%",
-                            boxShadow: "0px 0px 0px 15px white",
-                            zIndex: 40,
-                            pointerEvents: "none",
-                        }}
-                    ></div>
-                    {children}
-                    <Footer />
+                <Top />
+                <Divider />
+                <Header />
+                <Suspense fallback={<p>Loading feed...</p>}></Suspense>
+                <div
+                    style={{
+                        borderRadius: "1.5rem",
+                        // border: "solid 1px black",
+                        position: "fixed",
+                        top: 63,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "100vh",
+                        width: "100%",
+                        boxShadow: "0px 0px 0px 15px white",
+                        zIndex: 40,
+                        pointerEvents: "none",
+                    }}
+                ></div>
+                {children}
+                <Footer />
 
                 {/* </Provider> */}
             </ThemeProvider>

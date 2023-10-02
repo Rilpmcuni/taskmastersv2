@@ -22,7 +22,7 @@ export async function generateMetadata({
     }
 
     return {
-        title: `${empleo?.title} Empleo | Rilpni`,
+        title: `${empleo?.title} Empleo | Reviasa`,
         description: empleo?.description, // Agrega la descripción aquí
     };
 }

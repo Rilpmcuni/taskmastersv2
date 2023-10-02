@@ -12,29 +12,29 @@ const capriola = Capriola({
 });
 
 export const metadata = {
-    title: "Rilpni | La solución tecnológica para todos",
+    title: "Reviasa | La solución tecnológica para todos",
     description:
-        "Rilpni: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
-    generator: "Rilpni",
-    applicationName: "Rilpni",
+        "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+    generator: "Reviasa",
+    applicationName: "Reviasa",
     referrer: "origin-when-cross-origin",
-    keywords: ["Rilpni", "Reparaciones", "Mantenimiento"],
-    authors: [{ name: "Rilpni" }],
+    keywords: ["Reviasa", "Reparaciones", "Mantenimiento"],
+    authors: [{ name: "Reviasa" }],
     colorScheme: "light",
-    creator: "Rilpni",
-    publisher: "Rilpni",
+    creator: "Reviasa",
+    publisher: "Reviasa",
     formatDetection: {
         email: false,
         address: false,
         telephone: false,
     },
     openGraph: {
-        title: "Rilpni",
+        title: "Reviasa",
         description:
-            "Rilpni: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
-        url: "https://rilpni.vercel.app/",
+            "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+        url: "https://Reviasa.vercel.app/",
         images: "/image.png",
-        siteName: "Rilpni",
+        siteName: "Reviasa",
         locale: "es_CL",
         type: "website",
     },
@@ -54,15 +54,15 @@ export const metadata = {
     themeColor: "light",
     twitter: {
         card: "summary_large_image",
-        title: "Rilpni | La solución tecnológica para todos",
+        title: "Reviasa | La solución tecnológica para todos",
         description:
-            "Rilpni: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+            "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
         siteId: "1467726470533754880",
-        creator: "@Rilpni",
+        creator: "@Reviasa",
         creatorId: "1467726470533754880",
         images: {
             url: "/image.png",
-            alt: "@Rilpni",
+            alt: "@Reviasa",
         },
     },
     viewport: {
@@ -75,7 +75,7 @@ export const metadata = {
         yandex: "yandex",
         yahoo: "yahoo",
         other: {
-            me: ["contacto@Rilpni", "https://rilpni.vercel.app/"],
+            me: ["contacto@Reviasa", "https://Reviasa.vercel.app/"],
         },
     },
     category: "technology",
@@ -91,9 +91,7 @@ export default function RootLayout({
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
                 <ThemeRegistry options={{ key: "mui" }}>
-                    <NextNProgressClient>
-                        {children}
-                    </NextNProgressClient>
+                    <NextNProgressClient>{children}</NextNProgressClient>
                 </ThemeRegistry>
             </body>
         </html>

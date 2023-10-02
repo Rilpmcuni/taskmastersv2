@@ -141,14 +141,14 @@ export default function Footer() {
                             WebkitTextFillColor: "transparent",
                         }}
                     >
-                        Rilpni
+                        Reviasa
                     </Typography>
                 </LinkMui>
                 <Typography variant="body2">
                     Simplificando tu hogar, construyendo sonrisas
                 </Typography>
                 <Typography variant="caption">
-                    © {currentYear} Rilpni SpA. Todos los derechos reservados.
+                    © {currentYear} Reviasa SpA. Todos los derechos reservados.
                 </Typography>
             </Stack>
             <Stack

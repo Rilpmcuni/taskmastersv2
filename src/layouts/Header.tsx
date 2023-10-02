@@ -51,7 +51,7 @@ export default function Header() {
                         textDecoration: "none",
                     }}
                 >
-                    Rilpni
+                    Reviasa
                 </Typography> */}
                 <Typography
                     variant="h6"
@@ -77,25 +77,30 @@ export default function Header() {
                         WebkitTextFillColor: "transparent",
                     }}
                 >
-                    Rilpni
+                    Reviasa
                 </Typography>
             </LinkMui>
-            
+
             <Stack
-                sx={{ display: { xs: "none", md: "flex" } }}
+                sx={{
+                    display: {
+                        xs: "none",
+                        md: "flex",
+                    },
+                }}
                 direction="row"
                 justifyContent="space-evenly"
                 alignItems="center"
                 spacing={1}
             >
                 <Button LinkComponent={Link} href="/">
-                    Inicio
+                    INICIO
                 </Button>
                 <Button LinkComponent={Link} href="/Nosotros">
-                    Nosotros
+                    NOSOTROS
                 </Button>
                 <Button LinkComponent={Link} href="/Servicios">
-                    Servicios
+                    SERVICIOS
                 </Button>
                 {/* <Badge color="primary" badgeContent={CountEmpleo}> */}
                 <Badge
@@ -122,12 +127,12 @@ export default function Header() {
                             color="secondary"
                             onClick={() => setCountEmpleo(CountEmpleo + 1)}
                         >
-                            Empleo
+                            EMPLEO
                         </Button>
                     </Tooltip>
                 </Badge>
                 <Button LinkComponent={Link} href="/Contacto">
-                    Contacto
+                    CONTACTO
                 </Button>
             </Stack>
             <Button
@@ -139,7 +144,7 @@ export default function Header() {
                 startIcon={<PhoneInTalkIcon />}
                 LinkComponent={Link}
             >
-                Llámanos
+                LLÁMANOS
             </Button>
         </Stack>
     );
