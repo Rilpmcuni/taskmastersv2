@@ -7,6 +7,10 @@ import { Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
 import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
 import { Box } from "@mui/material";
+import AutoMenu from "../function/AutoMenu";
+import LlavasaLogo from "@/../public/images/LlavasaLogo.svg";
+import Reviasa from "@/../public/images/ReviasaLogo.svg";
+import Mudasa from "@/../public/images/MudasaLogo.svg";
 
 export default function Logo() {
     return (
@@ -69,22 +73,68 @@ export default function Logo() {
                     Reviasa
                 </Typography>
             </LinkMui>
-            <LinkMui component={Link} href={"https://llavasa.vercel.app/"}>
-                <IconButton
-                    sx={{
-                        marginBottom: -1,
-                        color: "primary.main",
-                        transition: "transform 300ms", // Añade la transición aquí
-                        "&:hover": {
-                            color: "secondary.main",
-                            transform: "rotate(-540deg)", // Añade la rotación aquí
-                        },
-                    }}
-                    aria-label="cambiar"
-                >
-                    <ReplayOutlinedIcon />
-                </IconButton>
-            </LinkMui>
+            <AutoMenu
+                subItem={[
+                    {
+                        title: "Llavasa",
+                        ico: (
+                            <Image
+                                style={{ pointerEvents: "none" }}
+                                className=""
+                                src={LlavasaLogo}
+                                alt="Llavasa"
+                                width={25}
+                                height={25}
+                                priority
+                            />
+                        ),
+                    },
+                    {
+                        title: "Reviasa",
+                        ico: (
+                            <Image
+                                style={{ pointerEvents: "none" }}
+                                className=""
+                                src={Reviasa}
+                                alt="Reviasa"
+                                width={25}
+                                height={25}
+                                priority
+                            />
+                        ),
+                    },
+                    {
+                        title: "Mudasa",
+                        ico: (
+                            <Image
+                                style={{ pointerEvents: "none" }}
+                                className=""
+                                src={Mudasa}
+                                alt="Mudasa"
+                                width={25}
+                                height={25}
+                                priority
+                            />
+                        ),
+                    },
+                ]}
+                item={
+                    <IconButton
+                        sx={{
+                            marginBottom: -1,
+                            color: "primary.main",
+                            transition: "transform 300ms", // Añade la transición aquí
+                            "&:hover": {
+                                color: "secondary.main",
+                                transform: "rotate(-540deg)", // Añade la rotación aquí
+                            },
+                        }}
+                        aria-label="cambiar"
+                    >
+                        <ReplayOutlinedIcon />
+                    </IconButton>
+                }
+            />
         </Box>
     );
 }

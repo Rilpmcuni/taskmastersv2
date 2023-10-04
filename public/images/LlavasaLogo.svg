@@ -1,0 +1,15 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+	<title>twoLogo</title>
+	<style>
+		.s0 { fill: none;stroke: #1681ff;stroke-linecap: round;stroke-miterlimit:100;stroke-width: 60 } 
+		.s1 { fill: none;stroke: #ffd234;stroke-linecap: round;stroke-miterlimit:100;stroke-width: 60 } 
+	</style>
+	<g id="Carpeta 1">
+		<g id="llave">
+			<path id="picos" class="s0" d="m681 624l252 112 18 78-108 48-18-50-60 8v-48l-68 6-14-50-56-22"/>
+			<path id="Forma 3" class="s0" d="m550 540c-5.4 1.5-10.8 6.7-12.9 12.1-1 2.6-0.8 5.4 2.3 6.4 8.1 2.6 16.3-2.5 22.9-6.3"/>
+			<path id="cabeza copy" class="s0" d="m365.6 469.7c64-76 199.3-98.3 265.2-40.2 68 60 55.4 166.8 28.2 222.5-42.6 87.3-203.2 135.2-265.3 74.8-74-72-105.4-165.3-28.1-257.1z"/>
+		</g>
+		<path id="cassa" class="s1" d="m913 512c-44-206.2-216-330.2-368-386.2-100 30-292 152-398 342-24 190-32 332 26 444.2 20.3 39.3 262 53.8 448 33.8"/>
+	</g>
+</svg>
