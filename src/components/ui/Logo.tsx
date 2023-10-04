@@ -77,6 +77,7 @@ export default function Logo() {
                 subItem={[
                     {
                         title: "Llavasa",
+                        href: "https://llavasa.vercel.app/",
                         ico: (
                             <Image
                                 style={{ pointerEvents: "none" }}
@@ -91,6 +92,7 @@ export default function Logo() {
                     },
                     {
                         title: "Reviasa",
+                        href: "https://reviasa.vercel.app/",
                         ico: (
                             <Image
                                 style={{ pointerEvents: "none" }}
@@ -105,6 +107,7 @@ export default function Logo() {
                     },
                     {
                         title: "Mudasa",
+                        href: "https://mudasa.vercel.app/",
                         ico: (
                             <Image
                                 style={{ pointerEvents: "none" }}

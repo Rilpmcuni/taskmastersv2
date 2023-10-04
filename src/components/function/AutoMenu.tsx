@@ -74,12 +74,12 @@ export default function AutoMenu({
                                                 <ListItemText>
                                                     {subItem.title}
                                                 </ListItemText>
-                                                <ListItemIcon>
+                                                {/* <ListItemIcon>
                                                     <OpenInNewRoundedIcon
                                                         fontSize="small"
                                                         color="primary"
                                                     />
-                                                </ListItemIcon>
+                                                </ListItemIcon> */}
                                             </MenuItem>
                                         </LinkMui>
                                     )
