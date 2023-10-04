@@ -58,20 +58,30 @@ export default function AutoMenu({
                             <MenuList dense>
                                 {subItem.map(
                                     (subItem: any, index: React.Key) => (
-                                        <MenuItem key={index}>
-                                            <ListItemIcon>
-                                                {subItem.ico}
-                                            </ListItemIcon>
-                                            <ListItemText>
-                                                {subItem.title}
-                                            </ListItemText>
-                                            <ListItemIcon>
-                                                <OpenInNewRoundedIcon
-                                                    fontSize="small"
-                                                    color="primary"
-                                                />
-                                            </ListItemIcon>
-                                        </MenuItem>
+                                        <LinkMui
+                                            component={Link}
+                                            sx={{
+                                                color: "inherit",
+                                                textDecoration: "none",
+                                            }}
+                                            href={subItem.href}
+                                            key={index}
+                                        >
+                                            <MenuItem>
+                                                <ListItemIcon>
+                                                    {subItem.ico}
+                                                </ListItemIcon>
+                                                <ListItemText>
+                                                    {subItem.title}
+                                                </ListItemText>
+                                                <ListItemIcon>
+                                                    <OpenInNewRoundedIcon
+                                                        fontSize="small"
+                                                        color="primary"
+                                                    />
+                                                </ListItemIcon>
+                                            </MenuItem>
+                                        </LinkMui>
                                     )
                                 )}
                             </MenuList>
