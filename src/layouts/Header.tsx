@@ -27,59 +27,7 @@ export default function Header() {
             paddingX={"1rem"}
             zIndex={50}
         >
-            <LinkMui
-                component={Link}
-                href={"/"}
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    color: "inherit",
-                    textDecoration: "none",
-                }}
-            >
-                <Logo />
-                {/* <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{
-                        mr: 2,
-                        fontWeight: 700,
-                        color: "inherit",
-                        textDecoration: "none",
-                    }}
-                >
-                    Reviasa
-                </Typography> */}
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    color="grey.700"
-                    sx={{
-                        mr: 2,
-                        fontWeight: 700,
-                        color: "inherit",
-                        textDecoration: "none",
-                        /*  */
-
-                        backgroundcolor: "primary.main",
-                        backgroundImage: `linear-gradient(to right, #1681FF 23%, #FFD234 42%)`,
-                        "&:hover": {
-                            backgroundImage: `linear-gradient(to right, #FFD234 23%, #1681FF 42%)`,
-                        },
-                        backgroundSize: "100%",
-                        backgroundRepeat: "repeat",
-                        backgroundClip: "text",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                    }}
-                >
-                    Reviasa
-                </Typography>
-            </LinkMui>
+            <Logo />
 
             <Stack
                 sx={{
