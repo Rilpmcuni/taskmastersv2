@@ -7,7 +7,7 @@ import { Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
 import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
 import { Box } from "@mui/material";
-import AutoMenu from "../function/AutoMenu";
+import ButtonMenu from "../function/ButtonMenu";
 import LlavasaLogo from "@/../public/images/LlavasaLogo.svg";
 import Reviasa from "@/../public/images/ReviasaLogo.svg";
 import Mudasa from "@/../public/images/MudasaLogo.svg";
@@ -73,7 +73,7 @@ export default function Logo() {
                     Reviasa
                 </Typography>
             </LinkMui>
-            <AutoMenu
+            <ButtonMenu
                 subItem={[
                     {
                         title: "Llavasa",
