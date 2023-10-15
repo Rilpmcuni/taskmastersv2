@@ -2,12 +2,14 @@
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import { Link as LinkMui } from "@mui/material";
 import Link from "next/link";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 
 import { Badge, Button, Stack, Tooltip, Typography } from "@mui/material";
 import Logo from "@/components/ui/Logo";
 import { useState } from "react";
 import Zoom from "@mui/material/Zoom";
 import { ContactData } from "@/data/ContactData";
+import TemporaryDrawer from "@/components/function/TemporaryDrawer";
 
 export default function Header() {
     const [CountEmpleo, setCountEmpleo] = useState(0);
@@ -41,15 +43,13 @@ export default function Header() {
                 alignItems="center"
                 spacing={1}
             >
-                <Button LinkComponent={Link} href="/">
-                    INICIO
-                </Button>
-                <Button LinkComponent={Link} href="/Nosotros">
-                    NOSOTROS
-                </Button>
-                <Button LinkComponent={Link} href="/Servicios">
+                <Button size="small" LinkComponent={Link} href="/Servicios">
                     SERVICIOS
                 </Button>
+                <Button size="small" LinkComponent={Link} href="/Nosotros">
+                    NOSOTROS
+                </Button>
+
                 {/* <Badge color="primary" badgeContent={CountEmpleo}> */}
                 <Badge
                     sx={{ userSelect: "none" }}
@@ -75,25 +75,46 @@ export default function Header() {
                             color="secondary"
                             onClick={() => setCountEmpleo(CountEmpleo + 1)}
                         >
-                            EMPLEO
+                            Sé un Reviaser
                         </Button>
                     </Tooltip>
                 </Badge>
-                <Button LinkComponent={Link} href="/Contacto">
+                <Button size="small" LinkComponent={Link} href="/Contacto">
                     CONTACTO
                 </Button>
             </Stack>
-            <Button
-                href={`tel:${ContactData.number}`}
-                variant="contained"
-                size="medium"
-                sx={{ boxShadow: 0 }}
-                // sx={{ borderRadius: "0.8rem" }}
-                startIcon={<PhoneInTalkIcon />}
-                LinkComponent={Link}
-            >
-                LLÁMANOS
-            </Button>
+            <Stack direction={"row"} spacing={1}>
+                <Button
+                    href={`ee525676-462b-4186-b46b-9655fd859e75`}
+                    variant="contained"
+                    size="medium"
+                    sx={{
+                        display: {
+                            xs: "flex",
+                            md: "flex",
+                        },
+                    }}
+                    LinkComponent={Link}
+                >
+                    pagar
+                </Button>
+                <TemporaryDrawer/>
+                <Button
+                    variant="outlined"
+                    href={`auth`}
+                    sx={{
+                        display: {
+                            xs: "none",
+                            md: "flex",
+                        },
+                    }}
+                    size="medium"
+                    LinkComponent={Link}
+                    startIcon={<PersonRoundedIcon />}
+                >
+                    Acceder
+                </Button>
+            </Stack>
         </Stack>
     );
 }

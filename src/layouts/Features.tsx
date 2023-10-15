@@ -14,7 +14,7 @@ import Logosvg from "@/../public/images/LOGO.svg";
 export default function Features() {
     const FeaturesListOne = [
         {
-            description: "Reviasas con experiencia",
+            description: "Reviasers con experiencia",
         },
         {
             description: "Precio competitivo",

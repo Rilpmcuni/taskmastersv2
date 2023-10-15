@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
 import Hero from "@/layouts/Hero";
+import Link from "next/link";
 import Features from "@/layouts/Features";
 import Services from "@/layouts/Services";
 import Contact from "@/layouts/Contact";
@@ -11,14 +11,9 @@ import Jobs from "@/layouts/Jobs";
 export default function Home() {
     return (
         <main>
-            <Link href="/app">App</Link>
-            <Hero />
-            <Features />
-            <Services />
-            <SocialProof />
-            <Jobs />
-            <Contact />
-            <CallUs />
+            <Link href="/app/ficha-profecional">ficha-profecional</Link>
+            <Link href="/app/metricas">metricas</Link>
+            <Link href="/app/cobro">cobro</Link>
         </main>
     );
 }

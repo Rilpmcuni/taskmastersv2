@@ -1,0 +1,76 @@
+"use client";
+import Hero from "@/layouts/Hero";
+import Features from "@/layouts/Features";
+import Link from "next/link";
+import Services from "@/layouts/Services";
+import Contact from "@/layouts/Contact";
+import SlotCounter from "react-slot-counter";
+import CallUs from "@/layouts/CallUs";
+import SocialProof from "@/layouts/SocialProof";
+import Carousel from "@/layouts/Carousel";
+import Jobs from "@/layouts/Jobs";
+import HeroCards from "@/components/ui/HeroCards";
+import {
+    Card,
+    CardActionArea,
+    CardContent,
+    Divider,
+    Grid,
+    Typography,
+} from "@mui/material";
+export default function Home() {
+    return (
+        <main>
+            <Grid
+                item
+                xs={12}
+                sx={{
+                    margin: "0.5rem",
+                }}
+            >
+                <Card variant="outlined">
+                    <CardActionArea>
+                        <CardContent
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                textAlign: "center",
+                            }}
+                        >
+                            <SlotCounter
+                                value="$398,000"
+                                startValue={"0"}
+                                // dummyCharacters={"450.000".split("")}
+                                // duration={}
+                                charClassName="char"
+                                separatorClassName="sepa"
+                            />
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+                <Typography
+                    variant="caption"
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        // alignSelf: "flex-end",
+                        // justifySelf: "flex-end",
+                        textAlign: "end",
+
+                    }}
+                >
+                    Ganacias en curso
+                </Typography>
+            </Grid>
+            <Divider
+                variant="middle"
+                sx={{
+                    marginBottom: "0.5rem",
+                }}
+            />
+            <HeroCards />
+            <Link href="/app">App</Link>
+        </main>
+    );
+}
