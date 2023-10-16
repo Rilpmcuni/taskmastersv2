@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import Ubicacion from "@/components/function/Ubicacion";
 import BottonNavigation from "@/components/function/BottonNavigation";
 
-export const metadata: Metadata = {
+export const metadata = {
     title: `App | Reviasa`,
     description:
         "Trabaja con un equipo altamente motivado de personas talentosas y excelentes compañeros de equipo.",
