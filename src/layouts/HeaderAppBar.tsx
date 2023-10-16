@@ -522,8 +522,50 @@ export default function HeaderAppBar({
                                 <AvatarUser />
                             </IconButton>
                         </Tooltip>
+                        <Menu
+                            TransitionComponent={Zoom}
+                            anchorEl={anchorEl}
+                            id="account-menu"
+                            open={open}
+                            onClose={handleClose}
+                            onClick={handleClose}
+                            transformOrigin={{
+                                horizontal: "right",
+                                vertical: "top",
+                            }}
+                            anchorOrigin={{
+                                horizontal: "right",
+                                vertical: "bottom",
+                            }}
+                        >
+                            <MenuItem
+                                dense
+                                onClick={() => {
+                                    handleClose();
+                                }}
+                                component={Link}
+                                href="/app/config"
+                            >
+                                <ListItemIcon>
+                                    <Settings />
+                                </ListItemIcon>
+                                Mi Laboratorio
+                            </MenuItem>
+                            <Divider variant="middle" />
+                            <MenuItem
+                                dense
+                                onClick={handleClose}
+                                component={Link}
+                                href="/Auth/Signout"
+                            >
+                                <ListItemIcon>
+                                    <Logout fontSize="small" />
+                                </ListItemIcon>
+                                Cerrar sesión
+                            </MenuItem>
+                        </Menu>
                     </Toolbar>
-                    <Divider variant="middle"/>
+                    <Divider variant="middle" />
                 </AppBar>
                 {/*  */}
             </Box>

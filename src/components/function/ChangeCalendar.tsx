@@ -14,7 +14,7 @@ import {
 import Switch from "@mui/material/Switch";
 import Link from "next/link";
 
-export default function Home() {
+export default function ChangeCalendar() {
     const [vacationMode, setVacationMode] = useState(false);
 
     dayjs.locale("es"); // use Spanish locale
@@ -68,15 +68,14 @@ export default function Home() {
     };
     return (
         <main>
-            <Link href="/app">App</Link>
             <Stack width={"100%"} direction={"column"} spacing={2}>
-                <Typography
+                {/* <Typography
                     variant="h5"
                     fontWeight={900}
                     sx={{ flexGrow: 1, width: "100%" }}
                 >
                     Horario
-                </Typography>
+                </Typography> */}
                 {days.map((day, index) => (
                     <>
                         {index !== 0 && <Divider variant="middle" />}
@@ -126,7 +125,7 @@ export default function Home() {
                                                 handleFullTimeChange(index)
                                             }
                                             name="fullTime"
-                                            color="primary"
+                                            color="secondary"
                                             disabled={
                                                 !day.active || vacationMode
                                             } // Modifica esta línea

@@ -21,12 +21,21 @@ import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
 import { usePathname, useSearchParams } from "next/navigation";
 export default function BottonNavigation({ children }: { children: any }) {
     const pathname = usePathname();
+    // const [value, setValue] = React.useState(
+    //     pathname === "/app/metricas"
+    //         ? 1
+    //         : pathname === "/app/ficha-profecional"
+    //         ? 0
+    //         : 2
+    // );
     const [value, setValue] = React.useState(
-        pathname === "/app/metricas"
-            ? 1
-            : pathname === "/app/ficha-profecional"
+        pathname === "/app/ficha-profecional"
             ? 0
-            : 2
+            : pathname === "/app/metricas"
+            ? 1
+            : pathname === "/app/metricas"
+            ? 2
+            : null
     );
     const ref = React.useRef<HTMLDivElement>(null);
     //
