@@ -10,17 +10,11 @@ import { useEffect, useState } from "react";
 import Ubicacion from "@/components/function/Ubicacion";
 import BottonNavigation from "@/components/function/BottonNavigation";
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { slug: string };
-}): Promise<Metadata> {
-    return {
-        title: `App | Reviasa`,
-        description:
-            "Trabaja con un equipo altamente motivado de personas talentosas y excelentes compañeros de equipo.",
-    };
-}
+export const metadata: Metadata = {
+    title: `App | Reviasa`,
+    description:
+        "Trabaja con un equipo altamente motivado de personas talentosas y excelentes compañeros de equipo.",
+};
 
 export default function RootEmpleo({
     children,
