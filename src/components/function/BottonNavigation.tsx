@@ -17,13 +17,9 @@ import Avatar from "@mui/material/Avatar";
 import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
 import AccountBalanceWalletRoundedIcon from "@mui/icons-material/AccountBalanceWalletRounded";
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
-export default function BottonNavigation({
-    children,
-    pathname,
-}: {
-    children: any;
-    pathname: any;
-}) {
+import { usePathname, useSearchParams } from "next/navigation";
+export default function BottonNavigation({ children }: { children: any }) {
+    const pathname = usePathname();
     const [value, setValue] = React.useState(
         pathname === "/app/metricas"
             ? 1
