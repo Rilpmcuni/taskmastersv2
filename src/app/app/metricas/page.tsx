@@ -1,14 +1,9 @@
 "use client";
-import Hero from "@/layouts/Hero";
-import Features from "@/layouts/Features";
+
 import Link from "next/link";
-import Services from "@/layouts/Services";
-import Contact from "@/layouts/Contact";
+
 import SlotCounter from "react-slot-counter";
-import CallUs from "@/layouts/CallUs";
-import SocialProof from "@/layouts/SocialProof";
-import Carousel from "@/layouts/Carousel";
-import Jobs from "@/layouts/Jobs";
+
 import HeroCards from "@/components/ui/HeroCards";
 import {
     Card,
@@ -57,7 +52,6 @@ export default function Home() {
                         // alignSelf: "flex-end",
                         // justifySelf: "flex-end",
                         textAlign: "end",
-
                     }}
                 >
                     Ganacias en curso
