@@ -30,7 +30,6 @@ export default function Header() {
             zIndex={50}
         >
             <Logo />
-
             <Stack
                 sx={{
                     display: {

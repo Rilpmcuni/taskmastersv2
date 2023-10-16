@@ -6,12 +6,35 @@ import Services from "@/layouts/Services";
 import Contact from "@/layouts/Contact";
 import CallUs from "@/layouts/CallUs";
 import SocialProof from "@/layouts/SocialProof";
-import Carousel from "@/layouts/Carousel";
 import Jobs from "@/layouts/Jobs";
+import Top from "@/layouts/Top";
+import { Divider } from "@mui/material";
+import Header from "@/layouts/Header";
+import Footer from "@/layouts/Footer";
 export default function Home() {
     return (
         <main>
-            <Link href="/app">App</Link>
+            <div
+                style={{
+                    borderRadius: "1.5rem",
+                    // border: "solid 1px black",
+                    position: "fixed",
+                    top: 63,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100vh",
+                    width: "100%",
+                    boxShadow: "0px 0px 0px 15px white",
+                    zIndex: 40,
+                    pointerEvents: "none",
+                }}
+            ></div>
+            <Top />
+            <Divider />
+            <Header />
+            <Link href="/app/metricas">App</Link>
             <Hero />
             <Features />
             <Services />
@@ -19,6 +42,7 @@ export default function Home() {
             <Jobs />
             <Contact />
             <CallUs />
+            <Footer />
         </main>
     );
 }

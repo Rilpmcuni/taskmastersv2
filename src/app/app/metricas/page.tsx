@@ -23,7 +23,13 @@ export default function Home() {
                     margin: "0.5rem",
                 }}
             >
-                <Card variant="outlined">
+                <Card
+                    variant="outlined"
+                    sx={{
+                        background:
+                            "rgba(255,219,92,1)",
+                    }}
+                >
                     <CardActionArea>
                         <CardContent
                             sx={{
@@ -36,6 +42,7 @@ export default function Home() {
                             <SlotCounter
                                 value="$398,000"
                                 startValue={"0"}
+                                // containerClassName="conta"
                                 // dummyCharacters={"450.000".split("")}
                                 // duration={}
                                 charClassName="char"

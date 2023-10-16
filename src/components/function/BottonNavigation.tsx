@@ -16,6 +16,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
 import AccountBalanceWalletRoundedIcon from "@mui/icons-material/AccountBalanceWalletRounded";
+import Divider from "@mui/material/Divider";
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
 import { usePathname, useSearchParams } from "next/navigation";
 export default function BottonNavigation({ children }: { children: any }) {
@@ -41,8 +42,9 @@ export default function BottonNavigation({ children }: { children: any }) {
             </Box>
             <Paper
                 sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-                elevation={3}
+                elevation={7}
             >
+                <Divider variant="middle" />
                 <BottomNavigation
                     showLabels
                     value={value}
@@ -54,7 +56,7 @@ export default function BottonNavigation({ children }: { children: any }) {
                         LinkComponent={Link}
                         href="/app/ficha-profecional"
                         onClick={() => setValue(0)}
-                        label="Ficha Profecional"
+                        label="Ficha"
                         icon={<BadgeRoundedIcon />}
                     />
                     <BottomNavigationAction

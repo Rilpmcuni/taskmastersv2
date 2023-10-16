@@ -69,10 +69,11 @@ const theme = createTheme({
         mode: "light",
         primary: {
             main: "#1681ff",
+            dark: "#449aff",
         },
         secondary: {
             main: "#ffd234",
-            dark: "#EFBE0A",
+            dark: "#ffdb5c",
         },
         text: {
             primary: "#1e293b",
@@ -138,13 +139,10 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
         <CacheProvider value={cache}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                {/* <Provider> */}
-                {/* <NextNProgressClient /> */}
-                <Top />
+                {/* <Top />
                 <Divider />
-                <Header />
-                <Suspense fallback={<p>Loading feed...</p>}></Suspense>
-                <div
+                <Header /> */}
+                {/* <div
                     style={{
                         borderRadius: "1.5rem",
                         // border: "solid 1px black",
@@ -160,9 +158,9 @@ export default function ThemeRegistry(props: { options: any; children: any }) {
                         zIndex: 40,
                         pointerEvents: "none",
                     }}
-                ></div>
+                ></div> */}
                 {children}
-                <Footer />
+                {/* <Footer /> */}
 
                 {/* </Provider> */}
             </ThemeProvider>

@@ -91,7 +91,9 @@ export default function RootLayout({
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
                 <ThemeRegistry options={{ key: "mui" }}>
-                    <NextNProgressClient>{children}</NextNProgressClient>
+                    <NextNProgressClient>
+                        {children}
+                    </NextNProgressClient>
                 </ThemeRegistry>
             </body>
         </html>
