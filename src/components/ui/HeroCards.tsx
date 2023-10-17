@@ -22,20 +22,19 @@ export default function HeroCards() {
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
-                                // alignItems: "center",
-                                // textAlign: "center",
                             }}
                         >
-                            <Typography>Trabajos cerrados</Typography>
+                            <Typography>Trabajos finalizados</Typography>
                             <SlotCounter
                                 value="12"
                                 startValue={"0"}
-                                // dummyCharacters={"450.000".split("")}
-                                // duration={}
                                 charClassName="charMd"
                                 separatorClassName="sepaMd"
                             />
-                            <Typography variant="caption">Los clientes han indicado que han cerrado contigo</Typography>
+                            <Typography variant="caption">
+                                Los clientes han indicado que han finalizado
+                                contigo
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>

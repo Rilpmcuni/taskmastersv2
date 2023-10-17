@@ -153,7 +153,7 @@ export default function TemporaryDrawer() {
                 </Button>
                 <Button
                     variant="outlined"
-                    href={`auth`}
+                    href={`/Auth`}
                     size="medium"
                     LinkComponent={Link}
                     startIcon={<PersonRoundedIcon />}

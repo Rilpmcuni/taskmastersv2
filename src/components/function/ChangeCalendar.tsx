@@ -10,6 +10,8 @@ import {
     Typography,
     Stack,
     Divider,
+    Chip,
+    FormLabel,
 } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import Link from "next/link";
@@ -18,8 +20,11 @@ export default function ChangeCalendar() {
     const [vacationMode, setVacationMode] = useState(false);
 
     dayjs.locale("es"); // use Spanish locale
-    const daysOfWeek = Array.from({ length: 7 }, (_, i) =>
-        dayjs().day(i).format("dddd")
+    const daysOfWeek = Array.from(
+        { length: 7 },
+        (_, i) =>
+            dayjs().day(i).format("dddd").charAt(0).toUpperCase() +
+            dayjs().day(i).format("dddd").slice(1)
     );
     const [days, setDays] = useState(
         daysOfWeek.map((day) => ({
@@ -141,9 +146,11 @@ export default function ChangeCalendar() {
                                 }
                             >
                                 {day.fullTime ? (
-                                    <Typography variant="body1">
-                                        Tiempo completo y Emergencias Activado
-                                    </Typography>
+                                    <Chip
+                                        label="Tiempo completo y Emergencias Activado"
+                                        color="success"
+                                        variant="outlined"
+                                    />
                                 ) : (
                                     <Stack
                                         key={day.day}
@@ -216,6 +223,7 @@ export default function ChangeCalendar() {
                     }
                     label="Modo Vacaciones"
                 />
+                <FormLabel component="legend">Tómate un tiempo</FormLabel>
             </Stack>
         </main>
     );

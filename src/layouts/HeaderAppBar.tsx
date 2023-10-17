@@ -549,7 +549,7 @@ export default function HeaderAppBar({
                                 <ListItemIcon>
                                     <Settings />
                                 </ListItemIcon>
-                                Mi Laboratorio
+                                Configurar
                             </MenuItem>
                             <Divider variant="middle" />
                             <MenuItem
