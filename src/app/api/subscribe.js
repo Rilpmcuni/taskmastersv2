@@ -2,7 +2,7 @@ navigator.serviceWorker.ready.then(function (registration) {
     registration.pushManager
         .subscribe({
             userVisibleOnly: true,
-            applicationServerKey: "your-public-key",
+            applicationServerKey: ONESIGNAL_API_KEY,
         })
         .then(function (subscription) {
             // Send the subscription details to the server
