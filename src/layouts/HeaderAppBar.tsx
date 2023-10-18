@@ -516,9 +516,6 @@ export default function HeaderAppBar({
                                 aria-haspopup="true"
                                 aria-expanded={open ? "true" : undefined}
                             >
-                                {/* <Avatar sx={{ width: 32, height: 32 }}>
-                                    C
-                                </Avatar> */}
                                 <AvatarUser />
                             </IconButton>
                         </Tooltip>

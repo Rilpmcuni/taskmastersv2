@@ -8,6 +8,40 @@
 }
 /* 
  */
+/* scroll */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #1681ff #ffd234;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffd234;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #1681ff;
+    border-radius: 20px;
+    border: 0px solid #ffd234;
+}
+/* select text */
+::-moz-selection {
+    /* Code for Firefox */
+    color: #1681ff;
+    background: #ffd234;
+}
+
+::selection {
+    color: #1681ff;
+    background: #ffd234;
+}
+
+/* 
+   */
 /*  */
 
 .swiper {
