@@ -15,6 +15,7 @@ export const metadata = {
     title: "Reviasa | La solución tecnológica para todos",
     description:
         "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+    mobileWebAppCapable: "yes",
     generator: "Reviasa",
     applicationName: "Reviasa",
     referrer: "origin-when-cross-origin",
