@@ -147,34 +147,6 @@ export default function FichaView({ session }: { session: any }) {
         getProfile();
     }, [user, getProfile]);
 
-    async function updateProfile({
-        lastName,
-        ability,
-        avatar_url,
-        schedule,
-        rut,
-        cellPhone, // Añade esta línea
-    }: UpdateProfileProps & {
-        schedule: any;
-        rut: string | null;
-        cellPhone: string | null;
-    }) {
-        // Añade "cellPhone" aquí
-        // ...
-        const { error } = await supabase.from("profiles").upsert({
-            id: user?.id,
-            full_name: fullname,
-            lastName,
-            ability: personName,
-            avatar_url,
-            schedule,
-            rut,
-            cellPhone, // Añade esta línea
-            updated_at: new Date().toISOString(),
-        });
-        // ...
-    }
-
     return (
         <main>
             {/* <Typography variant="h5">Configuración</Typography>
@@ -252,7 +224,7 @@ export default function FichaView({ session }: { session: any }) {
                                             sx={{
                                                 display: "flex",
                                                 justifyContent: "center",
-                                                gap:1
+                                                gap: 1,
                                             }}
                                         >
                                             <WhatsAppIcon />
@@ -269,7 +241,7 @@ export default function FichaView({ session }: { session: any }) {
                                             sx={{
                                                 display: "flex",
                                                 justifyContent: "center",
-                                                gap:1
+                                                gap: 1,
                                             }}
                                         >
                                             <MailOutlineRoundedIcon />
