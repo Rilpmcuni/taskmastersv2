@@ -369,7 +369,7 @@ export default function PerfilConfig({ session }: { session: any }) {
                             fontWeight={900}
                             sx={{ flexGrow: 1, width: "100%" }}
                         >
-                            Configura tu horario
+                            Programa tu horario
                         </Typography>
 
                         <ChangeCalendar
@@ -396,7 +396,7 @@ export default function PerfilConfig({ session }: { session: any }) {
                 message={"¡Datos actualizados!"}
                 disabled={loading}
             >
-                {loading ? "Cargando ..." : "Actualizar"}
+                {loading ? "Cargando ..." : "Guardar cambios"}
             </SimpleSnackbar>
         </main>
     );

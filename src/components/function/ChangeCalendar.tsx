@@ -13,6 +13,8 @@ import {
     Chip,
     FormLabel,
     Box,
+    Card,
+    CardContent,
 } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import Link from "next/link";
@@ -92,147 +94,161 @@ export default function ChangeCalendar({
                 display="flex"
                 flexDirection={"row"}
                 flexWrap={"wrap"}
-                spacing={2}
+                spacing={1}
             >
-                {/* <Typography
-                    variant="h5"
-                    fontWeight={900}
-                    sx={{ flexGrow: 1, width: "100%" }}
-                >
-                    Horario
-                </Typography> */}
                 {days ? (
                     days.map((day, index) => (
-                        <>
-                            {index !== 0 && <Divider variant="middle" />}
-                            <Stack
-                                key={day.day}
-                                width={"100%"}
-                                direction={"column"}
-                                justifyContent={"space-between"}
-                                spacing={1}
-                            >
+                        <Card
+                            key={index}
+                            variant="outlined"
+                            sx={{
+                                flexGrow: 1,
+                            }}
+                        >
+                            <CardContent>
                                 <Stack
                                     key={day.day}
                                     width={"100%"}
-                                    direction={"row"}
+                                    direction={"column"}
                                     justifyContent={"space-between"}
                                     spacing={1}
                                 >
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={day.active}
-                                                onChange={() =>
-                                                    handleActiveChange(index)
-                                                }
-                                                name="active"
-                                                color="primary"
-                                                disabled={vacationMode} // Agrega esta línea
-                                            />
-                                        }
-                                        label={
-                                            <Typography
-                                                variant="h6"
-                                                style={{
-                                                    color: day.active
-                                                        ? "black"
-                                                        : "gray",
-                                                }}
-                                            >
-                                                {day.day}
-                                            </Typography>
-                                        }
-                                    />
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={day.fullTime}
-                                                onChange={() =>
-                                                    handleFullTimeChange(index)
-                                                }
-                                                name="fullTime"
-                                                color="secondary"
-                                                disabled={
-                                                    !day.active || vacationMode
-                                                } // Modifica esta línea
-                                            />
-                                        }
-                                        label="Tiempo completo"
-                                    />
-                                </Stack>
-                                <Collapse
-                                    in={
-                                        day.active &&
-                                        (!day.fullTime || day.fullTime)
-                                    }
-                                >
-                                    {day.fullTime ? (
-                                        <Chip
-                                            label="Tiempo completo y Emergencias Activado"
-                                            color="success"
-                                            variant="outlined"
+                                    <Stack
+                                        key={day.day}
+                                        width={"100%"}
+                                        direction={"row"}
+                                        justifyContent={"space-between"}
+                                        spacing={1}
+                                    >
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={day.active}
+                                                    onChange={() =>
+                                                        handleActiveChange(
+                                                            index
+                                                        )
+                                                    }
+                                                    name="active"
+                                                    color="primary"
+                                                    disabled={vacationMode} // Agrega esta línea
+                                                />
+                                            }
+                                            label={
+                                                <Typography
+                                                    variant="h6"
+                                                    style={{
+                                                        color: day.active
+                                                            ? "black"
+                                                            : "gray",
+                                                    }}
+                                                >
+                                                    {day.day}
+                                                </Typography>
+                                            }
                                         />
-                                    ) : (
-                                        <Stack
-                                            key={day.day}
-                                            width={"100%"}
-                                            direction={"row"}
-                                            spacing={1}
-                                        >
-                                            <TextField
-                                                id="time"
-                                                label="Desde"
-                                                type="time"
-                                                disabled={
-                                                    !day.active ||
-                                                    day.fullTime ||
-                                                    vacationMode
-                                                } // Modifica esta línea
-                                                value={day.from}
-                                                onChange={(e) =>
-                                                    handleTimeChange(
-                                                        index,
-                                                        e.target.value,
-                                                        "from"
-                                                    )
+                                        {day.active &&
+                                        (!day.fullTime || day.fullTime) ? (
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={day.fullTime}
+                                                        onChange={() =>
+                                                            handleFullTimeChange(
+                                                                index
+                                                            )
+                                                        }
+                                                        name="fullTime"
+                                                        color="secondary"
+                                                        disabled={
+                                                            !day.active ||
+                                                            vacationMode
+                                                        } // Modifica esta línea
+                                                    />
                                                 }
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                                sx={{
-                                                    flexGrow: 1,
-                                                }}
+                                                label="Tiempo completo"
                                             />
-                                            <TextField
-                                                id="time"
-                                                label="Hasta"
-                                                type="time"
-                                                disabled={
-                                                    !day.active ||
-                                                    day.fullTime ||
-                                                    vacationMode
-                                                } // Modifica esta línea
-                                                value={day.to}
-                                                onChange={(e) =>
-                                                    handleTimeChange(
-                                                        index,
-                                                        e.target.value,
-                                                        "to"
-                                                    )
-                                                }
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                                sx={{
-                                                    flexGrow: 1,
-                                                }}
+                                        ) : (
+                                            <Chip
+                                                label="Día libre"
+                                                color="warning"
+                                                variant="outlined"
                                             />
-                                        </Stack>
-                                    )}
-                                </Collapse>
-                            </Stack>
-                        </>
+                                        )}
+                                    </Stack>
+                                    <Collapse
+                                        in={
+                                            day.active &&
+                                            (!day.fullTime || day.fullTime)
+                                        }
+                                    >
+                                        {day.fullTime ? (
+                                            <Chip
+                                                label="Tiempo completo y Emergencias Activado"
+                                                color="success"
+                                                variant="outlined"
+                                            />
+                                        ) : (
+                                            <Stack
+                                                key={day.day}
+                                                width={"100%"}
+                                                direction={"row"}
+                                                spacing={1}
+                                            >
+                                                <TextField
+                                                    id="time"
+                                                    label="Desde"
+                                                    type="time"
+                                                    disabled={
+                                                        !day.active ||
+                                                        day.fullTime ||
+                                                        vacationMode
+                                                    } // Modifica esta línea
+                                                    value={day.from}
+                                                    onChange={(e) =>
+                                                        handleTimeChange(
+                                                            index,
+                                                            e.target.value,
+                                                            "from"
+                                                        )
+                                                    }
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                    sx={{
+                                                        flexGrow: 1,
+                                                    }}
+                                                />
+                                                <TextField
+                                                    id="time"
+                                                    label="Hasta"
+                                                    type="time"
+                                                    disabled={
+                                                        !day.active ||
+                                                        day.fullTime ||
+                                                        vacationMode
+                                                    } // Modifica esta línea
+                                                    value={day.to}
+                                                    onChange={(e) =>
+                                                        handleTimeChange(
+                                                            index,
+                                                            e.target.value,
+                                                            "to"
+                                                        )
+                                                    }
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                    sx={{
+                                                        flexGrow: 1,
+                                                    }}
+                                                />
+                                            </Stack>
+                                        )}
+                                    </Collapse>
+                                </Stack>
+                            </CardContent>
+                        </Card>
                     ))
                 ) : (
                     <span>hola</span>
@@ -240,8 +256,8 @@ export default function ChangeCalendar({
                 <Box
                     sx={{
                         display: "flex",
-                        flexDirection:"row",
-                        alignItems:"center",
+                        flexDirection: "row",
+                        alignItems: "center",
                     }}
                 >
                     <FormControlLabel
