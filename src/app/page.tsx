@@ -32,11 +32,10 @@ export default function Home() {
                     pointerEvents: "none",
                 }}
             ></div>
-            <Top />
-            <Divider />
+            {/* <Top />
+            <Divider /> */}
             <Header />
-            <Link href="/app/metricas">App</Link>
-            <InstallPWA/>
+            {/* <InstallPWA/> */}
             <Hero />
             <Features />
             <Services />

@@ -127,56 +127,25 @@ export default function CalendarView({
                                             justifyContent={"space-between"}
                                             spacing={1}
                                         >
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={day.active}
-                                                        onChange={() =>
-                                                            handleActiveChange(
-                                                                index
-                                                            )
-                                                        }
-                                                        name="active"
-                                                        color="primary"
-                                                        disabled={vacationMode} // Agrega esta línea
-                                                    />
-                                                }
-                                                label={
-                                                    <Typography
-                                                        variant="h6"
-                                                        style={{
-                                                            color: day.active
-                                                                ? "black"
-                                                                : "gray",
-                                                        }}
-                                                    >
-                                                        {day.day}
-                                                    </Typography>
-                                                }
-                                            />
+                                            <Typography
+                                                variant="h6"
+                                                style={{
+                                                    color: day.active
+                                                        ? "black"
+                                                        : "gray",
+                                                }}
+                                            >
+                                                {day.day}
+                                            </Typography>
                                             {day.active &&
                                             (!day.fullTime || day.fullTime) ? (
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox
-                                                            checked={
-                                                                day.fullTime
-                                                            }
-                                                            onChange={() =>
-                                                                handleFullTimeChange(
-                                                                    index
-                                                                )
-                                                            }
-                                                            name="fullTime"
-                                                            color="secondary"
-                                                            disabled={
-                                                                !day.active ||
-                                                                vacationMode
-                                                            } // Modifica esta línea
-                                                        />
-                                                    }
-                                                    label="Tiempo completo"
-                                                />
+                                                day.fullTime && (
+                                                    <Chip
+                                                        label="Tiempo completo"
+                                                        color="primary"
+                                                        variant="outlined"
+                                                    />
+                                                )
                                             ) : (
                                                 <Chip
                                                     label="Día libre"
@@ -204,54 +173,46 @@ export default function CalendarView({
                                                     direction={"row"}
                                                     spacing={1}
                                                 >
-                                                    <TextField
-                                                        id="time"
-                                                        label="Desde"
-                                                        type="time"
-                                                        disabled={
-                                                            !day.active ||
-                                                            day.fullTime ||
-                                                            vacationMode
-                                                        } // Modifica esta línea
-                                                        value={day.from}
-                                                        onChange={(e) =>
-                                                            handleTimeChange(
-                                                                index,
-                                                                e.target.value,
-                                                                "from"
-                                                            )
-                                                        }
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
+                                                    <Divider
+                                                        orientation="vertical"
+                                                        variant="middle"
+                                                        flexItem
+                                                    />
+                                                    <Box
                                                         sx={{
+                                                            display: "flex",
+                                                            flexDirection:
+                                                                "column",
                                                             flexGrow: 1,
                                                         }}
+                                                    >
+                                                        <Typography variant="caption">
+                                                            Desde:
+                                                        </Typography>
+                                                        <Typography variant="h6">
+                                                            {day.from}
+                                                        </Typography>
+                                                    </Box>
+                                                    <Divider
+                                                        orientation="vertical"
+                                                        variant="middle"
+                                                        flexItem
                                                     />
-                                                    <TextField
-                                                        id="time"
-                                                        label="Hasta"
-                                                        type="time"
-                                                        disabled={
-                                                            !day.active ||
-                                                            day.fullTime ||
-                                                            vacationMode
-                                                        } // Modifica esta línea
-                                                        value={day.to}
-                                                        onChange={(e) =>
-                                                            handleTimeChange(
-                                                                index,
-                                                                e.target.value,
-                                                                "to"
-                                                            )
-                                                        }
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
+                                                    <Box
                                                         sx={{
+                                                            display: "flex",
+                                                            flexDirection:
+                                                                "column",
                                                             flexGrow: 1,
                                                         }}
-                                                    />
+                                                    >
+                                                        <Typography variant="caption">
+                                                            Hasta:
+                                                        </Typography>
+                                                        <Typography variant="h6">
+                                                            {day.to}
+                                                        </Typography>
+                                                    </Box>
                                                 </Stack>
                                             )}
                                         </Collapse>

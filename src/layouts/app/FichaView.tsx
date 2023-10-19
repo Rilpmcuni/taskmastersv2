@@ -148,13 +148,7 @@ export default function FichaView({ session }: { session: any }) {
     }, [user, getProfile]);
 
     return (
-        <main>
-            {/* <Typography variant="h5">Configuración</Typography>
-            <Typography variant="body2">
-                Configura en cualquier momento, cuando lo necesites, cuando
-                quieras.
-            </Typography> */}
-
+        <>
             <BasicTabs
                 labels={["Perfil", "Calendario", "Usuario"]}
                 contents={[
@@ -284,7 +278,7 @@ export default function FichaView({ session }: { session: any }) {
                     <span>En construcción</span>,
                 ]}
             />
-        </main>
+        </>
     );
 }
 //

@@ -229,8 +229,8 @@ export default function Features() {
                                         backgroundColor: "white",
                                         borderRadius: "99rem",
                                         p: 1,
-                                        width: { xs: "40px", md: "40px" },
-                                        height: { xs: "40px", md: "40px" },
+                                        width: { xs: "60px", md: "40px" },
+                                        height: { xs: "60px", md: "40px" },
                                     }}
                                 >
                                     <Image

@@ -5,6 +5,7 @@ import {
     Typography,
     Radio,
     CardActionArea,
+    CardMedia,
 } from "@mui/material";
 import { SetStateAction, useState } from "react";
 
@@ -20,7 +21,7 @@ const ServicesCardV2: React.FC<Props> = ({
 }) => {
     return (
         <>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={6} sm={2}>
                 <Card
                     variant="outlined"
                     sx={{
@@ -36,6 +37,15 @@ const ServicesCardV2: React.FC<Props> = ({
                     onClick={handleCardClick}
                 >
                     <CardActionArea>
+                        <CardMedia
+                            sx={{
+                                height: 140,
+                                borderTopLeftRadius: "1rem",
+                                borderTopRightRadius: "1rem",
+                            }}
+                            image={service.image}
+                            title={service.title}
+                        />
                         <CardContent>
                             {selectedProduct === service.title && (
                                 <Radio
@@ -61,9 +71,9 @@ const ServicesCardV2: React.FC<Props> = ({
                             >
                                 {service.title}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            {/* <Typography variant="body2" color="text.secondary">
                                 {service.description}
-                            </Typography>
+                            </Typography> */}
                             <Typography variant="button" color="primary">
                                 Solicitar
                             </Typography>

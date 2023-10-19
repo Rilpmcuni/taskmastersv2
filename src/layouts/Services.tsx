@@ -4,15 +4,7 @@ import { Container, Stack } from "@mui/material";
 import ServicesCard from "@/components/ServicesCard";
 import { ServicesData } from "@/data/ServicesData";
 
-import {
-    Grid,
-    Card,
-    CardContent,
-    Typography,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-} from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { SetStateAction, useState } from "react";
 import ServiceWindow from "@/components/function/ServiceWindow";
 import { Collapse } from "@mui/material";
@@ -30,7 +22,7 @@ export default function Services() {
                 display={"flex"}
                 justifyContent={"center"}
                 alignItems={"center"}
-                spacing={1}
+                spacing={0.5}
                 sx={{
                     paddingY: "1rem",
                     marginBottom: "2rem",

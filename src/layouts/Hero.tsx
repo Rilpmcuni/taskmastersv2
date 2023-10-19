@@ -7,9 +7,46 @@ import React from "react";
 import Image from "next/image";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { ContactData } from "@/data/ContactData";
+import Link from "next/link";
+import TextCarousel from "@/feedback/TextCarousel";
 // "repeat(auto-fit, minmax(500px, auto))",
+import ServicesCard from "@/components/ServicesCard";
+import { ServicesData } from "@/data/ServicesData";
+
+import { Grid } from "@mui/material";
+import { SetStateAction, useState } from "react";
+import ServiceWindow from "@/components/function/ServiceWindow";
+import { Collapse } from "@mui/material";
 
 export default function Hero() {
+    const [selectedProduct, setSelectedProduct] = useState("");
+    const [showMore, setShowMore] = useState(false); // Nuevo estado
+
+    const handleCardClick = (product: SetStateAction<string>) => {
+        setSelectedProduct(product);
+    };
+
+    const handleShowMore = () => {
+        setShowMore(!showMore); // Cambia el estado cada vez que se hace click
+    };
+
+    const servicesToShow = showMore ? ServicesData : ServicesData.slice(0, 4); // Si showMore es true, muestra todos los servicios. Si no, solo muestra los primeros 4.
+
+    let height = "";
+
+    if (showMore) {
+        if (selectedProduct !== "") {
+            height = "1510px";
+        } else {
+            height = "1240px";
+        }
+    } else {
+        if (selectedProduct !== "") {
+            height = "1240px";
+        } else {
+            height = "1040px";
+        }
+    }
     return (
         <>
             <Box
@@ -24,7 +61,14 @@ export default function Hero() {
                     marginBottom: "2rem",
                 }}
             >
-                <div style={{ position: "relative", height: "600px" }}>
+                <Box
+                    sx={{
+                        position: "relative",
+                        height: { xs: height, md: "590px" },
+                        backgroundColor: "#1e293b",
+                        borderRadius: "1.5rem",
+                    }}
+                >
                     <Stack
                         spacing={2}
                         style={{
@@ -53,75 +97,127 @@ export default function Hero() {
                             spacing={1}
                             color={"white"}
                         >
-                            {/* <Typography
-                                fontWeight={700}
-                                variant="h2"
-                                component="h2"
+                            <Box
                                 sx={{
-                                    fontSize: { xs: "3rem", md: "4rem" },
+                                    display: "flex",
+                                    flexDirection: "column",
                                 }}
                             >
-                                Solucionamos todos sus problemas de hogar
-                            </Typography> */}
-                            <Typography
-                                fontWeight={700}
-                                variant="h2"
-                                component="h2"
-                                sx={{
-                                    fontSize: { xs: "3rem", md: "4rem" },
-                                }}
-                            >
-                                Tu solución confiable
-                                para servicios en el hogar
-                            </Typography>
-                            {/* Bienvenido a Reviasa:  */}
-                            <Typography variant="body1" component="p">
-                                Conéctate con expertos en construcción,
-                                remodelación y reparaciones generales
-                            </Typography>
+                                <Typography
+                                    fontWeight={700}
+                                    variant="h2"
+                                    component="h2"
+                                    sx={{
+                                        fontSize: { xs: "2.5rem", md: "4rem" },
+                                    }}
+                                >
+                                    Reviasa: Donde
+                                </Typography>
+                                <TextCarousel />
+                                <Typography
+                                    fontWeight={700}
+                                    variant="h2"
+                                    component="h2"
+                                    sx={{
+                                        fontSize: { xs: "2.5rem", md: "4rem" },
+                                    }}
+                                >
+                                    se Convierte en
+                                </Typography>
+                                <TextCarousel />
+                                <Typography variant="body1" component="p">
+                                    La plataforma que conecta a personas con
+                                    profesionales locales. Descubre una nueva
+                                    forma de acceder a servicios de calidad en
+                                    Chile.
+                                </Typography>
+                            </Box>
                         </Stack>
                         <Box
                             display={"flex"}
                             justifyContent="center"
-                            alignItems="stretch"
+                            alignItems="center"
                             sx={{
                                 display: "flex",
-                                flexDirection: { xs: "column", md: "row" },
+                                flexDirection: "column",
                                 gap: 1,
+                                borderRadius: "1rem",
+                                padding: "0.5rem",
                             }}
                         >
-                            <Button
-                                size="large"
+                            <Box
                                 sx={{
-                                    fontWeight: 600,
-                                    boxShadow: 0,
+                                    display: "flex",
+                                    flexDirection: { xs: "column", md: "row" },
+                                    gap: 1,
+                                    borderRadius: "1rem",
+                                    padding: "0.5rem",
+                                    paddingTop: "1rem",
+                                    width: "100%",
+                                    // backgroundColor: "white",
+                                    transition: "250ms ease-in-out",
+                                    boxShadow: 6,
                                     "&:hover": {
-                                        boxShadow: 0,
+                                        transition: "250ms ease-in-out",
+                                        boxShadow: 4,
                                     },
+                                    backgroundColor:"#ffdb5c"
                                 }}
-                                startIcon={<WhatsAppIcon />}
-                                variant="contained"
-                                color="success"
                             >
-                                Escríbenos
-                            </Button>
+                                <Grid container spacing={1}>
+                                    {servicesToShow.map(
+                                        (service: any, index: any) => (
+                                            <ServicesCard
+                                                key={index}
+                                                service={service}
+                                                handleCardClick={() =>
+                                                    handleCardClick(
+                                                        service.title
+                                                    )
+                                                }
+                                                selectedProduct={
+                                                    selectedProduct
+                                                }
+                                            />
+                                        )
+                                    )}
+                                </Grid>
+                                <Button onClick={handleShowMore}>
+                                    {showMore ? "Mostrar menos" : "Mostrar más"}{" "}
+                                    {/* Cambia el texto del botón dependiendo del estado */}
+                                </Button>
+                                <Collapse
+                                    in={selectedProduct !== ""}
+                                    sx={{
+                                        maxWidth: "90%",
+                                        minWidth: "90%",
+                                        minHeimaxHeight: "16rem",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <ServiceWindow />
+                                </Collapse>
+                            </Box>
                             <Button
-                                href={`tel:${ContactData.number}`}
-                                startIcon={<PhoneInTalkIcon />}
-                                size="large"
-                                sx={{
-                                    fontWeight: 600,
-                                    boxShadow: 0,
-                                    "&:hover": {
-                                        boxShadow: 0,
-                                    },
-                                }}
-                                variant="contained"
+                                size="small"
                                 color="secondary"
+                                LinkComponent={Link}
+                                href="/Características"
+                                variant="text"
+                                sx={{
+                                    transition: "300ms",
+                                    textDecoration: "wavy underline",
+                                    "&:hover": {
+                                        transition: "300ms",
+                                        textDecoration: "wavy underline",
+                                    },
+                                }}
                             >
-                                {`Llámanos: ${ContactData.number}`}
+                                Sé un Reviaser
                             </Button>
-                            {/*  */}
                         </Box>
                     </Stack>
                     <Image
@@ -133,11 +229,9 @@ export default function Hero() {
                             borderRadius: "1.5rem",
                         }}
                     />
-                </div>
+                </Box>
                 {/* And more images in the grid... */}
             </Box>
-            {/* 
-             */}
         </>
     );
 }
