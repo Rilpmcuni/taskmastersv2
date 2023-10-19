@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import { InputAdornment } from "@mui/material";
+import FormHelperText from "@mui/material/FormHelperText";
 
 interface CustomProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -41,10 +42,12 @@ export default function TextFieldPhone({
     return (
         <>
             <FormControl variant="outlined" sx={{ flexGrow: 1 }}>
-                <InputLabel htmlFor="formatted-text-mask-input">Número celular</InputLabel>
+                <InputLabel htmlFor="formatted-text-mask-input">
+                    Número celular/Whatsapp
+                </InputLabel>
                 <OutlinedInput
                     // placeholder="Número celular"
-                    label="Número celular"
+                    label="Número celular/Whatsapp"
                     value={value}
                     onChange={onChange}
                     name="textmask"
@@ -54,6 +57,7 @@ export default function TextFieldPhone({
                         <InputAdornment position="start">+56</InputAdornment>
                     }
                 />
+                <FormHelperText>Para poder comunicarnos contigo</FormHelperText>
             </FormControl>
         </>
     );

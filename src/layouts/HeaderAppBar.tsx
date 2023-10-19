@@ -516,7 +516,7 @@ export default function HeaderAppBar({
                                 aria-haspopup="true"
                                 aria-expanded={open ? "true" : undefined}
                             >
-                                <AvatarUser />
+                                <AvatarUser size={40} />
                             </IconButton>
                         </Tooltip>
                         <Menu

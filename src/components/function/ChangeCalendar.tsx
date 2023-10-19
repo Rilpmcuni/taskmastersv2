@@ -103,6 +103,7 @@ export default function ChangeCalendar({
                             variant="outlined"
                             sx={{
                                 flexGrow: 1,
+                                borderColor: day.active ? 'primary.main' : 'error.main', // Cambia el color del borde en función de day.active
                             }}
                         >
                             <CardContent>

@@ -6,6 +6,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 
 interface CustomProps {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -50,6 +51,7 @@ export default function TextFieldRut({
                     id="formatted-text-mask-input"
                     inputComponent={TextMaskCustom as any}
                 />
+                <FormHelperText>Necesario para verificar tu identidad</FormHelperText>
             </FormControl>
         </>
     );

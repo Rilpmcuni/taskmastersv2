@@ -9,7 +9,7 @@ import AvatarNormal from "./AvatarNormal";
 interface Session {
     user: any;
 }
-export default function AvatarUser() {
+export default function AvatarUser({ size }: { size: any }) {
     const supabase = createClientComponentClient();
     const [loading, setLoading] = useState(true);
     const [avatar_url, setAvatarUrl] = useState(null);
@@ -38,9 +38,7 @@ export default function AvatarUser() {
             }
 
             if (data) {
-
                 setAvatarUrl(data.avatar_url);
-
             }
         } catch (error) {
             // alert("Error loading user data!");
@@ -60,7 +58,7 @@ export default function AvatarUser() {
             <AvatarNormal
                 uid={sessionData?.user.id}
                 url={avatar_url}
-                size={40}
+                size={size}
             />
         </>
     );
