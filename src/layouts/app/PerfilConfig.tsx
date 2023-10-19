@@ -387,27 +387,6 @@ export default function PerfilConfig({ session }: { session: any }) {
                     <span>En construcción</span>,
                 ]}
             />
-
-            {/* <Button
-                fullWidth
-                size="large"
-                variant="contained"
-                className="button primary block"
-                onClick={() =>
-                    updateProfile({
-                        fullname,
-                        lastName,
-                        ability: personName,
-                        avatar_url,
-                        schedule,
-                        rut,
-                        cellPhone, // Añade esta línea
-                    })
-                }
-                disabled={loading}
-            >
-                {loading ? "Cargando ..." : "Actualizar"}
-            </Button> */}
             <SimpleSnackbar
                 onClick={() =>
                     updateProfile({
