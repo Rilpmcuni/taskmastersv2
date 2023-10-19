@@ -77,13 +77,6 @@ export default function PerfilConfig({ session }: { session: any }) {
         antoine: false,
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setState({
-            ...state,
-            [event.target.name]: event.target.checked,
-        });
-    };
-
     const { gilad, jason, antoine } = state;
     const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
     // chip

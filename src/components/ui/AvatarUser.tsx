@@ -57,11 +57,6 @@ export default function AvatarUser() {
 
     return (
         <>
-            {/* {session ? (
-                <AvatarClient session={session} />
-            ) : (
-                <Skeleton variant="circular" width={40} height={40} />
-            )} */}
             <AvatarNormal
                 uid={sessionData?.user.id}
                 url={avatar_url}

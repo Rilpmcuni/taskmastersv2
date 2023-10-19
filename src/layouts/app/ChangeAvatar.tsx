@@ -4,6 +4,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import { Box, Skeleton } from "@mui/material";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 interface AvatarProps {
     uid: string;
@@ -80,9 +81,22 @@ export default function Avatar({ uid, url, size, onUpload }: AvatarProps) {
                     height={size}
                 />
             ) : (
-                <Skeleton variant="circular" width={size} height={size} />
+                <Box
+                    sx={{
+                        width: size,
+                        height: size,
+
+                        backgroundColor: "#bbbbbb60",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "99rem",
+                    }}
+                >
+                    <PersonOutlineOutlinedIcon />
+                </Box>
             )}
-            <Box sx={{ width: size, position: "absolute", bottom: 0}}>
+            <Box sx={{ width: size, position: "absolute", bottom: 0 }}>
                 <label
                     className="button primary block"
                     htmlFor="single"
@@ -97,7 +111,7 @@ export default function Avatar({ uid, url, size, onUpload }: AvatarProps) {
                     ) : (
                         <Box
                             sx={{
-                                display:"inline-flex",
+                                display: "inline-flex",
                                 backgroundColor: "#fff",
                                 borderRadius: "99rem",
                                 padding: "3px",

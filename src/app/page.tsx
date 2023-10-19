@@ -11,6 +11,7 @@ import Top from "@/layouts/Top";
 import { Divider } from "@mui/material";
 import Header from "@/layouts/Header";
 import Footer from "@/layouts/Footer";
+import InstallPWA from "@/feedback/InstallPWA";
 export default function Home() {
     return (
         <main>
@@ -35,6 +36,7 @@ export default function Home() {
             <Divider />
             <Header />
             <Link href="/app/metricas">App</Link>
+            <InstallPWA/>
             <Hero />
             <Features />
             <Services />
