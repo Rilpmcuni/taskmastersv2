@@ -17,6 +17,7 @@ import { Grid } from "@mui/material";
 import { SetStateAction, useState } from "react";
 import ServiceWindow from "@/components/function/ServiceWindow";
 import { Collapse } from "@mui/material";
+import FullScreenDialog from "@/feedback/FullScreenDialog";
 
 export default function Hero() {
     const [selectedProduct, setSelectedProduct] = useState("");
@@ -161,9 +162,11 @@ export default function Hero() {
                                         transition: "250ms ease-in-out",
                                         boxShadow: 4,
                                     },
-                                    backgroundColor:"#ffdb5c"
+                                    // backgroundColor: "#ffdb5c",
+                                    backgroundColor: "#fff",
                                 }}
                             >
+                                {selectedProduct}
                                 <Grid container spacing={1}>
                                     {servicesToShow.map(
                                         (service: any, index: any) => (
@@ -186,7 +189,7 @@ export default function Hero() {
                                     {showMore ? "Mostrar menos" : "Mostrar más"}{" "}
                                     {/* Cambia el texto del botón dependiendo del estado */}
                                 </Button>
-                                <Collapse
+                                {/* <Collapse
                                     in={selectedProduct !== ""}
                                     sx={{
                                         maxWidth: "90%",
@@ -199,7 +202,8 @@ export default function Hero() {
                                     }}
                                 >
                                     <ServiceWindow />
-                                </Collapse>
+                                </Collapse> */}
+                                <FullScreenDialog selectedProduct={selectedProduct} />
                             </Box>
                             <Button
                                 size="small"

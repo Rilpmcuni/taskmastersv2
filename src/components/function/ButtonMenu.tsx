@@ -1,6 +1,14 @@
 "use client";
 // import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import { Box, IconButton, Link as LinkMui } from "@mui/material";
+import {
+    Box,
+    Divider,
+    IconButton,
+    Link as LinkMui,
+    List,
+    ListItem,
+    ListItemButton,
+} from "@mui/material";
 import Link from "next/link";
 
 import {
@@ -80,16 +88,14 @@ export default function ButtonMenu({
                         href={subItem.href}
                         key={index}
                     >
-                        <MenuItem onClick={handleClose}>
-                            <ListItemIcon>{subItem.ico}</ListItemIcon>
-                            <ListItemText>{subItem.title}</ListItemText>
-                            {/* <ListItemIcon>
-                                                    <OpenInNewRoundedIcon
-                                                        fontSize="small"
-                                                        color="primary"
-                                                    />
-                                                </ListItemIcon> */}
-                        </MenuItem>
+                        <ListItemButton dense sx={{ gap: 1.5 }}>
+                            {subItem.ico}
+                            <ListItemText
+                                primary={subItem.title}
+                                secondary={subItem.description}
+                            />
+                        </ListItemButton>
+                        {index != 2 && <Divider variant="middle" />}
                     </LinkMui>
                 ))}
             </Menu>

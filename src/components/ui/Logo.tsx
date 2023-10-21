@@ -77,6 +77,7 @@ export default function Logo() {
                 subItem={[
                     {
                         title: "Llavasa",
+                        description: "Inmobiliaria",
                         href: "https://llavasa.vercel.app/",
                         ico: (
                             <Image
@@ -84,14 +85,14 @@ export default function Logo() {
                                 className=""
                                 src={LlavasaLogo}
                                 alt="Llavasa"
-                                width={25}
-                                height={25}
-                                priority
+                                width={40}
+                                height={40}
                             />
                         ),
                     },
                     {
                         title: "Reviasa",
+                        description: "Servicios",
                         href: "https://reviasa.vercel.app/",
                         ico: (
                             <Image
@@ -99,14 +100,14 @@ export default function Logo() {
                                 className=""
                                 src={Reviasa}
                                 alt="Reviasa"
-                                width={25}
-                                height={25}
-                                priority
+                                width={40}
+                                height={40}
                             />
                         ),
                     },
                     {
                         title: "Mudasa",
+                        description: "Mudanza",
                         href: "https://mudasa.vercel.app/",
                         ico: (
                             <Image
@@ -114,9 +115,8 @@ export default function Logo() {
                                 className=""
                                 src={Mudasa}
                                 alt="Mudasa"
-                                width={25}
-                                height={25}
-                                priority
+                                width={40}
+                                height={40}
                             />
                         ),
                     },
@@ -124,7 +124,7 @@ export default function Logo() {
                 item={
                     <IconButton
                         sx={{
-                            marginBottom: -1,
+                            marginBottom: "-6px",
                             color: "primary.main",
                             transition: "transform 300ms", // Añade la transición aquí
                             "&:hover": {

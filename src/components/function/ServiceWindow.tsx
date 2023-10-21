@@ -8,27 +8,55 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { Collapse } from "@mui/material";
+import { Collapse, TextField } from "@mui/material";
 import { Stack } from "@mui/material";
+import { ServicesData } from "@/data/ServicesData";
 
-const steps = [
-    {
-        label: "Select campaign settings",
-        description: `For each ad campaign that you create.`,
-    },
-    {
-        label: "Create an ad group",
-        description:
-            "An ad group contains one or more ads which target a shared set of keywords.",
-    },
-    {
-        label: "Create an ad",
-        description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.`,
-    },
-];
+export default function ServiceWindow({
+    selectedProduct,
+}: {
+    selectedProduct: any;
+}) {
+    let selectedService = ServicesData.find(
+        (service) => service.title === selectedProduct
+    );
+    const steps = [
+        {
+            label: "Detalles del Trabajo",
+            description: (
+                <>
+                    <span>{selectedService?.title}</span>
+                    <span>{selectedService?.badge}</span>
+                    <span>{selectedService?.description}</span>
+                </>
+            ),
+        },
+        {
+            label: "Ubicación y Horarios",
+            description: (
+                <>
+                    <TextField
+                        id="time"
+                        label="Desde"
+                        type="time"
+                        value={"day.from"}
+                        // onChange={ }
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        sx={{
+                            flexGrow: 1,
+                        }}
+                    />
+                </>
+            ),
+        },
+        {
+            label: "Cálculo del Costo Estimado",
+            description: <></>,
+        },
+    ];
 
-export default function ServiceWindow() {
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = () => {
@@ -49,74 +77,45 @@ export default function ServiceWindow() {
                 boxShadow: 4,
                 // maxWidth: "90%",
                 // minWidth: "90%",
-                height: "16rem",
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "Column",
                 borderRadius: "1.5rem",
                 justifyContent: "start",
                 bgcolor: "white",
+                height: "100%",
             }}
         >
             <Stepper
                 activeStep={activeStep}
-                orientation="vertical"
+                orientation="horizontal"
                 sx={{
                     p: 2,
                     backgroundColor: "text.primary",
                     borderBottomLeftRadius: "1.5rem",
                     borderTopLeftRadius: "1.5rem",
-                    minWidth: "15%",
-                    maxWidth: "15%",
                 }}
             >
                 {steps.map((step, index) => (
                     <Step key={step.label}>
                         <StepLabel
                             optional={
-                                index === 2 ? (
-                                    <Typography variant="caption" color="white">
-                                        Last step
+                                index === activeStep ? (
+                                    <Typography variant="body2" color="white">
+                                        {step.label}
                                     </Typography>
                                 ) : null
                             }
-                        >
-                            <Typography variant="body2" color="white">
-                                {step.label}
-                            </Typography>
-                        </StepLabel>
-                        {/* <StepContent>
-                            <Typography>{step.description}</Typography>
-                            <Box sx={{ mb: 2 }}>
-                                <div>
-                                    <Button
-                                        variant="contained"
-                                        onClick={handleNext}
-                                        sx={{ mt: 1, mr: 1 }}
-                                    >
-                                        {index === steps.length - 1
-                                            ? "Finish"
-                                            : "Continue"}
-                                    </Button>
-                                    <Button
-                                        disabled={index === 0}
-                                        onClick={handleBack}
-                                        sx={{ mt: 1, mr: 1 }}
-                                    >
-                                        Back
-                                    </Button>
-                                </div>
-                            </Box>
-                        </StepContent> */}
+                        ></StepLabel>
                     </Step>
                 ))}
             </Stepper>
-            {/* backgroundColor:"rgba(0, 0, 0, 0.12)", */}
 
             <Box
                 sx={{
                     p: 4,
                     // paddingX:2,
                     // paddingy:2,
+                    height: "100%",
                 }}
             >
                 {steps.map((step, index) => {
@@ -128,11 +127,15 @@ export default function ServiceWindow() {
                                     alignItems: "start",
                                     justifyContent: "",
                                     flexDirection: "col",
+                                    height: "100%",
                                 }}
                                 key={index}
                             >
-                                <Typography>{step.label}</Typography>
-                                <Typography>{step.description}</Typography>
+                                {/* <Typography> */}
+
+                                {step.description}
+
+                                {/* </Typography> */}
                                 <Box sx={{ mb: 2 }}>
                                     <Button
                                         variant="contained"
