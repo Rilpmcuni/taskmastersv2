@@ -69,7 +69,7 @@ export const ServicesData = [
         price: 60000,
     },
     {
-        title: "Instalaciones",
+        title: "Instalación",
 
         description:
             "Deja que nuestros profesionales mantengan tu hogar limpio y reluciente.",

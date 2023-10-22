@@ -87,50 +87,21 @@ export default function TemporaryDrawer() {
                     <ClearRoundedIcon />
                 </IconButton>
             </Box>
-            <ListItemButton dense onClick={handlePropiedadesClick}>
-                <ListItemText primary="Propiedades"  />
-                {propiedadesOpen ? <ExpandLess /> : <ExpandMore />}
+            <ListItemButton dense>
+                <ListItemText primary="Servicios" />
             </ListItemButton>
-            <Collapse in={propiedadesOpen} timeout="auto" unmountOnExit>
-                <List dense component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="Algo para Arrendar" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="Algo para Comprar" />
-                    </ListItemButton>
-                </List>
-            </Collapse>
             <Divider variant="middle" />
-            <ListItemButton dense onClick={handlePropietarioClick}>
-                <ListItemText primary="Propietario" />
-                {propietarioOpen ? <ExpandLess /> : <ExpandMore />}
+            <ListItemButton dense>
+                <ListItemText primary="Nosotros" />
             </ListItemButton>
-            <Collapse in={propietarioOpen} timeout="auto" unmountOnExit>
-                <List dense component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="Vender mi propiedad" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="Arrendar mi propiedad" />
-                    </ListItemButton>
-                </List>
-            </Collapse>
             <Divider variant="middle" />
-            <ListItemButton dense onClick={handleCalculaClick}>
-                <ListItemText primary="Calcula/Simula" />
-                {calculaOpen ? <ExpandLess /> : <ExpandMore />}
+            <ListItemButton dense color="primary">
+                <ListItemText primary="Sé un Reviaser" />
             </ListItemButton>
-            <Collapse in={calculaOpen} timeout="auto" unmountOnExit>
-                <List dense component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="Calculador Arriendo/Venta" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="Simular Crédito hipotecario" />
-                    </ListItemButton>
-                </List>
-            </Collapse>
+            <Divider variant="middle" />
+            <ListItemButton dense color="primary">
+                <ListItemText primary="Contacto" />
+            </ListItemButton>
 
             <Divider variant="middle" />
             <Box
@@ -149,7 +120,7 @@ export default function TemporaryDrawer() {
                     size="medium"
                     LinkComponent={Link}
                 >
-                    pagar arriendo
+                    pagar servicio
                 </Button>
                 <Button
                     variant="outlined"

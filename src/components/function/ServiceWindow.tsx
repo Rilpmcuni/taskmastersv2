@@ -46,7 +46,8 @@ export default function ServiceWindow({
     // date
     dayjs.locale("es");
     let fechas: string[][] = [];
-    let currentDay = dayjs().hour() >= 0 ? dayjs().add(1, "day") : dayjs(); // If it's after midnight, start from the next day
+    // let currentDay = dayjs().hour() >= 0 ? dayjs().add(1, "day") : dayjs();
+    let currentDay = dayjs();
     for (let i = 0; i < 7; i++) {
         let fecha = currentDay.add(i, "day").format("ddd D MMM").split(" ");
         fechas.push(fecha);
@@ -56,18 +57,21 @@ export default function ServiceWindow({
 
     let horas = [];
     let currentHour = dayjs().hour();
+
     // let currentDay = dayjs();
 
-    if (currentHour >= 0) {
-        currentDay = dayjs().add(1, "day");
-        currentHour = 0;
-    }
+    // if (currentHour >= 0) {
+    //     currentDay = dayjs().add(1, "day");
+    //     currentHour = 0;
+    // }
 
-    let hoursLeftToday = 24 - currentHour;
+    let startHour = selectedFechaIndex === 0 ? currentHour : 0;
+
+    let hoursLeftToday = 24 - startHour;
     for (let i = 0; i < hoursLeftToday; i++) {
         let hora = currentDay
             .startOf("day")
-            .add(currentHour + i, "hours")
+            .add(startHour + i, "hours")
             .format("h:mm a");
         horas.push(hora);
     }
@@ -83,19 +87,22 @@ export default function ServiceWindow({
     const setSelectedHourIndex = (index: any) => {
         setSelectedHourIndexState(index);
         let selectedHour = dayjs()
-            .hour((currentHour + index) % 24)
+            .hour(startHour + index)
             .hour();
+        console.log("Selected hour:", selectedHour); // Add this line
         setHour(selectedHour);
         if (selectedHour >= 20 || selectedHour < 8) {
             setIsEmergency(true);
         } else {
             setIsEmergency(false);
         }
+        console.log("Is emergency:", isEmergency); // Add this line
     };
     const setSelectedDayIndex = (index: any) => {
         setSelectedFechaIndex(index);
         let selectedDay: string[] = fechas[index];
         setSelectedDay(selectedDay);
+        setSelectedHourIndex(hour);
     };
     const [name, setName] = React.useState("");
     const [adress, setAdress] = useState("");
@@ -193,21 +200,14 @@ export default function ServiceWindow({
                                 width: "100%",
                             }}
                         >
-                            <Typography
-                                variant="h6"
-                                gutterBottom
-                                sx={{
-                                    alignSelf: "self-start",
-                                }}
-                            >
-                                {selectedService?.title}
-                            </Typography>
                             <Typography variant="body1">
                                 {selectedService?.description}
                             </Typography>
                         </CardContent>
                     </Card>
-                    <Typography variant="h6">Caso (Opcional)</Typography>
+                    <Typography variant="body1" sx={{ paddingY: 1 }}>
+                        Caso (Opcional)
+                    </Typography>
                     <Stack spacing={0.5} direction="column">
                         <Grid container spacing={0.5}>
                             {servicesToShow?.map((service: any, index: any) => (
@@ -1410,7 +1410,7 @@ export default function ServiceWindow({
                             <Typography variant="h5" fontWeight={"bold"}>
                                 ¡Servicio en camino!
                             </Typography>
-                            <Typography variant="h6" >
+                            <Typography variant="h6">
                                 Detalles, enviados a tu número de WhatsApp
                             </Typography>
                             <Typography variant="caption" fontWeight={"bold"}>

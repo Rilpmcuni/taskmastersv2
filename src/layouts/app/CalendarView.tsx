@@ -87,7 +87,7 @@ export default function CalendarView({
         }
     };
     return (
-        <main>
+        <>
             <Stack
                 width={"100%"}
                 // direction={"row"}
@@ -222,7 +222,7 @@ export default function CalendarView({
                         ))
                 )}
             </Stack>
-        </main>
+        </>
     );
 }
 //

@@ -49,9 +49,11 @@ const MenuProps = {
 };
 
 const names = [
-    "Gasfitería",
-    "Electricista",
-    "Instalaciones",
+    "Gásfiter",
+    "Electricísta",
+    "Reparaciones",
+    "Remodelación",
+    "Instalación",
     "Mantención/reparacion Artefactos",
     "Pintor",
     "Carpintero",
@@ -71,14 +73,6 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 // chip
 
 export default function PerfilConfig({ session }: { session: any }) {
-    const [state, setState] = useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
-    });
-
-    const { gilad, jason, antoine } = state;
-    const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
     // chip
     const theme = useTheme();
     const [personName, setPersonName] = useState<string[]>([]);
@@ -103,6 +97,8 @@ export default function PerfilConfig({ session }: { session: any }) {
     const [avatar_url, setAvatarUrl] = useState(null);
     const [rut, setRut] = useState<string | null>(null);
     const [cellPhone, setCellPhone] = useState<string | null>(null);
+    const [banco, setBanco] = useState<string | null>(null);
+    const [tipoCuenta, setTipoCuenta] = useState<string | null>(null);
     const user = session?.user;
 
     const getProfile = useCallback(async () => {
@@ -112,8 +108,8 @@ export default function PerfilConfig({ session }: { session: any }) {
             const { data, error, status } = await supabase
                 .from("profiles")
                 .select(
-                    `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone`
-                ) // Agrega "cellPhone" aquí
+                    `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, banco, tipoCuenta` // Add "banco" and "tipoCuenta" here
+                )
                 .eq("id", user?.id)
                 .single();
 
@@ -129,11 +125,11 @@ export default function PerfilConfig({ session }: { session: any }) {
                 setPersonName(data.ability);
                 setSchedule(data.schedule);
                 setRut(data.rut);
-                setCellPhone(data.cellPhone); // Añade esta línea
+                setCellPhone(data.cellPhone);
+                setBanco(data.banco); // Add this line
+                setTipoCuenta(data.tipoCuenta); // Add this line
             }
         } catch (error) {
-            // alert("Error loading user data!");
-            // setLastName("Error");
             console.log("error traer datos");
         } finally {
             setLoading(false);
@@ -150,14 +146,16 @@ export default function PerfilConfig({ session }: { session: any }) {
         avatar_url,
         schedule,
         rut,
-        cellPhone, // Añade esta línea
+        cellPhone,
+        banco, // Add this line
+        tipoCuenta, // Add this line
     }: UpdateProfileProps & {
         schedule: any;
         rut: string | null;
         cellPhone: string | null;
+        banco: string | null; // Add this line
+        tipoCuenta: string | null; // Add this line
     }) {
-        // Añade "cellPhone" aquí
-        // ...
         const { error } = await supabase.from("profiles").upsert({
             id: user?.id,
             full_name: fullname,
@@ -166,10 +164,11 @@ export default function PerfilConfig({ session }: { session: any }) {
             avatar_url,
             schedule,
             rut,
-            cellPhone, // Añade esta línea
+            cellPhone,
+            banco, // Add this line
+            tipoCuenta, // Add this line
             updated_at: new Date().toISOString(),
         });
-        // ...
     }
 
     return (
@@ -181,7 +180,7 @@ export default function PerfilConfig({ session }: { session: any }) {
             </Typography> */}
 
             <BasicTabs
-                labels={["Perfil", "Calendario", "Usuario"]}
+                labels={["Perfil", "Calendario", "Facturación"]}
                 contents={[
                     <Stack
                         spacing={2}
@@ -255,23 +254,6 @@ export default function PerfilConfig({ session }: { session: any }) {
                                     onChange={(
                                         e: React.ChangeEvent<HTMLInputElement>
                                     ) => setCellPhone(e.target.value)}
-                                />
-                                <TextFieldRut
-                                    value={rut || ""}
-                                    onChange={(
-                                        e: React.ChangeEvent<HTMLInputElement>
-                                    ) => setRut(e.target.value)}
-                                />
-
-                                <TextField
-                                    sx={{ flexGrow: 1 }}
-                                    fullWidth
-                                    id="outlined-basic"
-                                    label="Correo"
-                                    value={session?.user.email}
-                                    disabled
-                                    helperText="Contáctanos para cambiarlo."
-                                    variant="outlined"
                                 />
                             </Stack>
                         </Stack>
@@ -377,7 +359,81 @@ export default function PerfilConfig({ session }: { session: any }) {
                             setSchedule={setSchedule}
                         />
                     </Stack>,
-                    <span>En construcción</span>,
+                    <Stack width={"100%"} direction={"column"} spacing={1}>
+                        <Typography
+                            variant="h5"
+                            fontWeight={900}
+                            sx={{ flexGrow: 1, width: "100%" }}
+                        >
+                            Información delicada
+                        </Typography>
+                        <Stack width={"100%"} direction={"column"} spacing={1}>
+                            <TextField
+                                sx={{ flexGrow: 1 }}
+                                fullWidth
+                                id="outlined-basic"
+                                label="Correo"
+                                value={session?.user.email}
+                                disabled
+                                helperText="Contáctanos para cambiarlo."
+                                variant="outlined"
+                            />
+                            <TextFieldRut
+                                value={rut || ""}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => setRut(e.target.value)}
+                            />
+                            <FormControl fullWidth>
+                                <InputLabel id="banco-select-label">
+                                    Banco
+                                </InputLabel>
+                                <Select
+                                    labelId="banco-select-label"
+                                    id="banco-select"
+                                    value={banco}
+                                    label="Banco"
+                                    onChange={(e) => setBanco(e.target.value)}
+                                >
+                                    <MenuItem value={"BancoEstado"}>
+                                        BancoEstado
+                                    </MenuItem>
+                                    <MenuItem value={"Banco de Chile"}>
+                                        Banco de Chile
+                                    </MenuItem>
+                                    <MenuItem value={"Santander"}>
+                                        Santander
+                                    </MenuItem>
+                                    <MenuItem value={"Tenpo"}>Tenpo</MenuItem>
+                                </Select>
+                            </FormControl>
+
+                            <FormControl fullWidth>
+                                <InputLabel id="tipo-cuenta-select-label">
+                                    Tipo de Cuenta
+                                </InputLabel>
+                                <Select
+                                    labelId="tipo-cuenta-select-label"
+                                    id="tipo-cuenta-select"
+                                    value={tipoCuenta}
+                                    label="Tipo de Cuenta"
+                                    onChange={(e) =>
+                                        setTipoCuenta(e.target.value)
+                                    }
+                                >
+                                    <MenuItem value={"Cuenta Rut"}>
+                                        Cuenta Rut
+                                    </MenuItem>
+                                    <MenuItem value={"Cuenta Vista"}>
+                                        Cuenta Vista
+                                    </MenuItem>
+                                    <MenuItem value={"Cuenta Corriente"}>
+                                        Cuenta Corriente
+                                    </MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Stack>
+                    </Stack>,
                 ]}
             />
             <SimpleSnackbar
@@ -389,7 +445,9 @@ export default function PerfilConfig({ session }: { session: any }) {
                         avatar_url,
                         schedule,
                         rut,
-                        cellPhone, // Añade esta línea
+                        banco,
+                        tipoCuenta,
+                        cellPhone,
                     })
                 }
                 fullWidth={true}

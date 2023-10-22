@@ -5,6 +5,8 @@ import {
     Grid,
     Typography,
 } from "@mui/material";
+import { Link as LinkMui } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 import SlotCounter from "react-slot-counter";
 export default function HeroCards() {
@@ -39,31 +41,41 @@ export default function HeroCards() {
                     </CardActionArea>
                 </Card>
             </Grid>
-
             <Grid container spacing={0.5}>
                 <Grid item xs={6}>
-                    <Card variant="outlined">
-                        <CardActionArea>
-                            <CardContent
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    textAlign: "center",
-                                }}
-                            >
-                                <SlotCounter
-                                    value="12"
-                                    startValue={"00"}
-                                    // dummyCharacters={"450.000".split("")}
-                                    duration={2}
-                                    charClassName="charMini"
-                                    separatorClassName="sepaMini"
-                                />
-                                <Typography>Solicitudes recibidas</Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                    <LinkMui
+                        component={Link}
+                        href={"/app/metricas/solicitudes"}
+                        sx={{
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
+                        <Card variant="outlined">
+                            <CardActionArea>
+                                <CardContent
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <SlotCounter
+                                        value="12"
+                                        startValue={"00"}
+                                        // dummyCharacters={"450.000".split("")}
+                                        duration={2}
+                                        charClassName="charMini"
+                                        separatorClassName="sepaMini"
+                                    />
+                                    <Typography>
+                                        Solicitudes recibidas
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </LinkMui>
                 </Grid>
                 <Grid item xs={6}>
                     <Card variant="outlined">
