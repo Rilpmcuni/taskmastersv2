@@ -31,7 +31,7 @@ export default function Hero() {
         setShowMore(!showMore); // Cambia el estado cada vez que se hace click
     };
 
-    const servicesToShow = showMore ? ServicesData : ServicesData.slice(0, 4); // Si showMore es true, muestra todos los servicios. Si no, solo muestra los primeros 4.
+    const servicesToShow = showMore ? ServicesData : ServicesData.slice(0, 4); 
 
     let height = "";
 
@@ -166,7 +166,6 @@ export default function Hero() {
                                     backgroundColor: "#fff",
                                 }}
                             >
-                                {selectedProduct}
                                 <Grid container spacing={1}>
                                     {servicesToShow.map(
                                         (service: any, index: any) => (
@@ -187,7 +186,6 @@ export default function Hero() {
                                 </Grid>
                                 <Button onClick={handleShowMore}>
                                     {showMore ? "Mostrar menos" : "Mostrar más"}{" "}
-                                    {/* Cambia el texto del botón dependiendo del estado */}
                                 </Button>
                                 {/* <Collapse
                                     in={selectedProduct !== ""}

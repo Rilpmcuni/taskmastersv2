@@ -55,7 +55,7 @@ export default function Services() {
                         ))}
                     </Grid>
                 </Container>
-                <Collapse
+                {/* <Collapse
                     in={selectedProduct !== ""}
                     sx={{
                         maxWidth: "90%",
@@ -68,7 +68,7 @@ export default function Services() {
                     }}
                 >
                     <ServiceWindow />
-                </Collapse>
+                </Collapse> */}
             </Stack>
         </>
     );

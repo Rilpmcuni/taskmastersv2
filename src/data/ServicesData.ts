@@ -1,69 +1,90 @@
 export const ServicesData = [
     {
         title: "Gásfiter",
-        badge: ["?"],
+
         description:
-            "Soluciones expertas para mantener tu sistema de gas en perfecto funcionamiento.",
+            "Soluciones expertas para mantener tu sistema de tuberías en perfecto funcionamiento.",
         image: "/images/cards/gasfiteriaa.jpg",
 
-        parraph:
-            "Muy pronto, estaré lanzando nuevos proyectos y demostrando mi habilidad para crear experiencias en línea únicas y entretenidas. Además, podrás ver mi capacidad para diseñar y desarrollar aplicaciones empresariales complejas, y cómo las tecnologías como Next.js, Tailwind CSS y Firebase me permiten crear soluciones tecnológicas innovadoras. ¡Manténte atento para descubrir más acerca de mi trabajo y cómo puedo ayudar a llevar tus ideas al siguiente nivel!",
-        links: "/",
+        price: 30000,
+        list: [
+            {
+                title: "Instalación",
+                img: "/images/cards/gasfiteriaa.jpg",
+                price: 12000,
+            },
+            {
+                title: "Destaponamiento",
+                img: "/images/cards/gasfiteriaa.jpg",
+                price: 60000,
+            },
+
+            {
+                title: "Revisión de filtración",
+                img: "/images/cards/gasfiteriaa.jpg",
+                price: 5000,
+            },
+            {
+                title: "Cambio de componentes",
+                img: "/images/cards/gasfiteriaa.jpg",
+                price: 8000,
+            },
+            {
+                title: "Cotización de daños",
+                img: "/images/cards/gasfiteriaa.jpg",
+                price: 4000,
+            },
+            {
+                title: "Suministro de llaves de paso",
+                img: "/images/cards/gasfiteriaa.jpg",
+                price: 45000,
+            },
+        ],
     },
     {
         title: "Electricísta",
-        badge: ["?"],
+
         description:
             "Servicios eléctricos seguros y eficientes para tu tranquilidad.",
         image: "/images/cards/electrico.jpg",
 
-        parraph:
-            "Muy pronto, estaré lanzando nuevos proyectos y demostrando mi habilidad para crear experiencias en línea únicas y entretenidas. Además, podrás ver mi capacidad para diseñar y desarrollar aplicaciones empresariales complejas, y cómo las tecnologías como Next.js, Tailwind CSS y Firebase me permiten crear soluciones tecnológicas innovadoras. ¡Manténte atento para descubrir más acerca de mi trabajo y cómo puedo ayudar a llevar tus ideas al siguiente nivel!",
-        links: "/",
+        price: 25000,
     },
     {
         title: "Reparaciones",
-        badge: ["?"],
+
         description:
             "Soluciones rápidas y confiables para cualquier problema en tu hogar.",
         image: "/images/cards/reparacion.jpg",
 
-        parraph:
-            "Muy pronto, estaré lanzando nuevos proyectos y demostrando mi habilidad para crear experiencias en línea únicas y entretenidas. Además, podrás ver mi capacidad para diseñar y desarrollar aplicaciones empresariales complejas, y cómo las tecnologías como Next.js, Tailwind CSS y Firebase me permiten crear soluciones tecnológicas innovadoras. ¡Manténte atento para descubrir más acerca de mi trabajo y cómo puedo ayudar a llevar tus ideas al siguiente nivel!",
-        links: "/",
+        price: 15000,
     },
     {
         title: "Pintor",
-        badge: ["?"],
+
         description:
             "Resuelve cualquier problema de fontanería con la ayuda de nuestros expertos.",
         image: "/images/cards/pintor.jpg",
 
-        parraph:
-            "Muy pronto, estaré lanzando nuevos proyectos y demostrando mi habilidad para crear experiencias en línea únicas y entretenidas. Además, podrás ver mi capacidad para diseñar y desarrollar aplicaciones empresariales complejas, y cómo las tecnologías como Next.js, Tailwind CSS y Firebase me permiten crear soluciones tecnológicas innovadoras. ¡Manténte atento para descubrir más acerca de mi trabajo y cómo puedo ayudar a llevar tus ideas al siguiente nivel!",
-        links: "/",
+        price: 60000,
     },
     {
         title: "Instalaciones",
-        badge: ["?"],
+
         description:
             "Deja que nuestros profesionales mantengan tu hogar limpio y reluciente.",
         image: "/images/cards/instalador.jpg",
 
-        parraph:
-            "Muy pronto, estaré lanzando nuevos proyectos y demostrando mi habilidad para crear experiencias en línea únicas y entretenidas. Además, podrás ver mi capacidad para diseñar y desarrollar aplicaciones empresariales complejas, y cómo las tecnologías como Next.js, Tailwind CSS y Firebase me permiten crear soluciones tecnológicas innovadoras. ¡Manténte atento para descubrir más acerca de mi trabajo y cómo puedo ayudar a llevar tus ideas al siguiente nivel!",
-        links: "/",
+        price: 18000,
     },
 
     {
         title: "Remodelación",
-        badge: ["?"],
+
         description:
             "Transforma tu hogar en un espacio que refleje tu estilo y necesidades.",
         image: "/images/cards/reparacion.jpg",
 
-        parraph:
-            "Muy pronto, estaré lanzando nuevos proyectos y demostrando mi habilidad para crear experiencias en línea únicas y entretenidas. Además, podrás ver mi capacidad para diseñar y desarrollar aplicaciones empresariales complejas, y cómo las tecnologías como Next.js, Tailwind CSS y Firebase me permiten crear soluciones tecnológicas innovadoras. ¡Manténte atento para descubrir más acerca de mi trabajo y cómo puedo ayudar a llevar tus ideas al siguiente nivel!",
-        links: "/",
+        price: 25000,
     },
 ];
