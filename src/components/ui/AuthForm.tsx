@@ -12,7 +12,7 @@ export default function AuthForm() {
     return (
         <>
             <Auth
-            view="sign_in"
+                view="sign_in"
                 localization={{
                     variables: esES,
                 }}
@@ -59,7 +59,7 @@ export default function AuthForm() {
                 theme="light"
                 providers={[]}
                 socialLayout="horizontal"
-                showLinks
+                showLinks={false}
                 redirectTo="https://localhost:3000/Auth/Callback"
             />
             {/* <Auth

@@ -51,9 +51,6 @@ const MenuProps = {
     },
 };
 
-
-
-
 // chip
 
 export default function FichaView({ session }: { session: any }) {
@@ -67,8 +64,6 @@ export default function FichaView({ session }: { session: any }) {
     const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
     // chip
     const [personName, setPersonName] = useState<string[]>([]);
-
-
 
     // supabase
     const supabase = createClientComponentClient();
@@ -139,8 +134,20 @@ export default function FichaView({ session }: { session: any }) {
                                 direction={"column"}
                                 alignItems={"center"}
                                 spacing={1}
+                                sx={{
+                                    position: "relative",
+                                }}
                             >
                                 <AvatarUser size={200} />
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        top: 0,
+                                        right: 0,
+                                    }}
+                                >
+                                    <Button variant="text">Compartir</Button>
+                                </Box>
                                 <Stack
                                     width={"100%"}
                                     direction={"column"}
