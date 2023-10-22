@@ -25,7 +25,7 @@ export default function Home() {
         <main>
             <Link href="/app">App</Link>
             <Link href="/">Incio</Link>
-            <AccountForm session={sessionData} />
+            {sessionData?.user.id}
         </main>
     );
 }

@@ -26,28 +26,39 @@ const Transition = React.forwardRef(function Transition(
 
 export default function FullScreenDialog({
     selectedProduct,
+    open,
+    onClose,
 }: {
     selectedProduct: any;
+    open: boolean;
+    onClose?: () => void;
 }) {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const [localOpen, setLocalOpen] = React.useState(false);
 
     const handleClose = () => {
-        setOpen(false);
+        setLocalOpen(false);
     };
+
+    React.useEffect(() => {
+        if (onClose) {
+            setLocalOpen(open);
+        }
+    }, [open, onClose]);
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button
+                variant="outlined"
+                sx={{
+                    display: "none",
+                }}
+            >
                 Open full-screen dialog
             </Button>
             <Dialog
                 fullScreen
-                open={open}
-                onClose={handleClose}
+                open={onClose ? open : localOpen}
+                onClose={onClose || handleClose}
                 TransitionComponent={Transition}
             >
                 <AppBar
@@ -62,7 +73,7 @@ export default function FullScreenDialog({
                         <IconButton
                             edge="start"
                             color="inherit"
-                            onClick={handleClose}
+                            onClick={onClose || handleClose}
                             aria-label="close"
                         >
                             <CloseIcon />
@@ -79,9 +90,11 @@ export default function FullScreenDialog({
                         </Button> */}
                     </Toolbar>
                 </AppBar>
-                <Box sx={{
-                    height:"100%"
-                }}>
+                <Box
+                    sx={{
+                        height: "100%",
+                    }}
+                >
                     <ServiceWindow selectedProduct={selectedProduct} />
                 </Box>
             </Dialog>

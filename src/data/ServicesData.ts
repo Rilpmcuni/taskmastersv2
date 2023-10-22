@@ -14,7 +14,7 @@ export const ServicesData = [
                 price: 12000,
             },
             {
-                title: "Destaponamiento",
+                title: "Destapo- namiento",
                 img: "/images/cards/gasfiteriaa.jpg",
                 price: 60000,
             },

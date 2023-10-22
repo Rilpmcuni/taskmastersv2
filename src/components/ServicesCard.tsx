@@ -21,7 +21,7 @@ const ServicesCardV2: React.FC<Props> = ({
 }) => {
     return (
         <>
-            <Grid item xs={6} sm={2}>
+            <Grid item xs={6} sm={3} md={3}>
                 <Card
                     variant="outlined"
                     sx={{

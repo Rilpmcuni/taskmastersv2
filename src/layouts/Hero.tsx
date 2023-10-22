@@ -31,7 +31,7 @@ export default function Hero() {
         setShowMore(!showMore); // Cambia el estado cada vez que se hace click
     };
 
-    const servicesToShow = showMore ? ServicesData : ServicesData.slice(0, 4); 
+    const servicesToShow = showMore ? ServicesData : ServicesData.slice(0, 4);
 
     let height = "";
 
@@ -48,6 +48,11 @@ export default function Hero() {
             height = "1040px";
         }
     }
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const handleDialogOpen = (product: SetStateAction<string>) => {
+        setSelectedProduct(product);
+        setDialogOpen(true);
+    };
     return (
         <>
             <Box
@@ -144,12 +149,16 @@ export default function Hero() {
                                 gap: 1,
                                 borderRadius: "1rem",
                                 padding: "0.5rem",
+                                width: { xs: "auto", md: "70%" },
                             }}
                         >
                             <Box
                                 sx={{
                                     display: "flex",
-                                    flexDirection: { xs: "column", md: "row" },
+                                    flexDirection: {
+                                        xs: "column",
+                                        md: "column",
+                                    },
                                     gap: 1,
                                     borderRadius: "1rem",
                                     padding: "0.5rem",
@@ -166,14 +175,14 @@ export default function Hero() {
                                     backgroundColor: "#fff",
                                 }}
                             >
-                                <Grid container spacing={1}>
+                                <Grid container spacing={0.5}>
                                     {servicesToShow.map(
                                         (service: any, index: any) => (
                                             <ServicesCard
                                                 key={index}
                                                 service={service}
                                                 handleCardClick={() =>
-                                                    handleCardClick(
+                                                    handleDialogOpen(
                                                         service.title
                                                     )
                                                 }
@@ -185,7 +194,7 @@ export default function Hero() {
                                     )}
                                 </Grid>
                                 <Button onClick={handleShowMore}>
-                                    {showMore ? "Mostrar menos" : "Mostrar más"}{" "}
+                                    {showMore ? "Mostrar menos" : "Mostrar más"}
                                 </Button>
                                 {/* <Collapse
                                     in={selectedProduct !== ""}
@@ -201,7 +210,11 @@ export default function Hero() {
                                 >
                                     <ServiceWindow />
                                 </Collapse> */}
-                                <FullScreenDialog selectedProduct={selectedProduct} />
+                                <FullScreenDialog
+                                    selectedProduct={selectedProduct}
+                                    open={dialogOpen}
+                                    onClose={() => setDialogOpen(false)}
+                                />
                             </Box>
                             <Button
                                 size="small"

@@ -84,7 +84,7 @@ export default function Header() {
             </Stack>
             <Stack direction={"row"} spacing={1}>
                 <Button
-                    href={`ee525676-462b-4186-b46b-9655fd859e75`}
+                    href={`/pagar`}
                     variant="contained"
                     size="medium"
                     sx={{
