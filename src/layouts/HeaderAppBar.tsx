@@ -75,49 +75,36 @@ export default function HeaderAppBar({
 
     const items = [
         {
-            text: "Laboratorio",
+            text: "Métricas",
             icon: <SpaceDashboardTwoToneIcon />,
             subItems: [],
         },
         {
-            text: "Carpeta",
+            text: "Ficha",
             icon: <FolderTwoToneIcon />,
-            subItems: [
-                {
-                    text: "Carpeta",
-                    icon: <MailIcon />,
-                },
-                {
-                    text: "Informes",
-                    icon: <MailIcon />,
-                },
-            ],
+            subItems: [],
         },
         {
-            text: "Ensayos",
+            text: "Cobro",
             icon: <ScienceTwoToneIcon />,
             subItems: [
                 {
-                    text: "Ensayos",
+                    text: "Retirar",
                     icon: <ScienceTwoToneIcon />,
                 },
                 {
-                    text: "Granulometría",
-                    icon: <ScienceTwoToneIcon />,
-                },
-                {
-                    text: "Hormigón",
+                    text: "Cobrar",
                     icon: <ScienceTwoToneIcon />,
                 },
             ],
         },
         {
-            text: "Manuales",
+            text: "Configuración",
             icon: <FeedTwoToneIcon />,
             subItems: [],
         },
         {
-            text: "Cursos",
+            text: "Cambios",
             icon: <SchoolTwoToneIcon />,
             subItems: [],
         },

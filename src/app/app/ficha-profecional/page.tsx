@@ -23,22 +23,24 @@ import ChangeCalendar from "@/components/function/ChangeCalendar";
 import FichaView from "@/layouts/app/FichaView";
 // chip
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useSession } from "@/contexts/SessionContext";
 interface Session {
     user: any;
 }
 export default function Home() {
     const supabase = createClientComponentClient();
+    const { sessionData, metrics, profile } = useSession();
 
-    const [sessionData, setSessionData] = useState<Session | null>(null);
-    useEffect(() => {
-        getSessionData();
-    }, []);
-    async function getSessionData() {
-        const {
-            data: { session },
-        } = await supabase.auth.getSession();
-        setSessionData(session);
-    }
+    // const [sessionData, setSessionData] = useState<Session | null>(null);
+    // useEffect(() => {
+    //     getSessionData();
+    // }, []);
+    // async function getSessionData() {
+    //     const {
+    //         data: { session },
+    //     } = await supabase.auth.getSession();
+    //     setSessionData(session);
+    // }
     return (
         <main>
             <Box

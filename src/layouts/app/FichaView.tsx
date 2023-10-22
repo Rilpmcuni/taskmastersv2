@@ -51,25 +51,8 @@ const MenuProps = {
     },
 };
 
-const names = [
-    "Gasfitería",
-    "Electricista",
-    "Instalaciones",
-    "Mantención/reparacion Artefactos",
-    "Pintor",
-    "Carpintero",
-    "Cerrajería",
-    "Vidriero",
-];
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-}
+
 
 // chip
 
@@ -83,18 +66,9 @@ export default function FichaView({ session }: { session: any }) {
     const { gilad, jason, antoine } = state;
     const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
     // chip
-    const theme = useTheme();
     const [personName, setPersonName] = useState<string[]>([]);
 
-    const handleChangeChip = (event: SelectChangeEvent<typeof personName>) => {
-        const {
-            target: { value },
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === "string" ? value.split(",") : value
-        );
-    };
+
 
     // supabase
     const supabase = createClientComponentClient();

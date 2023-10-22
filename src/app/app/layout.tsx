@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Ubicacion from "@/components/function/Ubicacion";
 import BottonNavigation from "@/components/function/BottonNavigation";
 import HeaderAppBar from "@/layouts/HeaderAppBar";
+import SessionProvider from "@/contexts/SessionContext";
 
 export const metadata: Metadata = {
     title: `App | Reviasa`,
@@ -22,28 +23,30 @@ export default function RootEmpleo({
 }) {
     return (
         <>
-            <HeaderAppBar>
-                <BottonNavigation>
-                    <div
-                        style={{
-                            borderRadius: "1.5rem",
-                            // border: "solid 1px black",
-                            position: "fixed",
-                            top: 56,
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            height: "100vh",
-                            width: "100%",
-                            boxShadow: "0px 0px 0px 15px #fff",
-                            zIndex: 40,
-                            pointerEvents: "none",
-                        }}
-                    ></div>
-                    {children}
-                </BottonNavigation>
-            </HeaderAppBar>
+            <SessionProvider>
+                <HeaderAppBar>
+                    <BottonNavigation>
+                        <div
+                            style={{
+                                borderRadius: "1.5rem",
+                                // border: "solid 1px black",
+                                position: "fixed",
+                                top: 56,
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                height: "100vh",
+                                width: "100%",
+                                boxShadow: "0px 0px 0px 15px #fff",
+                                zIndex: 40,
+                                pointerEvents: "none",
+                            }}
+                        ></div>
+                        {children}
+                    </BottonNavigation>
+                </HeaderAppBar>
+            </SessionProvider>
         </>
     );
 }

@@ -23,8 +23,7 @@ export default function Home() {
 
     return (
         <main>
-            <Link href="/app">App</Link>
-            <Link href="/">Incio</Link>
+            sección en dasarrollo
             {sessionData?.user.id}
         </main>
     );
