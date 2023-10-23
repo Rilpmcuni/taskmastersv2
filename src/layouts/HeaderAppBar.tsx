@@ -523,7 +523,6 @@ export default function HeaderAppBar({
                             }}
                         >
                             <MenuItem
-                                dense
                                 onClick={() => {
                                     handleClose();
                                 }}
@@ -537,7 +536,6 @@ export default function HeaderAppBar({
                             </MenuItem>
                             <Divider variant="middle" />
                             <MenuItem
-                                dense
                                 onClick={handleClose}
                                 component={Link}
                                 href="/Auth/Signout"

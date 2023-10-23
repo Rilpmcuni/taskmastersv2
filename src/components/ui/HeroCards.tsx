@@ -1,3 +1,4 @@
+import { useSession } from "@/contexts/SessionContext";
 import {
     Card,
     CardActionArea,
@@ -10,6 +11,30 @@ import Link from "next/link";
 import React from "react";
 import SlotCounter from "react-slot-counter";
 export default function HeroCards() {
+    const { sessionData, metrics, profile } = useSession();
+
+    const sortedMetrics = metrics ? [...metrics] : [];
+
+    sortedMetrics.sort((a, b) => {
+        // Convertir selectedDay[1] a número
+        const dayA = parseInt(a.selectedDay[1], 10);
+        const dayB = parseInt(b.selectedDay[1], 10);
+
+        // Comparar selectedDay[1]
+        if (dayA < dayB) return -1;
+        if (dayA > dayB) return 1;
+
+        // Si selectedDay[1] es igual, comparar hour
+        if (a.hour < b.hour) return -1;
+        if (a.hour > b.hour) return 1;
+
+        return 0; // Si son iguales
+    });
+
+    const filteredData = sortedMetrics.filter((metric) =>
+        profile?.ability.includes(metric.selectedService)
+    );
+
     return (
         <>
             <Grid item xs={12}>
@@ -62,9 +87,8 @@ export default function HeroCards() {
                                     }}
                                 >
                                     <SlotCounter
-                                        value="12"
-                                        startValue={"00"}
-                                        // dummyCharacters={"450.000".split("")}
+                                        value={filteredData.length}
+                                        startValue={"0"}
                                         duration={2}
                                         charClassName="charMini"
                                         separatorClassName="sepaMini"
@@ -90,13 +114,12 @@ export default function HeroCards() {
                             >
                                 <SlotCounter
                                     value="43"
-                                    startValue={"00"}
-                                    // dummyCharacters={"450.000".split("")}
+                                    startValue={"0"}
                                     duration={3}
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
                                 />
-                                <Typography>Personas contactadas</Typography>
+                                <Typography>Trabajos activos</Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>

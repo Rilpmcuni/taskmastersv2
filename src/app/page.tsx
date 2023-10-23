@@ -20,7 +20,7 @@ export default function Home() {
                     borderRadius: "1.5rem",
                     // border: "solid 1px black",
                     position: "fixed",
-                    top: 63,
+                    top: 55,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",

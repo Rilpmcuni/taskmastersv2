@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, SetStateAction } from "react";
 
 import Link from "next/link";
 
@@ -21,6 +21,7 @@ import {
     Typography,
 } from "@mui/material";
 import { useSession } from "@/contexts/SessionContext";
+import FullScreenSolic from "@/feedback/FullScreenSolic";
 type Metric = {
     name: any;
     cellPhone: any;
@@ -40,17 +41,20 @@ interface Session {
     user: any;
 }
 export default function Home() {
+    const [selectedSolic, setSelectedSolic] = useState("");
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const handleDialogOpen = (product: SetStateAction<string>) => {
+        setSelectedSolic(product);
+        setDialogOpen(true);
+    };
+    const handleCardClick = (product: SetStateAction<string>) => {
+        setSelectedSolic(product);
+    };
     const { sessionData, metrics, profile } = useSession();
 
     const [loading, setLoading] = useState(false);
-    console.log(profile?.ability);
-    console.log(profile?.ability);
-    console.log(profile?.ability);
-    const sortedMetrics = metrics ? [...metrics] : [];
 
-    const filteredData = sortedMetrics.filter((metric) =>
-        profile?.ability.includes(metric.selectedService)
-    );
+    const sortedMetrics = metrics ? [...metrics] : [];
 
     sortedMetrics.sort((a, b) => {
         // Convertir selectedDay[1] a número
@@ -67,7 +71,9 @@ export default function Home() {
 
         return 0; // Si son iguales
     });
-
+    const filteredData = sortedMetrics.filter((metric) =>
+        profile?.ability.includes(metric.selectedService)
+    );
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -77,7 +83,7 @@ export default function Home() {
             <Stack
                 width={"100%"}
                 display="flex"
-                flexDirection={"row"}
+                flexDirection={"column"}
                 flexWrap={"wrap"}
                 spacing={1}
             >
@@ -87,6 +93,10 @@ export default function Home() {
                 <Typography variant="h5" padding={1}>
                     Solicitudes seleccionadas según tu perfil profesional
                 </Typography>
+                <Typography variant="body2" padding={1}>
+                    Total: {filteredData.length}
+                </Typography>
+                {/* {selectedSolic} */}
                 {filteredData.map((metric, index) => (
                     <Card key={index} variant="outlined" sx={{ flexGrow: 1 }}>
                         <CardContent>
@@ -237,7 +247,22 @@ export default function Home() {
                                             variant="outlined"
                                         />
                                     )}
-                                    <Button variant="contained">Aceptar</Button>
+                                    <Button
+                                        onClick={() =>
+                                            handleDialogOpen(
+                                                metric.selectedService
+                                            )
+                                        }
+                                        variant="contained"
+                                    >
+                                        Ver detalles
+                                    </Button>
+                                    <FullScreenSolic
+                                        metric={metric}
+                                        selectedProduct={selectedSolic}
+                                        open={dialogOpen}
+                                        onClose={() => setDialogOpen(false)}
+                                    />
                                 </Box>
                                 {/* Renderiza los demás campos de la misma manera */}
                             </Stack>

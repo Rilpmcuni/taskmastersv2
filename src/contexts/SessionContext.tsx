@@ -28,6 +28,7 @@ type Profile = {
     schedule: any;
     rut: any;
     cellPhone: any;
+    updated_at: any;
 };
 // Crear el contexto
 const SessionContext = createContext<
@@ -87,7 +88,7 @@ export default function SessionProvider({ children }: { children: any }) {
         const { data, error, status } = await supabase
             .from("profiles")
             .select(
-                `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone`
+                `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, updated_at`
             ) // Agrega "cellPhone" aquí
             .eq("id", sessionData?.user?.id)
             .single();

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Logosvg from "@/../public/images/LOGO.svg";
-import { Link as LinkMui } from "@mui/material";
+import { CardActionArea, Link as LinkMui } from "@mui/material";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
@@ -19,11 +19,12 @@ export default function Logo() {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                gap: 1,
+                gap: 0.5,
+                userSelect: "none",
             }}
         >
-            <LinkMui
-                component={Link}
+            <CardActionArea
+                LinkComponent={Link}
                 href={"/"}
                 sx={{
                     display: "flex",
@@ -32,13 +33,38 @@ export default function Logo() {
                     justifyContent: "center",
                     color: "inherit",
                     textDecoration: "none",
+                    transition: "all 300ms ease-out",
+                    width: "auto",
+                    margin: "3px",
                     "&:hover": {
                         "& .hoverable": {
                             backgroundPosition: "-40%", // Cambia la posición del fondo al hacer hover
                         },
+                        boxShadow: "0 0 1px 2px #ffd234",
+                        borderRadius: "1rem",
                     },
                 }}
             >
+                {/* <LinkMui
+                    component={Link}
+                    href={"/"}
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "inherit",
+                        textDecoration: "none",
+                        transition: "all 1s ease-out",
+                        "&:hover": {
+                            "& .hoverable": {
+                                backgroundPosition: "-40%", // Cambia la posición del fondo al hacer hover
+                            },
+                            boxShadow: "0 0 1px 2px #ffd234",
+                            borderRadius: "1rem",
+                        },
+                    }}
+                > */}
                 <Image
                     style={{ pointerEvents: "none" }}
                     className=""
@@ -52,6 +78,7 @@ export default function Logo() {
                     variant="h6"
                     noWrap
                     marginBottom={-1}
+                    paddingRight={0.5}
                     component="div"
                     color="grey.700"
                     className="hoverable"
@@ -72,7 +99,8 @@ export default function Logo() {
                 >
                     Reviasa
                 </Typography>
-            </LinkMui>
+                {/* </LinkMui> */}
+            </CardActionArea>
             <ButtonMenu
                 subItem={[
                     {
