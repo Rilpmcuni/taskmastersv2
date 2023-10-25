@@ -479,14 +479,15 @@ export default function HeaderAppBar({
                                 </SwipeableDrawer>
                             </React.Fragment>
                         ))}
-                        <Image
+                        {/* <Image
                             className=""
                             src={Logosvg}
                             alt="Reviasa"
                             width={33}
                             height={33}
                             priority
-                        />
+                        /> */}
+                        <Logo />
                         <Tooltip
                             title="Configurar Perfil"
                             arrow

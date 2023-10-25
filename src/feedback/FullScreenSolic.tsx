@@ -26,27 +26,24 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export default function FullScreenSolic({
-    selectedProduct,
     metric,
     open,
     onClose,
 }: {
-    selectedProduct: any;
     metric: any;
     open: boolean;
     onClose?: () => void;
 }) {
-    const [localOpen, setLocalOpen] = React.useState(false);
-
-    const handleClose = () => {
-        setLocalOpen(false);
-    };
-
-    React.useEffect(() => {
-        if (onClose) {
-            setLocalOpen(open);
-        }
-    }, [open, onClose]);
+    // calc
+    const total = metric.price.reduce(
+        (sum: number, item: { value: number }) => sum + item.value,
+        0
+    );
+    let emergencyFee = 0;
+    if (metric.isEmergency) {
+        emergencyFee = total * 0.25;
+    }
+    const preliminaryCost = total + emergencyFee;
 
     return (
         <div>
@@ -56,45 +53,49 @@ export default function FullScreenSolic({
                     display: "none",
                 }}
             >
-                Open full-screen dialog
+                metric.nam
             </Button>
             <Dialog
                 fullScreen
-                open={onClose ? open : localOpen}
-                onClose={onClose || handleClose}
+                open={open}
+                onClose={onClose}
                 TransitionComponent={Transition}
             >
-                <AppBar
-                    color="secondary"
-                    variant="outlined"
-                    sx={{
-                        border: "none",
-                        position: "relative",
-                        borderBottomLeftRadius: "1rem",
-                        borderBottomRightRadius: "1rem",
-                    }}
+                <Stack
+                    direction={"row"}
+                    spacing={0.5}
+                    paddingLeft={2}
+                    alignItems={"center"}
                 >
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            onClick={onClose || handleClose}
-                            aria-label="close"
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                        <Typography
-                            sx={{ ml: 2, flex: 1 }}
-                            variant="h6"
-                            component="div"
-                        >
-                            Solicitud {selectedProduct}
-                        </Typography>
-                        {/* <Button autoFocus color="inherit" onClick={handleClose}>
-                            save
-                        </Button> */}
-                    </Toolbar>
-                </AppBar>
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        onClick={onClose}
+                        aria-label="close"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                    <Box
+                        // color="secondary"
+                        // variant="outlined"
+                        sx={{
+                            border: "none",
+                            position: "relative",
+                            borderBottomLeftRadius: "1.5rem",
+                            flexGrow: 1,
+                            // width: "100%",
+                            backgroundColor: "secondary.main",
+                        }}
+                    >
+                        <Toolbar>
+                            <Typography variant="h6">
+                                Solicitud {metric.selectedService}{" "}
+                                {metric.selectedDetailService &&
+                                    ` - ${metric.selectedDetailService}`}
+                            </Typography>
+                        </Toolbar>
+                    </Box>
+                </Stack>
                 <Box
                     sx={{
                         height: "100%",
@@ -118,8 +119,49 @@ export default function FullScreenSolic({
                                 width={"100%"}
                                 padding={1}
                             >
-                                <Logo />
-                                {/* <Sello /> */}
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        justifyContent: "space-between",
+                                        width: "100%",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <Logo />
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            width: "100%",
+                                            alignItems: "flex-end",
+                                            justifyContent: "flex-end",
+                                            gap: 0.5,
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            textAlign={"end"}
+                                            fontWeight={"bold"}
+                                        >
+                                            {metric.selectedService}{" "}
+                                            {metric.selectedDetailService &&
+                                                ` - ${metric.selectedDetailService}`}
+                                        </Typography>
+                                        {metric.isEmergency && (
+                                            <Chip
+                                                label="¡Emergencia!"
+                                                color="warning"
+                                                variant="outlined"
+                                                size="medium"
+                                                sx={{
+                                                    fontSize: "large",
+                                                    fontWeight: "bold",
+                                                }}
+                                            />
+                                        )}
+                                    </Box>
+                                </Box>
                                 <Stack
                                     display="flex"
                                     direction={"column"}
@@ -129,104 +171,75 @@ export default function FullScreenSolic({
                                     // padding={1}
                                 >
                                     <Divider variant="fullWidth" />
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "row",
-
-                                            justifyContent: "space-between",
-                                            width: "100%",
-                                        }}
-                                    >
-                                        <Chip
-                                            label="Desde"
-                                            color="info"
-                                            variant="outlined"
-                                        />
-                                        <Typography
-                                            textAlign={"end"}
-                                            variant="caption"
-                                            sx={{
-                                                color: "info.main",
-                                            }}
-                                        >
-                                            {/* {selectedService &&
-                                                selectedService.price.toLocaleString(
-                                                    "es-CL",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "CLP",
-                                                    }
-                                                )} */}
-                                        </Typography>
-                                    </Box>
-                                    {/* {selectedDetailService !== "" && (
-                                        <Box
-                                            sx={{
-                                                display: "flex",
-                                                flexDirection: "row",
-
-                                                justifyContent: "space-between",
-                                                width: "100%",
-                                            }}
-                                        >
-                                            <Chip
-                                                label={`Caso (${selectedDetailService})`}
-                                                color="info"
-                                                variant="outlined"
-                                            />
-                                            <Typography
-                                                textAlign={"end"}
-                                                variant="caption"
+                                    {metric.price.map(
+                                        (item: any, index: number) => (
+                                            <Box
+                                                key={index}
                                                 sx={{
-                                                    color: "info.main",
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    justifyContent:
+                                                        "space-between",
+                                                    width: "100%",
                                                 }}
                                             >
-                                                {selectedService &&
-                                                    (
-                                                        selectedService?.list?.find(
-                                                            (service) =>
-                                                                service.title ===
-                                                                selectedDetailService
-                                                        )?.price || 0
-                                                    ).toLocaleString("es-CL", {
-                                                        style: "currency",
-                                                        currency: "CLP",
-                                                    })}
-                                            </Typography>
-                                        </Box>
-                                    )} */}
-                                    {/* {metric.isEmergency && selectedService && ( */}
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            justifyContent: "space-between",
-                                            width: "100%",
-                                        }}
-                                    >
-                                        <Chip
-                                            label="Emergencias 25% extra"
-                                            color="warning"
-                                            variant="outlined"
-                                        />
-                                        <Typography
-                                            textAlign={"end"}
-                                            variant="caption"
-                                            sx={{
-                                                color: "warning.main",
-                                            }}
-                                        >
-                                            {metric.price.toLocaleString(
-                                                "es-CL",
-                                                {
-                                                    style: "currency",
-                                                    currency: "CLP",
-                                                }
-                                            )}
-                                        </Typography>
-                                    </Box>
-                                    {/*  )}*/}
+                                                <Chip
+                                                    label={item.label}
+                                                    color="info"
+                                                    variant="outlined"
+                                                />
+                                                <Typography
+                                                    textAlign={"end"}
+                                                    variant="caption"
+                                                    sx={{
+                                                        color: "info.main",
+                                                    }}
+                                                >
+                                                    {item.value.toLocaleString(
+                                                        "es-CL",
+                                                        {
+                                                            style: "currency",
+                                                            currency: "CLP",
+                                                        }
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        )
+                                    )}
+                                    {metric.isEmergency && (
+                                        <>
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    justifyContent:
+                                                        "space-between",
+                                                    width: "100%",
+                                                }}
+                                            >
+                                                <Chip
+                                                    label="Emergencias 25% extra"
+                                                    color="success"
+                                                    variant="outlined"
+                                                />
+                                                <Typography
+                                                    textAlign={"end"}
+                                                    variant="caption"
+                                                    sx={{
+                                                        color: "success.main",
+                                                    }}
+                                                >
+                                                    {emergencyFee.toLocaleString(
+                                                        "es-CL",
+                                                        {
+                                                            style: "currency",
+                                                            currency: "CLP",
+                                                        }
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        </>
+                                    )}
                                     <Box
                                         sx={{
                                             display: "flex",
@@ -237,7 +250,7 @@ export default function FullScreenSolic({
                                         }}
                                     >
                                         <Chip
-                                            label="Coste Preliminar"
+                                            label="Ganancia mínima estimada"
                                             color="success"
                                             variant="outlined"
                                             size="medium"
@@ -254,7 +267,7 @@ export default function FullScreenSolic({
                                                 color: "success.main",
                                             }}
                                         >
-                                            {metric.price.toLocaleString(
+                                            {preliminaryCost.toLocaleString(
                                                 "es-CL",
                                                 {
                                                     style: "currency",
@@ -273,42 +286,57 @@ export default function FullScreenSolic({
                                         <Typography variant="body1">
                                             Servicio:
                                         </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            gutterBottom
-                                        >
+
+                                        <Typography variant="body1">
                                             {metric.selectedService}
                                         </Typography>
                                     </Box>
-                                    {/* {selectedDetailService !== "" && (
-                                        <Box
-                                            sx={{
-                                                display: "flex",
-                                                justifyContent: "space-between",
-                                                gap: 1,
-                                            }}
-                                        >
-                                            <Typography variant="body1">
-                                                Caso:
-                                            </Typography>
-                                            <Typography
-                                                variant="body1"
-                                                gutterBottom
-                                            >
-                                                {selectedDetailService}
-                                            </Typography>
-                                        </Box>
-                                    )} */}
-                                    <Divider variant="middle" />
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            gap: 1,
+                                        }}
+                                    >
+                                        <Typography variant="body1">
+                                            Descripción de servicio:
+                                        </Typography>
+                                        <Typography variant="body1">
+                                            {metric.description
+                                                ? metric.description
+                                                : "No hay descripción"}
+                                        </Typography>
+                                    </Box>
+
+                                    <Divider
+                                        variant="middle"
+                                        sx={{
+                                            paddingY: 0.5,
+                                        }}
+                                    />
                                 </Stack>
                                 <Stack
                                     width={"100%"}
                                     direction={"column"}
                                     spacing={0.5}
                                 >
-                                    <Typography variant="h6" gutterBottom>
-                                        Persona
-                                    </Typography>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            gap: 1,
+                                        }}
+                                    >
+                                        <Typography variant="h6" gutterBottom>
+                                            Persona
+                                        </Typography>
+                                        <Typography
+                                            variant="caption"
+                                            color="CaptionText"
+                                        >
+                                            Datos ocultos por seguridad
+                                        </Typography>
+                                    </Box>
                                     <Box
                                         sx={{
                                             display: "flex",
@@ -320,10 +348,11 @@ export default function FullScreenSolic({
                                             Nombre y apellido:
                                         </Typography>
                                         <Typography
-                                            variant="body1"
-                                            gutterBottom
+                                            variant="caption"
+                                            color="CaptionText"
                                         >
-                                            {metric.name}
+                                            {/* {metric.name} */}
+                                            ### ####
                                         </Typography>
                                     </Box>
                                     <Box
@@ -336,8 +365,12 @@ export default function FullScreenSolic({
                                         <Typography variant="body1">
                                             Número de contacto:
                                         </Typography>
-                                        <Typography variant="body1">
-                                            +56 {metric.cellPhone}
+                                        <Typography
+                                            variant="caption"
+                                            color="CaptionText"
+                                        >
+                                            {/* +56 {metric.cellPhone} */}
+                                            +56 9 #### ####
                                         </Typography>
                                     </Box>
                                     <Box
@@ -351,13 +384,19 @@ export default function FullScreenSolic({
                                             Rut:
                                         </Typography>
                                         <Typography
-                                            variant="body1"
-                                            gutterBottom
+                                            variant="caption"
+                                            color="CaptionText"
                                         >
-                                            {metric.rut}
+                                            {/* {metric.rut} */}
+                                            ###.####.####-#
                                         </Typography>
                                     </Box>
-                                    <Divider variant="middle" />
+                                    <Divider
+                                        variant="middle"
+                                        sx={{
+                                            paddingY: 0.5,
+                                        }}
+                                    />
                                     <Typography variant="h6" gutterBottom>
                                         Horario
                                     </Typography>
@@ -454,7 +493,12 @@ export default function FullScreenSolic({
                                             </Box>
                                         </Box>
                                     </Box>
-                                    <Divider variant="middle" />
+                                    <Divider
+                                        variant="middle"
+                                        sx={{
+                                            paddingY: 0.5,
+                                        }}
+                                    />
                                     <Typography variant="h6" gutterBottom>
                                         Dirección
                                     </Typography>
@@ -468,10 +512,7 @@ export default function FullScreenSolic({
                                         <Typography variant="body1">
                                             Ciudad:
                                         </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            gutterBottom
-                                        >
+                                        <Typography variant="body1">
                                             Antofagasta
                                         </Typography>
                                     </Box>
@@ -485,10 +526,7 @@ export default function FullScreenSolic({
                                         <Typography variant="body1">
                                             Calle:
                                         </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            gutterBottom
-                                        >
+                                        <Typography variant="body1">
                                             {metric.adress}
                                         </Typography>
                                     </Box>
@@ -503,10 +541,11 @@ export default function FullScreenSolic({
                                             N°:
                                         </Typography>
                                         <Typography
-                                            variant="body1"
-                                            gutterBottom
+                                            variant="caption"
+                                            color="CaptionText"
                                         >
-                                            {metric.number}
+                                            {/* {metric.number} */}
+                                            ###
                                         </Typography>
                                     </Box>
                                     <Box
@@ -519,28 +558,8 @@ export default function FullScreenSolic({
                                         <Typography variant="body1">
                                             Propiedad:
                                         </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            gutterBottom
-                                        >
-                                            {metric.propiedad}
-                                        </Typography>
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            gap: 1,
-                                        }}
-                                    >
                                         <Typography variant="body1">
-                                            Descripción:
-                                        </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            gutterBottom
-                                        >
-                                            {metric.description}
+                                            {metric.propiedad}
                                         </Typography>
                                     </Box>
                                 </Stack>
@@ -557,10 +576,7 @@ export default function FullScreenSolic({
                                     mt: 1,
                                 }}
                             >
-                                <Button
-                                    variant="outlined"
-                                    onClick={onClose || handleClose}
-                                >
+                                <Button variant="outlined" onClick={onClose}>
                                     Cerrar
                                 </Button>
                                 <Button

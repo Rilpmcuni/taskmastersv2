@@ -42,7 +42,7 @@ export default function TextFieldPhone({
     return (
         <>
             <FormControl variant="outlined" sx={{ flexGrow: 1 }}>
-                <InputLabel htmlFor="formatted-text-mask-input">
+                <InputLabel htmlFor="cellPhone-text-input">
                     Número celular/Whatsapp
                 </InputLabel>
                 <OutlinedInput
@@ -51,7 +51,7 @@ export default function TextFieldPhone({
                     value={value}
                     onChange={onChange}
                     name="textmask"
-                    id="formatted-text-mask-input"
+                    id="cellPhone-text-input"
                     inputComponent={TextMaskCustom as any}
                     startAdornment={
                         <InputAdornment position="start">+56</InputAdornment>

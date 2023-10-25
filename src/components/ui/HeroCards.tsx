@@ -54,7 +54,9 @@ export default function HeroCards() {
                             <Typography>Trabajos finalizados</Typography>
                             <SlotCounter
                                 value="12"
-                                startValue={"0"}
+                                
+                                sequentialAnimationMode
+                                useMonospaceWidth
                                 charClassName="charMd"
                                 separatorClassName="sepaMd"
                             />
@@ -88,7 +90,9 @@ export default function HeroCards() {
                                 >
                                     <SlotCounter
                                         value={filteredData.length}
-                                        startValue={"0"}
+                                        
+                                        sequentialAnimationMode
+                                        useMonospaceWidth
                                         duration={2}
                                         charClassName="charMini"
                                         separatorClassName="sepaMini"
@@ -114,7 +118,9 @@ export default function HeroCards() {
                             >
                                 <SlotCounter
                                     value="43"
-                                    startValue={"0"}
+                                    
+                                    sequentialAnimationMode
+                                    useMonospaceWidth
                                     duration={3}
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
@@ -137,8 +143,9 @@ export default function HeroCards() {
                             >
                                 <SlotCounter
                                     value="23"
-                                    startValue={"00"}
-                                    // dummyCharacters={"450.000".split("")}
+                                    
+                                    sequentialAnimationMode
+                                    useMonospaceWidth
                                     duration={4}
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
@@ -161,8 +168,9 @@ export default function HeroCards() {
                             >
                                 <SlotCounter
                                     value="12"
-                                    startValue={"00"}
-                                    // dummyCharacters={"450.000".split("")}
+                                    
+                                    sequentialAnimationMode
+                                    useMonospaceWidth
                                     duration={5}
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"

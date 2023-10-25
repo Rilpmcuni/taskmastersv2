@@ -41,15 +41,8 @@ interface Session {
     user: any;
 }
 export default function Home() {
-    const [selectedSolic, setSelectedSolic] = useState("");
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const handleDialogOpen = (product: SetStateAction<string>) => {
-        setSelectedSolic(product);
-        setDialogOpen(true);
-    };
-    const handleCardClick = (product: SetStateAction<string>) => {
-        setSelectedSolic(product);
-    };
+    const [openDialogId, setOpenDialogId] = useState<number | null>(null);
+
     const { sessionData, metrics, profile } = useSession();
 
     const [loading, setLoading] = useState(false);
@@ -80,196 +73,267 @@ export default function Home() {
 
     return (
         <main>
-            <Stack
+            <Box
+                
+            >
+                <Stack
                 width={"100%"}
                 display="flex"
                 flexDirection={"column"}
                 flexWrap={"wrap"}
+                direction={"column"}
                 spacing={1}
             >
-                {/* {sessionData?.user?.id}
-                {profile?.ability}
-                {sessionData?.user.id} */}
                 <Typography variant="h5" padding={1}>
                     Solicitudes seleccionadas según tu perfil profesional
                 </Typography>
                 <Typography variant="body2" padding={1}>
                     Total: {filteredData.length}
-                </Typography>
-                {/* {selectedSolic} */}
-                {filteredData.map((metric, index) => (
-                    <Card key={index} variant="outlined" sx={{ flexGrow: 1 }}>
-                        <CardContent>
-                            <Stack
-                                width={"100%"}
-                                direction={"row"}
-                                justifyContent={"space-between"}
-                                spacing={1}
-                            >
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 0.5,
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        fontWeight={"bold"}
-                                    >
-                                        {metric.selectedService}
-                                        {metric.selectedDetailService !== "" &&
-                                            `, ${metric.selectedDetailService}`}
-                                    </Typography>
-                                    <Divider variant="middle" />
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            alignItems: "flex-start",
-                                            gap: 0.5,
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                alignItems: "center",
-                                                alignSelf: "flex-start",
-                                                paddingX: 1.5,
-                                                paddingY: 0.3,
-                                                borderRadius: 1,
-                                                border: "1px #d9d9d9 solid",
-                                                "&:hover": {
-                                                    opacity: 0.9,
-                                                },
-                                                boxShadow:
-                                                    "0 0 1px 2px #ffd234",
-                                            }}
-                                        >
-                                            <Typography
-                                                sx={{ pointerEvents: "none" }}
-                                                variant="caption"
-                                            >
-                                                {metric.selectedDay[0].replace(
-                                                    /\./g,
-                                                    ""
-                                                )}
-                                            </Typography>
-                                            <Typography
-                                                sx={{ pointerEvents: "none" }}
-                                                variant="body1"
-                                                fontWeight={"bold"}
-                                            >
-                                                {metric.selectedDay[1]}
-                                            </Typography>
-                                            <Typography
-                                                sx={{ pointerEvents: "none" }}
-                                                variant="caption"
-                                            >
-                                                {metric.selectedDay[2]}
-                                            </Typography>
-                                        </Box>
-                                        <Box
-                                            sx={{
-                                                flexDirection: "column",
-                                                // alignSelf:"flex-start",
-                                                gap: 1,
-                                            }}
-                                        >
-                                            <Box
-                                                sx={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    alignSelf: "flex-start",
-                                                    paddingX: 1.5,
-                                                    paddingY: 0.3,
-                                                    borderRadius: 1,
-                                                    border: "1px #d9d9d9 solid",
-                                                    "&:hover": {
-                                                        opacity: 0.9,
-                                                    },
-                                                    boxShadow:
-                                                        "0 0 1px 2px #ffd234",
-                                                }}
-                                            >
-                                                <Typography
-                                                    sx={{
-                                                        pointerEvents: "none",
-                                                    }}
-                                                    variant="body1"
-                                                >
-                                                    {metric.hour % 12 || 12}:00
-                                                    {metric.hour < 12
-                                                        ? "am"
-                                                        : "pm"}
-                                                </Typography>
-                                            </Box>
-                                            {metric.isEmergency && (
-                                                <Chip
-                                                    sx={{ marginTop: 0.5 }}
-                                                    label={"¡Emergencia!"}
-                                                    color="warning"
-                                                    variant="outlined"
-                                                />
-                                            )}
-                                        </Box>
-                                    </Box>
-                                </Box>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 0.5,
-                                    }}
-                                >
-                                    <Typography
-                                        variant="caption"
-                                        textAlign={"end"}
-                                    >
-                                        Ganancias preliminar
-                                    </Typography>
-                                    <Chip
-                                        label={metric.price}
-                                        color="success"
+                </Typography></Stack>
+                <Grid container spacing={0.5}>
+                    {filteredData.map((metric, index) => {
+                        const total = metric.price.reduce(
+                            (sum: number, item: { value: number }) =>
+                                sum + item.value,
+                            0
+                        );
+                        let emergencyFee = 0;
+                        if (metric.isEmergency) {
+                            emergencyFee = total * 0.25;
+                        }
+                        const preliminaryCost = total + emergencyFee;
+                        return (
+                            <>
+                                <Grid item xs={12}>
+                                    <Card
+                                        key={index}
                                         variant="outlined"
-                                        size="medium"
-                                        sx={{
-                                            fontSize: "large",
-                                            fontWeight: "bold",
-                                        }}
-                                    />
-
-                                    {metric.isEmergency && (
-                                        <Chip
-                                            label={"¡25% EXTRA!"}
-                                            color="success"
-                                            variant="outlined"
-                                        />
-                                    )}
-                                    <Button
-                                        onClick={() =>
-                                            handleDialogOpen(
-                                                metric.selectedService
-                                            )
-                                        }
-                                        variant="contained"
+                                        // sx={{ flexGrow: 1 }}
                                     >
-                                        Ver detalles
-                                    </Button>
+                                        <CardContent>
+                                            <Stack
+                                                width={"100%"}
+                                                direction={"row"}
+                                                justifyContent={"space-between"}
+                                                spacing={1}
+                                            >
+                                                <Box
+                                                    sx={{
+                                                        display: "flex",
+                                                        flexDirection: "column",
+                                                        gap: 0.5,
+                                                    }}
+                                                >
+                                                    <Typography
+                                                        variant="h6"
+                                                        fontWeight={"bold"}
+                                                    >
+                                                        {metric.selectedService}
+                                                        {metric.selectedDetailService !==
+                                                            "" &&
+                                                            `, ${metric.selectedDetailService}`}
+                                                    </Typography>
+                                                    <Divider variant="middle" />
+                                                    <Box
+                                                        sx={{
+                                                            display: "flex",
+                                                            flexDirection:
+                                                                "row",
+                                                            alignItems:
+                                                                "flex-start",
+                                                            gap: 0.5,
+                                                        }}
+                                                    >
+                                                        <Box
+                                                            sx={{
+                                                                display: "flex",
+                                                                flexDirection:
+                                                                    "column",
+                                                                alignItems:
+                                                                    "center",
+                                                                alignSelf:
+                                                                    "flex-start",
+                                                                paddingX: 1.5,
+                                                                paddingY: 0.3,
+                                                                borderRadius: 1,
+                                                                border: "1px #d9d9d9 solid",
+                                                                "&:hover": {
+                                                                    opacity: 0.9,
+                                                                },
+                                                                boxShadow:
+                                                                    "0 0 1px 2px #ffd234",
+                                                            }}
+                                                        >
+                                                            <Typography
+                                                                sx={{
+                                                                    pointerEvents:
+                                                                        "none",
+                                                                }}
+                                                                variant="caption"
+                                                            >
+                                                                {metric.selectedDay[0].replace(
+                                                                    /\./g,
+                                                                    ""
+                                                                )}
+                                                            </Typography>
+                                                            <Typography
+                                                                sx={{
+                                                                    pointerEvents:
+                                                                        "none",
+                                                                }}
+                                                                variant="body1"
+                                                                fontWeight={
+                                                                    "bold"
+                                                                }
+                                                            >
+                                                                {
+                                                                    metric
+                                                                        .selectedDay[1]
+                                                                }
+                                                            </Typography>
+                                                            <Typography
+                                                                sx={{
+                                                                    pointerEvents:
+                                                                        "none",
+                                                                }}
+                                                                variant="caption"
+                                                            >
+                                                                {
+                                                                    metric
+                                                                        .selectedDay[2]
+                                                                }
+                                                            </Typography>
+                                                        </Box>
+                                                        <Box
+                                                            sx={{
+                                                                flexDirection:
+                                                                    "column",
+                                                                // alignSelf:"flex-start",
+                                                                gap: 1,
+                                                            }}
+                                                        >
+                                                            <Box
+                                                                sx={{
+                                                                    display:
+                                                                        "flex",
+                                                                    alignItems:
+                                                                        "center",
+                                                                    alignSelf:
+                                                                        "flex-start",
+                                                                    paddingX: 1.5,
+                                                                    paddingY: 0.3,
+                                                                    borderRadius: 1,
+                                                                    border: "1px #d9d9d9 solid",
+                                                                    "&:hover": {
+                                                                        opacity: 0.9,
+                                                                    },
+                                                                    boxShadow:
+                                                                        "0 0 1px 2px #ffd234",
+                                                                }}
+                                                            >
+                                                                <Typography
+                                                                    sx={{
+                                                                        pointerEvents:
+                                                                            "none",
+                                                                    }}
+                                                                    variant="body1"
+                                                                >
+                                                                    {metric.hour %
+                                                                        12 ||
+                                                                        12}
+                                                                    :00
+                                                                    {metric.hour <
+                                                                    12
+                                                                        ? "am"
+                                                                        : "pm"}
+                                                                </Typography>
+                                                            </Box>
+                                                            {metric.isEmergency && (
+                                                                <Chip
+                                                                    sx={{
+                                                                        marginTop: 0.5,
+                                                                    }}
+                                                                    label={
+                                                                        "¡Emergencia!"
+                                                                    }
+                                                                    color="warning"
+                                                                    variant="outlined"
+                                                                />
+                                                            )}
+                                                        </Box>
+                                                    </Box>
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        display: "flex",
+                                                        flexDirection: "column",
+                                                        gap: 0.5,
+                                                    }}
+                                                >
+                                                    <Typography
+                                                        variant="caption"
+                                                        textAlign={"end"}
+                                                    >
+                                                        Ganancia mínima
+                                                    </Typography>
+                                                    <Chip
+                                                        label={preliminaryCost.toLocaleString(
+                                                            "es-CL",
+                                                            {
+                                                                style: "currency",
+                                                                currency: "CLP",
+                                                            }
+                                                        )}
+                                                        color="success"
+                                                        variant="outlined"
+                                                        size="medium"
+                                                        sx={{
+                                                            fontSize: "large",
+                                                            fontWeight: "bold",
+                                                        }}
+                                                    />
+                                                    {metric.isEmergency && (
+                                                        <Chip
+                                                            label={
+                                                                "¡25% EXTRA!"
+                                                            }
+                                                            color="success"
+                                                            variant="outlined"
+                                                        />
+                                                    )}
+                                                    <Button
+                                                        onClick={() =>
+                                                            setOpenDialogId(
+                                                                index
+                                                            )
+                                                        }
+                                                        variant="contained"
+                                                    >
+                                                        Ver detalles
+                                                    </Button>
+                                                </Box>
+                                            </Stack>
+                                        </CardContent>
+                                    </Card>
                                     <FullScreenSolic
+                                        // key={index}
                                         metric={metric}
-                                        selectedProduct={selectedSolic}
-                                        open={dialogOpen}
-                                        onClose={() => setDialogOpen(false)}
+                                        open={openDialogId === index}
+                                        onClose={() => setOpenDialogId(null)}
                                     />
-                                </Box>
-                                {/* Renderiza los demás campos de la misma manera */}
-                            </Stack>
-                        </CardContent>
-                    </Card>
-                ))}
-            </Stack>
+                                </Grid>
+                            </>
+                        );
+                    })}
+                </Grid>
+            </Box>
         </main>
     );
 }
+//
+//
+//
+//
+//
+//
+//

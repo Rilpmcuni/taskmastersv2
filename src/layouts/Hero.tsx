@@ -196,20 +196,6 @@ export default function Hero() {
                                 <Button onClick={handleShowMore}>
                                     {showMore ? "Mostrar menos" : "Mostrar más"}
                                 </Button>
-                                {/* <Collapse
-                                    in={selectedProduct !== ""}
-                                    sx={{
-                                        maxWidth: "90%",
-                                        minWidth: "90%",
-                                        minHeimaxHeight: "16rem",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }}
-                                >
-                                    <ServiceWindow />
-                                </Collapse> */}
                                 <FullScreenDialog
                                     selectedProduct={selectedProduct}
                                     open={dialogOpen}
@@ -231,7 +217,7 @@ export default function Hero() {
                                     },
                                 }}
                             >
-                                Sé un Reviaser
+                                ¿Eres profesional?
                             </Button>
                         </Box>
                     </Stack>
@@ -245,7 +231,6 @@ export default function Hero() {
                         }}
                     />
                 </Box>
-                {/* And more images in the grid... */}
             </Box>
         </>
     );

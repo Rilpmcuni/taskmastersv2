@@ -61,7 +61,7 @@ export default function FullScreenDialog({
                 onClose={onClose || handleClose}
                 TransitionComponent={Transition}
             >
-                <AppBar
+                {/* <AppBar
                     color="secondary"
                     variant="outlined"
                     sx={{
@@ -85,17 +85,17 @@ export default function FullScreenDialog({
                         >
                             {selectedProduct}
                         </Typography>
-                        {/* <Button autoFocus color="inherit" onClick={handleClose}>
-                            save
-                        </Button> */}
                     </Toolbar>
-                </AppBar>
+                </AppBar> */}
                 <Box
                     sx={{
                         height: "100%",
                     }}
                 >
-                    <ServiceWindow selectedProduct={selectedProduct} />
+                    <ServiceWindow
+                        onClose={onClose || handleClose}
+                        selectedProduct={selectedProduct}
+                    />
                 </Box>
             </Dialog>
         </div>

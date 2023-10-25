@@ -41,14 +41,14 @@ export default function TextFieldRut({
     return (
         <>
             <FormControl variant="outlined" sx={{ flexGrow: 1 }}>
-                <InputLabel htmlFor="formatted-text-mask-input">RUT</InputLabel>
+                <InputLabel htmlFor="rut-text-input">RUT</InputLabel>
                 <OutlinedInput
                     // placeholder="RUT"
                     label="RUT"
                     value={value}
                     onChange={onChange}
                     name="textmask"
-                    id="formatted-text-mask-input"
+                    id="rut-text-input"
                     inputComponent={TextMaskCustom as any}
                 />
                 <FormHelperText>Necesario para verificar tu identidad</FormHelperText>
