@@ -436,7 +436,7 @@ export default function ServiceWindow({
                                             )}
                                     </Typography>
                                 </Box>
-                                <Typography variant="caption">
+                                <Typography variant="caption" color="text.secondary">
                                     Mínimo base
                                 </Typography>
                             </Box>
@@ -481,7 +481,7 @@ export default function ServiceWindow({
                                                 })}
                                         </Typography>
                                     </Box>
-                                    <Typography variant="caption">
+                                    <Typography variant="caption" color="text.secondary">
                                         valor del caso en específico
                                     </Typography>
                                 </Box>
@@ -529,7 +529,7 @@ export default function ServiceWindow({
                                             })}
                                         </Typography>
                                     </Box>
-                                    <Typography variant="caption">
+                                    <Typography variant="caption" color="text.secondary">
                                         Base del valor total para servicio de
                                         emergencia
                                     </Typography>
@@ -591,7 +591,7 @@ export default function ServiceWindow({
                                             })}
                                     </Typography>
                                 </Box>
-                                <Typography variant="caption">
+                                <Typography variant="caption" color="text.secondary">
                                     Puede variar con la decisión final del
                                     profesional
                                 </Typography>

@@ -36,6 +36,7 @@ const SessionContext = createContext<
           sessionData: Session | null;
           metrics: Metric[] | null;
           profile: Profile | null;
+          requestUpdate: () => void; // Agregar la nueva propiedad aquí
       }
     | undefined
 >(undefined);
@@ -45,6 +46,7 @@ export default function SessionProvider({ children }: { children: any }) {
     const [sessionData, setSessionData] = useState<Session | null>(null);
     const [metrics, setMetrics] = useState<Metric[]>([]);
     const [profile, setProfile] = useState<Profile | null>(null);
+    const [updateSignal, setUpdateSignal] = useState(false);
     const supabase = createClientComponentClient();
 
     useEffect(() => {
@@ -53,8 +55,11 @@ export default function SessionProvider({ children }: { children: any }) {
         if (sessionData?.user?.id) {
             fetchProfile();
         }
-    }, [sessionData?.user?.id]);
+    }, [sessionData?.user?.id, updateSignal]);
 
+    function requestUpdate() {
+        setUpdateSignal(!updateSignal); // Cambiar el valor de updateSignal para desencadenar el useEffect
+    }
     async function getSessionData() {
         const {
             data: { session },
@@ -96,7 +101,9 @@ export default function SessionProvider({ children }: { children: any }) {
     }
 
     return (
-        <SessionContext.Provider value={{ sessionData, metrics, profile }}>
+        <SessionContext.Provider
+            value={{ sessionData, metrics, profile, requestUpdate }}
+        >
             {children}
         </SessionContext.Provider>
     );

@@ -27,6 +27,7 @@ import Avatar from "./ChangeAvatar";
 import TextFieldRut from "@/components/ui/TextFieldRut";
 import TextFieldPhone from "@/components/ui/TextFieldPhone";
 import { SimpleSnackbar } from "@/feedback/SnackBar";
+import { useSession } from "@/contexts/SessionContext";
 
 interface UpdateProfileProps {
     lastName: string | null;
@@ -73,6 +74,8 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 // chip
 
 export default function PerfilConfig({ session }: { session: any }) {
+    const { requestUpdate } = useSession();
+
     // chip
     const theme = useTheme();
     const [personName, setPersonName] = useState<string[]>([]);
@@ -169,6 +172,7 @@ export default function PerfilConfig({ session }: { session: any }) {
             tipoCuenta, // Add this line
             updated_at: new Date().toISOString(),
         });
+        requestUpdate();
     }
 
     return (
