@@ -235,7 +235,6 @@ export default function FichaView({ session }: { session: any }) {
                             </Stack>
                         </Stack>
                     </Stack>,
-
                     <Stack
                         spacing={{ xs: 1, sm: 2 }}
                         direction="row"

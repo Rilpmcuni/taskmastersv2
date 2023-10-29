@@ -55,7 +55,8 @@ export const SimpleSnackbar: React.FC<Props> = ({
 
     return (
         <>
-            <Button size="large"
+            <Button
+                size="large"
                 disabled={disabled}
                 fullWidth={fullWidth}
                 variant="contained"
@@ -65,10 +66,17 @@ export const SimpleSnackbar: React.FC<Props> = ({
             </Button>
             <Snackbar
                 open={open}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 onClose={handleClose}
                 // message={message}
                 action={action}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                }}
+                sx={{
+                    margginBottom: "20rem",
+                }}
             >
                 <Alert
                     onClose={handleClose}

@@ -6,12 +6,12 @@ export const ServicesData = [
             "Soluciones expertas para mantener tu sistema de tuberías en perfecto funcionamiento.",
         image: "/images/cards/gasfiteriaa.jpg",
 
-        price: 30000,
+        price: 24000,
         list: [
             {
                 title: "Instalación",
                 img: "/images/cards/gasfiteriaa.jpg",
-                price: 12000,
+                price: 90000,
             },
             {
                 title: "Destapo- namiento",

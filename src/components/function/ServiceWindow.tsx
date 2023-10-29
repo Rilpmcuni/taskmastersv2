@@ -112,7 +112,7 @@ export default function ServiceWindow({
     const [name, setName] = React.useState("");
     const [adress, setAdress] = useState("");
     const [number, setNumber] = useState("");
-    const [description, setDescription] = useState("");
+    const [clientNote, setClientNote] = useState("");
     const [indications, setIndications] = useState("");
     const [propiedad, setPropiedad] = React.useState("");
     const handleChange = (event: SelectChangeEvent) => {
@@ -159,7 +159,7 @@ export default function ServiceWindow({
 
         if (isEmergency && selectedService) {
             price.push({
-                label: "Emergencias 25% extra",
+                label: "Emergencias 50% extra",
                 value: 1, // Aquí almacenamos el valor como 1 en lugar de calcular el extra
             });
         }
@@ -172,7 +172,7 @@ export default function ServiceWindow({
                 adress: adress,
                 number: number,
                 propiedad: propiedad,
-                description: description,
+                clientNote: clientNote,
                 indications: indications,
                 selectedService: selectedService?.title,
                 selectedDetailService: selectedDetailService,
@@ -287,7 +287,7 @@ export default function ServiceWindow({
                                 />
                                 {isEmergency && (
                                     <Chip
-                                        label="Emergencias 25% extra"
+                                        label="Emergencias 50% extra"
                                         color="warning"
                                         variant="outlined"
                                     />
@@ -502,7 +502,7 @@ export default function ServiceWindow({
                                         }}
                                     >
                                         <Chip
-                                            label="Emergencias 25% extra"
+                                            label="Emergencias 50% extra"
                                             color="warning"
                                             variant="outlined"
                                         />
@@ -522,7 +522,7 @@ export default function ServiceWindow({
                                                                 selectedDetailService
                                                         )?.price || 0
                                                     )) *
-                                                0.25
+                                                0.50
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
                                                 currency: "CLP",
@@ -583,7 +583,7 @@ export default function ServiceWindow({
                                                                   service.title ===
                                                                   selectedDetailService
                                                           )?.price || 0)) *
-                                                      0.25
+                                                      0.50
                                                     : 0)
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
@@ -734,7 +734,7 @@ export default function ServiceWindow({
                                         }}
                                     >
                                         <Chip
-                                            label="Emergencias 25% extra"
+                                            label="Emergencias 50% extra"
                                             color="warning"
                                             variant="outlined"
                                         />
@@ -754,7 +754,7 @@ export default function ServiceWindow({
                                                                 selectedDetailService
                                                         )?.price || 0
                                                     )) *
-                                                0.25
+                                                0.50
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
                                                 currency: "CLP",
@@ -804,7 +804,7 @@ export default function ServiceWindow({
                                                                   service.title ===
                                                                   selectedDetailService
                                                           )?.price || 0)) *
-                                                      0.25
+                                                      0.50
                                                     : 0)
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
@@ -1055,7 +1055,7 @@ export default function ServiceWindow({
                                         Descripción:
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
-                                        {description}
+                                        {clientNote}
                                     </Typography>
                                 </Box>
                             </Stack>
@@ -1272,7 +1272,7 @@ export default function ServiceWindow({
                                                         }}
                                                     >
                                                         <Chip
-                                                            label="Emergencias 25% extra"
+                                                            label="Emergencias 50% extra"
                                                             color="warning"
                                                             variant="outlined"
                                                         />
@@ -1296,7 +1296,7 @@ export default function ServiceWindow({
                                                                             ?.price ||
                                                                         0
                                                                     )) *
-                                                                0.25
+                                                                0.50
                                                             ).toLocaleString(
                                                                 "es-CL",
                                                                 {
@@ -1356,7 +1356,7 @@ export default function ServiceWindow({
                                                                       )
                                                                           ?.price ||
                                                                           0)) *
-                                                                  0.25
+                                                                  0.50
                                                                 : 0)
                                                         ).toLocaleString(
                                                             "es-CL",

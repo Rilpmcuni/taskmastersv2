@@ -6,19 +6,23 @@ interface Session {
     user: any;
 }
 type Metric = {
+    id: any;
     name: any;
     cellPhone: any;
     rut: any;
     adress: any;
     number: any;
     propiedad: any;
-    description: any;
     selectedService: string;
     selectedDetailService: any;
     isEmergency: any;
     selectedDay: any;
     hour: any;
     price: any;
+    status: any;
+    user_id: any;
+    clientNote: any;
+    profesionalNote: any;
 };
 type Profile = {
     full_name: any;
@@ -67,21 +71,28 @@ export default function SessionProvider({ children }: { children: any }) {
         setSessionData(session);
     }
     async function fetchMetrics() {
-        const { data, error, status } = await supabase.from("request").select(`
+        const { data, error, status } = await supabase.from("request").select(
+            `
+                    id,
                     name,
                     cellPhone,
                     rut,
                     adress,
                     number,
                     propiedad,
-                    description,
                     selectedService,
                     selectedDetailService,
                     isEmergency,
                     selectedDay,
                     hour,
-                    price
-                `);
+                    price,
+                    status,
+                    user_id,
+                    clientNote,
+                    profesionalNote
+                `
+        );
+        // .eq("status", "published");
         if (data) {
             setMetrics(data);
         }
@@ -94,7 +105,7 @@ export default function SessionProvider({ children }: { children: any }) {
             .from("profiles")
             .select(
                 `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, updated_at`
-            ) // Agrega "cellPhone" aquí
+            )
             .eq("id", sessionData?.user?.id)
             .single();
         setProfile(data);

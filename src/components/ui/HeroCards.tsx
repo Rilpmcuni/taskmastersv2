@@ -35,6 +35,19 @@ export default function HeroCards() {
         profile?.ability.includes(metric.selectedService)
     );
 
+    const publishedData = filteredData.filter(
+        (metric) => metric.status === "published"
+    );
+
+    const solicitedData = sortedMetrics.filter(
+        (metric) => metric.user_id === sessionData?.user?.id
+    );
+
+    const solicitedDataFiltered = solicitedData.filter(
+        (metric) => metric.status === "solicited"
+    );
+
+
     return (
         <>
             <Grid item xs={12}>
@@ -54,7 +67,6 @@ export default function HeroCards() {
                             <Typography>Trabajos finalizados</Typography>
                             <SlotCounter
                                 value="12"
-                                
                                 sequentialAnimationMode
                                 useMonospaceWidth
                                 charClassName="charMd"
@@ -89,8 +101,7 @@ export default function HeroCards() {
                                     }}
                                 >
                                     <SlotCounter
-                                        value={filteredData.length}
-                                        
+                                        value={publishedData.length}
                                         sequentialAnimationMode
                                         useMonospaceWidth
                                         duration={2}
@@ -100,6 +111,39 @@ export default function HeroCards() {
                                     <Typography>
                                         Solicitudes recibidas
                                     </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </LinkMui>
+                </Grid>
+                <Grid item xs={6}>
+                    <LinkMui
+                        component={Link}
+                        href={"/app/metricas/trabajos"}
+                        sx={{
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
+                        <Card variant="outlined">
+                            <CardActionArea>
+                                <CardContent
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <SlotCounter
+                                        value={solicitedDataFiltered.length}
+                                        sequentialAnimationMode
+                                        useMonospaceWidth
+                                        duration={3}
+                                        charClassName="charMini"
+                                        separatorClassName="sepaMini"
+                                    />
+                                    <Typography>Trabajos activos</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
@@ -117,33 +161,7 @@ export default function HeroCards() {
                                 }}
                             >
                                 <SlotCounter
-                                    value="43"
-                                    
-                                    sequentialAnimationMode
-                                    useMonospaceWidth
-                                    duration={3}
-                                    charClassName="charMini"
-                                    separatorClassName="sepaMini"
-                                />
-                                <Typography>Trabajos activos</Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card variant="outlined">
-                        <CardActionArea>
-                            <CardContent
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    textAlign: "center",
-                                }}
-                            >
-                                <SlotCounter
                                     value="23"
-                                    
                                     sequentialAnimationMode
                                     useMonospaceWidth
                                     duration={4}
@@ -168,7 +186,6 @@ export default function HeroCards() {
                             >
                                 <SlotCounter
                                     value="12"
-                                    
                                     sequentialAnimationMode
                                     useMonospaceWidth
                                     duration={5}

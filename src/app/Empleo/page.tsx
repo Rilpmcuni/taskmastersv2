@@ -119,7 +119,7 @@ export default function Empleo() {
                                             <Skeleton width={"50%"} />
                                         </Typography>
                                         <Skeleton
-                                            width={"25%"}
+                                            width={"50%"}
                                             variant="text"
                                             sx={{ fontSize: "1rem" }}
                                         />

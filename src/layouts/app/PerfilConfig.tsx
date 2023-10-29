@@ -6,12 +6,14 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
 import FormHelperText from "@mui/material/FormHelperText";
 import MenuItem from "@mui/material/MenuItem";
+import CircularProgress from "@mui/material/CircularProgress";
 import { Theme, useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import Horario from "@/components/function/Horario";
 import Image from "next/image";
 import BasicTabs from "@/components/ui/BasicTabs";
@@ -102,6 +104,11 @@ export default function PerfilConfig({ session }: { session: any }) {
     const [cellPhone, setCellPhone] = useState<string | null>(null);
     const [banco, setBanco] = useState<string | null>(null);
     const [tipoCuenta, setTipoCuenta] = useState<string | null>(null);
+    const [numeroCuenta, setNumeroCuenta] = useState<string | null>(null);
+
+    const [isSaving, setIsSaving] = useState(false);
+    const [saveSuccess, setSaveSuccess] = useState(false);
+
     const user = session?.user;
 
     const getProfile = useCallback(async () => {
@@ -111,7 +118,7 @@ export default function PerfilConfig({ session }: { session: any }) {
             const { data, error, status } = await supabase
                 .from("profiles")
                 .select(
-                    `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, banco, tipoCuenta` // Add "banco" and "tipoCuenta" here
+                    `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, banco, tipoCuenta, numeroCuenta` // Add "banco" and "tipoCuenta" here
                 )
                 .eq("id", user?.id)
                 .single();
@@ -131,6 +138,7 @@ export default function PerfilConfig({ session }: { session: any }) {
                 setCellPhone(data.cellPhone);
                 setBanco(data.banco); // Add this line
                 setTipoCuenta(data.tipoCuenta); // Add this line
+                setNumeroCuenta(String(data.numeroCuenta)); // Añade esta línea
             }
         } catch (error) {
             console.log("error traer datos");
@@ -150,15 +158,18 @@ export default function PerfilConfig({ session }: { session: any }) {
         schedule,
         rut,
         cellPhone,
-        banco, // Add this line
-        tipoCuenta, // Add this line
+        banco,
+        tipoCuenta,
+        numeroCuenta, // Añade esta línea
     }: UpdateProfileProps & {
         schedule: any;
         rut: string | null;
         cellPhone: string | null;
-        banco: string | null; // Add this line
-        tipoCuenta: string | null; // Add this line
+        banco: string | null;
+        tipoCuenta: string | null;
+        numeroCuenta: string | null; // Añade esta línea
     }) {
+        setIsSaving(true);
         const { error } = await supabase.from("profiles").upsert({
             id: user?.id,
             full_name: fullname,
@@ -168,11 +179,15 @@ export default function PerfilConfig({ session }: { session: any }) {
             schedule,
             rut,
             cellPhone,
-            banco, // Add this line
-            tipoCuenta, // Add this line
+            banco,
+            tipoCuenta,
+            numeroCuenta,
             updated_at: new Date().toISOString(),
         });
         requestUpdate();
+        setIsSaving(false);
+        setSaveSuccess(true);
+        setTimeout(() => setSaveSuccess(false), 3000);
     }
 
     return (
@@ -436,11 +451,59 @@ export default function PerfilConfig({ session }: { session: any }) {
                                     </MenuItem>
                                 </Select>
                             </FormControl>
+                            <TextField
+                                type="number"
+                                sx={{ flexGrow: 1 }}
+                                fullWidth
+                                id="outlined-basic"
+                                label="N° de cuenta"
+                                value={numeroCuenta || ""}
+                                onChange={(e) =>
+                                    setNumeroCuenta(e.target.value)
+                                }
+                                variant="outlined"
+                            />
                         </Stack>
                     </Stack>,
                 ]}
             />
-            <SimpleSnackbar
+            <Button
+                size="large"
+                variant="contained"
+                onClick={() =>
+                    updateProfile({
+                        fullname,
+                        lastName,
+                        ability: personName,
+                        avatar_url,
+                        schedule,
+                        rut,
+                        banco,
+                        tipoCuenta,
+                        cellPhone,
+                        numeroCuenta,
+                    })
+                }
+                disabled={loading || isSaving}
+                fullWidth={true}
+                startIcon={
+                    isSaving ? (
+                        <CircularProgress size={20} />
+                    ) : saveSuccess ? (
+                        <CheckCircleRoundedIcon />
+                    ) : null
+                }
+                color={saveSuccess ? "success" : "primary"}
+            >
+                {isSaving
+                    ? "Guardando..."
+                    : saveSuccess
+                    ? "¡Datos actualizados!"
+                    : loading
+                    ? "Cargando ..."
+                    : "Guardar cambios"}
+            </Button>
+            {/* <SimpleSnackbar
                 onClick={() =>
                     updateProfile({
                         fullname,
@@ -459,7 +522,7 @@ export default function PerfilConfig({ session }: { session: any }) {
                 disabled={loading}
             >
                 {loading ? "Cargando ..." : "Guardar cambios"}
-            </SimpleSnackbar>
+            </SimpleSnackbar> */}
         </main>
     );
 }

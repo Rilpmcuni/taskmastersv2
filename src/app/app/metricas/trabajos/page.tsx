@@ -1,6 +1,8 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import {
+    Alert,
+    AlertTitle,
     Box,
     Button,
     Card,
@@ -11,8 +13,11 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import FullScreenSolic from "@/feedback/FullScreenSolic";
+import FullScreenTrabajoSolic from "@/feedback/FullScreenTrabajoSolic";
+import FullScreenTrabajoInProc from "@/feedback/FullScreenTrabajoInProc";
+import FullScreenTrabajoInFini from "@/feedback/FullScreenTrabajoInFini";
 import { useSession } from "@/contexts/SessionContext";
+import BasicTabs from "@/components/ui/BasicTabs";
 interface MetricCardProps {
     metric: {
         id: any;
@@ -38,10 +43,13 @@ const calculatePreliminaryCost = (metric: {
     );
     let emergencyFee = 0;
     if (metric.isEmergency) {
-        emergencyFee = total * 0.50;
+        emergencyFee = total * 0.5;
     }
     return total + emergencyFee;
 };
+interface NothingCardProps {
+    on: string;
+}
 
 const MetricCard = ({
     metric,
@@ -179,9 +187,6 @@ const MetricCard = ({
                                 gap: 0.5,
                             }}
                         >
-                            <Typography variant="caption" textAlign={"end"}>
-                                Ganancia mínima
-                            </Typography>
                             <Chip
                                 label={preliminaryCost.toLocaleString("es-CL", {
                                     style: "currency",
@@ -212,7 +217,7 @@ const MetricCard = ({
                     </Stack>
                 </CardContent>
             </Card>
-            <FullScreenSolic
+            <FullScreenTrabajoSolic
                 // key={index}
                 metric={metric}
                 open={openDialogId === index}
@@ -221,11 +226,20 @@ const MetricCard = ({
         </Grid>
     );
 };
+const NothingCard = ({ on }: NothingCardProps) => {
+    return (
+        <Grid item xs={12}>
+            <Alert severity="info">
+                <AlertTitle>Oh...</AlertTitle>
+                Aún sin Trabajos <strong>{on}</strong>
+            </Alert>
+        </Grid>
+    );
+};
 
 export default function Home() {
     const [openDialogId, setOpenDialogId] = useState<number | null>(null);
-    const { metrics, profile } = useSession();
-    const [loading, setLoading] = useState(false);
+    const { metrics, sessionData } = useSession();
 
     const sortedMetrics = useMemo(() => {
         const result = metrics ? [...metrics] : [];
@@ -245,17 +259,21 @@ export default function Home() {
     }, [metrics]);
 
     const filteredData = useMemo(() => {
-        return sortedMetrics.filter((metric) =>
-            profile?.ability.includes(metric.selectedService)
+        return sortedMetrics.filter(
+            (metric) => metric.user_id === sessionData?.user?.id
         );
-    }, [sortedMetrics, profile]);
-    const solicitedData = useMemo(() => {
-        return filteredData.filter((metric) => metric.status === "published");
+    }, [sortedMetrics]);
+    const solicdDataiteundefined = useMemo(() => {
+        return filteredData.filter((metric) => metric.status === "solicited");
     }, [filteredData]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    const inProgressData = useMemo(() => {
+        return filteredData.filter((metric) => metric.status === "inProgress");
+    }, [filteredData]);
+
+    const finalizedData = useMemo(() => {
+        return filteredData.filter((metric) => metric.status === "finalized");
+    }, [filteredData]);
 
     return (
         <main>
@@ -268,24 +286,74 @@ export default function Home() {
                     direction={"column"}
                     spacing={1}
                 >
-                    <Typography variant="h5" padding={1} paddingBottom={0}>
-                        Solicitudes seleccionadas según tu perfil profesional
+                    <Typography
+                        variant="h5"
+                        paddingTop={1}
+                        paddingX={1}
+                        paddingBottom={0}
+                    >
+                        Lista de trabajos
                     </Typography>
-                    <Typography variant="body2" padding={1} paddingTop={0}>
-                        Total: {solicitedData.length}
+                    <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        paddingTop={0}
+                        paddingX={1}
+                        // paddingBottom={1}
+                    >
+                        Acá puedes ver el estado de tus trabajos
                     </Typography>
                 </Stack>
-                <Grid container spacing={0.5}>
-                    {solicitedData.map((metric, index) => (
-                        <MetricCard
-                            key={index}
-                            metric={metric}
-                            index={index}
-                            setOpenDialogId={setOpenDialogId}
-                            openDialogId={openDialogId}
-                        />
-                    ))}
-                </Grid>
+                <BasicTabs
+                    labels={["Solicitados", "En proceso", "Finalizados"]}
+                    contents={[
+                        <Grid container spacing={0.5}>
+                            {solicdDataiteundefined.length > 0 ? (
+                                solicdDataiteundefined.map((metric, index) => (
+                                    <MetricCard
+                                        key={index}
+                                        metric={metric}
+                                        index={index}
+                                        setOpenDialogId={setOpenDialogId}
+                                        openDialogId={openDialogId}
+                                    />
+                                ))
+                            ) : (
+                                <NothingCard on={"Solicitados"} />
+                            )}
+                        </Grid>,
+                        <Grid container spacing={0.5}>
+                            {inProgressData.length > 0 ? (
+                                inProgressData.map((metric, index) => (
+                                    <MetricCard
+                                        key={index}
+                                        metric={metric}
+                                        index={index}
+                                        setOpenDialogId={setOpenDialogId}
+                                        openDialogId={openDialogId}
+                                    />
+                                ))
+                            ) : (
+                                <NothingCard on={"En proceso"} />
+                            )}
+                        </Grid>,
+                        <Grid container spacing={0.5}>
+                            {finalizedData.length > 0 ? (
+                                finalizedData.map((metric, index) => (
+                                    <MetricCard
+                                        key={index}
+                                        metric={metric}
+                                        index={index}
+                                        setOpenDialogId={setOpenDialogId}
+                                        openDialogId={openDialogId}
+                                    />
+                                ))
+                            ) : (
+                                <NothingCard on={"Finalizados"} />
+                            )}
+                        </Grid>,
+                    ]}
+                />
             </Box>
         </main>
     );

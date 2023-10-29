@@ -21,7 +21,7 @@ export const metadata = {
     referrer: "origin-when-cross-origin",
     keywords: ["Reviasa", "Reparaciones", "Mantenimiento"],
     authors: [{ name: "Reviasa" }],
-    colorScheme: "light",
+
     creator: "Reviasa",
     publisher: "Reviasa",
     manifest: "/manifest.json",
@@ -62,7 +62,6 @@ export const metadata = {
             "max-snippet": -1,
         },
     },
-    themeColor: "light",
     twitter: {
         card: "summary_large_image",
         title: "Reviasa | La solución tecnológica para todos",
@@ -77,6 +76,8 @@ export const metadata = {
         },
     },
     viewport: {
+        colorScheme: "light",
+        themeColor: "light",
         width: "device-width",
         initialScale: 1,
         maximumScale: 1,
@@ -102,9 +103,7 @@ export default function RootLayout({
         <html lang="es">
             <body className={capriola.className} style={{ margin: 0 }}>
                 <ThemeRegistry options={{ key: "mui" }}>
-                    <NextNProgressClient>
-                        {children}
-                    </NextNProgressClient>
+                    <NextNProgressClient>{children}</NextNProgressClient>
                 </ThemeRegistry>
             </body>
         </html>

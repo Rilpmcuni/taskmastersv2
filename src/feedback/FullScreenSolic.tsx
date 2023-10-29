@@ -11,10 +11,27 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import { useRouter } from "next/navigation";
 import { TransitionProps } from "@mui/material/transitions";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ServiceWindow from "@/components/function/ServiceWindow";
-import { Box, Chip, Stack, Step, StepLabel, Stepper } from "@mui/material";
+import {
+    Box,
+    Chip,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Stack,
+    Step,
+    StepLabel,
+    Stepper,
+    Zoom,
+} from "@mui/material";
 import Logo from "@/components/ui/Logo";
+import { useSession } from "@/contexts/SessionContext";
+import ChipValue from "@/components/ui/ChipValue";
+import DialogPer from "./DialogPer";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -34,9 +51,77 @@ export default function FullScreenSolic({
     open: boolean;
     onClose?: () => void;
 }) {
+    const router = useRouter();
+    const [openAlert, setOpenAlert] = React.useState(false);
+    const topRef = React.useRef<HTMLDivElement>(null);
+    const supabase = createClientComponentClient();
     const [activeStep, setActiveStep] = React.useState(0);
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    const { sessionData, requestUpdate } = useSession();
+
+    // const handleRequestNow = async () => {
+    //     try {
+    //         const { data, error } = await supabase
+    //             .from("request")
+    //             .update({
+    //                 status: "solicited",
+    //                 user_id: sessionData?.user?.id,
+    //             })
+    //             .eq("id", metric.id);
+    //         if (error) {
+    //             console.error("Error al solicitar el trabajo:", error);
+    //         } else {
+    //             setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    //             topRef.current?.scrollIntoView({ behavior: "auto" });
+    //             setTimeout(() => {
+    //                 requestUpdate();
+    //                 router.push("/app/metricas/trabajos", { scroll: false });
+    //             }, 3000);
+    //         }
+    //     } catch (error: any) {
+    //         alert(error.message);
+    //     }
+    // };
+    const handleRequestNow = async () => {
+        try {
+            // Primero, obtenemos el estado actual del trabajo
+            let { data: jobData, error } = await supabase
+                .from("request")
+                .select("status")
+                .eq("id", metric.id);
+
+            if (error) {
+                console.error("Error al obtener el estado del trabajo:", error);
+                return;
+            }
+
+            // Verificamos si el trabajo aún está disponible
+            if (jobData && jobData[0].status !== "published") {
+                setOpenAlert(true);
+                return;
+            }
+
+            // Si el trabajo está disponible, actualizamos su estado a "solicitado"
+            let { data, error: updateError } = await supabase
+                .from("request")
+                .update({
+                    status: "solicited",
+                    user_id: sessionData?.user?.id,
+                })
+                .eq("id", metric.id);
+
+            if (updateError) {
+                console.error("Error al solicitar el trabajo:", updateError);
+            } else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                topRef.current?.scrollIntoView({ behavior: "auto" });
+                setTimeout(() => {
+                    requestUpdate();
+                    router.push("/app/metricas/trabajos", { scroll: false });
+                }, 3000);
+            }
+        } catch (error: any) {
+            alert(error.message);
+        }
     };
     // calc
     const total = metric.price.reduce(
@@ -45,14 +130,22 @@ export default function FullScreenSolic({
     );
     let emergencyFee = 0;
     if (metric.isEmergency) {
-        emergencyFee = total * 0.25;
+        emergencyFee = total * 0.5;
     }
-    const preliminaryCost = total + emergencyFee;
+    let preliminaryCost = total + emergencyFee;
+    // Primero calculamos el 14% del costo preliminar
+    let fourteenPercent = preliminaryCost * 0.07;
 
+    // Luego lo restamos del costo preliminar
+    let finalCost = preliminaryCost - fourteenPercent;
+    const handleOpenAlert = () => {
+        setOpenAlert(true);
+    };
     const steps = [
         {
             label: `Solicitud ${metric.selectedService} ${
-                metric.selectedDetailService && -metric.selectedDetailService
+                metric.selectedDetailService &&
+                `-${metric.selectedDetailService}`
             }`,
             description: (
                 <Box
@@ -72,49 +165,6 @@ export default function FullScreenSolic({
                         width={"100%"}
                         padding={1}
                     >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                width: "100%",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Logo />
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    width: "100%",
-                                    alignItems: "flex-end",
-                                    justifyContent: "flex-end",
-                                    gap: 0.5,
-                                }}
-                            >
-                                <Typography
-                                    variant="h6"
-                                    textAlign={"end"}
-                                    fontWeight={"bold"}
-                                >
-                                    {metric.selectedService}{" "}
-                                    {metric.selectedDetailService &&
-                                        ` - ${metric.selectedDetailService}`}
-                                </Typography>
-                                {metric.isEmergency && (
-                                    <Chip
-                                        label="¡Emergencia!"
-                                        color="warning"
-                                        variant="outlined"
-                                        size="medium"
-                                        sx={{
-                                            fontSize: "large",
-                                            fontWeight: "bold",
-                                        }}
-                                    />
-                                )}
-                            </Box>
-                        </Box>
                         <Stack
                             display="flex"
                             direction={"column"}
@@ -123,102 +173,45 @@ export default function FullScreenSolic({
                             width={"100%"}
                             // padding={1}
                         >
-                            <Divider variant="fullWidth" />
+                            <Divider>Costos</Divider>
                             {metric.price.map((item: any, index: number) => (
-                                <Box
+                                <ChipValue
                                     key={index}
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        width: "100%",
-                                    }}
-                                >
-                                    <Chip
-                                        label={item.label}
-                                        color="info"
-                                        variant="outlined"
-                                    />
-                                    <Typography
-                                        textAlign={"end"}
-                                        variant="caption"
-                                        sx={{
-                                            color: "info.main",
-                                        }}
-                                    >
-                                        {item.value.toLocaleString("es-CL", {
-                                            style: "currency",
-                                            currency: "CLP",
-                                        })}
-                                    </Typography>
-                                </Box>
+                                    label={item.label}
+                                    value={item.value}
+                                    color={"primary"}
+                                    size={"medium"}
+                                />
                             ))}
                             {metric.isEmergency && (
-                                <>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            justifyContent: "space-between",
-                                            width: "100%",
-                                        }}
-                                    >
-                                        <Chip
-                                            label="Emergencias 25% extra"
-                                            color="success"
-                                            variant="outlined"
-                                        />
-                                        <Typography
-                                            textAlign={"end"}
-                                            variant="caption"
-                                            sx={{
-                                                color: "success.main",
-                                            }}
-                                        >
-                                            {emergencyFee.toLocaleString(
-                                                "es-CL",
-                                                {
-                                                    style: "currency",
-                                                    currency: "CLP",
-                                                }
-                                            )}
-                                        </Typography>
-                                    </Box>
-                                </>
-                            )}
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    width: "100%",
-                                }}
-                            >
-                                <Chip
-                                    label="Ganancia mínima estimada"
-                                    color="success"
-                                    variant="outlined"
-                                    size="medium"
-                                    sx={{
-                                        fontSize: "large",
-                                        fontWeight: "bold",
-                                    }}
+                                <ChipValue
+                                    label={"Emergencias 50% extra"}
+                                    value={emergencyFee}
+                                    color={"success"}
+                                    size={"medium"}
                                 />
-                                <Typography
-                                    textAlign={"end"}
-                                    variant="h6"
-                                    fontWeight={"bold"}
-                                    sx={{
-                                        color: "success.main",
-                                    }}
-                                >
-                                    {preliminaryCost.toLocaleString("es-CL", {
-                                        style: "currency",
-                                        currency: "CLP",
-                                    })}
-                                </Typography>
-                            </Box>
+                            )}
+                            <ChipValue
+                                label={"Costo preliminar"}
+                                value={preliminaryCost}
+                                color={"success"}
+                                size={"large"}
+                            />
+                            <Divider>Ganancias</Divider>
+                            <ChipValue
+                                label={"Comisíon 7%"}
+                                value={fourteenPercent}
+                                color={"warning"}
+                                size={"medium"}
+                            />
+                            <ChipValue
+                                label={"Ganancia mínima estimada"}
+                                value={finalCost}
+                                color={"success"}
+                                size={"large"}
+                            />
+                            <Divider>Datos</Divider>
+
                             <Box
                                 sx={{
                                     display: "flex",
@@ -242,12 +235,12 @@ export default function FullScreenSolic({
                                 }}
                             >
                                 <Typography variant="body1">
-                                    Descripción de servicio:
+                                    Nota del cliente:
                                 </Typography>
                                 <Typography variant="body1" textAlign={"end"}>
-                                    {metric.description
-                                        ? metric.description
-                                        : "No hay descripción"}
+                                    {metric.clientNote
+                                        ? metric.clientNote
+                                        : "Sin comentarios del cliente "}
                                 </Typography>
                             </Box>
 
@@ -498,28 +491,6 @@ export default function FullScreenSolic({
                             </Box>
                         </Stack>
                     </Stack>
-                    {/* <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            paddingX: 2,
-                            paddingY: 1,
-                            justifyContent: "space-between",
-                            width: "100%",
-                            mt: 1,
-                        }}
-                    >
-                        <Button variant="outlined" onClick={onClose}>
-                            Cerrar
-                        </Button>
-                        <Button
-                            size="large"
-                            variant="contained"
-                            // onClick={handleRequestNow}
-                        >
-                            ¡Solicitar ahora!
-                        </Button>
-                    </Box> */}
                     <Box
                         sx={{
                             display: "flex",
@@ -532,27 +503,56 @@ export default function FullScreenSolic({
                         }}
                     >
                         <Button
-                            // disabled={index === 0}
-                            // onClick={() => {
-                            //     handleBack();
-                            //     handleScrollTop();
-                            // }}
                             variant="outlined"
+                            onClick={() => {
+                                onClose && (onClose(), setActiveStep(0));
+                            }}
                         >
-                            Volver
+                            Cerrar
                         </Button>
-                        <Button
-                            onClick={handleNext}
-                            size="large"
-                            variant="contained"
-                            // onClick={() => {
-                            //     handleRequestNow();
-                            //     window.scrollTo(0, 0);
-                            // }}
+                        <DialogPer
+                            title={"¿Solicitar trabajo?"}
+                            description={
+                                " Al solicitar el trabajo, te comprometes a realizarlo en el horario y lugar indicado."
+                            }
+                            onConfirm={() => {
+                                // onClose && (onClose(), setActiveStep(0));
+                                handleRequestNow();
+                            }}
+                            buttonProps={"¡Solicitar Ahora!"}
                         >
-                            ¡Solicitar ahora!
-                        </Button>
+                            <Button size="large" variant="contained">
+                                ¡Solicitar ahora!
+                            </Button>
+                        </DialogPer>
                     </Box>
+                    <Dialog
+                        open={openAlert}
+                        onClose={() => {
+                            setOpenAlert(false);
+                        }}
+                        TransitionComponent={Zoom}
+                    >
+                        <DialogTitle>¡Lo sentimos!</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                El trabajo ya no está disponible.
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button
+                                variant="contained"
+                                onClick={() => {
+                                    setOpenAlert(false);
+                                    onClose && (onClose(), setActiveStep(0));
+                                    requestUpdate();
+                                }}
+                                color="primary"
+                            >
+                                ¡Entendido!
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Box>
             ),
         },
@@ -576,20 +576,19 @@ export default function FullScreenSolic({
                         width={"100%"}
                         padding={1}
                     >
-                        <Logo />
-
                         <Typography variant="h5" fontWeight={"bold"}>
-                            ¡Servicio en camino!
+                            ¡Trabajo Solicitado!
                         </Typography>
                         <Typography variant="h6">
-                            Detalles, enviados a tu número de WhatsApp
+                            Tu solicitud ha sido procesada y aceptada. Revisa
+                            tus <b>trabajos activos</b> en <b>Metricas</b>
                         </Typography>
                         <Typography
                             variant="caption"
                             color="text.secondary"
                             fontWeight={"bold"}
                         >
-                            puedes salir
+                            Serás redirigido en 3 segundos...
                         </Typography>
                     </Stack>
 
@@ -603,21 +602,12 @@ export default function FullScreenSolic({
                             width: "100%",
                             mt: 1,
                         }}
-                    >
-                        {/* <Button onClick={handleReset}>Reset</Button> */}
-                        {/* <Button
-                                size="large"
-                                variant="contained"
-                                onClick={handleRequestNow}
-                            >
-                                ¡Solicitar ahora!
-                            </Button> */}
-                    </Box>
+                    ></Box>
                 </Box>
             ),
         },
     ];
-
+    // console.log(metric.nam);
     return (
         <div>
             <Button
@@ -635,6 +625,7 @@ export default function FullScreenSolic({
                 TransitionComponent={Transition}
             >
                 <Stack
+                    ref={topRef}
                     direction={"row"}
                     spacing={0.5}
                     paddingLeft={2}
@@ -644,10 +635,6 @@ export default function FullScreenSolic({
                         edge="start"
                         color="inherit"
                         onClick={() => {
-                            // if (onClose) {
-                            //     onClose();
-                            //     setActiveStep(0);
-                            // }
                             onClose && (onClose(), setActiveStep(0));
                         }}
                         aria-label="close"
@@ -690,7 +677,74 @@ export default function FullScreenSolic({
                 >
                     {steps.map((step, index) => {
                         if (index === activeStep) {
-                            return <>{step.description}</>;
+                            return (
+                                <>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "space-between",
+                                            width: "100%",
+                                            alignItems: "flex-start",
+                                            paddingX: 1,
+                                            paddingY: 0.5,
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "row",
+                                                width: "100%",
+                                                alignItems: "center",
+                                                justifyContent: "space-between",
+                                                gap: 0.5,
+                                            }}
+                                        >
+                                            <Logo />
+                                            {metric.isEmergency ? (
+                                                <Chip
+                                                    label="¡Emergencia!"
+                                                    color="warning"
+                                                    variant="outlined"
+                                                    size="medium"
+                                                    sx={{
+                                                        fontSize: "large",
+                                                        fontWeight: "bold",
+                                                    }}
+                                                />
+                                            ) : (
+                                                <Typography
+                                                    variant="h6"
+                                                    textAlign={"start"}
+                                                    sx={{
+                                                        paddingX: 1,
+                                                    }}
+                                                    fontWeight={"bold"}
+                                                >
+                                                    {metric.selectedService}{" "}
+                                                    {metric.selectedDetailService &&
+                                                        ` - ${metric.selectedDetailService}`}
+                                                </Typography>
+                                            )}
+                                        </Box>
+                                        {metric.isEmergency! && (
+                                            <Typography
+                                                variant="h6"
+                                                textAlign={"start"}
+                                                sx={{
+                                                    paddingX: 1,
+                                                }}
+                                                fontWeight={"bold"}
+                                            >
+                                                {metric.selectedService}{" "}
+                                                {metric.selectedDetailService &&
+                                                    ` - ${metric.selectedDetailService}`}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                    {step.description}
+                                </>
+                            );
                         }
                         return null;
                     })}
@@ -699,3 +753,8 @@ export default function FullScreenSolic({
         </div>
     );
 }
+//
+//
+//
+//
+//

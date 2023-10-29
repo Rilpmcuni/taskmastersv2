@@ -72,7 +72,7 @@ const ServicesCardV2: React.FC<Props> = ({
                                 {service.title}
                             </Typography>
                             {/* <Typography variant="body2" color="text.secondary">
-                                {service.description}
+                                {service.clientNote}
                             </Typography> */}
                             <Typography variant="button" color="primary">
                                 Solicitar
