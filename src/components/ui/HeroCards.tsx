@@ -68,6 +68,10 @@ export default function HeroCards({
                     variant="outlined"
                     sx={{
                         margin: "0.5rem",
+                        // backgroundColor: #ffffff,
+                        opacity: 0.8,
+                        backgroundImage:
+                            "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 32px ), repeating-linear-gradient( #ffdb5c55, #ffdb5c )",
                     }}
                 >
                     <CardActionArea
@@ -102,7 +106,16 @@ export default function HeroCards({
             </Grid>
             <Grid container spacing={0.5}>
                 <Grid item xs={6}>
-                    <Card variant="outlined">
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            backgroundColor: "#ffffff",
+                            opacity: 0.8,
+                            backgroundImage:
+                                "radial-gradient(circle at center center, #FFDB5C, #ffffff), repeating-radial-gradient(circle at center center, #FFDB5C, #FFDB5C, 29px, transparent 58px, transparent 29px)",
+                            backgroundblendmode: "multiply",
+                        }}
+                    >
                         <CardActionArea
                             LinkComponent={Link}
                             href={"/app/metricas/solicitudes"}
@@ -132,7 +145,15 @@ export default function HeroCards({
                     </Card>
                 </Grid>
                 <Grid item xs={6}>
-                    <Card variant="outlined">
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            backgroundColor: "#ffffff",
+                            opacity: 0.8,
+                            background:
+                                "repeating-linear-gradient( 45deg, #ffdb5c, #ffdb5c 16px, #ffffff 16px, #ffffff 80px )",
+                        }}
+                    >
                         <CardActionArea
                             LinkComponent={Link}
                             href={"/app/metricas/trabajos"}
@@ -162,7 +183,16 @@ export default function HeroCards({
                     </Card>
                 </Grid>
                 <Grid item xs={6}>
-                    <Card variant="outlined">
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            backgroundColor: "#ffffff",
+                            opacity: 0.8,
+                            backgroundImage:
+                                "linear-gradient(#FFDB5C 1px, transparent 1px), linear-gradient(to right, #FFDB5C 1px, #ffffff 1px)",
+                            backgroundSize: "20px 20px",
+                        }}
+                    >
                         <CardActionArea>
                             <CardContent
                                 sx={{
@@ -187,7 +217,15 @@ export default function HeroCards({
                     </Card>
                 </Grid>
                 <Grid item xs={6}>
-                    <Card variant="outlined">
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            backgroundColor: "#ffffff",
+                            opacity: 0.8,
+                            background:
+                                "repeating-linear-gradient( -45deg, #ffdb5c, #ffdb5c 16px, #ffffff 16px, #ffffff 80px )",
+                        }}
+                    >
                         <CardActionArea
                             LinkComponent={Link}
                             href={"/app/metricas/trabajos?tab=1"}
