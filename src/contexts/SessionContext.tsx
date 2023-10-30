@@ -23,6 +23,8 @@ type Metric = {
     user_id: any;
     clientNote: any;
     profesionalNote: any;
+    hourFinish: any;
+    dayFinish: any;
 };
 type Profile = {
     full_name: any;
@@ -89,7 +91,9 @@ export default function SessionProvider({ children }: { children: any }) {
                     status,
                     user_id,
                     clientNote,
-                    profesionalNote
+                    profesionalNote,
+                    hourFinish,
+                    dayFinish
                 `
         );
         // .eq("status", "published");

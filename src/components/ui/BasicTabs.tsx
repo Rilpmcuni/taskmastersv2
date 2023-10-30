@@ -3,6 +3,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -22,7 +25,7 @@ function CustomTabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ paddingX:1,paddingY:2.5 }}>
+                <Box sx={{ paddingX: 1, paddingY: 2.5 }}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -44,10 +47,16 @@ export default function BasicTabs({
     labels: any;
     contents: any;
 }) {
-    const [value, setValue] = React.useState(0);
+    const pathname = usePathname();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const search = searchParams.get("tab");
+
+    const [value, setValue] = React.useState(Number(search) || 0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
+        router.push(`${pathname}?tab=${newValue}`);
     };
 
     return (
@@ -59,10 +68,14 @@ export default function BasicTabs({
                     aria-label="basic tabs example"
                 >
                     {labels.map((label: any, index: any) => (
-                        <Tab label={label} {...a11yProps(index)} sx={{
-                            borderTopLeftRadius:"0.5rem",
-                            borderTopRightRadius:"0.5rem",
-                        }} />
+                        <Tab
+                            label={label}
+                            {...a11yProps(index)}
+                            sx={{
+                                borderTopLeftRadius: "0.5rem",
+                                borderTopRightRadius: "0.5rem",
+                            }}
+                        />
                     ))}
                 </Tabs>
             </Box>

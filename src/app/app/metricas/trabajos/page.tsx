@@ -18,6 +18,7 @@ import FullScreenTrabajoInProc from "@/feedback/FullScreenTrabajoInProc";
 import FullScreenTrabajoInFini from "@/feedback/FullScreenTrabajoInFini";
 import { useSession } from "@/contexts/SessionContext";
 import BasicTabs from "@/components/ui/BasicTabs";
+
 interface MetricCardProps {
     metric: {
         id: any;
@@ -27,6 +28,7 @@ interface MetricCardProps {
         selectedDetailService: string;
         selectedDay: string[];
         hour: number;
+        status: 'solicited' | 'inProgress' | 'finalized';
         // Agrega aquí las demás propiedades de 'metric' con sus respectivos tipos
     };
     index: number;
@@ -45,7 +47,14 @@ const calculatePreliminaryCost = (metric: {
     if (metric.isEmergency) {
         emergencyFee = total * 0.5;
     }
-    return total + emergencyFee;
+    const preliminaryCost = total + emergencyFee;
+
+    let fourteenPercent = preliminaryCost * 0.14;
+
+    // Luego lo restamos del costo preliminar
+    let finalCost = preliminaryCost - fourteenPercent;
+
+    return finalCost;
 };
 interface NothingCardProps {
     on: string;
@@ -58,9 +67,31 @@ const MetricCard = ({
     setOpenDialogId,
 }: MetricCardProps) => {
     const preliminaryCost = calculatePreliminaryCost(metric);
+
+    const statusToComponent = {
+        'solicited': FullScreenTrabajoSolic,
+        'inProgress': FullScreenTrabajoInProc,
+        'finalized': FullScreenTrabajoInFini
+    };
+
+    const FullScreenComponent = statusToComponent[metric.status];
+
     return (
         <Grid item xs={12}>
-            <Card key={index} variant="outlined">
+            <Card
+                key={index}
+                variant="outlined"
+                sx={{
+                    borderColor:
+                        metric.status === "solicited"
+                            ? "primary.main"
+                            : metric.status === "inProgress"
+                            ? "success.main"
+                            : metric.status === "finalized"
+                            ? "default"
+                            : "default",
+                }}
+            >
                 <CardContent>
                     <Stack
                         width={"100%"}
@@ -217,12 +248,13 @@ const MetricCard = ({
                     </Stack>
                 </CardContent>
             </Card>
-            <FullScreenTrabajoSolic
-                // key={index}
-                metric={metric}
-                open={openDialogId === index}
-                onClose={() => setOpenDialogId(null)}
-            />
+            {FullScreenComponent && (
+                <FullScreenComponent
+                    metric={metric}
+                    open={openDialogId === index}
+                    onClose={() => setOpenDialogId(null)}
+                />
+            )}
         </Grid>
     );
 };

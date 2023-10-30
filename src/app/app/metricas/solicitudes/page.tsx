@@ -38,9 +38,15 @@ const calculatePreliminaryCost = (metric: {
     );
     let emergencyFee = 0;
     if (metric.isEmergency) {
-        emergencyFee = total * 0.50;
+        emergencyFee = total * 0.5;
     }
-    return total + emergencyFee;
+    const preliminaryCost = total + emergencyFee;
+
+    let fourteenPercent = preliminaryCost * 0.14;
+
+    // Luego lo restamos del costo preliminar
+    let finalCost = preliminaryCost - fourteenPercent;
+    return finalCost;
 };
 
 const MetricCard = ({
@@ -52,7 +58,13 @@ const MetricCard = ({
     const preliminaryCost = calculatePreliminaryCost(metric);
     return (
         <Grid item xs={12}>
-            <Card key={index} variant="outlined">
+            <Card
+                key={index}
+                variant="outlined"
+                sx={{
+                    borderColor: "primary.main",
+                }}
+            >
                 <CardContent>
                     <Stack
                         width={"100%"}

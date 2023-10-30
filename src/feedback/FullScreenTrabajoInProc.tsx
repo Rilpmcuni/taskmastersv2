@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import ListItemText from "@mui/material/ListItemText";
@@ -40,11 +40,16 @@ import {
     StepLabel,
     Stepper,
 } from "@mui/material";
+import dayjs from "dayjs";
+import "dayjs/locale/es";
 import Logo from "@/components/ui/Logo";
 import { useSession } from "@/contexts/SessionContext";
 import Link from "next/link";
 import TextFieldPrice from "@/components/ui/TextFieldPrice";
 import ChipValue from "@/components/ui/ChipValue";
+import DialogPer from "./DialogPer";
+import Hour from "@/components/ui/Hour";
+import Day from "@/components/ui/Day";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -65,16 +70,21 @@ export default function FullScreenTrabajoInProc({
     onClose?: () => void;
 }) {
     const router = useRouter();
+    const topRef = useRef<HTMLDivElement>(null);
     const supabase = createClientComponentClient();
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [openAlert, setOpenAlert] = React.useState(false);
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [activeStep, setActiveStep] = useState(0);
     const { sessionData, requestUpdate } = useSession();
-    const [profesionalNote, setProfesionalNote] = React.useState(
+    const [profesionalNote, setProfesionalNote] = useState(
         metric.profesionalNote
     );
-    const [priceItems, setPriceItems] = React.useState(metric.price);
-
+    const [priceItems, setPriceItems] = useState(metric.price);
+    // Día y hora
+    dayjs.locale("es");
+    let currentHour = dayjs().hour();
+    const currentDay = dayjs().format("ddd D MMM").split(" ");
+    // Día y hora
     const openMenu = Boolean(anchorEl);
     const handlePublishJob = async () => {
         try {
@@ -100,10 +110,33 @@ export default function FullScreenTrabajoInProc({
             alert(error.message);
         }
     };
-    const [newItems, setNewItems] = React.useState<
+    const handleCancelJob = async () => {
+        try {
+            const { data, error } = await supabase
+                .from("request")
+                .update({
+                    status: "cancel",
+                })
+                .eq("id", metric.id);
+            if (error) {
+                console.error("Error al publicar el trabajo:", error);
+            } else {
+                // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                // setOpenAlert(false);
+                // setTimeout(() => {
+                requestUpdate();
+                onClose && (onClose(), setActiveStep(0));
+                // router.push("/app/metricas/trabajos", { scroll: false });
+                // }, 3000);
+            }
+        } catch (error: any) {
+            alert(error.message);
+        }
+    };
+    const [newItems, setNewItems] = useState<
         Array<{ label: string; value: number }>
     >([]);
-    const [inputState, setInputState] = React.useState<{
+    const [inputState, setInputState] = useState<{
         label: string;
         value: string;
     }>({ label: "", value: "" });
@@ -123,16 +156,19 @@ export default function FullScreenTrabajoInProc({
     }
     const preliminaryCost = total + emergencyFee;
 
-    let fourteenPercent = preliminaryCost * 0.07;
+    let fourteenPercent = preliminaryCost * 0.14;
 
     // Luego lo restamos del costo preliminar
     let finalCost = preliminaryCost - fourteenPercent;
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        topRef.current?.scrollIntoView({ behavior: "auto" });
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        topRef.current?.scrollIntoView({ behavior: "auto" });
     };
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -150,7 +186,9 @@ export default function FullScreenTrabajoInProc({
                 .update({
                     price: priceItems,
                     profesionalNote: metric.profesionalNote,
-                    status: "inProgress",
+                    status: "finalized",
+                    hourFinish: currentHour,
+                    dayFinish: currentDay,
                 })
                 .eq("id", metric.id);
 
@@ -160,8 +198,11 @@ export default function FullScreenTrabajoInProc({
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
                 setOpenAlert(false);
                 setTimeout(() => {
+                    onClose && (onClose(), setActiveStep(0));
                     requestUpdate();
-                    // router.push("/app/metricas/trabajos", { scroll: false });
+                    router.push("/app/metricas/trabajos?tab=2", {
+                        scroll: false,
+                    });
                 }, 3000);
             }
         } catch (error: any) {
@@ -176,7 +217,7 @@ export default function FullScreenTrabajoInProc({
     };
     const steps = [
         {
-            label: `Solicitado`,
+            label: `En proceso`,
             description: (
                 <Box
                     sx={{
@@ -203,7 +244,7 @@ export default function FullScreenTrabajoInProc({
                             width={"100%"}
                             // padding={1}
                         >
-                            <Divider variant="fullWidth" />
+                            <Divider>Costos</Divider>
                             {priceItems.map((item: any, index: number) => (
                                 <ChipValue
                                     key={index}
@@ -211,17 +252,6 @@ export default function FullScreenTrabajoInProc({
                                     value={item.value}
                                     color={"primary"}
                                     size={"medium"}
-                                    onDelete={
-                                        index !== 0
-                                            ? () => {
-                                                  const updatedItems = [
-                                                      ...priceItems,
-                                                  ];
-                                                  updatedItems.splice(index, 1);
-                                                  setPriceItems(updatedItems);
-                                              }
-                                            : undefined
-                                    }
                                 />
                             ))}
                             {newItems.map((item, index) => (
@@ -252,6 +282,7 @@ export default function FullScreenTrabajoInProc({
                                         flexGrow: 1,
                                     }}
                                     label="Item"
+                                    placeholder="Ej. Repuesto, materiales, etc."
                                     size="small"
                                     value={inputState.label}
                                     onChange={(e) =>
@@ -260,6 +291,7 @@ export default function FullScreenTrabajoInProc({
                                             label: e.target.value,
                                         })
                                     }
+                                    helperText="Añade elementos"
                                 />
                                 <TextFieldPrice
                                     value={inputState.value}
@@ -273,6 +305,7 @@ export default function FullScreenTrabajoInProc({
                                 <IconButton
                                     sx={{
                                         flexGrow: 1,
+                                        marginTop: "-27px",
                                     }}
                                     edge="start"
                                     size="small"
@@ -306,20 +339,21 @@ export default function FullScreenTrabajoInProc({
                                 color={"success"}
                                 size={"large"}
                             />
-                            <Divider variant="middle" />
+                            <Divider>Ganancias</Divider>
                             <ChipValue
-                                label={"Comisíon 7%"}
+                                label={"Comisíon 14%"}
                                 value={fourteenPercent}
                                 color={"warning"}
                                 size={"medium"}
                             />
                             <ChipValue
-                                label={"Ganancia mínima estimada"}
+                                label={"Ganancia estimada"}
                                 value={finalCost}
                                 color={"success"}
                                 size={"large"}
                             />
-                            <Divider variant="middle" />
+                            <Divider>Datos</Divider>
+
                             <Box
                                 sx={{
                                     display: "flex",
@@ -459,9 +493,7 @@ export default function FullScreenTrabajoInProc({
                                     paddingY: 0.5,
                                 }}
                             />
-                            <Typography variant="h6" gutterBottom>
-                                Horario
-                            </Typography>
+                            <Typography variant="h6">Horario</Typography>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -469,89 +501,48 @@ export default function FullScreenTrabajoInProc({
                                     gap: 1,
                                 }}
                             >
-                                <Typography variant="body1">
-                                    Fecha y hora:
-                                </Typography>
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        flexDirection: "row",
+                                        justifyContent: "space-between",
                                         gap: 1,
                                     }}
                                 >
                                     <Box
                                         sx={{
                                             display: "flex",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
+                                            flexDirection: "column",
+                                            gap: 1,
                                         }}
                                     >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                        >
-                                            {metric.hour % 12 || 12}
-                                            :00
-                                            {metric.hour < 12 ? "am" : "pm"}
+                                        <Typography variant="body1">
+                                            Inicio:
                                         </Typography>
+                                        <Hour hour={metric.hour} />
                                     </Box>
+                                    <Day day={metric.selectedDay} />
+                                </Box>
+                                <Divider orientation="vertical" />
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        gap: 1,
+                                    }}
+                                >
                                     <Box
                                         sx={{
                                             display: "flex",
                                             flexDirection: "column",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
+                                            gap: 1,
                                         }}
                                     >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[0].replace(
-                                                /\./g,
-                                                ""
-                                            )}
+                                        <Typography variant="body1">
+                                            Término:
                                         </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                            fontWeight={"bold"}
-                                        >
-                                            {metric.selectedDay[1]}
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[2]}
-                                        </Typography>
+                                        <Hour hour={currentHour} />
                                     </Box>
+                                    <Day day={currentDay} />
                                 </Box>
                             </Box>
                             <Divider
@@ -640,14 +631,14 @@ export default function FullScreenTrabajoInProc({
                             size="large"
                             variant="contained"
                         >
-                            Preliminar
+                            Boleta Preliminar
                         </Button>
                     </Box>
                 </Box>
             ),
         },
         {
-            label: `Preliminar`,
+            label: `Boleta Preliminar`,
             description: (
                 <Box
                     sx={{
@@ -702,7 +693,7 @@ export default function FullScreenTrabajoInProc({
                                 />
                             )}
                             <ChipValue
-                                label={"Costo preliminar"}
+                                label={"Costo"}
                                 value={preliminaryCost}
                                 color={"success"}
                                 size={"large"}
@@ -839,9 +830,7 @@ export default function FullScreenTrabajoInProc({
                                     paddingY: 0.5,
                                 }}
                             />
-                            <Typography variant="h6" gutterBottom>
-                                Horario
-                            </Typography>
+                            <Typography variant="h6">Horario</Typography>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -849,89 +838,48 @@ export default function FullScreenTrabajoInProc({
                                     gap: 1,
                                 }}
                             >
-                                <Typography variant="body1">
-                                    Fecha y hora:
-                                </Typography>
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        flexDirection: "row",
+                                        justifyContent: "space-between",
                                         gap: 1,
                                     }}
                                 >
                                     <Box
                                         sx={{
                                             display: "flex",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
+                                            flexDirection: "column",
+                                            gap: 1,
                                         }}
                                     >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                        >
-                                            {metric.hour % 12 || 12}
-                                            :00
-                                            {metric.hour < 12 ? "am" : "pm"}
+                                        <Typography variant="body1">
+                                            Inicio:
                                         </Typography>
+                                        <Hour hour={metric.hour} />
                                     </Box>
+                                    <Day day={metric.selectedDay} />
+                                </Box>
+                                <Divider orientation="vertical" />
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        gap: 1,
+                                    }}
+                                >
                                     <Box
                                         sx={{
                                             display: "flex",
                                             flexDirection: "column",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
+                                            gap: 1,
                                         }}
                                     >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[0].replace(
-                                                /\./g,
-                                                ""
-                                            )}
+                                        <Typography variant="body1">
+                                            Término:
                                         </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                            fontWeight={"bold"}
-                                        >
-                                            {metric.selectedDay[1]}
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[2]}
-                                        </Typography>
+                                        <Hour hour={currentHour} />
                                     </Box>
+                                    <Day day={currentDay} />
                                 </Box>
                             </Box>
                             <Divider
@@ -1010,44 +958,27 @@ export default function FullScreenTrabajoInProc({
                         <Button onClick={handleBack} variant="outlined">
                             Volver
                         </Button>
-                        <Button
-                            onClick={handleOpenAlert}
-                            size="large"
-                            variant="contained"
+                        <DialogPer
+                            title={
+                                "¿Estás seguro que quieres finalizar el trabajo?"
+                            }
+                            description={
+                                "Estás a punto de finalizar el trabajo. Una vez que lo hagas, no podrás volver a editar la boleta preliminar."
+                            }
+                            onConfirm={() => {
+                                handleStart();
+                            }}
+                            buttonProps={"¡Finalizar trabajo!"}
                         >
-                            Empezar
-                        </Button>
-                    </Box>
-
-                    <Dialog open={openAlert} onClose={handleCloseAlert}>
-                        <DialogTitle>
-                            ¿Estás seguro que quieres empezar el trabajo?
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                Estás a punto de empezar el trabajo. Una vez que
-                                lo hagas, el cliente será notificado y no podrás
-                                volver atrás.
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
                             <Button
-                                variant="outlined"
-                                onClick={handleCloseAlert}
-                                color="primary"
-                                autoFocus
-                            >
-                                Pensándolo mejor, No
-                            </Button>
-                            <Button
+                                // onClick={handleOpenAlert}
+                                size="large"
                                 variant="contained"
-                                onClick={handleStart}
-                                color="primary"
                             >
-                                ¡Empezar el trabajo!
+                                Finalizar trabajo
                             </Button>
-                        </DialogActions>
-                    </Dialog>
+                        </DialogPer>
+                    </Box>
                 </Box>
             ),
         },
@@ -1120,12 +1051,18 @@ export default function FullScreenTrabajoInProc({
                 open={open}
                 onClose={onClose}
                 TransitionComponent={Transition}
+                sx={{
+                    width: "100%",
+                }}
             >
                 <Stack
+                    ref={topRef}
                     direction={"row"}
-                    spacing={0.5}
-                    paddingLeft={2}
+                    // spacing={0.5}
+                    paddingLeft={1}
+                    justifyContent={"center"}
                     alignItems={"center"}
+                    width={"100%"}
                 >
                     <IconButton
                         edge="start"
@@ -1142,7 +1079,7 @@ export default function FullScreenTrabajoInProc({
                         orientation="horizontal"
                         sx={{
                             p: 2,
-                            backgroundColor: "text.primary",
+                            backgroundColor: "success.main",
                             borderBottomLeftRadius: "1.5rem",
                             borderBottomRightRadius: "1.5rem",
                             flexGrow: 1,
@@ -1167,8 +1104,6 @@ export default function FullScreenTrabajoInProc({
                     </Stepper>
                     <IconButton
                         onClick={handleClick}
-                        size="small"
-                        sx={{ ml: 2 }}
                         aria-controls={openMenu ? "account-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={openMenu ? "true" : undefined}
@@ -1181,7 +1116,7 @@ export default function FullScreenTrabajoInProc({
                         id="account-menu"
                         open={openMenu}
                         onClose={handleClose}
-                        onClick={handleClose}
+                        // onClick={handleClose}
                         transformOrigin={{
                             horizontal: "right",
                             vertical: "top",
@@ -1191,38 +1126,59 @@ export default function FullScreenTrabajoInProc({
                             vertical: "bottom",
                         }}
                     >
-                        <ListItemButton
-                            dense
-                            sx={{ gap: 1.5, color: "warning.main" }}
+                        {/* <DialogPer
+                            title={
+                                "¿Estás seguro que quieres devolver el trabajo?"
+                            }
+                            description={
+                                "Estás a punto de devolver el trabajo a la lista de solicitudes. Una vez que lo hagas, regresará a la lista de solicitudes y alguien más podrá tomarlo."
+                            }
+                            onConfirm={() => {
+                                handlePublishJob();
+                                handleClose();
+                            }}
+                            buttonProps={"¡Devolver trabajo!"}
                         >
-                            <UndoRoundedIcon />
-                            <ListItemText
-                                onClick={() => {
-                                    handlePublishJob();
-                                    handleClose();
-                                }}
-                                primary={"Devolver trabajo"}
-                                secondary={
-                                    "Devuelve el trabajo a la lista de solicitudes para alguien más"
-                                }
-                            />
-                        </ListItemButton>
-                        <Divider variant="middle" />
-                        <ListItemButton
-                            dense
-                            sx={{ gap: 1.5, color: "error.main" }}
+                            <ListItemButton
+                                dense
+                                sx={{ gap: 1.5, color: "warning.main" }}
+                            >
+                                <UndoRoundedIcon />
+                                <ListItemText
+                                    primary={"Devolver trabajo"}
+                                    secondary={
+                                        "Devuelve el trabajo a la lista de solicitudes para alguien más"
+                                    }
+                                />
+                            </ListItemButton>
+                        </DialogPer>
+                        <Divider variant="middle" /> */}
+                        <DialogPer
+                            title={
+                                "¿Estás seguro que quieres cancelar el trabajo?"
+                            }
+                            description={
+                                " Estás a punto de cancelar el trabajo. Solo hazlo si el cliente no está de acuerdo con tus servicios."
+                            }
+                            onConfirm={() => {
+                                handleCancelJob();
+                                handleClose();
+                            }}
+                            buttonProps={"¡Cancelar trabajo!"}
                         >
-                            <DoDisturbAltRoundedIcon />
-                            <ListItemText
-                                onClick={() => {
-                                    handleClose();
-                                }}
-                                primary={"Cancelar trabajo"}
-                                secondary={
-                                    "Cancela el trabajo si el cliente no está de acuerdo con el precio"
-                                }
-                            />
-                        </ListItemButton>
+                            <ListItemButton
+                                dense
+                                sx={{ gap: 1.5, color: "error.main" }}
+                            >
+                                <DoDisturbAltRoundedIcon />
+                                <ListItemText
+                                    primary={"Cancelar trabajo"}
+                                    secondary={
+                                        "Cancela el trabajo si el cliente no está de acuerdo con tus servicios"
+                                    }
+                                />
+                            </ListItemButton>
+                        </DialogPer>
                     </Menu>
                 </Stack>
                 <Box
@@ -1256,7 +1212,7 @@ export default function FullScreenTrabajoInProc({
                                             }}
                                         >
                                             <Logo />
-                                            {metric.isEmergency && (
+                                            {metric.isEmergency ? (
                                                 <Chip
                                                     label="¡Emergencia!"
                                                     color="warning"
@@ -1267,20 +1223,35 @@ export default function FullScreenTrabajoInProc({
                                                         fontWeight: "bold",
                                                     }}
                                                 />
+                                            ) : (
+                                                <Typography
+                                                    variant="h6"
+                                                    textAlign={"start"}
+                                                    sx={{
+                                                        paddingX: 1,
+                                                    }}
+                                                    fontWeight={"bold"}
+                                                >
+                                                    {metric.selectedService}{" "}
+                                                    {metric.selectedDetailService &&
+                                                        ` - ${metric.selectedDetailService}`}
+                                                </Typography>
                                             )}
                                         </Box>
-                                        <Typography
-                                            variant="h6"
-                                            textAlign={"start"}
-                                            sx={{
-                                                paddingX: 1,
-                                            }}
-                                            fontWeight={"bold"}
-                                        >
-                                            {metric.selectedService}{" "}
-                                            {metric.selectedDetailService &&
-                                                ` - ${metric.selectedDetailService}`}
-                                        </Typography>
+                                        {metric.isEmergency! && (
+                                            <Typography
+                                                variant="h6"
+                                                textAlign={"start"}
+                                                sx={{
+                                                    paddingX: 1,
+                                                }}
+                                                fontWeight={"bold"}
+                                            >
+                                                {metric.selectedService}{" "}
+                                                {metric.selectedDetailService &&
+                                                    ` - ${metric.selectedDetailService}`}
+                                            </Typography>
+                                        )}
                                     </Box>
                                     {step.description}
                                 </>

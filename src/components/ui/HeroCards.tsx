@@ -10,9 +10,15 @@ import { Link as LinkMui } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import SlotCounter from "react-slot-counter";
-export default function HeroCards() {
-    const { sessionData, metrics, profile } = useSession();
-
+export default function HeroCards({
+    sessionData,
+    metrics,
+    profile,
+}: {
+    sessionData: any;
+    metrics: any;
+    profile: any;
+}) {
     const sortedMetrics = metrics ? [...metrics] : [];
 
     sortedMetrics.sort((a, b) => {
@@ -43,10 +49,17 @@ export default function HeroCards() {
         (metric) => metric.user_id === sessionData?.user?.id
     );
 
-    const solicitedDataFiltered = solicitedData.filter(
+    const solicitedDataSolicited = solicitedData.filter(
         (metric) => metric.status === "solicited"
     );
 
+    const solicitedDataInProgress = solicitedData.filter(
+        (metric) => metric.status === "inProgress"
+    );
+
+    const solicitedDataFinalized = solicitedData.filter(
+        (metric) => metric.status === "finalized"
+    );
 
     return (
         <>
@@ -57,7 +70,14 @@ export default function HeroCards() {
                         margin: "0.5rem",
                     }}
                 >
-                    <CardActionArea>
+                    <CardActionArea
+                        LinkComponent={Link}
+                        href={"/app/metricas/trabajos?tab=2"}
+                        sx={{
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
                         <CardContent
                             sx={{
                                 display: "flex",
@@ -66,7 +86,7 @@ export default function HeroCards() {
                         >
                             <Typography>Trabajos finalizados</Typography>
                             <SlotCounter
-                                value="12"
+                                value={solicitedDataFinalized.length}
                                 sequentialAnimationMode
                                 useMonospaceWidth
                                 charClassName="charMd"
@@ -82,76 +102,15 @@ export default function HeroCards() {
             </Grid>
             <Grid container spacing={0.5}>
                 <Grid item xs={6}>
-                    <LinkMui
-                        component={Link}
-                        href={"/app/metricas/solicitudes"}
-                        sx={{
-                            color: "inherit",
-                            textDecoration: "none",
-                        }}
-                    >
-                        <Card variant="outlined">
-                            <CardActionArea>
-                                <CardContent
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    <SlotCounter
-                                        value={publishedData.length}
-                                        sequentialAnimationMode
-                                        useMonospaceWidth
-                                        duration={2}
-                                        charClassName="charMini"
-                                        separatorClassName="sepaMini"
-                                    />
-                                    <Typography>
-                                        Solicitudes recibidas
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </LinkMui>
-                </Grid>
-                <Grid item xs={6}>
-                    <LinkMui
-                        component={Link}
-                        href={"/app/metricas/trabajos"}
-                        sx={{
-                            color: "inherit",
-                            textDecoration: "none",
-                        }}
-                    >
-                        <Card variant="outlined">
-                            <CardActionArea>
-                                <CardContent
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    <SlotCounter
-                                        value={solicitedDataFiltered.length}
-                                        sequentialAnimationMode
-                                        useMonospaceWidth
-                                        duration={3}
-                                        charClassName="charMini"
-                                        separatorClassName="sepaMini"
-                                    />
-                                    <Typography>Trabajos activos</Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </LinkMui>
-                </Grid>
-                <Grid item xs={6}>
                     <Card variant="outlined">
-                        <CardActionArea>
+                        <CardActionArea
+                            LinkComponent={Link}
+                            href={"/app/metricas/solicitudes"}
+                            sx={{
+                                color: "inherit",
+                                textDecoration: "none",
+                            }}
+                        >
                             <CardContent
                                 sx={{
                                     display: "flex",
@@ -161,14 +120,43 @@ export default function HeroCards() {
                                 }}
                             >
                                 <SlotCounter
-                                    value="23"
+                                    value={publishedData.length}
                                     sequentialAnimationMode
                                     useMonospaceWidth
-                                    duration={4}
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
                                 />
-                                <Typography>Cotizaciones enviadas</Typography>
+                                <Typography>Solicitudes abiertas</Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={6}>
+                    <Card variant="outlined">
+                        <CardActionArea
+                            LinkComponent={Link}
+                            href={"/app/metricas/trabajos"}
+                            sx={{
+                                color: "inherit",
+                                textDecoration: "none",
+                            }}
+                        >
+                            <CardContent
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <SlotCounter
+                                    value={solicitedDataSolicited.length}
+                                    sequentialAnimationMode
+                                    useMonospaceWidth
+                                    charClassName="charMini"
+                                    separatorClassName="sepaMini"
+                                />
+                                <Typography>Trabajos solicitados</Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>
@@ -188,13 +176,42 @@ export default function HeroCards() {
                                     value="12"
                                     sequentialAnimationMode
                                     useMonospaceWidth
-                                    duration={5}
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
                                 />
                                 <Typography>
                                     Valoraciones de clientes
                                 </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={6}>
+                    <Card variant="outlined">
+                        <CardActionArea
+                            LinkComponent={Link}
+                            href={"/app/metricas/trabajos?tab=1"}
+                            sx={{
+                                color: "inherit",
+                                textDecoration: "none",
+                            }}
+                        >
+                            <CardContent
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <SlotCounter
+                                    value={solicitedDataInProgress.length}
+                                    sequentialAnimationMode
+                                    useMonospaceWidth
+                                    charClassName="charMini"
+                                    separatorClassName="sepaMini"
+                                />
+                                <Typography>Trabajos activos</Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>

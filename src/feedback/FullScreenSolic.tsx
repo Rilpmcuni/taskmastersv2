@@ -32,6 +32,8 @@ import Logo from "@/components/ui/Logo";
 import { useSession } from "@/contexts/SessionContext";
 import ChipValue from "@/components/ui/ChipValue";
 import DialogPer from "./DialogPer";
+import Day from "@/components/ui/Day";
+import Hour from "@/components/ui/Hour";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -134,7 +136,7 @@ export default function FullScreenSolic({
     }
     let preliminaryCost = total + emergencyFee;
     // Primero calculamos el 14% del costo preliminar
-    let fourteenPercent = preliminaryCost * 0.07;
+    let fourteenPercent = preliminaryCost * 0.14;
 
     // Luego lo restamos del costo preliminar
     let finalCost = preliminaryCost - fourteenPercent;
@@ -199,13 +201,13 @@ export default function FullScreenSolic({
                             />
                             <Divider>Ganancias</Divider>
                             <ChipValue
-                                label={"Comisíon 7%"}
+                                label={"Comisíon 14%"}
                                 value={fourteenPercent}
                                 color={"warning"}
                                 size={"medium"}
                             />
                             <ChipValue
-                                label={"Ganancia mínima estimada"}
+                                label={"Ganancia estimada"}
                                 value={finalCost}
                                 color={"success"}
                                 size={"large"}
@@ -337,94 +339,32 @@ export default function FullScreenSolic({
                             <Box
                                 sx={{
                                     display: "flex",
-                                    justifyContent: "space-between",
+                                    justifyContent: "end",
                                     gap: 1,
                                 }}
                             >
-                                <Typography variant="body1">
-                                    Fecha y hora:
-                                </Typography>
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        flexDirection: "row",
+                                        justifyContent: "space-between",
                                         gap: 1,
                                     }}
                                 >
                                     <Box
                                         sx={{
                                             display: "flex",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
-                                        }}
-                                    >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                        >
-                                            {metric.hour % 12 || 12}
-                                            :00
-                                            {metric.hour < 12 ? "am" : "pm"}
-                                        </Typography>
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
                                             flexDirection: "column",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
+                                            gap: 1,
                                         }}
                                     >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[0].replace(
-                                                /\./g,
-                                                ""
-                                            )}
+                                        <Typography variant="body1">
+                                        Fecha y hora:
                                         </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                            fontWeight={"bold"}
-                                        >
-                                            {metric.selectedDay[1]}
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[2]}
-                                        </Typography>
+                                        <Hour hour={metric.hour} />
                                     </Box>
+                                    <Day day={metric.selectedDay} />
                                 </Box>
+                                <Divider orientation="vertical" />
                             </Box>
                             <Divider
                                 variant="middle"

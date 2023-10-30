@@ -46,6 +46,8 @@ import Link from "next/link";
 import TextFieldPrice from "@/components/ui/TextFieldPrice";
 import ChipValue from "@/components/ui/ChipValue";
 import DialogPer from "./DialogPer";
+import Day from "@/components/ui/Day";
+import Hour from "@/components/ui/Hour";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -95,6 +97,29 @@ export default function FullScreenTrabajoSolic({
                 // setTimeout(() => {
                 requestUpdate();
                 onClose && (onClose(), setActiveStep(0));
+                router.push("/app/metricas/trabajos?tab=1", { scroll: false });
+                // }, 3000);
+            }
+        } catch (error: any) {
+            alert(error.message);
+        }
+    };
+    const handleCancelJob = async () => {
+        try {
+            const { data, error } = await supabase
+                .from("request")
+                .update({
+                    status: "cancel",
+                })
+                .eq("id", metric.id);
+            if (error) {
+                console.error("Error al publicar el trabajo:", error);
+            } else {
+                // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                // setOpenAlert(false);
+                // setTimeout(() => {
+                requestUpdate();
+                onClose && (onClose(), setActiveStep(0));
                 // router.push("/app/metricas/trabajos", { scroll: false });
                 // }, 3000);
             }
@@ -125,7 +150,7 @@ export default function FullScreenTrabajoSolic({
     }
     const preliminaryCost = total + emergencyFee;
 
-    let fourteenPercent = preliminaryCost * 0.07;
+    let fourteenPercent = preliminaryCost * 0.14;
 
     // Luego lo restamos del costo preliminar
     let finalCost = preliminaryCost - fourteenPercent;
@@ -165,8 +190,9 @@ export default function FullScreenTrabajoSolic({
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
                 setOpenAlert(false);
                 setTimeout(() => {
+                    onClose && (onClose(), setActiveStep(0));
                     requestUpdate();
-                    // router.push("/app/metricas/trabajos", { scroll: false });
+                    router.push("/app/metricas/trabajos?tab=1", { scroll: false });
                 }, 3000);
             }
         } catch (error: any) {
@@ -280,6 +306,7 @@ export default function FullScreenTrabajoSolic({
                                 <IconButton
                                     sx={{
                                         flexGrow: 1,
+                                        marginTop: "-27px",
                                     }}
                                     edge="start"
                                     size="small"
@@ -315,13 +342,13 @@ export default function FullScreenTrabajoSolic({
                             />
                             <Divider>Ganancias</Divider>
                             <ChipValue
-                                label={"Comisíon 7%"}
+                                label={"Comisíon 14%"}
                                 value={fourteenPercent}
                                 color={"warning"}
                                 size={"medium"}
                             />
                             <ChipValue
-                                label={"Ganancia mínima estimada"}
+                                label={"Ganancia estimada"}
                                 value={finalCost}
                                 color={"success"}
                                 size={"large"}
@@ -473,94 +500,32 @@ export default function FullScreenTrabajoSolic({
                             <Box
                                 sx={{
                                     display: "flex",
-                                    justifyContent: "space-between",
+                                    justifyContent: "end",
                                     gap: 1,
                                 }}
                             >
-                                <Typography variant="body1">
-                                    Fecha y hora:
-                                </Typography>
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        flexDirection: "row",
+                                        justifyContent: "space-between",
                                         gap: 1,
                                     }}
                                 >
                                     <Box
                                         sx={{
                                             display: "flex",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
-                                        }}
-                                    >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                        >
-                                            {metric.hour % 12 || 12}
-                                            :00
-                                            {metric.hour < 12 ? "am" : "pm"}
-                                        </Typography>
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
                                             flexDirection: "column",
-                                            alignItems: "center",
-                                            alignSelf: "center",
-                                            paddingX: 1.5,
-                                            paddingY: 0.3,
-                                            borderRadius: 1,
-                                            border: "1px #d9d9d9 solid",
-                                            "&:hover": {
-                                                opacity: 0.9,
-                                            },
-                                            boxShadow: "0 0 1px 3px #ffd234",
+                                            gap: 1,
                                         }}
                                     >
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[0].replace(
-                                                /\./g,
-                                                ""
-                                            )}
+                                        <Typography variant="body1">
+                                            Fecha y hora:
                                         </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="body1"
-                                            fontWeight={"bold"}
-                                        >
-                                            {metric.selectedDay[1]}
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                pointerEvents: "none",
-                                            }}
-                                            variant="caption"
-                                            color="text.secondary"
-                                        >
-                                            {metric.selectedDay[2]}
-                                        </Typography>
+                                        <Hour hour={metric.hour} />
                                     </Box>
+                                    <Day day={metric.selectedDay} />
                                 </Box>
+                                <Divider orientation="vertical" />
                             </Box>
                             <Divider
                                 variant="middle"
@@ -1139,7 +1104,7 @@ export default function FullScreenTrabajoSolic({
                         orientation="horizontal"
                         sx={{
                             p: 2,
-                            backgroundColor: "text.primary",
+                            backgroundColor: "primary.dark",
                             borderBottomLeftRadius: "1.5rem",
                             borderBottomRightRadius: "1.5rem",
                             flexGrow: 1,
@@ -1218,9 +1183,10 @@ export default function FullScreenTrabajoSolic({
                                 "¿Estás seguro que quieres cancelar el trabajo?"
                             }
                             description={
-                                " Estás a punto de cancelar el trabajo. Solo hazlo si el cliente no está de acuerdo con el trabajo."
+                                " Estás a punto de cancelar el trabajo. Solo hazlo si el cliente no está de acuerdo con tus servicios."
                             }
                             onConfirm={() => {
+                                handleCancelJob();
                                 handleClose();
                             }}
                             buttonProps={"¡Cancelar trabajo!"}
@@ -1233,10 +1199,10 @@ export default function FullScreenTrabajoSolic({
                                 <ListItemText
                                     primary={"Cancelar trabajo"}
                                     secondary={
-                                        "Cancela el trabajo si el cliente no está de acuerdo con el trabajo"
+                                        "Cancela el trabajo si el cliente no está de acuerdo con tus servicios"
                                     }
                                 />
-                            </ListItemButton>{" "}
+                            </ListItemButton>
                         </DialogPer>
                     </Menu>
                 </Stack>
