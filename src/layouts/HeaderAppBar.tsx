@@ -539,7 +539,7 @@ export default function HeaderAppBar({
                             <MenuItem
                                 onClick={handleClose}
                                 component={Link}
-                                href="/auth/Signout"
+                                href="/Auth/Signout"
                             >
                                 <ListItemIcon>
                                     <Logout fontSize="small" />

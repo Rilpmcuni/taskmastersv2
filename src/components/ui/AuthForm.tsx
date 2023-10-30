@@ -60,7 +60,7 @@ export default function AuthForm() {
                 providers={[]}
                 socialLayout="horizontal"
                 showLinks={false}
-                redirectTo="https://localhost:3000/auth/Callback"
+                redirectTo="https://localhost:3000/Auth/Callback"
             />
             {/* <Auth
       supabaseClient={supabase}
@@ -69,7 +69,7 @@ export default function AuthForm() {
       theme="dark"
       showLinks={false}
       providers={[]}
-      redirectTo="http://localhost:3000/auth/Callback"
+      redirectTo="http://localhost:3000/Auth/Callback"
     /> */}
         </>
     );
