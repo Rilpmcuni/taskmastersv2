@@ -194,7 +194,9 @@ export default function Home() {
                                 display: "flex",
                                 flexDirection: "row",
                                 alignItems: "center",
-                                justifyContent: "space-evenly",
+                                // justifyContent: "space-evenly",
+                                justifyContent: "center",
+                                gap: 1,
                             }}
                         >
                             <PaymentsTwoToneIcon
