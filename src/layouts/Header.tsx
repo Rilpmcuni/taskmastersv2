@@ -100,7 +100,7 @@ export default function Header() {
                 <TemporaryDrawer/>
                 <Button
                     variant="outlined"
-                    href={`/Auth`}
+                    href={`/auth`}
                     sx={{
                         display: {
                             xs: "none",

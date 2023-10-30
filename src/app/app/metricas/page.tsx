@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/es"; // importa el locale español
 
 import weekOfYear from "dayjs/plugin/weekOfYear";
-
+import PaymentsTwoToneIcon from "@mui/icons-material/PaymentsTwoTone";
 import isBetween from "dayjs/plugin/isBetween";
 import HeroCards from "@/components/ui/HeroCards";
 import {
@@ -192,11 +192,18 @@ export default function Home() {
                         <CardContent
                             sx={{
                                 display: "flex",
-                                flexDirection: "column",
+                                flexDirection: "row",
                                 alignItems: "center",
-                                textAlign: "center",
+                                justifyContent: "space-evenly",
                             }}
                         >
+                            <PaymentsTwoToneIcon
+                                color="primary"
+                                // fontSize="large"
+                                sx={{
+                                    fontSize: "3rem",
+                                }}
+                            />
                             <SlotCounter
                                 // containerClassName="conta"
                                 // dummyCharacters={"450.000".split("")}
@@ -224,10 +231,11 @@ export default function Home() {
                     variant="caption"
                     sx={{
                         display: "flex",
-                        flexDirection: "column",
+                        // flexDirection: "column",
                         // alignSelf: "flex-end",
                         // justifySelf: "flex-end",
                         textAlign: "end",
+                        color:"text.secondary"
                     }}
                 >
                     {(currentWeekEarnings

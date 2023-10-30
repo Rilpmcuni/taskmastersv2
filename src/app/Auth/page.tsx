@@ -36,14 +36,14 @@ export default function Auth() {
     const router = useRouter();
     // useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
-        // if (event == "SIGNED_IN") router.push("/Auth/Callback");
+        // if (event == "SIGNED_IN") router.push("/auth/Callback");
 
         if (event == "SIGNED_IN") {
-            router.push("/Auth/Callback");
+            router.push("/auth/Callback");
             setOpen(true);
         }
         // if (event == "INITIAL_SESSION") {
-        //     router.push("/Auth/Callback");
+        //     router.push("/auth/Callback");
         // }
     });
     // }, []);
