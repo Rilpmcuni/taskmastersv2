@@ -71,6 +71,7 @@ export default function HeroCards({
                 <Card
                     variant="outlined"
                     sx={{
+                        border: "hidden",
                         margin: "0.5rem",
                         opacity: 0.8,
                         backgroundImage: `repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 32px ), repeating-linear-gradient( #ffdb5c55, #449aff )`,
@@ -112,6 +113,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
+                            border: "hidden",
                             backgroundColor: `${
                                 publishedData.length > 0
                                     ? `${theme.palette.info.light}50`
@@ -180,6 +182,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
+                            border: "hidden",
                             backgroundColor: `${
                                 solicitedDataSolicited.length > 0
                                     ? `${theme.palette.primary.light}50`
@@ -246,6 +249,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
+                            border: "hidden",
                             backgroundColor: `${
                                 solicitedDataSolicited.length > 0
                                     ? `${theme.palette.error.light}50`
@@ -301,6 +305,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
+                            border: "hidden",
                             backgroundColor: `${
                                 solicitedDataInProgress.length > 0
                                     ? `${theme.palette.success.light}50`

@@ -188,6 +188,7 @@ export default function Home() {
                                 backgroundPosition: "108px 54px",
                             },
                         },
+                        border: "hidden",
                     }}
                 >
                     <CardActionArea
