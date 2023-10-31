@@ -62,7 +62,7 @@ const MetricCard = ({
                 key={index}
                 variant="outlined"
                 sx={{
-                    borderColor: "primary.main",
+                    borderColor: "info.main",
                 }}
             >
                 <CardContent>

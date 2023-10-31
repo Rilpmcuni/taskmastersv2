@@ -1,7 +1,7 @@
 import { useSession } from "@/contexts/SessionContext";
 import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
-
+import { darken } from "@mui/system";
 import {
     Card,
     CardActionArea,
@@ -64,10 +64,6 @@ export default function HeroCards({
     const solicitedDataFinalized = solicitedData.filter(
         (metric) => metric.status === "finalized"
     );
-    const StyledSlotCounter = styled(SlotCounter)(({ theme }) => ({
-        height: "100%",
-        color: "#fff",
-    }));
 
     return (
         <>
@@ -76,10 +72,9 @@ export default function HeroCards({
                     variant="outlined"
                     sx={{
                         margin: "0.5rem",
-                        // backgroundColor: #ffffff,
                         opacity: 0.8,
-                        backgroundImage:
-                            "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 32px ), repeating-linear-gradient( #D9D9D955, #D9D9D9 )",
+                        backgroundImage: `repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 32px ), repeating-linear-gradient( #ffdb5c55, #449aff )`,
+                        color: darken(theme.palette.text.primary, 0.6),
                     }}
                 >
                     <CardActionArea
@@ -116,9 +111,42 @@ export default function HeroCards({
                 <Grid item xs={6}>
                     <Card
                         variant="outlined"
-                        // sx={{
-                        //     backgroundColor: theme.palette.success.light,
-                        // }}
+                        sx={{
+                            backgroundColor: `${
+                                publishedData.length > 0
+                                    ? `${theme.palette.info.light}50`
+                                    : "#E0E0E0"
+                            }`,
+                            opacity: 0.8,
+
+                            background: `radial-gradient(circle, transparent 20%, ${
+                                publishedData.length > 0 ? `#cea8cc` : "#E0E0E0"
+                            } 20%, ${
+                                publishedData.length > 0 ? `#cea8cc` : "#E0E0E0"
+                            } 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, ${
+                                publishedData.length > 0 ? `#cea8cc` : "#E0E0E0"
+                            } 20%, ${
+                                publishedData.length > 0 ? `#cea8cc` : "#E0E0E0"
+                            } 80%, transparent 80%, transparent) 60px 60px, linear-gradient(${
+                                publishedData.length > 0
+                                    ? theme.palette.info.light
+                                    : "#AFAFAF"
+                            } 4.800000000000001px, transparent 4.800000000000001px) 0 -2.4000000000000004px, linear-gradient(90deg, ${
+                                publishedData.length > 0
+                                    ? theme.palette.info.light
+                                    : "#AFAFAF"
+                            } 4.800000000000001px, ${
+                                publishedData.length > 0 ? `#cea8cc` : "#E0E0E0"
+                            } 4.800000000000001px) -2.4000000000000004px 0`,
+                            backgroundSize:
+                                "120px 120px, 120px 120px, 60px 60px, 60px 60px",
+                            color: darken(
+                                publishedData.length > 0
+                                    ? theme.palette.info.dark
+                                    : "#000",
+                                0.6
+                            ),
+                        }}
                     >
                         <CardActionArea
                             LinkComponent={Link}
@@ -152,7 +180,35 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
-                            backgroundColor: theme.palette.primary.light,
+                            backgroundColor: `${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.primary.light}50`
+                                    : "#E0E0E0"
+                            }`,
+                            opacity: 0.8,
+                            background: `repeating-linear-gradient( 45deg, ${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.primary.light}`
+                                    : "#AFAFAF"
+                            }, ${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.primary.light}`
+                                    : "#AFAFAF"
+                            } 20px, ${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.primary.light}50`
+                                    : "#E0E0E0"
+                            } 20px, ${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.primary.light}50`
+                                    : "#E0E0E0"
+                            } 100px )`,
+                            color: darken(
+                                publishedData.length > 0
+                                    ? theme.palette.primary.dark
+                                    : "#000",
+                                0.6
+                            ),
                         }}
                     >
                         <CardActionArea
@@ -179,9 +235,7 @@ export default function HeroCards({
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
                                 />
-                                <Typography
-                                    variant="body1"
-                                >
+                                <Typography variant="body1">
                                     Trabajos solicitados
                                 </Typography>
                             </CardContent>
@@ -192,7 +246,32 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
-                            backgroundColor: theme.palette.error.light,
+                            backgroundColor: `${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.error.light}50`
+                                    : "#E0E0E0"
+                            }`,
+                            opacity: 0.8,
+                            backgroundImage: `linear-gradient(${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.error.light}`
+                                    : "#AFAFAF"
+                            } 4px, transparent 4px), linear-gradient(to right, ${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.error.light}`
+                                    : "#AFAFAF"
+                            } 4px, ${
+                                solicitedDataSolicited.length > 0
+                                    ? `${theme.palette.error.light}50`
+                                    : "#E0E0E0"
+                            } 4px)`,
+                            backgroundSize: "80px 80px",
+                            color: darken(
+                                publishedData.length > 0
+                                    ? theme.palette.error.dark
+                                    : "#000",
+                                0.6
+                            ),
                         }}
                     >
                         <CardActionArea>
@@ -222,7 +301,35 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
-                            backgroundColor: theme.palette.success.light,
+                            backgroundColor: `${
+                                solicitedDataInProgress.length > 0
+                                    ? `${theme.palette.success.light}50`
+                                    : "#E0E0E0"
+                            }`,
+                            opacity: 0.8,
+                            background: `repeating-linear-gradient( -45deg, ${
+                                solicitedDataInProgress.length > 0
+                                    ? `${theme.palette.success.light}`
+                                    : "#AFAFAF"
+                            }, ${
+                                solicitedDataInProgress.length > 0
+                                    ? `${theme.palette.success.light}`
+                                    : "#AFAFAF"
+                            } 20px, ${
+                                solicitedDataInProgress.length > 0
+                                    ? `${theme.palette.success.light}50`
+                                    : "#E0E0E0"
+                            } 20px, ${
+                                solicitedDataInProgress.length > 0
+                                    ? `${theme.palette.success.light}50`
+                                    : "#E0E0E0"
+                            } 100px )`,
+                            color: darken(
+                                publishedData.length > 0
+                                    ? theme.palette.success.dark
+                                    : "#000",
+                                0.6
+                            ),
                         }}
                     >
                         <CardActionArea

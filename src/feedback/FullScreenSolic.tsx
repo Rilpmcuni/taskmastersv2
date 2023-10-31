@@ -586,7 +586,7 @@ export default function FullScreenSolic({
                         orientation="horizontal"
                         sx={{
                             p: 2,
-                            backgroundColor: "text.primary",
+                            backgroundColor: "info.main",
                             borderBottomLeftRadius: "1.5rem",
                             // borderTopLeftRadius: "1.5rem",
                             flexGrow: 1,
