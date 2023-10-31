@@ -150,8 +150,9 @@ export default function HeroCards({
                         sx={{
                             backgroundColor: "#ffffff",
                             opacity: 0.8,
-                            background:
-                                "repeating-linear-gradient( 45deg, #449aff, #449aff 16px, #ffffff 16px, #ffffff 80px )",
+                            backgroundImage:
+                                "radial-gradient(circle at center center, #449aff, #ffffff), repeating-radial-gradient(circle at center center, #449aff, #449aff, 29px, transparent 58px, transparent 29px)",
+                            backgroundblendmode: "multiply",
                         }}
                     >
                         <CardActionArea
@@ -189,8 +190,8 @@ export default function HeroCards({
                             backgroundColor: "#ffffff",
                             opacity: 0.8,
                             backgroundImage:
-                                "linear-gradient(#EF5350 1px, transparent 1px), linear-gradient(to right, #EF5350 1px, #ffffff 1px)",
-                            backgroundSize: "20px 20px",
+                                "radial-gradient(circle at center center, #EF5350, #ffffff), repeating-radial-gradient(circle at center center, #EF5350, #EF5350, 29px, transparent 58px, transparent 29px)",
+                            backgroundblendmode: "multiply",
                         }}
                     >
                         <CardActionArea>
@@ -222,8 +223,9 @@ export default function HeroCards({
                         sx={{
                             backgroundColor: "#ffffff",
                             opacity: 0.8,
-                            background:
-                                "repeating-linear-gradient( -45deg, #4CAF50, #4CAF50 16px, #ffffff 16px, #ffffff 80px )",
+                            backgroundImage:
+                                "radial-gradient(circle at center center, #4CAF50, #ffffff), repeating-radial-gradient(circle at center center, #4CAF50, #4CAF50, 29px, transparent 58px, transparent 29px)",
+                            backgroundblendmode: "multiply",
                         }}
                     >
                         <CardActionArea

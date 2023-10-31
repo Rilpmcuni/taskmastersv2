@@ -231,12 +231,12 @@ export default function Home() {
                 </Card>
                 <Typography
                     variant="caption"
+                    textAlign="end"
                     sx={{
                         display: "flex",
                         // flexDirection: "column",
                         // alignSelf: "flex-end",
                         // justifySelf: "flex-end",
-                        textAlign: "end",
                         color:"text.secondary"
                     }}
                 >
