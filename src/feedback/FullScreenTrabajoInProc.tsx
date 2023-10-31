@@ -40,14 +40,14 @@ import {
     StepLabel,
     Stepper,
 } from "@mui/material";
-import dayjs from "dayjs";
-import "dayjs/locale/es";
 import Logo from "@/components/ui/Logo";
 import { useSession } from "@/contexts/SessionContext";
 import Link from "next/link";
 import TextFieldPrice from "@/components/ui/TextFieldPrice";
 import ChipValue from "@/components/ui/ChipValue";
 import DialogPer from "./DialogPer";
+import dayjs from "dayjs";
+import "dayjs/locale/es";
 import Hour from "@/components/ui/Hour";
 import Day from "@/components/ui/Day";
 

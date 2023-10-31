@@ -48,7 +48,7 @@ const theme = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    textTransform:"capitalize",
+                    textTransform: "capitalize",
                     // fontWeight: "bold",
                     boxShadow: "none",
                     "&:hover": {
@@ -78,6 +78,12 @@ const theme = createTheme({
         text: {
             primary: "#1e293b",
         },
+        success: {
+            main: '#00af54',
+          },
+          error: {
+            main: '#fe4a49',
+          },
         divider: "#d9d9d9",
     },
     shape: {

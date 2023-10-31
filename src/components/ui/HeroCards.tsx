@@ -1,4 +1,7 @@
 import { useSession } from "@/contexts/SessionContext";
+import { useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
+
 import {
     Card,
     CardActionArea,
@@ -19,6 +22,7 @@ export default function HeroCards({
     metrics: any;
     profile: any;
 }) {
+    const theme = useTheme();
     const sortedMetrics = metrics ? [...metrics] : [];
 
     sortedMetrics.sort((a, b) => {
@@ -60,6 +64,10 @@ export default function HeroCards({
     const solicitedDataFinalized = solicitedData.filter(
         (metric) => metric.status === "finalized"
     );
+    const StyledSlotCounter = styled(SlotCounter)(({ theme }) => ({
+        height: "100%",
+        color: "#fff",
+    }));
 
     return (
         <>
@@ -108,13 +116,9 @@ export default function HeroCards({
                 <Grid item xs={6}>
                     <Card
                         variant="outlined"
-                        sx={{
-                            backgroundColor: "#ffffff",
-                            opacity: 0.8,
-                            backgroundImage:
-                                "radial-gradient(circle at center center, #FFDB5C, #ffffff), repeating-radial-gradient(circle at center center, #FFDB5C, #FFDB5C, 29px, transparent 58px, transparent 29px)",
-                            backgroundblendmode: "multiply",
-                        }}
+                        // sx={{
+                        //     backgroundColor: theme.palette.success.light,
+                        // }}
                     >
                         <CardActionArea
                             LinkComponent={Link}
@@ -148,11 +152,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
-                            backgroundColor: "#ffffff",
-                            opacity: 0.8,
-                            backgroundImage:
-                                "radial-gradient(circle at center center, #449aff, #ffffff), repeating-radial-gradient(circle at center center, #449aff, #449aff, 29px, transparent 58px, transparent 29px)",
-                            backgroundblendmode: "multiply",
+                            backgroundColor: theme.palette.primary.light,
                         }}
                     >
                         <CardActionArea
@@ -169,6 +169,7 @@ export default function HeroCards({
                                     flexDirection: "column",
                                     alignItems: "center",
                                     textAlign: "center",
+                                    // color: theme.palette.success.dark,
                                 }}
                             >
                                 <SlotCounter
@@ -178,7 +179,11 @@ export default function HeroCards({
                                     charClassName="charMini"
                                     separatorClassName="sepaMini"
                                 />
-                                <Typography>Trabajos solicitados</Typography>
+                                <Typography
+                                    variant="body1"
+                                >
+                                    Trabajos solicitados
+                                </Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>
@@ -187,11 +192,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
-                            backgroundColor: "#ffffff",
-                            opacity: 0.8,
-                            backgroundImage:
-                                "radial-gradient(circle at center center, #EF5350, #ffffff), repeating-radial-gradient(circle at center center, #EF5350, #EF5350, 29px, transparent 58px, transparent 29px)",
-                            backgroundblendmode: "multiply",
+                            backgroundColor: theme.palette.error.light,
                         }}
                     >
                         <CardActionArea>
@@ -221,11 +222,7 @@ export default function HeroCards({
                     <Card
                         variant="outlined"
                         sx={{
-                            backgroundColor: "#ffffff",
-                            opacity: 0.8,
-                            backgroundImage:
-                                "radial-gradient(circle at center center, #4CAF50, #ffffff), repeating-radial-gradient(circle at center center, #4CAF50, #4CAF50, 29px, transparent 58px, transparent 29px)",
-                            backgroundblendmode: "multiply",
+                            backgroundColor: theme.palette.success.light,
                         }}
                     >
                         <CardActionArea

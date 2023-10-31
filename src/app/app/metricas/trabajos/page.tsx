@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
     Alert,
     AlertTitle,
@@ -18,7 +18,10 @@ import FullScreenTrabajoInProc from "@/feedback/FullScreenTrabajoInProc";
 import FullScreenTrabajoInFini from "@/feedback/FullScreenTrabajoInFini";
 import { useSession } from "@/contexts/SessionContext";
 import BasicTabs from "@/components/ui/BasicTabs";
-
+import dayjs from "dayjs";
+import "dayjs/locale/es";
+import Hour from "@/components/ui/Hour";
+import Day from "@/components/ui/Day";
 interface MetricCardProps {
     metric: {
         id: any;
@@ -28,7 +31,7 @@ interface MetricCardProps {
         selectedDetailService: string;
         selectedDay: string[];
         hour: number;
-        status: 'solicited' | 'inProgress' | 'finalized';
+        status: "solicited" | "inProgress" | "finalized";
         // Agrega aquí las demás propiedades de 'metric' con sus respectivos tipos
     };
     index: number;
@@ -69,9 +72,9 @@ const MetricCard = ({
     const preliminaryCost = calculatePreliminaryCost(metric);
 
     const statusToComponent = {
-        'solicited': FullScreenTrabajoSolic,
-        'inProgress': FullScreenTrabajoInProc,
-        'finalized': FullScreenTrabajoInFini
+        solicited: FullScreenTrabajoSolic,
+        inProgress: FullScreenTrabajoInProc,
+        finalized: FullScreenTrabajoInFini,
     };
 
     const FullScreenComponent = statusToComponent[metric.status];
@@ -270,6 +273,21 @@ const NothingCard = ({ on }: NothingCardProps) => {
 };
 
 export default function Home() {
+    dayjs.locale("es");
+    const [currentHour, setCurrentHour] = useState(dayjs().hour());
+    const [currentDay, setCurrentDay] = useState(
+        dayjs().format("ddd D MMM").split(" ")
+    );
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentHour(dayjs().hour());
+            setCurrentDay(dayjs().format("ddd D MMM").split(" "));
+        }, 60000); // Actualiza cada minuto
+
+        // Limpia el intervalo cuando el componente se desmonta
+        return () => clearInterval(interval);
+    }, []);
     const [openDialogId, setOpenDialogId] = useState<number | null>(null);
     const { metrics, sessionData } = useSession();
 
@@ -313,28 +331,62 @@ export default function Home() {
                 <Stack
                     width={"100%"}
                     display="flex"
-                    flexDirection={"column"}
-                    flexWrap={"wrap"}
-                    direction={"column"}
+                    flexDirection={"row"}
+                    paddingX={1}
+                    // flexWrap={"wrap"}
+                    direction={"row"}
+                    alignItems={"center"}
                     spacing={1}
                 >
-                    <Typography
-                        variant="h5"
-                        paddingTop={1}
-                        paddingX={1}
-                        paddingBottom={0}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 1,
+                        }}
                     >
-                        Lista de trabajos
-                    </Typography>
-                    <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        paddingTop={0}
-                        paddingX={1}
-                        // paddingBottom={1}
+                        <Typography
+                            variant="h5"
+                            paddingTop={1}
+                            paddingBottom={0}
+                        >
+                            Lista de trabajos
+                        </Typography>
+                        <Typography
+                            variant="caption"
+                            color="text.secondary"
+                            paddingTop={0}
+                            // paddingBottom={1}
+                        >
+                            Acá puedes ver el estado de tus trabajos
+                        </Typography>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 1,
+                            border: "1px #d9d9d9 solid",
+                            borderRadius: 1,
+                            padding: 1,
+                                height: "fit-content",
+
+                        }}
                     >
-                        Acá puedes ver el estado de tus trabajos
-                    </Typography>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 1,
+                                height: "fit-content",
+                            }}
+                        >
+                            <Typography variant="body1">Hoy:</Typography>
+                            <Hour hour={currentHour} />
+                        </Box>
+                        <Day day={currentDay} />
+                    </Box>
                 </Stack>
                 <BasicTabs
                     labels={["Solicitados", "En proceso", "Finalizados"]}

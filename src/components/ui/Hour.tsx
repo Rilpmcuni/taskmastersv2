@@ -16,6 +16,7 @@ export default function Hour({ hour }: { hour: number }) {
                     opacity: 0.9,
                 },
                 boxShadow: "0 0 1px 3px #ffd234",
+                height: "fit-content"
             }}
         >
             <Typography
