@@ -179,6 +179,15 @@ export default function Home() {
                         backgroundImage:
                             "radial-gradient(#449aff 0.9px, #ffdb5c 0.9px)",
                         backgroundSize: "18px 18px",
+                        animation: "backgroundScroll 6s linear infinite",
+                        "@keyframes backgroundScroll": {
+                            "0%": {
+                                backgroundPosition: "0 0",
+                            },
+                            "100%": {
+                                backgroundPosition: "108px 54px",
+                            },
+                        },
                     }}
                 >
                     <CardActionArea
@@ -233,11 +242,9 @@ export default function Home() {
                     variant="caption"
                     textAlign="end"
                     sx={{
-                        display: "flex",
-                        // flexDirection: "column",
-                        // alignSelf: "flex-end",
-                        // justifySelf: "flex-end",
-                        color:"text.secondary"
+                        display: "block",
+                        alignSelf: "flex-end",
+                        color: "text.secondary",
                     }}
                 >
                     {(currentWeekEarnings

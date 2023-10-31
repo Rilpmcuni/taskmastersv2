@@ -337,6 +337,7 @@ export default function Home() {
                     direction={"row"}
                     alignItems={"center"}
                     spacing={1}
+                    justifyContent={"space-between"}
                 >
                     <Box
                         sx={{
