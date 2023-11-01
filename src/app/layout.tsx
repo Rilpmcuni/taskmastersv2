@@ -12,9 +12,9 @@ const capriola = Capriola({
 });
 
 export const metadata = {
-    title: "Reviasa | La solución tecnológica para todos",
+    title: "Reviasa | Conectando hogares con profesionales de servicios",
     description:
-        "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+        "¡Bienvenido a Reviasa! Somos tu enlace con los profesionales más talentosos en servicios para el hogar. Explora las oportunidades para unirte a nuestro alegre equipo y ayuda a llevar la comodidad y la felicidad a cada hogar.",
     mobileWebAppCapable: "yes",
     generator: "Reviasa",
     applicationName: "Reviasa",
@@ -42,7 +42,7 @@ export const metadata = {
     openGraph: {
         title: "Reviasa",
         description:
-            "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+            "¡Bienvenido a Reviasa! Somos tu enlace con los profesionales más talentosos en servicios para el hogar. Explora las oportunidades para unirte a nuestro alegre equipo y ayuda a llevar la comodidad y la felicidad a cada hogar.",
         url: "https://Reviasa.vercel.app/",
         images: "/image.png",
         siteName: "Reviasa",
@@ -64,9 +64,9 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Reviasa | La solución tecnológica para todos",
+        title: "Reviasa | Conectando hogares con profesionales de servicios",
         description:
-            "Reviasa: La solución tecnológica para todos, impulsa la eficiencia y ofrece herramientas innovadoras para resultados excepcionales",
+            "¡Bienvenido a Reviasa! Somos tu enlace con los profesionales más talentosos en servicios para el hogar. Explora las oportunidades para unirte a nuestro alegre equipo y ayuda a llevar la comodidad y la felicidad a cada hogar.",
         siteId: "1467726470533754880",
         creator: "@Reviasa",
         creatorId: "1467726470533754880",
@@ -101,7 +101,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es">
-            <body className={capriola.className} style={{ margin: 0 }}>
+            <body
+                className={capriola.className}
+                style={{ margin: 0, overscrollBehaviorY: "contain" }}
+            >
                 <ThemeRegistry options={{ key: "mui" }}>
                     <NextNProgressClient>{children}</NextNProgressClient>
                 </ThemeRegistry>

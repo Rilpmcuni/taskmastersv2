@@ -233,7 +233,7 @@ export default function HeaderAppBar({
     /*  */
     /*  */
     return (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", userSelect: "none" }}>
             {/* desktop */}
 
             {/* desktop */}
