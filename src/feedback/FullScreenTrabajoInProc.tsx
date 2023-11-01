@@ -1002,7 +1002,7 @@ export default function FullScreenTrabajoInProc({
                         width={"100%"}
                         padding={1}
                     >
-                        <Logo />
+                        <Logo app={true} />
 
                         <Typography variant="h5" fontWeight={"bold"}>
                             ¡Trabajo Solicitado!
@@ -1211,7 +1211,7 @@ export default function FullScreenTrabajoInProc({
                                                 gap: 0.5,
                                             }}
                                         >
-                                            <Logo />
+                                            <Logo app={true} />
                                             {metric.isEmergency ? (
                                                 <Chip
                                                     label="¡Emergencia!"

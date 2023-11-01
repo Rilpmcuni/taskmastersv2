@@ -286,7 +286,7 @@ export default function HeaderAppBar({
                                                 justifyContent: "center",
                                             }}
                                         >
-                                            <Logo />
+                                            <Logo app={true} />
                                         </Box>
                                         <Divider variant="middle" />
                                         <List>
@@ -487,7 +487,7 @@ export default function HeaderAppBar({
                             height={33}
                             priority
                         /> */}
-                        <Logo />
+                        <Logo app={true} />
                         <Tooltip
                             title="Configurar Perfil"
                             arrow

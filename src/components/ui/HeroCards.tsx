@@ -291,8 +291,8 @@ export default function HeroCards({
                                     value="12"
                                     sequentialAnimationMode
                                     useMonospaceWidth
-                                    charClassName="charMini"
-                                    separatorClassName="sepaMini"
+                                    charClassName="charMd"
+                                    separatorClassName="sepaMd"
                                 />
                                 <Typography>
                                     Valoraciones de clientes

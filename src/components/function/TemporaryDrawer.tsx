@@ -82,7 +82,7 @@ export default function TemporaryDrawer() {
                     justifyContent: "space-around",
                 }}
             >
-                <Logo />
+                <Logo app={true} />
                 <IconButton onClick={toggleDrawer(anchor, false)}>
                     <ClearRoundedIcon />
                 </IconButton>

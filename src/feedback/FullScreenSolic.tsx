@@ -640,7 +640,7 @@ export default function FullScreenSolic({
                                                 gap: 0.5,
                                             }}
                                         >
-                                            <Logo />
+                                            <Logo app={true} />
                                             {metric.isEmergency ? (
                                                 <Chip
                                                     label="¡Emergencia!"

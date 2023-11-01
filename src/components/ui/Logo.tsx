@@ -12,7 +12,7 @@ import LlavasaLogo from "@/../public/images/LlavasaLogo.svg";
 import Reviasa from "@/../public/images/ReviasaLogo.svg";
 import Mudasa from "@/../public/images/MudasaLogo.svg";
 
-export default function Logo() {
+export default function Logo({ app = false }: { app?: boolean }) {
     return (
         <Box
             sx={{
@@ -25,7 +25,7 @@ export default function Logo() {
         >
             <CardActionArea
                 LinkComponent={Link}
-                href={"/"}
+                href={app ? "/app/metricas" : "/"}
                 sx={{
                     display: "flex",
                     flexDirection: "row",
@@ -45,26 +45,6 @@ export default function Logo() {
                     },
                 }}
             >
-                {/* <LinkMui
-                    component={Link}
-                    href={"/"}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "inherit",
-                        textDecoration: "none",
-                        transition: "all 1s ease-out",
-                        "&:hover": {
-                            "& .hoverable": {
-                                backgroundPosition: "-40%", // Cambia la posición del fondo al hacer hover
-                            },
-                            boxShadow: "0 0 1px 2px #ffd234",
-                            borderRadius: "1rem",
-                        },
-                    }}
-                > */}
                 <Image
                     style={{ pointerEvents: "none" }}
                     className=""
