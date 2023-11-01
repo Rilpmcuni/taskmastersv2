@@ -103,7 +103,11 @@ export default function RootLayout({
         <html lang="es">
             <body
                 className={capriola.className}
-                style={{ margin: 0, overscrollBehaviorY: "contain" }}
+                style={{
+                    margin: 0,
+                    overscrollBehaviorY: "contain",
+                    userSelect: "none",
+                }}
             >
                 <ThemeRegistry options={{ key: "mui" }}>
                     <NextNProgressClient>{children}</NextNProgressClient>
