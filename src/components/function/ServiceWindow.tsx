@@ -111,6 +111,7 @@ export default function ServiceWindow({
     };
     const [name, setName] = React.useState("");
     const [adress, setAdress] = useState("");
+    const topRef = React.useRef<HTMLDivElement>(null);
     const [number, setNumber] = useState("");
     const [clientNote, setClientNote] = useState("");
     const [indications, setIndications] = useState("");
@@ -188,6 +189,7 @@ export default function ServiceWindow({
         } else {
             console.log("Data inserted successfully!");
             handleNext();
+            topRef.current?.scrollIntoView({ behavior: "auto" });
         }
     };
     const handleReset = () => {
@@ -204,7 +206,7 @@ export default function ServiceWindow({
                                 width: "100%",
                             }}
                         >
-                            <Typography variant="body1">
+                            <Typography variant="body2">
                                 {selectedService?.description}
                             </Typography>
                         </CardContent>
@@ -360,7 +362,7 @@ export default function ServiceWindow({
                                 </FormControl>
                                 <TextField
                                     id="outlined-controlled"
-                                    label="Referencian"
+                                    label="Referencian (opcional)"
                                     value={indications}
                                     multiline
                                     placeholder="Ej. Casa azul, esquina..."
@@ -436,7 +438,10 @@ export default function ServiceWindow({
                                             )}
                                     </Typography>
                                 </Box>
-                                <Typography variant="caption" color="text.secondary">
+                                <Typography
+                                    variant="caption"
+                                    color="text.secondary"
+                                >
                                     Mínimo base
                                 </Typography>
                             </Box>
@@ -481,7 +486,10 @@ export default function ServiceWindow({
                                                 })}
                                         </Typography>
                                     </Box>
-                                    <Typography variant="caption" color="text.secondary">
+                                    <Typography
+                                        variant="caption"
+                                        color="text.secondary"
+                                    >
                                         valor del caso en específico
                                     </Typography>
                                 </Box>
@@ -522,15 +530,18 @@ export default function ServiceWindow({
                                                                 selectedDetailService
                                                         )?.price || 0
                                                     )) *
-                                                0.50
+                                                0.5
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
                                                 currency: "CLP",
                                             })}
                                         </Typography>
                                     </Box>
-                                    <Typography variant="caption" color="text.secondary">
-                                        Base del valor total para servicio de
+                                    <Typography
+                                        variant="caption"
+                                        color="text.secondary"
+                                    >
+                                        Base del valor total por servicio de
                                         emergencia
                                     </Typography>
                                 </Box>
@@ -583,7 +594,7 @@ export default function ServiceWindow({
                                                                   service.title ===
                                                                   selectedDetailService
                                                           )?.price || 0)) *
-                                                      0.50
+                                                      0.5
                                                     : 0)
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
@@ -591,7 +602,10 @@ export default function ServiceWindow({
                                             })}
                                     </Typography>
                                 </Box>
-                                <Typography variant="caption" color="text.secondary">
+                                <Typography
+                                    variant="caption"
+                                    color="text.secondary"
+                                >
                                     Puede variar con la decisión final del
                                     profesional
                                 </Typography>
@@ -626,7 +640,7 @@ export default function ServiceWindow({
             ),
         },
         {
-            label: "Revisar información",
+            label: "Revisar Solicitud",
             description: (
                 <>
                     <Box
@@ -754,7 +768,7 @@ export default function ServiceWindow({
                                                                 selectedDetailService
                                                         )?.price || 0
                                                     )) *
-                                                0.50
+                                                0.5
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
                                                 currency: "CLP",
@@ -804,7 +818,7 @@ export default function ServiceWindow({
                                                                   service.title ===
                                                                   selectedDetailService
                                                           )?.price || 0)) *
-                                                      0.50
+                                                      0.5
                                                     : 0)
                                             ).toLocaleString("es-CL", {
                                                 style: "currency",
@@ -1077,17 +1091,16 @@ export default function ServiceWindow({
     };
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        handleScrollTop();
+        topRef.current?.scrollIntoView({ behavior: "auto" });
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-        handleScrollTop();
+        topRef.current?.scrollIntoView({ behavior: "auto" });
     };
 
     return (
         <Box
-            ref={dialogRef}
             sx={{
                 // boxShadow: 4,
                 // maxWidth: "90%",
@@ -1105,6 +1118,7 @@ export default function ServiceWindow({
                 spacing={0.5}
                 paddingLeft={2}
                 alignItems={"center"}
+                ref={topRef}
             >
                 <IconButton
                     edge="start"
@@ -1296,7 +1310,7 @@ export default function ServiceWindow({
                                                                             ?.price ||
                                                                         0
                                                                     )) *
-                                                                0.50
+                                                                0.5
                                                             ).toLocaleString(
                                                                 "es-CL",
                                                                 {
@@ -1356,7 +1370,7 @@ export default function ServiceWindow({
                                                                       )
                                                                           ?.price ||
                                                                           0)) *
-                                                                  0.50
+                                                                  0.5
                                                                 : 0)
                                                         ).toLocaleString(
                                                             "es-CL",
@@ -1386,7 +1400,6 @@ export default function ServiceWindow({
                                             disabled={index === 0}
                                             onClick={() => {
                                                 handleBack();
-                                                handleScrollTop();
                                             }}
                                             variant="outlined"
                                         >
@@ -1409,7 +1422,7 @@ export default function ServiceWindow({
                                                 onClick={handleNext}
                                             >
                                                 {index === steps.length - 2
-                                                    ? "Revisar información"
+                                                    ? "Revisar Solicitud"
                                                     : "Siguiente"}
                                             </Button>
                                         )}

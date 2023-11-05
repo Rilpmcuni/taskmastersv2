@@ -35,19 +35,26 @@ export default function Hero() {
 
     let height = "";
 
-    if (showMore) {
-        if (selectedProduct !== "") {
-            height = "1510px";
-        } else {
-            height = "1240px";
-        }
+    // if (showMore) {
+    //     if (selectedProduct !== "") {
+    //         height = "1510px";
+    //     } else {
+    //         height = "1240px";
+    //     }
+    // } else {
+    //     if (selectedProduct !== "") {
+    //         height = "1240px";
+    //     } else {
+    //         height = "1040px";
+    //     }
+    // }
+
+    if (selectedProduct !== "") {
+        height = "1240px";
     } else {
-        if (selectedProduct !== "") {
-            height = "1240px";
-        } else {
-            height = "1040px";
-        }
+        height = "1040px";
     }
+
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = (product: SetStateAction<string>) => {
         setSelectedProduct(product);
@@ -70,7 +77,7 @@ export default function Hero() {
                 <Box
                     sx={{
                         position: "relative",
-                        height: { xs: height, md: "590px" },
+                        height: { xs: height, md: "800px" },
                         backgroundColor: "#1e293b",
                         borderRadius: "1.5rem",
                     }}
