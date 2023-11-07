@@ -8,7 +8,7 @@ export default function Home() {
         <main>
             <Link href="/app/ficha-profecional">ficha-profecional</Link>
             <Link href="/app/metricas">metricas</Link>
-            <Link href="/app/cobro">cobro</Link>
+            <Link href="/app/balance">balance</Link>
         </main>
     );
 }

@@ -77,9 +77,9 @@ export default function BottonNavigation({ children }: { children: any }) {
                     />
                     <BottomNavigationAction
                         LinkComponent={Link}
-                        href="/app/cobro"
+                        href="/app/balance"
                         onClick={() => setValue(2)}
-                        label="Cobro"
+                        label="Balance"
                         icon={<AccountBalanceWalletRoundedIcon />}
                     />
                 </BottomNavigation>

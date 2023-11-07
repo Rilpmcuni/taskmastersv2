@@ -2,17 +2,20 @@ import { useSession } from "@/contexts/SessionContext";
 import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import { darken } from "@mui/system";
+import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import {
     Card,
     CardActionArea,
     CardContent,
     Grid,
+    IconButton,
     Typography,
 } from "@mui/material";
 import { Link as LinkMui } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import SlotCounter from "react-slot-counter";
+import FullScreenDialogUser from "@/feedback/FullScreenDialogUser";
 export default function HeroCards({
     sessionData,
     metrics,
@@ -64,7 +67,8 @@ export default function HeroCards({
     const solicitedDataFinalized = solicitedData.filter(
         (metric) => metric.status === "finalized"
     );
-
+    //
+    const [dialogOpen, setDialogOpen] = useState(false);
     return (
         <>
             <Grid item xs={12}>
@@ -246,60 +250,58 @@ export default function HeroCards({
                     </Card>
                 </Grid>
                 <Grid item xs={6}>
-                    <Card
-                        variant="outlined"
-                        sx={{
-                            border: "hidden",
-                            backgroundColor: `${
-                                solicitedDataSolicited.length > 0
-                                    ? `${theme.palette.error.light}50`
-                                    : "#E0E0E0"
-                            }`,
-                            opacity: 0.8,
-                            backgroundImage: `linear-gradient(${
-                                solicitedDataSolicited.length > 0
-                                    ? `${theme.palette.error.light}`
-                                    : "#AFAFAF"
-                            } 4px, transparent 4px), linear-gradient(to right, ${
-                                solicitedDataSolicited.length > 0
-                                    ? `${theme.palette.error.light}`
-                                    : "#AFAFAF"
-                            } 4px, ${
-                                solicitedDataSolicited.length > 0
-                                    ? `${theme.palette.error.light}50`
-                                    : "#E0E0E0"
-                            } 4px)`,
-                            backgroundSize: "80px 80px",
-                            color: darken(
-                                publishedData.length > 0
-                                    ? theme.palette.error.dark
-                                    : "#000",
-                                0.6
-                            ),
-                        }}
+                    <FullScreenDialogUser
+                        open={dialogOpen}
+                        onClose={() => setDialogOpen(false)}
                     >
-                        <CardActionArea>
-                            <CardContent
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    textAlign: "center",
-                                }}
-                            >
-                                <SlotCounter
-                                    value="12"
-                                    sequentialAnimationMode
-                                    useMonospaceWidth
-                                    charClassName="charMd"
-                                    separatorClassName="sepaMd"
-                                />
-                                <Typography>
-                                    Valoraciones de clientes
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                        <Card
+                            onClick={() => setDialogOpen(true)}
+                            variant="outlined"
+                            sx={{
+                                border: "hidden",
+                                backgroundColor: `${
+                                    solicitedDataSolicited.length > 0
+                                        ? `${theme.palette.error.light}50`
+                                        : "#E0E0E0"
+                                }`,
+                                opacity: 0.8,
+                                backgroundImage: `linear-gradient(${
+                                    solicitedDataSolicited.length > 0
+                                        ? `${theme.palette.error.light}`
+                                        : "#AFAFAF"
+                                } 4px, transparent 4px), linear-gradient(to right, ${
+                                    solicitedDataSolicited.length > 0
+                                        ? `${theme.palette.error.light}`
+                                        : "#AFAFAF"
+                                } 4px, ${
+                                    solicitedDataSolicited.length > 0
+                                        ? `${theme.palette.error.light}50`
+                                        : "#E0E0E0"
+                                } 4px)`,
+                                backgroundSize: "80px 80px",
+                                color: darken(
+                                    publishedData.length > 0
+                                        ? theme.palette.error.dark
+                                        : "#000",
+                                    0.6
+                                ),
+                            }}
+                        >
+                            <CardActionArea>
+                                <CardContent
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <CreateRoundedIcon />
+                                    <Typography>Crear nuevo trabajo</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </FullScreenDialogUser>
                 </Grid>
                 <Grid item xs={6}>
                     <Card

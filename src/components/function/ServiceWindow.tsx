@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, SetStateAction, useRef } from "react";
+import React, { useState, SetStateAction, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -36,17 +36,20 @@ import TextFieldPhone from "../ui/TextFieldPhone";
 import TextFieldRut from "../ui/TextFieldRut";
 import Sello from "../ui/Sello";
 import { StackedBarChartRounded } from "@mui/icons-material";
-
+interface Service {
+    title: string;
+    price: number;
+    list?: Array<{ title: string; price: number }>;
+}
 export default function ServiceWindow({
     selectedProduct,
     onClose,
+    userId,
 }: {
-    selectedProduct: any;
+    selectedProduct?: any;
     onClose: any;
+    userId?: any;
 }) {
-    let selectedService = ServicesData.find(
-        (service) => service.title === selectedProduct
-    );
     // date
     // date
     dayjs.locale("es");
@@ -109,6 +112,20 @@ export default function ServiceWindow({
         setSelectedDay(selectedDay);
         setSelectedHourIndex(hour);
     };
+
+    const [selectedProductState, setSelectedProductState] =
+        useState(selectedProduct);
+    const [selectedService, setSelectedService] = useState<any | null>(null);
+
+    useEffect(() => {
+        setSelectedService(
+            ServicesData.find(
+                (service) =>
+                    service.title === (selectedProductState || selectedProduct)
+            )
+        );
+    }, [selectedProductState]);
+
     const [name, setName] = React.useState("");
     const [adress, setAdress] = useState("");
     const topRef = React.useRef<HTMLDivElement>(null);
@@ -118,6 +135,9 @@ export default function ServiceWindow({
     const [propiedad, setPropiedad] = React.useState("");
     const handleChange = (event: SelectChangeEvent) => {
         setPropiedad(event.target.value as string);
+    };
+    const handleChangesetSelectedProductState = (event: SelectChangeEvent) => {
+        setSelectedProductState(event.target.value as string);
     };
 
     const [selectedDetailService, setSelectedDetailService] = useState("");
@@ -141,7 +161,7 @@ export default function ServiceWindow({
     const handleRequestNow = async () => {
         const price = [
             {
-                label: `${selectedProduct} desde`,
+                label: `${selectedProductState} desde`,
                 value: selectedService?.price,
             },
         ];
@@ -149,7 +169,8 @@ export default function ServiceWindow({
         if (selectedDetailService !== "") {
             const detailServicePrice =
                 selectedService?.list?.find(
-                    (service) => service.title === selectedDetailService
+                    (service: Service) =>
+                        service.title === selectedDetailService
                 )?.price || 0;
 
             price.push({
@@ -158,12 +179,12 @@ export default function ServiceWindow({
             });
         }
 
-        if (isEmergency && selectedService) {
-            price.push({
-                label: "Emergencias 50% extra",
-                value: 1, // Aquí almacenamos el valor como 1 en lugar de calcular el extra
-            });
-        }
+        // if (isEmergency && selectedService) {
+        //     price.push({
+        //         label: "Emergencias 50% extra",
+        //         value: 1, // Aquí almacenamos el valor como 1 en lugar de calcular el extra
+        //     });
+        // }
 
         const { error } = await supabase.from("request").insert([
             {
@@ -181,6 +202,8 @@ export default function ServiceWindow({
                 selectedDay: selectedDay,
                 hour: hour,
                 price: price,
+                user_id: userId || null,
+                status: userId ? "solicited" : "published",
             },
         ]);
 
@@ -200,6 +223,35 @@ export default function ServiceWindow({
             label: "Detalles del Trabajo",
             description: (
                 <>
+                    {selectedProductState}
+                    {userId && (
+                        <>
+                            <Typography variant="body1" sx={{ paddingY: 1 }}>
+                                ¿Qué necesitas?
+                            </Typography>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">
+                                    selectedProductState
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={selectedProductState}
+                                    label="Propiedad"
+                                    onChange={
+                                        handleChangesetSelectedProductState
+                                    }
+                                >
+                                    {ServicesData.map((service) => (
+                                        <MenuItem value={service.title}>
+                                            {service.title}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </>
+                    )}
+
                     <Card variant="outlined" sx={{ width: "100%" }}>
                         <CardContent
                             sx={{
@@ -417,7 +469,7 @@ export default function ServiceWindow({
                                     }}
                                 >
                                     <Chip
-                                        label={`${selectedProduct} desde`}
+                                        label={`${selectedProductState} desde`}
                                         color="info"
                                         variant="outlined"
                                     />
@@ -476,7 +528,7 @@ export default function ServiceWindow({
                                             {selectedService &&
                                                 (
                                                     selectedService?.list?.find(
-                                                        (service) =>
+                                                        (service: Service) =>
                                                             service.title ===
                                                             selectedDetailService
                                                     )?.price || 0
@@ -525,7 +577,9 @@ export default function ServiceWindow({
                                                 (selectedService.price +
                                                     +(
                                                         selectedService?.list?.find(
-                                                            (service) =>
+                                                            (
+                                                                service: Service
+                                                            ) =>
                                                                 service.title ===
                                                                 selectedDetailService
                                                         )?.price || 0
@@ -583,14 +637,16 @@ export default function ServiceWindow({
                                             (
                                                 selectedService.price +
                                                 (selectedService?.list?.find(
-                                                    (service) =>
+                                                    (service: Service) =>
                                                         service.title ===
                                                         selectedDetailService
                                                 )?.price || 0) +
                                                 (isEmergency
                                                     ? (selectedService.price +
                                                           (selectedService?.list?.find(
-                                                              (service) =>
+                                                              (
+                                                                  service: Service
+                                                              ) =>
                                                                   service.title ===
                                                                   selectedDetailService
                                                           )?.price || 0)) *
@@ -681,7 +737,7 @@ export default function ServiceWindow({
                                     }}
                                 >
                                     <Chip
-                                        label={`${selectedProduct} desde`}
+                                        label={`${selectedProductState} desde`}
                                         color="info"
                                         variant="outlined"
                                     />
@@ -727,7 +783,7 @@ export default function ServiceWindow({
                                             {selectedService &&
                                                 (
                                                     selectedService?.list?.find(
-                                                        (service) =>
+                                                        (service: Service) =>
                                                             service.title ===
                                                             selectedDetailService
                                                     )?.price || 0
@@ -763,7 +819,9 @@ export default function ServiceWindow({
                                                 (selectedService.price +
                                                     +(
                                                         selectedService?.list?.find(
-                                                            (service) =>
+                                                            (
+                                                                service: Service
+                                                            ) =>
                                                                 service.title ===
                                                                 selectedDetailService
                                                         )?.price || 0
@@ -807,14 +865,16 @@ export default function ServiceWindow({
                                             (
                                                 selectedService.price +
                                                 (selectedService?.list?.find(
-                                                    (service) =>
+                                                    (service: Service) =>
                                                         service.title ===
                                                         selectedDetailService
                                                 )?.price || 0) +
                                                 (isEmergency
                                                     ? (selectedService.price +
                                                           (selectedService?.list?.find(
-                                                              (service) =>
+                                                              (
+                                                                  service: Service
+                                                              ) =>
                                                                   service.title ===
                                                                   selectedDetailService
                                                           )?.price || 0)) *
@@ -1211,7 +1271,7 @@ export default function ServiceWindow({
                                                 }}
                                             >
                                                 <Chip
-                                                    label={`${selectedProduct} desde`}
+                                                    label={`${selectedProductState} desde`}
                                                     color="info"
                                                     variant="outlined"
                                                 />
@@ -1258,7 +1318,9 @@ export default function ServiceWindow({
                                                         {selectedService &&
                                                             (
                                                                 selectedService?.list?.find(
-                                                                    (service) =>
+                                                                    (
+                                                                        service: Service
+                                                                    ) =>
                                                                         service.title ===
                                                                         selectedDetailService
                                                                 )?.price || 0
@@ -1302,7 +1364,7 @@ export default function ServiceWindow({
                                                                     +(
                                                                         selectedService?.list?.find(
                                                                             (
-                                                                                service
+                                                                                service: Service
                                                                             ) =>
                                                                                 service.title ===
                                                                                 selectedDetailService
@@ -1355,7 +1417,9 @@ export default function ServiceWindow({
                                                         (
                                                             selectedService.price +
                                                             (selectedService?.list?.find(
-                                                                (service) =>
+                                                                (
+                                                                    service: Service
+                                                                ) =>
                                                                     service.title ===
                                                                     selectedDetailService
                                                             )?.price || 0) +
@@ -1363,7 +1427,7 @@ export default function ServiceWindow({
                                                                 ? (selectedService.price +
                                                                       (selectedService?.list?.find(
                                                                           (
-                                                                              service
+                                                                              service: Service
                                                                           ) =>
                                                                               service.title ===
                                                                               selectedDetailService

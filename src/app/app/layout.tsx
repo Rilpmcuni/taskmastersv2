@@ -9,6 +9,7 @@ import Ubicacion from "@/components/function/Ubicacion";
 import BottonNavigation from "@/components/function/BottonNavigation";
 import HeaderAppBar from "@/layouts/HeaderAppBar";
 import SessionProvider from "@/contexts/SessionContext";
+import SpeedDialBasic from "@/components/ui/speedDialBasic";
 
 export const metadata: Metadata = {
     title: `App | Reviasa`,
@@ -44,6 +45,7 @@ export default function RootEmpleo({
                             }}
                         ></div>
                         {children}
+                        {/* <SpeedDialBasic /> */}
                     </BottonNavigation>
                 </HeaderAppBar>
             </SessionProvider>

@@ -19,6 +19,9 @@ import {
     Typography,
 } from "@mui/material";
 import { useSession } from "@/contexts/SessionContext";
+import SpeedDialBasic from "@/components/ui/speedDialBasic";
+import FullScreenDialogUser from "@/feedback/FullScreenDialogUser";
+import { SetStateAction, useState } from "react";
 export default function Home() {
     const { sessionData, metrics, profile } = useSession();
 
@@ -161,6 +164,8 @@ export default function Home() {
     const currentMonthEarnings = Object.values(
         earningsByMonthAndWeek[currentMonth] ?? {}
     ).reduce((sum, value) => sum + value, 0);
+    //
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     return (
         <main>
@@ -193,7 +198,7 @@ export default function Home() {
                 >
                     <CardActionArea
                         LinkComponent={Link}
-                        href={"/app/metricas/balance"}
+                        href={"/app/balance"}
                         sx={{
                             color: "inherit",
                             textDecoration: "none",
@@ -277,6 +282,7 @@ export default function Home() {
                 metrics={metrics}
                 profile={profile}
             />
+           
         </main>
     );
 }

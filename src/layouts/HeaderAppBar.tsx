@@ -85,7 +85,7 @@ export default function HeaderAppBar({
             subItems: [],
         },
         {
-            text: "Cobro",
+            text: "Balance",
             icon: <ScienceTwoToneIcon />,
             subItems: [
                 {
