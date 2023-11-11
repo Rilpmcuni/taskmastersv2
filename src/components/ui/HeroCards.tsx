@@ -259,32 +259,15 @@ export default function HeroCards({
                             variant="outlined"
                             sx={{
                                 border: "hidden",
-                                backgroundColor: `${
-                                    solicitedDataSolicited.length > 0
-                                        ? `${theme.palette.error.light}50`
-                                        : "#E0E0E0"
-                                }`,
+                                backgroundColor: `${theme.palette.error.light}50`,
                                 opacity: 0.8,
                                 backgroundImage: `linear-gradient(${
-                                    solicitedDataSolicited.length > 0
-                                        ? `${theme.palette.error.light}`
-                                        : "#AFAFAF"
+                                    theme.palette.error.light
                                 } 4px, transparent 4px), linear-gradient(to right, ${
-                                    solicitedDataSolicited.length > 0
-                                        ? `${theme.palette.error.light}`
-                                        : "#AFAFAF"
-                                } 4px, ${
-                                    solicitedDataSolicited.length > 0
-                                        ? `${theme.palette.error.light}50`
-                                        : "#E0E0E0"
-                                } 4px)`,
+                                    theme.palette.error.light
+                                } 4px, ${`${theme.palette.error.light}50`} 4px)`,
                                 backgroundSize: "80px 80px",
-                                color: darken(
-                                    publishedData.length > 0
-                                        ? theme.palette.error.dark
-                                        : "#000",
-                                    0.6
-                                ),
+                                color: darken(theme.palette.error.dark, 0.6),
                             }}
                         >
                             <CardActionArea>

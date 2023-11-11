@@ -1,34 +1,78 @@
 "use client";
+import React, { useMemo, useState } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import multiMonthPlugin from "@fullcalendar/multimonth";
+import esLocale from "@fullcalendar/core/locales/es";
 
-import Link from "next/link";
-
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Chip,
+    Divider,
+    Grid,
+    Stack,
+    Typography,
+} from "@mui/material";
 import SlotCounter from "react-slot-counter";
 import dayjs from "dayjs";
 import "dayjs/locale/es"; // importa el locale español
-
 import weekOfYear from "dayjs/plugin/weekOfYear";
+import { useSession } from "@/contexts/SessionContext";
+
+import Link from "next/link";
+
+import "dayjs/locale/es"; // importa el locale español
+
 import PaymentsTwoToneIcon from "@mui/icons-material/PaymentsTwoTone";
 import isBetween from "dayjs/plugin/isBetween";
 import HeroCards from "@/components/ui/HeroCards";
-import {
-    Card,
-    CardActionArea,
-    CardContent,
-    Divider,
-    Grid,
-    Typography,
-} from "@mui/material";
-import { useSession } from "@/contexts/SessionContext";
+import { CardActionArea } from "@mui/material";
 import SpeedDialBasic from "@/components/ui/speedDialBasic";
 import FullScreenDialogUser from "@/feedback/FullScreenDialogUser";
-import { SetStateAction, useState } from "react";
+dayjs.extend(weekOfYear);
+dayjs.locale("es"); // usa el locale español
+
+interface MetricCardProps {
+    metric: {
+        id: any;
+        price: { value: number }[];
+        isEmergency: boolean;
+        selectedService: string;
+        selectedDetailService: string;
+        selectedDay: string[];
+        hour: number;
+        // Agrega aquí las demás propiedades de 'metric' con sus respectivos tipos
+    };
+    index: number;
+    openDialogId: number | null;
+    setOpenDialogId: (id: number | null) => void;
+}
+
 export default function Home() {
     const { sessionData, metrics, profile } = useSession();
+
+    const [open, setOpen] = useState(false);
+    const [eventDetails, setEventDetails] = useState<any | null>(null);
 
     const calculatePreliminaryCost = (metric: {
         price: any[];
         isEmergency: any;
+        hourFinish: number;
+        dayFinish: string[];
     }) => {
+        // Solo calcular las ganancias si la métrica tiene fecha de terminación
+        if (!metric.hourFinish || !metric.dayFinish) {
+            return 0;
+        }
+
         const total = metric.price.reduce(
             (sum: number, item: { value: number }) => sum + item.value,
             0
@@ -43,9 +87,9 @@ export default function Home() {
 
         // Luego lo restamos del costo preliminar
         let finalCost = preliminaryCost - fourteenPercent;
+
         return finalCost;
     };
-    // calculatePreliminaryCost
 
     const sortedMetrics = metrics ? [...metrics] : [];
 
@@ -58,13 +102,9 @@ export default function Home() {
     );
     const total = solicitedDataPrice.reduce((sum, value) => sum + value, 0);
     const startValue = 0;
-    //
-    //
-    //
-    dayjs.extend(weekOfYear);
-    dayjs.locale("es"); // usa el locale español
+
     const currentYear = 2023;
-    // Convertir el formato de fecha ["sáb.","28","oct"] a un formato que dayjs pueda entender
+
     const convertDate = (dateArray: string[]) => {
         const months = {
             ene: "01",
@@ -80,27 +120,25 @@ export default function Home() {
             nov: "11",
             dic: "12",
         };
-        return `2023-${months[dateArray[2] as keyof typeof months]}-${
-            dateArray[1]
-        }`;
+        const day = dateArray.length > 1 ? dateArray[1].padStart(2, "0") : "01";
+        return `2023-${months[dateArray[2] as keyof typeof months]}-${day}`;
     };
 
-    // Agrupar las métricas por semana del mes
     const metricsByWeek = solicitedData.reduce(
         (acc: Record<number, (typeof metric)[]>, metric) => {
             const date = dayjs(convertDate(metric.selectedDay));
-            const firstSaturdayOfMonth = date.startOf("month").day(6);
-            const weekOfMonth =
-                Math.ceil(date.diff(firstSaturdayOfMonth, "day") / 7) + 1;
-            if (!acc[weekOfMonth]) {
-                acc[weekOfMonth] = [];
+            const weekOfYear =
+                date.day() === 6 ? date.add(1, "week").week() : date.week();
+            if (!acc[weekOfYear]) {
+                acc[weekOfYear] = [];
             }
-            acc[weekOfMonth].push(metric);
+            acc[weekOfYear].push(metric);
             return acc;
         },
         {}
     );
-    // Calcular las ganancias por semana
+
+    // Aquí está la lógica de ganancia semanal copiada de metricas/page.tsx
     const earningsByWeek = Object.keys(metricsByWeek).reduce(
         (acc: Record<string, number>, week) => {
             const metrics = metricsByWeek[Number(week)];
@@ -113,59 +151,17 @@ export default function Home() {
         {} as Record<string, number>
     );
 
-    const totalEarningsOfMonth = Object.values(earningsByWeek).reduce(
-        (sum, value) => sum + value,
-        0
-    );
-    // Agrupar las métricas por mes y luego por semana del mes
-    const metricsByMonthAndWeek = solicitedData.reduce((acc, metric) => {
-        const date = dayjs(convertDate(metric.selectedDay));
-        const month = date.format("MMMM");
-        const firstSaturdayOfMonth = date.startOf("month").day(6);
-        const weekOfMonth =
-            Math.ceil(date.diff(firstSaturdayOfMonth, "day") / 7) + 1;
-        if (!acc[month]) {
-            acc[month] = {};
-        }
-        if (!acc[month][weekOfMonth]) {
-            acc[month][weekOfMonth] = [];
-        }
-        acc[month][weekOfMonth].push(metric);
-        return acc;
-    }, {} as Record<string, Record<number, (typeof solicitedData)[0][]>>);
+    // Obtén el día de la semana actual (0-6, domingo a sábado)
+    const currentDayOfWeek = dayjs().day();
 
-    // Calcular las ganancias por mes y por semana
-    const earningsByMonthAndWeek = Object.entries(metricsByMonthAndWeek).reduce(
-        (acc, [month, weeks]) => {
-            acc[month] = Object.entries(weeks).reduce(
-                (acc, [week, metrics]) => {
-                    const earnings = metrics
-                        .map((metric) => calculatePreliminaryCost(metric))
-                        .reduce((sum, value) => sum + value, 0);
-                    acc[week] = earnings;
-                    return acc;
-                },
-                {} as Record<string, number>
-            );
-            return acc;
-        },
-        {} as Record<string, Record<string, number>>
-    );
+    // Si hoy es sábado (6) o domingo (0), entonces es el comienzo de la nueva semana, de lo contrario, es la misma semana que comenzó el sábado pasado
+    const currentWeek =
+        currentDayOfWeek === 6 || currentDayOfWeek === 0
+            ? dayjs().add(1, "week").week()
+            : dayjs().week();
 
-    // Obtener las ganancias de la semana actual
-    const currentDate = dayjs();
-    const currentMonth = currentDate.format("MMMM");
-    const firstDayOfCurrentMonth = currentDate.startOf("month");
-    const currentWeekOfMonth =
-        currentDate.diff(firstDayOfCurrentMonth, "week") + 1;
-    const currentWeekEarnings =
-        earningsByMonthAndWeek[currentMonth]?.[currentWeekOfMonth] ?? 0;
-
-    const currentMonthEarnings = Object.values(
-        earningsByMonthAndWeek[currentMonth] ?? {}
-    ).reduce((sum, value) => sum + value, 0);
-    //
-    const [dialogOpen, setDialogOpen] = useState(false);
+    // Usa el número de la semana para obtener las ganancias de la semana actual
+    const earningsThisWeek = earningsByWeek[currentWeek] || 0;
 
     return (
         <main>
@@ -225,8 +221,8 @@ export default function Home() {
                                 // containerClassName="conta"
                                 // dummyCharacters={"450.000".split("")}
                                 // duration={}
-                                value={(currentWeekEarnings
-                                    ? currentWeekEarnings
+                                value={(earningsThisWeek
+                                    ? earningsThisWeek
                                     : 0
                                 ).toLocaleString("es-CL", {
                                     style: "currency",
@@ -253,22 +249,14 @@ export default function Home() {
                         color: "text.secondary",
                     }}
                 >
-                    {(currentWeekEarnings
-                        ? currentWeekEarnings
-                        : 0
-                    ).toLocaleString("es-CL", {
-                        style: "currency",
-                        currency: "CLP",
-                    })}{" "}
-                    ganados esta semana |{" "}
-                    {(currentMonthEarnings
-                        ? currentMonthEarnings
-                        : 0
-                    ).toLocaleString("es-CL", {
-                        style: "currency",
-                        currency: "CLP",
-                    })}{" "}
-                    ganados este mes
+                    {(earningsThisWeek ? earningsThisWeek : 0).toLocaleString(
+                        "es-CL",
+                        {
+                            style: "currency",
+                            currency: "CLP",
+                        }
+                    )}{" "}
+                    ganados esta semana
                 </Typography>
             </Grid>
             <Divider
@@ -282,7 +270,6 @@ export default function Home() {
                 metrics={metrics}
                 profile={profile}
             />
-           
         </main>
     );
 }
