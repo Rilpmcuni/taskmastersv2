@@ -42,7 +42,7 @@ const calculatePreliminaryCost = (metric: {
     }
     const preliminaryCost = total + emergencyFee;
 
-    let fourteenPercent = preliminaryCost * 0.14;
+    let fourteenPercent = preliminaryCost * 0.115;
 
     // Luego lo restamos del costo preliminar
     let finalCost = preliminaryCost - fourteenPercent;

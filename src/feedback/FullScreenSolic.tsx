@@ -135,8 +135,8 @@ export default function FullScreenSolic({
         emergencyFee = total * 0.5;
     }
     let preliminaryCost = total + emergencyFee;
-    // Primero calculamos el 14% del costo preliminar
-    let fourteenPercent = preliminaryCost * 0.14;
+    // Primero calculamos el (11.5%) del costo preliminar
+    let fourteenPercent = preliminaryCost * 0.115;
 
     // Luego lo restamos del costo preliminar
     let finalCost = preliminaryCost - fourteenPercent;
@@ -201,7 +201,7 @@ export default function FullScreenSolic({
                             />
                             <Divider>Ganancias</Divider>
                             <ChipValue
-                                label={"Comisíon 14%"}
+                                label={"Comisíon (11.5%)"}
                                 value={fourteenPercent}
                                 color={"warning"}
                                 size={"medium"}

@@ -23,6 +23,7 @@ import {
     TextField,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/navigation";
 import { Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import { ServicesData } from "@/data/ServicesData";
@@ -36,6 +37,7 @@ import TextFieldPhone from "../ui/TextFieldPhone";
 import TextFieldRut from "../ui/TextFieldRut";
 import Sello from "../ui/Sello";
 import { StackedBarChartRounded } from "@mui/icons-material";
+import { useSession } from "@/contexts/SessionContext";
 interface Service {
     title: string;
     price: number;
@@ -45,10 +47,12 @@ export default function ServiceWindow({
     selectedProduct,
     onClose,
     userId,
+    requestUpdate,
 }: {
     selectedProduct?: any;
     onClose: any;
     userId?: any;
+    requestUpdate?: any;
 }) {
     // date
     // date
@@ -116,6 +120,7 @@ export default function ServiceWindow({
     const [selectedProductState, setSelectedProductState] =
         useState(selectedProduct);
     const [selectedService, setSelectedService] = useState<any | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         setSelectedService(
@@ -125,7 +130,6 @@ export default function ServiceWindow({
             )
         );
     }, [selectedProductState]);
-
     const [name, setName] = React.useState("");
     const [adress, setAdress] = useState("");
     const topRef = React.useRef<HTMLDivElement>(null);
@@ -213,6 +217,12 @@ export default function ServiceWindow({
             console.log("Data inserted successfully!");
             handleNext();
             topRef.current?.scrollIntoView({ behavior: "auto" });
+            setTimeout(() => {
+                userId
+                    ? (requestUpdate(),
+                      router.push("/app/metricas/trabajos", { scroll: false }))
+                    : onClose();
+            }, 3000);
         }
     };
     const handleReset = () => {

@@ -320,16 +320,25 @@ export default function Home() {
     // Crear eventos de ganancias semanales
     const weeklyEarningsEvents = Object.entries(earningsByWeek).map(
         ([week, earnings], index) => {
+            // Encuentra la fecha de inicio de la semana para la métrica actual
             const startDate = dayjs()
                 .week(Number(week))
-                .day(5) // Viernes
+                .startOf("week") // Inicio de la semana
+                .add(4, "day") // Viernes
                 .format("YYYY-MM-DD");
             const endDate = dayjs(startDate).add(1, "day").format("YYYY-MM-DD"); // Sábado
-            return {
-                title: `Ganancia semanal: ${earnings.toLocaleString("es-CL", {
+
+            // Asegúrate de que 'earnings' es un número antes de usar 'toLocaleString'
+            const earningsAsString = (earnings as number).toLocaleString(
+                "es-CL",
+                {
                     style: "currency",
                     currency: "CLP",
-                })}`,
+                }
+            );
+
+            return {
+                title: `Ganancia semanal: ${earningsAsString}`,
                 start: startDate,
                 semanal: true,
                 end: endDate,
@@ -422,7 +431,7 @@ export default function Home() {
                                     variant="middle"
                                 />
                                 <Typography variant="body1">
-                                    Esta es la ganaica de la semana
+                                    Esta es la ganancia de la semana
                                 </Typography>
                             </DialogContentText>
                         </DialogContent>

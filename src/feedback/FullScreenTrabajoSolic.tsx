@@ -150,7 +150,7 @@ export default function FullScreenTrabajoSolic({
     }
     const preliminaryCost = total + emergencyFee;
 
-    let fourteenPercent = preliminaryCost * 0.14;
+    let fourteenPercent = preliminaryCost * 0.115;
 
     // Luego lo restamos del costo preliminar
     let finalCost = preliminaryCost - fourteenPercent;
@@ -342,7 +342,7 @@ export default function FullScreenTrabajoSolic({
                             />
                             <Divider>Ganancias</Divider>
                             <ChipValue
-                                label={"Comisíon 14%"}
+                                label={"Comisíon (11.5%)"}
                                 value={fourteenPercent}
                                 color={"warning"}
                                 size={"medium"}

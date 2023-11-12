@@ -75,6 +75,7 @@ export default function FullScreenDialogUser({
                     <ServiceWindow
                         onClose={onClose || handleClose}
                         userId={sessionData?.user?.id}
+                        requestUpdate={requestUpdate}
                     />
                 </Box>
             </Dialog>
