@@ -114,9 +114,9 @@ export default function Logo({ app = false }: { app?: boolean }) {
                         ),
                     },
                     {
-                        title: "Mudasa",
-                        description: "Mudanza",
-                        href: "https://mudasa.vercel.app/",
+                        title: "🚧¿?🚧",
+                        description: "🚧En desarrollo🚧",
+                        href: "#",
                         ico: (
                             <Image
                                 style={{ pointerEvents: "none" }}
