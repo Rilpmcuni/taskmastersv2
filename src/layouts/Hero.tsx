@@ -146,7 +146,7 @@ export default function Hero() {
                                 </Typography>
                             </Box>
                         </Stack>
-                        <Box
+                        {/* <Box
                             display={"flex"}
                             justifyContent="center"
                             alignItems="center"
@@ -226,7 +226,7 @@ export default function Hero() {
                             >
                                 ¿Eres profesional?
                             </Button>
-                        </Box>
+                        </Box> */}
                     </Stack>
                     <Image
                         src={heroRabbit}

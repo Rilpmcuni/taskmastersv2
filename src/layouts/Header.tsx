@@ -42,10 +42,10 @@ export default function Header() {
                 alignItems="center"
                 spacing={1}
             >
-                <Button size="small" LinkComponent={Link} href="/Servicios">
+                <Button size="small" LinkComponent={Link} href="/#servicios">
                     SERVICIOS
                 </Button>
-                <Button size="small" LinkComponent={Link} href="/Nosotros">
+                <Button size="small" LinkComponent={Link} href="/#nosotros">
                     NOSOTROS
                 </Button>
 
@@ -78,7 +78,7 @@ export default function Header() {
                         </Button>
                     </Tooltip>
                 </Badge>
-                <Button size="small" LinkComponent={Link} href="/Contacto">
+                <Button size="small" LinkComponent={Link} href="/#contacto">
                     CONTACTO
                 </Button>
             </Stack>

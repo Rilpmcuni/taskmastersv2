@@ -37,10 +37,13 @@ export default function Home() {
             <Header />
             {/* <InstallPWA/> */}
             <Hero />
+            <div id={"servicios"}></div>
             <Features />
+            <div id={"nosotros"}></div>
             <Services />
             <SocialProof />
-            <Jobs />
+            {/* <Jobs /> */}
+            <div id={"contacto"}></div>
             <Contact />
             <CallUs />
             <Footer />
