@@ -30,6 +30,7 @@ import TextFieldRut from "@/components/ui/TextFieldRut";
 import TextFieldPhone from "@/components/ui/TextFieldPhone";
 import { SimpleSnackbar } from "@/feedback/SnackBar";
 import { useSession } from "@/contexts/SessionContext";
+import ContractModal from "@/feedback/ContractModal";
 
 interface UpdateProfileProps {
     lastName: string | null;
@@ -189,6 +190,7 @@ export default function PerfilConfig({ session }: { session: any }) {
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
     }
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     return (
         <main>
@@ -249,6 +251,7 @@ export default function PerfilConfig({ session }: { session: any }) {
                                                 setFullname(e.target.value)
                                             }
                                             variant="outlined"
+                                            disabled
                                         />
                                         <TextField
                                             sx={{ flexGrow: 1 }}
@@ -259,6 +262,7 @@ export default function PerfilConfig({ session }: { session: any }) {
                                             onChange={(e) =>
                                                 setLastName(e.target.value)
                                             }
+                                            disabled
                                         />
                                     </Stack>
                                 </Stack>
@@ -276,6 +280,10 @@ export default function PerfilConfig({ session }: { session: any }) {
                                 />
                             </Stack>
                         </Stack>
+                        <span className="text-caption">
+                            *Comunicate con nosotros para actualizar datos
+                            personales
+                        </span>
                         <Stack width={"100%"} direction={"column"} spacing={1}>
                             <Typography
                                 variant="h5"
@@ -378,93 +386,121 @@ export default function PerfilConfig({ session }: { session: any }) {
                             setSchedule={setSchedule}
                         />
                     </Stack>,
-                    <Stack width={"100%"} direction={"column"} spacing={1}>
-                        <Typography
-                            variant="h5"
-                            fontWeight={900}
-                            sx={{ flexGrow: 1, width: "100%" }}
+                    <>
+                        <span className="text-caption">
+                            *Comunicate con nosotros para actualizar datos
+                            personales
+                        </span>
+                        <ContractModal
+                            sessionData={session}
+                            open={dialogOpen}
+                            onClose={() => setDialogOpen(false)}
                         >
-                            Información delicada
-                        </Typography>
+                            <Button
+                                color="success"
+                                onClick={() => setDialogOpen(true)}
+                                variant="contained"
+                            >
+                                Ver Contrato
+                            </Button>
+                        </ContractModal>
                         <Stack width={"100%"} direction={"column"} spacing={1}>
-                            <TextField
-                                sx={{ flexGrow: 1 }}
-                                fullWidth
-                                id="outlined-basic"
-                                label="Correo"
-                                value={session?.user.email}
-                                disabled
-                                helperText="Contáctanos para cambiarlo."
-                                variant="outlined"
-                            />
-                            <TextFieldRut
-                                value={rut || ""}
-                                onChange={(
-                                    e: React.ChangeEvent<HTMLInputElement>
-                                ) => setRut(e.target.value)}
-                            />
-                            <FormControl fullWidth>
-                                <InputLabel id="banco-select-label">
-                                    Banco
-                                </InputLabel>
-                                <Select
-                                    labelId="banco-select-label"
-                                    id="banco-select"
-                                    value={banco}
-                                    label="Banco"
-                                    onChange={(e) => setBanco(e.target.value)}
-                                >
-                                    <MenuItem value={"BancoEstado"}>
-                                        BancoEstado
-                                    </MenuItem>
-                                    <MenuItem value={"Banco de Chile"}>
-                                        Banco de Chile
-                                    </MenuItem>
-                                    <MenuItem value={"Santander"}>
-                                        Santander
-                                    </MenuItem>
-                                    <MenuItem value={"Tenpo"}>Tenpo</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <Typography
+                                variant="h5"
+                                fontWeight={900}
+                                sx={{ flexGrow: 1, width: "100%" }}
+                            >
+                                Información delicada
+                            </Typography>
+                            <Stack
+                                width={"100%"}
+                                direction={"column"}
+                                spacing={1}
+                            >
+                                <TextField
+                                    sx={{ flexGrow: 1 }}
+                                    fullWidth
+                                    id="outlined-basic"
+                                    label="Correo"
+                                    value={session?.user.email}
+                                    disabled
+                                    helperText="Contáctanos para cambiarlo."
+                                    variant="outlined"
+                                />
+                                <TextFieldRut
+                                    value={rut || ""}
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>
+                                    ) => setRut(e.target.value)}
+                                    disabled
+                                />
+                                <FormControl fullWidth>
+                                    <InputLabel id="banco-select-label">
+                                        Banco
+                                    </InputLabel>
+                                    <Select
+                                        labelId="banco-select-label"
+                                        id="banco-select"
+                                        value={banco}
+                                        label="Banco"
+                                        onChange={(e) =>
+                                            setBanco(e.target.value)
+                                        }
+                                    >
+                                        <MenuItem value={"BancoEstado"}>
+                                            BancoEstado
+                                        </MenuItem>
+                                        <MenuItem value={"Banco de Chile"}>
+                                            Banco de Chile
+                                        </MenuItem>
+                                        <MenuItem value={"Santander"}>
+                                            Santander
+                                        </MenuItem>
+                                        <MenuItem value={"Tenpo"}>
+                                            Tenpo
+                                        </MenuItem>
+                                    </Select>
+                                </FormControl>
 
-                            <FormControl fullWidth>
-                                <InputLabel id="tipo-cuenta-select-label">
-                                    Tipo de Cuenta
-                                </InputLabel>
-                                <Select
-                                    labelId="tipo-cuenta-select-label"
-                                    id="tipo-cuenta-select"
-                                    value={tipoCuenta}
-                                    label="Tipo de Cuenta"
+                                <FormControl fullWidth>
+                                    <InputLabel id="tipo-cuenta-select-label">
+                                        Tipo de Cuenta
+                                    </InputLabel>
+                                    <Select
+                                        labelId="tipo-cuenta-select-label"
+                                        id="tipo-cuenta-select"
+                                        value={tipoCuenta}
+                                        label="Tipo de Cuenta"
+                                        onChange={(e) =>
+                                            setTipoCuenta(e.target.value)
+                                        }
+                                    >
+                                        <MenuItem value={"Cuenta Rut"}>
+                                            Cuenta Rut
+                                        </MenuItem>
+                                        <MenuItem value={"Cuenta Vista"}>
+                                            Cuenta Vista
+                                        </MenuItem>
+                                        <MenuItem value={"Cuenta Corriente"}>
+                                            Cuenta Corriente
+                                        </MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <TextField
+                                    type="number"
+                                    sx={{ flexGrow: 1 }}
+                                    fullWidth
+                                    id="outlined-basic"
+                                    label="N° de cuenta"
+                                    value={numeroCuenta || ""}
                                     onChange={(e) =>
-                                        setTipoCuenta(e.target.value)
+                                        setNumeroCuenta(e.target.value)
                                     }
-                                >
-                                    <MenuItem value={"Cuenta Rut"}>
-                                        Cuenta Rut
-                                    </MenuItem>
-                                    <MenuItem value={"Cuenta Vista"}>
-                                        Cuenta Vista
-                                    </MenuItem>
-                                    <MenuItem value={"Cuenta Corriente"}>
-                                        Cuenta Corriente
-                                    </MenuItem>
-                                </Select>
-                            </FormControl>
-                            <TextField
-                                type="number"
-                                sx={{ flexGrow: 1 }}
-                                fullWidth
-                                id="outlined-basic"
-                                label="N° de cuenta"
-                                value={numeroCuenta || ""}
-                                onChange={(e) =>
-                                    setNumeroCuenta(e.target.value)
-                                }
-                                variant="outlined"
-                            />
+                                    variant="outlined"
+                                />
+                            </Stack>
                         </Stack>
-                    </Stack>,
+                    </>,
                 ]}
             />
             <Button

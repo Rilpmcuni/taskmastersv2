@@ -74,6 +74,7 @@ export default function BottonNavigation({ children }: { children: any }) {
                         onClick={() => setValue(1)}
                         label="Métricas"
                         icon={<LeaderboardRoundedIcon />}
+                        color="success"
                     />
                     <BottomNavigationAction
                         LinkComponent={Link}

@@ -9,19 +9,20 @@ import {
 } from "@mui/material";
 import { SetStateAction, useState } from "react";
 
-interface Props {
-    service: any;
-    handleCardClick: any;
-    selectedProduct: any;
-}
-const ServicesCardV2: React.FC<Props> = ({
+export default function ServicesCard({
     service,
     handleCardClick,
     selectedProduct,
-}) => {
+    textDescription = true,
+}: {
+    service: any;
+    handleCardClick: any;
+    selectedProduct: any;
+    textDescription?: boolean;
+}) {
     return (
         <>
-            <Grid item xs={6} sm={3} md={3}>
+            <Grid item xs={6} sm={4} md={4}>
                 <Card
                     variant="outlined"
                     sx={{
@@ -34,7 +35,7 @@ const ServicesCardV2: React.FC<Props> = ({
                                 : "none",
                         cursor: "pointer",
                     }}
-                    onClick={handleCardClick}
+                    onClick={textDescription && handleCardClick}
                 >
                     <CardActionArea>
                         <CardMedia
@@ -47,23 +48,26 @@ const ServicesCardV2: React.FC<Props> = ({
                             title={service.title}
                         />
                         <CardContent>
-                            {selectedProduct === service.title && (
-                                <Radio
-                                    checked={selectedProduct === service.title}
-                                    sx={{
-                                        position: "absolute",
-                                        top: "-10px",
-                                        left: "-10px",
-                                        zIndex: 1,
-                                        // bgcolor: "secondary.main",
-                                        // boxShadow: "0 0 1px 1px #000",
-                                        color: "primary",
-                                        "&.Mui-checked": {
+                            {textDescription &&
+                                selectedProduct === service.title && (
+                                    <Radio
+                                        checked={
+                                            selectedProduct === service.title
+                                        }
+                                        sx={{
+                                            position: "absolute",
+                                            top: "-10px",
+                                            left: "-10px",
+                                            zIndex: 1,
+                                            // bgcolor: "secondary.main",
+                                            // boxShadow: "0 0 1px 1px #000",
                                             color: "primary",
-                                        },
-                                    }}
-                                />
-                            )}
+                                            "&.Mui-checked": {
+                                                color: "primary",
+                                            },
+                                        }}
+                                    />
+                                )}
                             <Typography
                                 variant="h6"
                                 component="div"
@@ -71,18 +75,15 @@ const ServicesCardV2: React.FC<Props> = ({
                             >
                                 {service.title}
                             </Typography>
-                            {/* <Typography variant="body2" color="text.secondary">
-                                {service.clientNote}
-                            </Typography> */}
-                            <Typography variant="button" color="primary">
-                                Solicitar
-                            </Typography>
+                            {textDescription && (
+                                <Typography variant="button" color="primary">
+                                    Solicitar
+                                </Typography>
+                            )}
                         </CardContent>
                     </CardActionArea>
                 </Card>
             </Grid>
         </>
     );
-};
-
-export default ServicesCardV2;
+}

@@ -77,7 +77,7 @@ export default function Hero() {
                 <Box
                     sx={{
                         position: "relative",
-                        height: { xs: height, md: "800px" },
+                        height: { xs: "90vh", md: "600px" },
                         backgroundColor: "#1e293b",
                         borderRadius: "1.5rem",
                     }}
@@ -144,6 +144,49 @@ export default function Hero() {
                                     forma de acceder a servicios de calidad en
                                     Chile.
                                 </Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: {xs: "column", md: "row"},
+                                    gap: 1,
+                                    justifyContent: "center",
+                                    alignItems: {xs: "stretch", md: "center"},
+                                    padding: "0.5rem",
+                                }}
+                            >
+                                <Button
+                                    size="large"
+                                    sx={{
+                                        fontWeight: 600,
+                                        boxShadow: 0,
+                                        "&:hover": {
+                                            boxShadow: 0,
+                                        },
+                                        color: "#fff",
+                                    }}
+                                    startIcon={<WhatsAppIcon />}
+                                    variant="contained"
+                                    color="success"
+                                >
+                                    Escríbenos
+                                </Button>
+                                <Button
+                                    href={`tel:${ContactData.number}`}
+                                    startIcon={<PhoneInTalkIcon />}
+                                    size="large"
+                                    sx={{
+                                        fontWeight: 600,
+                                        boxShadow: 0,
+                                        "&:hover": {
+                                            boxShadow: 0,
+                                        },
+                                    }}
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                    {`Llámanos: ${ContactData.number}`}
+                                </Button>
                             </Box>
                         </Stack>
                         {/* <Box

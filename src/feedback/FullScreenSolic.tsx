@@ -308,7 +308,7 @@ export default function FullScreenSolic({
                                     color="text.secondary"
                                 >
                                     {/* +56 {metric.cellPhone} */}
-                                    +56 9 #### ####
+                                    +56 {metric.cellPhone}
                                 </Typography>
                             </Box>
                             <Box

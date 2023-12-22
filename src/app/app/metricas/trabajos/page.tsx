@@ -274,17 +274,21 @@ const NothingCard = ({ on }: NothingCardProps) => {
 
 export default function Home() {
     dayjs.locale("es");
-    const [currentHour, setCurrentHour] = useState(dayjs().hour());
-    const [currentDay, setCurrentDay] = useState(
-        dayjs().format("ddd D MMM").split(" ")
-    );
-
+    const [currentDateTime, setCurrentDateTime] = useState({
+        hour: dayjs().hour(),
+        minute: dayjs().minute(),
+        day: dayjs().format("ddd D MMM").split(" ")
+    });
+    
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentHour(dayjs().hour());
-            setCurrentDay(dayjs().format("ddd D MMM").split(" "));
+            setCurrentDateTime({
+                hour: dayjs().hour(),
+                minute: dayjs().minute(),
+                day: dayjs().format("ddd D MMM").split(" ")
+            });
         }, 60000); // Actualiza cada minuto
-
+    
         // Limpia el intervalo cuando el componente se desmonta
         return () => clearInterval(interval);
     }, []);
@@ -384,9 +388,9 @@ export default function Home() {
                             }}
                         >
                             <Typography variant="body1">Hoy:</Typography>
-                            <Hour hour={currentHour} />
+                            <Hour hour={currentDateTime} />
                         </Box>
-                        <Day day={currentDay} />
+                        <Day day={currentDateTime.day} />
                     </Box>
                 </Stack>
                 <BasicTabs

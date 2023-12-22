@@ -128,7 +128,6 @@ export default function Home() {
         0
     );
 
-
     // Agrupar las métricas por mes y luego por semana del mes
     const metricsByMonthAndWeek = solicitedData.reduce((acc, metric) => {
         const date = dayjs(convertDate(metric.selectedDay));
@@ -168,10 +167,14 @@ export default function Home() {
     const currentDate = dayjs();
     const currentMonth = currentDate.format("MMMM");
     const firstDayOfCurrentMonth = currentDate.startOf("month");
+    const firstSaturdayOfCurrentMonth = currentDate.startOf("month").day(6);
+
     const currentWeekOfMonth =
-        currentDate.diff(firstDayOfCurrentMonth, "week") + 1;
+        Math.ceil(currentDate.diff(firstSaturdayOfCurrentMonth, "day") / 7) + 1;
+
     const currentWeekEarnings =
         earningsByMonthAndWeek[currentMonth]?.[currentWeekOfMonth] ?? 0;
+
     // Componente para renderizar los meses y las semanas
     const EarningsByMonthAndWeek = () => {
         return (
@@ -282,10 +285,9 @@ export default function Home() {
             </Grid>
         );
     };
-    const currentMonthEarnings = Object.values(earningsByMonthAndWeek[currentMonth] ?? {}).reduce(
-        (sum, value) => sum + value,
-        0
-    );
+    const currentMonthEarnings = Object.values(
+        earningsByMonthAndWeek[currentMonth] ?? {}
+    ).reduce((sum, value) => sum + value, 0);
     return (
         <main>
             <Box>
@@ -297,6 +299,9 @@ export default function Home() {
                     direction={"column"}
                     spacing={1}
                 >
+                    {/* <Typography variant="h6">
+                        Ganancias de la semana actual: {currentWeekEarnings}
+                    </Typography> */}
                     <Typography variant="h5" padding={1} paddingBottom={0}>
                         Balance en el tiempo
                     </Typography>

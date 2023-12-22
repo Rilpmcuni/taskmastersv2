@@ -9,7 +9,11 @@ import { SetStateAction, useState } from "react";
 import ServiceWindow from "@/components/function/ServiceWindow";
 import { Collapse } from "@mui/material";
 
-export default function Services() {
+export default function Services({
+    textDescription = true,
+}:{
+    textDescription?: boolean
+}) {
     const [selectedProduct, setSelectedProduct] = useState("");
 
     const handleCardClick = (product: SetStateAction<string>) => {
@@ -45,6 +49,7 @@ export default function Services() {
                     <Grid container spacing={1}>
                         {ServicesData.map((service: any, index: any) => (
                             <ServicesCard
+                            textDescription={false}
                                 key={index}
                                 service={service}
                                 handleCardClick={() =>

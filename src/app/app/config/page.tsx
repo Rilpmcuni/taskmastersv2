@@ -5,6 +5,7 @@ import { Typography, Box } from "@mui/material";
 import PerfilConfig from "@/layouts/app/PerfilConfig";
 // chip
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import InstallPWA from "@/feedback/InstallPWA";
 interface Session {
     user: any;
 }
@@ -28,6 +29,7 @@ export default function Home() {
                     padding: "1rem",
                 }}
             >
+                <InstallPWA />
                 <Typography variant="h5">Configuración</Typography>
                 <Typography variant="body2">
                     Configura en cualquier momento, cuando lo necesites, cuando

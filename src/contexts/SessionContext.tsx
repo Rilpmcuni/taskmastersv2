@@ -35,6 +35,7 @@ type Profile = {
     rut: any;
     cellPhone: any;
     updated_at: any;
+    signature:boolean
 };
 // Crear el contexto
 const SessionContext = createContext<
@@ -108,7 +109,7 @@ export default function SessionProvider({ children }: { children: any }) {
         const { data, error, status } = await supabase
             .from("profiles")
             .select(
-                `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, updated_at`
+                `full_name, lastName, ability, avatar_url, schedule, rut, cellPhone, updated_at, signature`
             )
             .eq("id", sessionData?.user?.id)
             .single();

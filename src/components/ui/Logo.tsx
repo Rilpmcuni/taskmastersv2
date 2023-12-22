@@ -81,7 +81,7 @@ export default function Logo({ app = false }: { app?: boolean }) {
                 </Typography>
                 {/* </LinkMui> */}
             </CardActionArea>
-            <ButtonMenu
+            {/* <ButtonMenu
                 subItem={[
                     {
                         title: "Llavasa",
@@ -145,7 +145,7 @@ export default function Logo({ app = false }: { app?: boolean }) {
                         <ReplayOutlinedIcon />
                     </IconButton>
                 }
-            />
+            /> */}
         </Box>
     );
 }

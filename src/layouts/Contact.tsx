@@ -86,7 +86,7 @@ export default function Contact() {
                                 boxShadow: 0,
                                 "&:hover": {
                                     boxShadow: 0,
-                                },
+                                }, color: "#fff",
                             }}
                             startIcon={<WhatsAppIcon />}
                             variant="contained"

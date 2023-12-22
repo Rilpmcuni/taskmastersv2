@@ -40,7 +40,7 @@ export default function Home() {
             <div id={"servicios"}></div>
             <Features />
             <div id={"nosotros"}></div>
-            <Services />
+            <Services textDescription={false} />
             <SocialProof />
             {/* <Jobs /> */}
             <div id={"contacto"}></div>

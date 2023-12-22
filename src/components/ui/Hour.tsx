@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-export default function Hour({ hour }: { hour: number }) {
+export default function Hour({ hour }: { hour: any }) {
     return (
         <Box
             sx={{
@@ -16,7 +16,7 @@ export default function Hour({ hour }: { hour: number }) {
                     opacity: 0.9,
                 },
                 boxShadow: "0 0 1px 3px #ffd234",
-                height: "fit-content"
+                height: "fit-content",
             }}
         >
             <Typography
@@ -25,8 +25,10 @@ export default function Hour({ hour }: { hour: number }) {
                 }}
                 variant="body1"
             >
-                {hour % 12 || 12}
+                {/* {hour % 12 || 12}
                 :00
+                {hour < 12 ? "am" : "pm"} */}
+                {hour.hour}:{String(hour.minute).padStart(2, "0")}
                 {hour < 12 ? "am" : "pm"}
             </Typography>
         </Box>

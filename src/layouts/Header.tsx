@@ -50,10 +50,10 @@ export default function Header() {
                 </Button>
 
                 {/* <Badge color="primary" badgeContent={CountEmpleo}> */}
-                <Badge
+                {/* <Badge
                     sx={{ userSelect: "none" }}
                     color="primary"
-                    badgeContent={"+50"}
+                    badgeContent={"¡Nuevo!"}
                 >
                     <Tooltip
                         disableInteractive
@@ -77,7 +77,7 @@ export default function Header() {
                             Sé un Reviaser
                         </Button>
                     </Tooltip>
-                </Badge>
+                </Badge> */}
                 <Button size="small" LinkComponent={Link} href="/#contacto">
                     CONTACTO
                 </Button>

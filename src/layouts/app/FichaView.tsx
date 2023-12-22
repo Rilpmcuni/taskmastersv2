@@ -146,7 +146,7 @@ export default function FichaView({ session }: { session: any }) {
                                         right: 0,
                                     }}
                                 >
-                                    <Button variant="text">Compartir</Button>
+                                    {/* <Button variant="text">Compartir</Button> */}
                                 </Box>
                                 <Stack
                                     width={"100%"}
@@ -212,7 +212,7 @@ export default function FichaView({ session }: { session: any }) {
                                                 +56 {cellPhone}
                                             </Typography>
                                         </Box>
-                                        <Box
+                                        {/* <Box
                                             sx={{
                                                 display: "flex",
                                                 justifyContent: "center",
@@ -229,7 +229,7 @@ export default function FichaView({ session }: { session: any }) {
                                             >
                                                 {session?.user.email}
                                             </Typography>
-                                        </Box>
+                                        </Box> */}
                                     </Stack>
                                 </Stack>
                             </Stack>

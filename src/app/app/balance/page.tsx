@@ -67,7 +67,7 @@ export default function Home() {
         }
         const preliminaryCost = total + emergencyFee;
 
-        let fourteenPercent = preliminaryCost * 0.14;
+        let fourteenPercent = preliminaryCost * 0.115;
 
         // Luego lo restamos del costo preliminar
         let finalCost = preliminaryCost - fourteenPercent;
@@ -117,9 +117,9 @@ export default function Home() {
     const metricsByWeek = solicitedData.reduce(
         (acc: Record<number, (typeof metric)[]>, metric) => {
             const date = dayjs(convertDate(metric.selectedDay));
-            // Si el día es sábado, pertenece a la próxima semana
+            // Si el día es viernes, pertenece a la próxima semana
             const weekOfYear =
-                date.day() === 6 ? date.add(1, "week").week() : date.week();
+                date.day() === 0 ? date.add(1, "week").week() : date.week();
             if (!acc[weekOfYear]) {
                 acc[weekOfYear] = [];
             }
@@ -324,10 +324,10 @@ export default function Home() {
             const startDate = dayjs()
                 .week(Number(week))
                 .startOf("week") // Inicio de la semana
-                .add(4, "day") // Viernes
+                .add(4, "day") // Jueves
                 .format("YYYY-MM-DD");
-            const endDate = dayjs(startDate).add(1, "day").format("YYYY-MM-DD"); // Sábado
-
+            const endDate = dayjs(startDate).add(1, "day").format("YYYY-MM-DD"); // Viernes
+    
             // Asegúrate de que 'earnings' es un número antes de usar 'toLocaleString'
             const earningsAsString = (earnings as number).toLocaleString(
                 "es-CL",
@@ -336,7 +336,7 @@ export default function Home() {
                     currency: "CLP",
                 }
             );
-
+    
             return {
                 title: `Ganancia semanal: ${earningsAsString}`,
                 start: startDate,
@@ -419,6 +419,7 @@ export default function Home() {
                         setEventDetails(info.event);
                         setOpen(true);
                     }}
+                    firstDay={6}
                 />
                 <Dialog open={open} onClose={() => setOpen(false)}>
                     <DialogTitle>{eventDetails?.title}</DialogTitle>

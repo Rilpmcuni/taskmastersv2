@@ -69,6 +69,8 @@ export default function HeroCards({
     );
     //
     const [dialogOpen, setDialogOpen] = useState(false);
+
+
     return (
         <>
             <Grid item xs={12}>
@@ -250,27 +252,35 @@ export default function HeroCards({
                     </Card>
                 </Grid>
                 <Grid item xs={6}>
-                    <FullScreenDialogUser
+                    {/* <FullScreenDialogUser
                         open={dialogOpen}
                         onClose={() => setDialogOpen(false)}
-                    >
+                    > */}
                         <Card
-                            onClick={() => setDialogOpen(true)}
+                            // onClick={() => setDialogOpen(true)}
                             variant="outlined"
                             sx={{
                                 border: "hidden",
-                                backgroundColor: `${theme.palette.error.light}50`,
+                                backgroundColor: "gray",
                                 opacity: 0.8,
-                                backgroundImage: `linear-gradient(${
-                                    theme.palette.error.light
-                                } 4px, transparent 4px), linear-gradient(to right, ${
-                                    theme.palette.error.light
-                                } 4px, ${`${theme.palette.error.light}50`} 4px)`,
+                                backgroundImage: `linear-gradient(gray 4px, transparent 4px), linear-gradient(to right, gray 4px, gray 4px)`,
                                 backgroundSize: "80px 80px",
-                                color: darken(theme.palette.error.dark, 0.6),
+                                color: "#000",
                             }}
+                            // sx={{
+                            //     border: "hidden",
+                            //     backgroundColor: `${theme.palette.error.light}50`,
+                            //     opacity: 0.8,
+                            //     backgroundImage: `linear-gradient(${
+                            //         theme.palette.error.light
+                            //     } 4px, transparent 4px), linear-gradient(to right, ${
+                            //         theme.palette.error.light
+                            //     } 4px, ${`${theme.palette.error.light}50`} 4px)`,
+                            //     backgroundSize: "80px 80px",
+                            //     color: darken(theme.palette.error.dark, 0.6),
+                            // }}
                         >
-                            <CardActionArea>
+                            <CardActionArea disabled>
                                 <CardContent
                                     sx={{
                                         display: "flex",
@@ -280,11 +290,11 @@ export default function HeroCards({
                                     }}
                                 >
                                     <CreateRoundedIcon />
-                                    <Typography>Crear nuevo trabajo</Typography>
+                                    <Typography>Crear nuevo trabajo (próximamente)</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
-                    </FullScreenDialogUser>
+                    {/* </FullScreenDialogUser> */}
                 </Grid>
                 <Grid item xs={6}>
                     <Card

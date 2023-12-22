@@ -42,15 +42,15 @@ export default function SocialProof() {
         },
         {
             number: "95%",
-            description: "proyectos completados exitosamente",
+            description: "trabajadores satisfechos",
         },
         {
             number: "20+",
             description: "trabajadores calificados",
         },
         {
-            number: "4m+",
-            description: "no se que poner",
+            number: "2+",
+            description: "ciudades que trabajámos",
         },
     ];
 
@@ -83,7 +83,7 @@ export default function SocialProof() {
                 <Button
                     size="small"
                     href={`/Saber-Mas`}
-                    sx={{ borderRadius: "2rem", fontSize:"small" }}
+                    sx={{ borderRadius: "2rem", fontSize: "small" }}
                     LinkComponent={Link}
                     endIcon={
                         <NavigateNextRoundedIcon

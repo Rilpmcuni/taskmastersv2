@@ -56,6 +56,7 @@ export default function TextFieldPhone({
                     startAdornment={
                         <InputAdornment position="start">+56</InputAdornment>
                     }
+                    disabled
                 />
                 <FormHelperText>Para poder comunicarnos contigo</FormHelperText>
             </FormControl>

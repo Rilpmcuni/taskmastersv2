@@ -388,7 +388,7 @@ export default function FullScreenTrabajoInFini({
                                     color="text.secondary"
                                 >
                                     {/* +56 {metric.cellPhone} */}
-                                    +56 9 #### ####
+                                    +56 {metric.cellPhone}
                                 </Typography>
                             </Box>
                             <Box

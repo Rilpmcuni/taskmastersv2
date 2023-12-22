@@ -1,5 +1,7 @@
 // components/InstallPWA.tsx
 import React, { useState, useEffect } from "react";
+import DialogPer from "./DialogPer";
+import { Button } from "@mui/material";
 
 const InstallPWA: React.FC = () => {
     const [installPromptEvent, setInstallPromptEvent] = useState<any | null>(
@@ -46,8 +48,26 @@ const InstallPWA: React.FC = () => {
     };
 
     return (
-        <div>
-            <>
+        <>
+            {installPromptEvent ? (
+                <DialogPer
+                    title={"Instalar aplicación"}
+                    description={
+                        "Instala nuestra aplicación para una mejor experencia y no te pierdas de nada."
+                    }
+                    onConfirm={() => {
+                        // onClose && (onClose(), setActiveStep(0));
+                        // handleRequestNow();
+                        handleInstallClick();
+                    }}
+                    buttonProps={"¡Instalar Ahora!"}
+                >
+                    <Button size="medium" variant="contained">
+                        Instalar aplicación
+                    </Button>
+                </DialogPer>
+            ) : undefined}
+            {/* <>
                 {installPromptEvent ? (
                     <button
                         onClick={handleInstallClick}
@@ -59,10 +79,13 @@ const InstallPWA: React.FC = () => {
                     <span>
                         ¡aplicación instalada! te recomendamos que uses nuestra
                         aplicación ya instalada en tu sistema.
+                        <button onClick={handleInstallClick}>
+                            Instalar la App
+                        </button>
                     </span>
                 )}
-            </>
-        </div>
+            </> */}
+        </>
     );
 };
 

@@ -34,9 +34,11 @@ const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
 export default function TextFieldRut({
     value,
     onChange,
+    disabled = false,
 }: {
     value: any;
     onChange: any;
+    disabled?: boolean;
 }) {
     return (
         <>
@@ -50,6 +52,7 @@ export default function TextFieldRut({
                     name="textmask"
                     id="rut-text-input"
                     inputComponent={TextMaskCustom as any}
+                    disabled={disabled}
                 />
                 <FormHelperText>Necesario para verificar tu identidad</FormHelperText>
             </FormControl>

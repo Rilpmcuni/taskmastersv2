@@ -469,7 +469,7 @@ export default function FullScreenTrabajoSolic({
                                     color="text.secondary"
                                 >
                                     {/* +56 {metric.cellPhone} */}
-                                    +56 9 #### ####
+                                    +56 {metric.cellPhone}
                                 </Typography>
                             </Box>
                             <Box
@@ -613,14 +613,14 @@ export default function FullScreenTrabajoSolic({
                             size="large"
                             variant="contained"
                         >
-                            Boleta Preliminar
+                            Presupuesto Preliminar
                         </Button>
                     </Box>
                 </Box>
             ),
         },
         {
-            label: `Boleta Preliminar`,
+            label: `Presupuesto Preliminar`,
             description: (
                 <Box
                     sx={{
@@ -787,7 +787,7 @@ export default function FullScreenTrabajoSolic({
                                     color="text.secondary"
                                 >
                                     {/* +56 {metric.cellPhone} */}
-                                    +56 9 #### ####
+                                    +56 {metric.cellPhone}
                                 </Typography>
                             </Box>
                             <Box
@@ -1008,7 +1008,7 @@ export default function FullScreenTrabajoSolic({
             ),
         },
         {
-            label: "¡Solicitado!",
+            label: "¡Comencemos!",
             description: (
                 <Box
                     sx={{
@@ -1030,11 +1030,10 @@ export default function FullScreenTrabajoSolic({
                         <Logo app={true} />
 
                         <Typography variant="h5" fontWeight={"bold"}>
-                            ¡Trabajo Solicitado!
+                            ¡Manos a la obra!
                         </Typography>
                         <Typography variant="h6">
-                            Tu solicitud ha sido procesada y aceptada. Revisa
-                            tus <b>trabajos activos</b> en <b>Metricas</b>
+                            Trabajo iniciado y listo para ser atendido.
                         </Typography>
                         <Typography
                             variant="caption"
@@ -1251,7 +1250,7 @@ export default function FullScreenTrabajoSolic({
                                             ) : (
                                                 <Typography
                                                     variant="h6"
-                                                    textAlign={"start"}
+                                                    textAlign={"end"}
                                                     sx={{
                                                         paddingX: 1,
                                                     }}

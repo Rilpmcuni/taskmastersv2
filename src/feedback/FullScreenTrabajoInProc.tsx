@@ -468,7 +468,7 @@ export default function FullScreenTrabajoInProc({
                                     color="text.secondary"
                                 >
                                     {/* +56 {metric.cellPhone} */}
-                                    +56 9 #### ####
+                                    +56 {metric.cellPhone}
                                 </Typography>
                             </Box>
                             <Box
@@ -805,7 +805,7 @@ export default function FullScreenTrabajoInProc({
                                     color="text.secondary"
                                 >
                                     {/* +56 {metric.cellPhone} */}
-                                    +56 9 #### ####
+                                    +56 {metric.cellPhone}
                                 </Typography>
                             </Box>
                             <Box
@@ -960,10 +960,10 @@ export default function FullScreenTrabajoInProc({
                         </Button>
                         <DialogPer
                             title={
-                                "¿Estás seguro que quieres finalizar el trabajo?"
+                                "¿Finalizar trabajo y enviar link de pago al cliente?"
                             }
                             description={
-                                "Estás a punto de finalizar el trabajo. Una vez que lo hagas, no podrás volver a editar la boleta preliminar."
+                                "Estás a punto de finalizar el trabajo. Una vez que lo hagas, no podrás volver a editar la boleta preliminar y se enviará el link de pago al cliente."
                             }
                             onConfirm={() => {
                                 handleStart();
@@ -1005,11 +1005,10 @@ export default function FullScreenTrabajoInProc({
                         <Logo app={true} />
 
                         <Typography variant="h5" fontWeight={"bold"}>
-                            ¡Trabajo Solicitado!
+                            ¡Trabajo Finalizado!
                         </Typography>
                         <Typography variant="h6">
-                            Tu solicitud ha sido procesada y aceptada. Revisa
-                            tus <b>trabajos activos</b> en <b>Metricas</b>
+                            Generando Link de pago para ser enviado al cliente.
                         </Typography>
                         <Typography
                             variant="caption"

@@ -5,12 +5,15 @@ import heroImg from "@/../public/images/heroImg.jpg";
 import heroRabbit from "@/../public/images/heroRabbit.webp";
 import CallUsImgOne from "@/../public/images/CallUsImgOne.webp";
 import CallUsImgTwo from "@/../public/images/CallUsImgTwo.webp";
-import LOGO from "@/../public/images/LOGO.svg";
-import SELLO from "@/../public/images/SELLO.svg";
 import featureImg from "@/../public/images/featureImg.webp";
 import servicesOne from "@/../public/images/servicesOne.webp";
 import servicesTwo from "@/../public/images/servicesTwo.jpg";
 import servicesTree from "@/../public/images/servicesTree.webp";
+
+import pintor from "@/../public/images/cards/pintor.jpg";
+import instalador from "@/../public/images/cards/instalador.jpg";
+import reparacion from "@/../public/images/cards/reparacion.jpg";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -28,22 +31,23 @@ export default function Carousel() {
         heroRabbit,
         CallUsImgOne,
         CallUsImgTwo,
-        LOGO,
-        SELLO,
         featureImg,
         servicesOne,
         servicesTwo,
         servicesTree,
+        pintor,
+        instalador,
+        reparacion,
     ];
 
     return (
         <>
             <Swiper
-            grabCursor={true}
+                grabCursor={true}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
-                    pauseOnMouseEnter:true
+                    pauseOnMouseEnter: true,
                 }}
                 navigation={true}
                 centeredSlides={false}
@@ -67,7 +71,7 @@ export default function Carousel() {
                             }}
                         >
                             <Image
-                                alt="trabajos"
+                                alt={`trabajos${index}`}
                                 fill={true}
                                 style={{
                                     objectFit: "cover",

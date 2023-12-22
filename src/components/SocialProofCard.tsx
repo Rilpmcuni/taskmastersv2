@@ -9,9 +9,7 @@ import {
 interface Props {
     proof: any;
 }
-const SocialProofCard: React.FC<Props> = ({
-    proof,
-}) => {
+const SocialProofCard: React.FC<Props> = ({ proof }) => {
     return (
         <>
             <Grid item xs={4} sm={2}>
@@ -21,24 +19,21 @@ const SocialProofCard: React.FC<Props> = ({
                         userSelect: "none",
                         position: "relative",
                         overflow: "visible",
-                        cursor: "pointer",
-                        textAlign:"center"
+                        textAlign: "center",
                     }}
                 >
-                    <CardActionArea>
-                        <CardContent>
-                            <Typography
-                                variant="h4"
-                                component="div"
-                                fontWeight={900}
-                            >
-                                {proof.number}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {proof.description}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
+                    <CardContent>
+                        <Typography
+                            variant="h4"
+                            component="div"
+                            fontWeight={900}
+                        >
+                            {proof.number}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {proof.description}
+                        </Typography>
+                    </CardContent>
                 </Card>
             </Grid>
         </>

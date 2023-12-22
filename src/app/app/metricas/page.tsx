@@ -18,6 +18,7 @@ import {
     Chip,
     Divider,
     Grid,
+    Skeleton,
     Stack,
     Typography,
 } from "@mui/material";
@@ -37,6 +38,9 @@ import HeroCards from "@/components/ui/HeroCards";
 import { CardActionArea } from "@mui/material";
 import SpeedDialBasic from "@/components/ui/speedDialBasic";
 import FullScreenDialogUser from "@/feedback/FullScreenDialogUser";
+import { Console } from "console";
+import ContractModal from "@/feedback/ContractModal";
+import JSignature from "@/feedback/JSignature";
 dayjs.extend(weekOfYear);
 dayjs.locale("es"); // usa el locale español
 
@@ -97,13 +101,7 @@ export default function Home() {
         (metric) => metric.user_id === sessionData?.user?.id
     );
 
-    const solicitedDataPrice = solicitedData.map((metric) =>
-        calculatePreliminaryCost(metric)
-    );
-    const total = solicitedDataPrice.reduce((sum, value) => sum + value, 0);
     const startValue = 0;
-
-    const currentYear = 2023;
 
     const convertDate = (dateArray: string[]) => {
         const months = {
@@ -120,48 +118,58 @@ export default function Home() {
             nov: "11",
             dic: "12",
         };
-        const day = dateArray.length > 1 ? dateArray[1].padStart(2, "0") : "01";
-        return `2023-${months[dateArray[2] as keyof typeof months]}-${day}`;
+        return `2023-${months[dateArray[2] as keyof typeof months]}-${
+            dateArray[1]
+        }`;
     };
 
-    const metricsByWeek = solicitedData.reduce(
-        (acc: Record<number, (typeof metric)[]>, metric) => {
-            const date = dayjs(convertDate(metric.selectedDay));
-            const weekOfYear =
-                date.day() === 6 ? date.add(1, "week").week() : date.week();
-            if (!acc[weekOfYear]) {
-                acc[weekOfYear] = [];
-            }
-            acc[weekOfYear].push(metric);
+    // Agrupar las métricas por mes y luego por semana del mes
+    const metricsByMonthAndWeek = solicitedData.reduce((acc, metric) => {
+        const date = dayjs(convertDate(metric.selectedDay));
+        const month = date.format("MMMM");
+        const firstSaturdayOfMonth = date.startOf("month").day(6);
+        const weekOfMonth =
+            Math.ceil(date.diff(firstSaturdayOfMonth, "day") / 7) + 1;
+        if (!acc[month]) {
+            acc[month] = {};
+        }
+        if (!acc[month][weekOfMonth]) {
+            acc[month][weekOfMonth] = [];
+        }
+        acc[month][weekOfMonth].push(metric);
+        return acc;
+    }, {} as Record<string, Record<number, (typeof solicitedData)[0][]>>);
+
+    // Agrupar las métricas por semana del mes
+    // Calcular las ganancias por mes y por semana
+    const earningsByMonthAndWeek = Object.entries(metricsByMonthAndWeek).reduce(
+        (acc, [month, weeks]) => {
+            acc[month] = Object.entries(weeks).reduce(
+                (acc, [week, metrics]) => {
+                    const earnings = metrics
+                        .map((metric) => calculatePreliminaryCost(metric))
+                        .reduce((sum, value) => sum + value, 0);
+                    acc[week] = earnings;
+                    return acc;
+                },
+                {} as Record<string, number>
+            );
             return acc;
         },
-        {}
+        {} as Record<string, Record<string, number>>
     );
+    // Obtener las ganancias de la semana actual
+    const currentDate = dayjs();
+    const currentMonth = currentDate.format("MMMM");
+    const firstSaturdayOfCurrentMonth = currentDate.startOf("month").day(5);
 
-    // Aquí está la lógica de ganancia semanal copiada de metricas/page.tsx
-    const earningsByWeek = Object.keys(metricsByWeek).reduce(
-        (acc: Record<string, number>, week) => {
-            const metrics = metricsByWeek[Number(week)];
-            const earnings = metrics
-                .map((metric) => calculatePreliminaryCost(metric))
-                .reduce((sum, value) => sum + value, 0);
-            acc[week] = earnings;
-            return acc;
-        },
-        {} as Record<string, number>
-    );
+    const currentWeekOfMonth =
+        Math.ceil(currentDate.diff(firstSaturdayOfCurrentMonth, "day") / 7) + 1;
 
-    // Obtén el día de la semana actual (0-6, domingo a sábado)
-    const currentDayOfWeek = dayjs().day();
+    const currentWeekEarnings =
+        earningsByMonthAndWeek[currentMonth]?.[currentWeekOfMonth] ?? 0;
 
-    // Si hoy es sábado (6) o domingo (0), entonces es el comienzo de la nueva semana, de lo contrario, es la misma semana que comenzó el sábado pasado
-    const currentWeek =
-        currentDayOfWeek === 6 || currentDayOfWeek === 0
-            ? dayjs().add(1, "week").week()
-            : dayjs().week();
-
-    // Usa el número de la semana para obtener las ganancias de la semana actual
-    const earningsThisWeek = earningsByWeek[currentWeek] || 0;
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     return (
         <main>
@@ -221,13 +229,13 @@ export default function Home() {
                                 // containerClassName="conta"
                                 // dummyCharacters={"450.000".split("")}
                                 // duration={}
-                                value={(earningsThisWeek
-                                    ? earningsThisWeek
-                                    : 0
-                                ).toLocaleString("es-CL", {
-                                    style: "currency",
-                                    currency: "CLP",
-                                })}
+                                value={currentWeekEarnings.toLocaleString(
+                                    "es-CL",
+                                    {
+                                        style: "currency",
+                                        currency: "CLP",
+                                    }
+                                )}
                                 // sequentialAnimationMode
                                 // useMonospaceWidth
                                 startValue={startValue.toLocaleString("es-CL", {
@@ -249,13 +257,10 @@ export default function Home() {
                         color: "text.secondary",
                     }}
                 >
-                    {(earningsThisWeek ? earningsThisWeek : 0).toLocaleString(
-                        "es-CL",
-                        {
-                            style: "currency",
-                            currency: "CLP",
-                        }
-                    )}{" "}
+                    {currentWeekEarnings.toLocaleString("es-CL", {
+                        style: "currency",
+                        currency: "CLP",
+                    })}{" "}
                     ganados esta semana
                 </Typography>
             </Grid>
@@ -265,11 +270,51 @@ export default function Home() {
                     marginBottom: "0.5rem",
                 }}
             />
-            <HeroCards
-                sessionData={sessionData}
-                metrics={metrics}
-                profile={profile}
-            />
+            {profile === null ? (
+                // Aquí puedes renderizar un componente de carga o simplemente no renderizar nada
+                <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                        <Skeleton variant="rounded" height={133} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Skeleton variant="rounded" height={133} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Skeleton variant="rounded" height={133} />
+                    </Grid>
+                </Grid>
+            ) : profile?.signature ? (
+                <HeroCards
+                    sessionData={sessionData}
+                    metrics={metrics}
+                    profile={profile}
+                />
+            ) : (
+                <ContractModal
+                    sessionData={sessionData}
+                    open={dialogOpen}
+                    onClose={() => setDialogOpen(false)}
+                >
+                    <Button
+                        color="success"
+                        onClick={() => setDialogOpen(true)}
+                        variant="contained"
+                    >
+                        Firmar Acuerdo de usuario
+                    </Button>
+                </ContractModal>
+            )}
+            <Typography variant="caption" textAlign="center">
+                Versión beta.
+                <br />
+                Estamos esperando los comentarios de los profesionales y
+                usuarios para mejorar la experiencia del usuario y prepararnos
+                para la próxima versión, que traerá nuevas características y
+                mejoras de optimización.
+                <br />
+                Agradecemos su paciencia y apoyo mientras trabajamos para
+                mejorar nuestra aplicación.
+            </Typography>
         </main>
     );
 }
