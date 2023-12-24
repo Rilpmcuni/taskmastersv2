@@ -6,8 +6,16 @@ import SignatureCanvas from "react-signature-canvas";
 //
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useSession } from "@/contexts/SessionContext";
+import DialogPer from "./DialogPer";
+import Image from "next/image";
 
-const JSignature = ({ sessionData }: { sessionData: any }) => {
+const JSignature = ({
+    sessionData,
+    profile,
+}: {
+    sessionData: any;
+    profile: any;
+}) => {
     const { requestUpdate } = useSession();
 
     const [imageURL, setImageURL] = useState<string | null>(null);
@@ -95,9 +103,9 @@ const JSignature = ({ sessionData }: { sessionData: any }) => {
                     signature: true,
                     updated_at: new Date().toISOString(),
                 });
-                
+
                 if (error) {
-                    console.error('Error updating signature:', error);
+                    console.error("Error updating signature:", error);
                 } else {
                     requestUpdate();
                 }
@@ -146,16 +154,41 @@ const JSignature = ({ sessionData }: { sessionData: any }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                width: "100%",
             }}
         >
             {signature ? (
                 imageURL && (
-                    <div style={{ marginTop: "1em" }}>
-                        <img
+                    <div
+                        style={{
+                            width: "100%",
+                            marginTop: "1em",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                        }}
+                    >
+                        <Image
+                            height={200}
+                            width={300}
                             src={imageURL}
                             alt="my signature"
-                            style={{ border: "1px solid", padding: "3rem", borderRadius: "4px" }}
+                            style={{
+                                border: "1px solid",
+                                padding: "3rem",
+                                borderRadius: "1.5rem",
+                            }}
                         />
+                        <Typography variant="caption" fontWeight={"bold"}>
+                            <i>
+                                {profile.full_name}{" "}
+                                {profile.lastName && `, ${profile.lastName}`}
+                            </i>
+                        </Typography>
+                        <Typography variant="caption" fontWeight={"bold"}>
+                            <i>{profile.rut}</i>
+                        </Typography>
                     </div>
                 )
             ) : (
@@ -163,42 +196,82 @@ const JSignature = ({ sessionData }: { sessionData: any }) => {
                     <Typography variant="h5" fontWeight={"bold"}>
                         <i>Firmar</i>
                     </Typography>
-                    <div style={{ border: "1px solid", borderRadius: "4px" }}>
+                    <div
+                        style={{
+                            width: "100%",
+                            marginTop: "1em",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                        }}
+                    >
                         <SignatureCanvas
                             ref={sigCanvas}
-                            canvasProps={{ className: "signatureCanvas" }}
+                            // canvasProps={{ className: "signatureCanvas" }}
+                            canvasProps={{
+                                width: 300,
+                                height: 200,
+                                style: {
+                                    border: "1px solid",
+                                    borderRadius: "1.5rem",
+                                },
+                            }}
                             onEnd={handleEnd}
+                            penColor="blue"
                         />
+                        <Typography variant="caption" fontWeight={"bold"}>
+                            <i>
+                                {profile.full_name}{" "}
+                                {profile.lastName && `, ${profile.lastName}`}
+                            </i>
+                        </Typography>
+                        <Typography variant="caption" fontWeight={"bold"}>
+                            <i>{profile.rut}</i>
+                        </Typography>
                     </div>
                     <Button
                         onClick={clear}
                         style={{
                             marginTop: "1em",
                             padding: "0.5em 1em",
-                            borderRadius: "4px",
                         }}
                         startIcon={<UndoRoundedIcon />}
                         color="error"
-                        variant="contained"
+                        variant="outlined"
+                        size="large"
                         disabled={isCanvasEmpty}
+                        fullWidth
                     >
                         Reintentar Firma
                     </Button>
-                    <Button
-                        onClick={save}
-                        style={{
-                            marginTop: "1em",
-                            padding: "0.5em 1em",
-                            borderRadius: "4px",
-                            color: "white",
+                    <DialogPer
+                        title={"Firmar Acuerdo de usuario"}
+                        description={
+                            "El profesional manifiesta que ha leído y comprendido el presente contrato, y acepta todas las condiciones y obligaciones establecidas en el mismo."
+                        }
+                        onConfirm={() => {
+                            // onClose && (onClose(), setActiveStep(0));
+                            save();
                         }}
-                        startIcon={<AssignmentTurnedInOutlinedIcon />}
-                        color="success"
-                        variant="contained"
-                        disabled={isCanvasEmpty}
+                        buttonProps={"¡Firmar!"}
                     >
-                        Firmar
-                    </Button>
+                        <Button
+                            style={{
+                                marginTop: "1em",
+                                padding: "0.5em 1em",
+                                color: "white",
+                            }}
+                            startIcon={<AssignmentTurnedInOutlinedIcon />}
+                            color="success"
+                            variant="contained"
+                            disabled={isCanvasEmpty}
+                            fullWidth
+                            size="large"
+                        >
+                            Firmar
+                        </Button>
+                    </DialogPer>
                 </>
             )}
         </div>

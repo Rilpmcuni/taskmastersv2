@@ -38,7 +38,9 @@ export default function DialogPer({
     };
     return (
         <>
-            <Box onClick={handleOpenAlert}>{children}</Box>
+            <Box onClick={handleOpenAlert} sx={{
+                width:"100%"
+            }}>{children}</Box>
             <Dialog
                 open={openAlert}
                 onClose={handleCloseAlert}

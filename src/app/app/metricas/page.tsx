@@ -11,6 +11,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import {
+    Alert,
+    AlertTitle,
     Box,
     Button,
     Card,
@@ -294,27 +296,34 @@ export default function Home() {
                     sessionData={sessionData}
                     open={dialogOpen}
                     onClose={() => setDialogOpen(false)}
+                    profile={profile}
                 >
                     <Button
+                        fullWidth
                         color="success"
                         onClick={() => setDialogOpen(true)}
                         variant="contained"
+                        size="large"
+                        sx={{
+                            color: "white",
+                        }}
                     >
                         Firmar Acuerdo de usuario
                     </Button>
                 </ContractModal>
             )}
-            <Typography variant="caption" textAlign="center">
-                Versión beta.
-                <br />
+            <Alert severity="warning" sx={{ marginTop: "1rem" }}>
+                <AlertTitle>
+                    <strong>Versión beta</strong>
+                </AlertTitle>
                 Estamos esperando los comentarios de los profesionales y
                 usuarios para mejorar la experiencia del usuario y prepararnos
-                para la próxima versión, que traerá nuevas características y
-                mejoras de optimización.
+                para la <strong>próxima versión</strong>, que traerá nuevas
+                características y mejoras de optimización.
                 <br />
-                Agradecemos su paciencia y apoyo mientras trabajamos para
-                mejorar nuestra aplicación.
-            </Typography>
+                <strong>Agradecemos</strong> su paciencia y apoyo mientras
+                trabajamos para mejorar nuestra aplicación.
+            </Alert>
         </main>
     );
 }

@@ -46,13 +46,15 @@ export default function ContractModal({
     onClose,
     userId,
     children,
-    sessionData
+    sessionData,
+    profile
 }: {
     open: boolean;
     onClose?: () => void;
     userId?: any;
     children?: React.ReactNode;
     sessionData: any;
+    profile:any
 }) {
     // const { sessionData, requestUpdate } = useSession();
 
@@ -124,7 +126,7 @@ export default function ContractModal({
                         <Typography variant="body1">
                             <div dangerouslySetInnerHTML={{ __html: html }} />
                         </Typography>
-                        <JSignature sessionData={sessionData} />
+                        <JSignature sessionData={sessionData} profile={profile} />
                     </Stack>
 
                     <Box
@@ -204,7 +206,7 @@ export default function ContractModal({
                                     orientation="horizontal"
                                     sx={{
                                         p: 2,
-                                        backgroundColor: "info.main",
+                                        backgroundColor: "success.main",
                                         borderBottomLeftRadius: "1.5rem",
                                         // borderTopLeftRadius: "1.5rem",
                                         flexGrow: 1,

@@ -77,7 +77,7 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 // chip
 
 export default function PerfilConfig({ session }: { session: any }) {
-    const { requestUpdate } = useSession();
+    const { requestUpdate, profile } = useSession();
 
     // chip
     const theme = useTheme();
@@ -395,11 +395,15 @@ export default function PerfilConfig({ session }: { session: any }) {
                             sessionData={session}
                             open={dialogOpen}
                             onClose={() => setDialogOpen(false)}
+                            profile={profile}
                         >
                             <Button
                                 color="success"
                                 onClick={() => setDialogOpen(true)}
                                 variant="contained"
+                                sx={{
+                                    color:"white"
+                                }}
                             >
                                 Ver Contrato
                             </Button>
