@@ -35,7 +35,7 @@ import Link from "next/link";
 import "dayjs/locale/es"; // importa el locale español
 
 import PaymentsTwoToneIcon from "@mui/icons-material/PaymentsTwoTone";
-import isBetween from "dayjs/plugin/isBetween";
+import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
 import HeroCards from "@/components/ui/HeroCards";
 import { CardActionArea } from "@mui/material";
 import SpeedDialBasic from "@/components/ui/speedDialBasic";
@@ -324,6 +324,67 @@ export default function Home() {
                 <strong>Agradecemos</strong> su paciencia y apoyo mientras
                 trabajamos para mejorar nuestra aplicación.
             </Alert>
+            
+            <Grid container spacing={0.5}>
+                <Grid item xs={6}>
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            border: "hidden",
+                            backgroundColor: "gray",
+                            opacity: 0.8,
+                            backgroundImage: `linear-gradient(gray 4px, transparent 4px), linear-gradient(to right, gray 4px, gray 4px)`,
+                            backgroundSize: "80px 80px",
+                            color: "#000",
+                        }}
+                    >
+                        <CardActionArea disabled>
+                            <CardContent
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <HelpOutlineRounded />
+                                <Typography>
+                                    Crear nuevo trabajo (próximamente)
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={6}>
+                    <Card
+                        variant="outlined"
+                        sx={{
+                            border: "hidden",
+                            backgroundColor: "gray",
+                            opacity: 0.8,
+                            backgroundImage: `linear-gradient(gray 4px, transparent 4px), linear-gradient(to right, gray 4px, gray 4px)`,
+                            backgroundSize: "80px 80px",
+                            color: "#000",
+                        }}
+                    >
+                        <CardActionArea disabled>
+                            <CardContent
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <HelpOutlineRounded />
+                                <Typography>
+                                    Agenda clientes (próximamente)
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            </Grid>
         </main>
     );
 }

@@ -3,6 +3,7 @@ import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import { darken } from "@mui/system";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
+import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
 import {
     Card,
     CardActionArea,
@@ -289,8 +290,8 @@ export default function HeroCards({
                                         textAlign: "center",
                                     }}
                                 >
-                                    <CreateRoundedIcon />
-                                    <Typography>Crear nuevo trabajo (próximamente)</Typography>
+                                    <HelpOutlineRounded />
+                                    <Typography>Nuevas características próxima versión</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
